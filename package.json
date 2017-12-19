@@ -3,24 +3,30 @@
   "description": "Gatsby default starter",
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "license": "MIT",
+  "main": "n/a",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "build": "gatsby build",
+    "heroku-postbuild": "gatsby build",
+    "start": "gatsby serve",
+    "dev": "gatsby develop",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "dotenv": "^4.0.0",
     "gatsby": "^1.9.127",
     "gatsby-cli": "^1.1.25",
+    "gatsby-image": "^1.0.30",
     "gatsby-link": "^1.6.30",
     "gatsby-plugin-react-helmet": "^1.0.8",
-    "gatsby-source-contentful": "^1.3.28"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "main": "n/a",
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "gatsby-source-contentful": "^1.3.28",
+    "gatsby-transformer-remark": "^1.7.25",
+    "lodash": "^4.17.4",
+    "slash": "^1.0.0"
   },
   "devDependencies": {
     "prettier": "^1.8.2"

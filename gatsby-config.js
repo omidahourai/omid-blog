@@ -2,7 +2,7 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `StoryFork Blog`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
