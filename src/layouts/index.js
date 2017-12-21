@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { map } from 'lodash'
+import { map, result } from 'lodash'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import ArticlePreview from '../components/ArticlePreview'
@@ -40,7 +40,6 @@ const Header = () => (
 class TemplateWrapper extends Component {
 
   render() {
-    const edges = this.props.data.us.edges
     return (
       <div>
         <Helmet
@@ -59,9 +58,6 @@ class TemplateWrapper extends Component {
             paddingTop: 0,
           }}
         >
-        {map(edges, ({node}) => (
-          <ArticlePreview {...node} />
-        ))}
           {this.props.children()}
         </div>
       </div>
@@ -74,26 +70,3 @@ TemplateWrapper.propTypes = {
 }
 
 export default TemplateWrapper
-
-export const pageQuery = graphql`
-  query PageQuery {
-    us: allContentfulArticle(filter: { node_locale: { eq: "en-US" } }) {
-      edges {
-        node {
-          id
-          title
-          content {
-              id
-              content
-          }
-          authors {
-            id
-            firstName
-            lastName
-          }
-          slug
-        }
-      }
-    }
-  }
-`

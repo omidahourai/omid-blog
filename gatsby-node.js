@@ -7,8 +7,8 @@ const ARTICLES_QUERY = `{
     allContentfulArticle(limit: 1000) {
         edges {
             node {
-            id
-            slug
+                id
+                slug
             }
         }
     }
