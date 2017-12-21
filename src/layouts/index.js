@@ -8,7 +8,7 @@ import ArticlePreview from '../components/ArticlePreview'
 import './index.css'
 
 const Header = () => (
-  <div
+  <header
     style={{
       background: 'rebeccapurple',
       marginBottom: '1.45rem',
@@ -33,7 +33,7 @@ const Header = () => (
         </Link>
       </h1>
     </div>
-  </div>
+  </header>
 )
 
 // const TemplateWrapper = ({ children }) => (
@@ -50,7 +50,7 @@ class TemplateWrapper extends Component {
           ]}
         />
         <Header />
-        <div
+        <main
           style={{
             margin: '0 auto',
             maxWidth: 960,
@@ -59,7 +59,10 @@ class TemplateWrapper extends Component {
           }}
         >
           {this.props.children()}
-        </div>
+        </main>
+        <footer>
+
+        </footer>
       </div>
     )
   }
