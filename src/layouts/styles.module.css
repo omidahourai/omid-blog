@@ -1,0 +1,46 @@
+#site {
+    display: grid;
+    grid-template-areas: "header header header" "navigation main ads" "footer footer footer";
+    grid-template-columns: 150px 1fr 150px;
+    grid-template-rows: 100px 1fr 30px;
+    grid-column-gap: 20px;
+    min-height: 100vh;
+}
+
+.header-home {
+    grid-area: header;
+    background-color: rebeccapurple;
+    margin-bottom: 1.45rem;
+
+    & .header-top {
+        margin: 0 auto;
+        max-width: 960px;
+        padding: 1.45rem 1.0875rem;
+    }
+
+    & .header-center {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-position: center center;
+    }
+
+    & .header-bottom {
+        padding: 0 30px;
+        text-align: center;
+        height: 60px;
+        padding: 0 25px;
+        box-shadow: 0px 1px 5px rgba(185, 185, 185, 0.5);
+    }
+}
+
+
+.main-layout {
+    grid-area: main;
+}
+
+.footer-layout {
+    grid-area: footer;
+    background-color: #333;
+    color: #fff;
+}

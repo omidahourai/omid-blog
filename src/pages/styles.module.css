@@ -1,0 +1,25 @@
+h2,
+p {
+    color: #333;
+}
+
+ul.articles-preview {
+    list-style-type: none;
+    margin: 0;
+
+    & li {
+        margin: 0;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #CCC;
+    }
+
+    & h2 {
+        margin-bottom: 1rem;
+    }
+
+    & a {
+        text-decoration: none;
+    }
+}
+

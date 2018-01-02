@@ -1,0 +1,13 @@
+#site {
+    display: grid;
+    grid-template-areas: "header header header" "navigation main ads" "footer footer footer";
+    grid-template-columns: 150px 1fr 150px;
+    grid-template-rows: auto 1fr 30px;
+    grid-column-gap: 20px;
+    min-height: 100vh;
+}
+
+.main-layout {
+    grid-area: main;
+    overflow: hidden;
+}

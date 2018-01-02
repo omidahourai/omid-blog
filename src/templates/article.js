@@ -3,6 +3,10 @@ import { map } from 'lodash'
 import Link from "gatsby-link"
 import * as PropTypes from "prop-types"
 import Img from "gatsby-image"
+import ArticleFooter from '../components/ArticleFooter'
+import marked from 'marked'
+import moment from 'moment'
+import styles from './styles.module.css'
 
 // import { rhythm } from "../utils/typography"
 
@@ -11,6 +15,11 @@ const propTypes = {
 }
 
 class ArticleTemplate extends Component {
+  componentDidMount() {
+    this.props.updateLayout({
+      category: this.props.data.contentfulArticle.category.name,
+    })
+  }
   render() {
     const article = this.props.data.contentfulArticle
     const {
@@ -18,46 +27,50 @@ class ArticleTemplate extends Component {
         content,
         image,
         authors,
+        category,
+        createdAt,
     } = article
     return (
-      <div>
-        <h2>{title}</h2>
-        <br/>
-        <br/>
-        {content.content}
-        <br/>
-        <br/>
-        {image}
-        <br/>
-        <br/>
-        {map(authors, author => `${ author.firstName } ${ author.lastName }`)}
-        {/*
-          <Img resolutions={image[0].resolutions} />
-          <h4>{productName}</h4>
-        </div>
-        <h1>{productName}</h1>
-        <h4>Made by {brand.companyName.companyName}</h4>
-        <div>
-          <span>Price: ${price}</span>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: productDescription.childMarkdownRemark.html,
-            }}
-          />
-          <div>
-            <span>See other: </span>
-            <ul>
-              {categories.map((category, i) => (
-                <li key={i}>
-                  <Link key={i} to={`/categories/${category.id}`}>
-                    {category.title.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+      <article>
+        <header className={styles['header-article']}>
+          <div className={styles['meta-categories']}>
+            <span className={styles['category-prefix']}>In</span>
+            <Link
+              to={`/categories/${category.name}`}
+              rel="category tag">
+                {category.name}
+            </Link>
           </div>
-            */}
-      </div>
+          <h2 className={styles['post-title']}>{title}</h2>
+          <div className={styles['meta-author-date']}>
+            <span className={styles['meta-date']}>
+              {moment(createdAt).format('MMMM D, YYYY')}
+            </span>
+            <span className={styles['author-prefix']}>
+              By
+            </span>
+            <Link
+              className={styles['meta-author']}
+              to="http://infinitythemes.ge/flex-blog/author/admin/"
+              rel="author">
+              {map(authors, author => `${ author.firstName } ${ author.lastName }`)}
+            </Link>
+          </div>
+        </header>
+        <div
+          className={styles.content}
+          dangerouslySetInnerHTML={{
+          __html: content.childMarkdownRemark.html
+        }}/>
+
+        <ArticleFooter />
+
+        <div className={styles.authors}>
+          <span>
+            {map(authors, author => `${ author.firstName } ${ author.lastName }`)}
+          </span>
+        </div>
+      </article>
     )
   }
 }
@@ -67,19 +80,27 @@ ArticleTemplate.propTypes = propTypes
 export default ArticleTemplate
 
 export const pageQuery = graphql`
-  query articleQuery($id: String!) {
+  query ArticleQuery($id: String!) {
     contentfulArticle(id: { eq: $id }) {
       title
       content {
-          id
-          content
+        childMarkdownRemark {
+          html
+        }
       }
       authors {
         id
         firstName
         lastName
       }
+      category {
+        name
+      }
       slug
+      createdAt
+      tags {
+        name
+      }
     }
   }
 `

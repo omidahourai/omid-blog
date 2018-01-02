@@ -1,0 +1,6 @@
+@value primary: #00A9FF;
+:global {
+  @import '//fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i';
+}
+
+@value primaryHighlight: #46A9EE;
