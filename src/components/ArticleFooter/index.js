@@ -48,7 +48,6 @@ const ArticleFooter = () => (
       </Link>
       */}
     </div>
-    <div class="clear"></div>
   </footer>
 )
 

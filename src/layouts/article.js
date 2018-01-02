@@ -5,6 +5,7 @@ import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import ArticlePreview from '../components/ArticlePreview'
 import ArticleHeader from '../components/ArticleHeader'
+import ArticleAuthor from '../components/ArticleAuthor'
 
 import './index.css'
 import styles from './article.module.css'
@@ -47,6 +48,15 @@ class TemplateWrapper extends Component {
             ...this.props,
             updateLayout: (s) => this.setState(s),
           })}
+          {map(this.state.authors, author => (
+            <ArticleAuthor
+              key={author.id}
+              firstName={author.firstName}
+              lastName={author.lastName}
+              description={author.description.description}
+              photoUrl={author.photo.file.url}
+            />
+          ))}
         </main>
       </div>
     )

@@ -18,6 +18,7 @@ class ArticleTemplate extends Component {
   componentDidMount() {
     this.props.updateLayout({
       category: this.props.data.contentfulArticle.category.name,
+      authors: this.props.data.contentfulArticle.authors,
     })
   }
   render() {
@@ -31,7 +32,7 @@ class ArticleTemplate extends Component {
         createdAt,
     } = article
     return (
-      <article>
+      <article className={styles.article}>
         <header className={styles['header-article']}>
           <div className={styles['meta-categories']}>
             <span className={styles['category-prefix']}>In</span>
@@ -62,14 +63,7 @@ class ArticleTemplate extends Component {
           dangerouslySetInnerHTML={{
           __html: content.childMarkdownRemark.html
         }}/>
-
         <ArticleFooter />
-
-        <div className={styles.authors}>
-          <span>
-            {map(authors, author => `${ author.firstName } ${ author.lastName }`)}
-          </span>
-        </div>
       </article>
     )
   }
@@ -92,6 +86,14 @@ export const pageQuery = graphql`
         id
         firstName
         lastName
+        description {
+          description
+        }
+        photo {
+          file {
+            url
+          }
+        }
       }
       category {
         name

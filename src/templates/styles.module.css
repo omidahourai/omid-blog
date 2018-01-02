@@ -1,5 +1,9 @@
 @value primary, primaryHighlight from '../common/styles/index.module.css';
 
+.article {
+    margin-bottom: 2rem;
+}
+
 .header-article {
     text-align: center;
 

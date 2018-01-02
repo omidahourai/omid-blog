@@ -56,6 +56,9 @@ export const pageQuery = graphql`
             id
             firstName
             lastName
+            description {
+                description
+            }
           }
           tags {
               name

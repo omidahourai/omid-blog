@@ -1,0 +1,43 @@
+@value primary, primaryHighlight from '../../common/styles/index.module.css';
+
+.author {
+    padding: 0 1rem 1rem 1rem;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.avatar-wrapper {
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.avatar {
+    
+}
+
+.description {
+    text-align: center;
+
+    &>h4 {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        margin: 0.8rem 0;
+    }
+
+    & a {
+        text-decoration: none;
+        color: primary;
+        &:hover {
+            color: primaryHighlight;
+        }
+    }
+
+    & p {
+        font-family: "Open Sans", sans-serif;
+        font-size: .85rem;
+        line-height: 1.35rem;
+    }
+}
