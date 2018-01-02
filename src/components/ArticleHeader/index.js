@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
-import { map } from 'lodash'
+import { lowerFirst, map } from 'lodash'
 import moment from 'moment'
 import styles from './styles.module.css'
 
@@ -17,7 +17,7 @@ const ArticleHeader = ({ category, title, createdAt, firstName, lastName } = {})
       <div className={styles['meta-categories']}>
         <span className={styles['category-prefix']}>In</span>
         <Link
-          to={`/categories/${category}`}
+          to={`/categories/${ lowerFirst(category) }`}
           rel="category tag">
             {category}
         </Link>

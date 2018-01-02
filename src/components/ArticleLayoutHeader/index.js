@@ -1,21 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { lowerFirst } from 'lodash'
 import Link from 'gatsby-link'
 import styles from './styles.module.css'
 
 const ArticleLayoutHeader = ({ category, title } = {}) => (
     <header className={styles['header-article']}>
-      <div className={styles.top}>
-        <h1 style={{ margin: 0 }}>
-          <Link
-            to="/"
-            style={{
-              color: 'blue',
-              textDecoration: 'none',
-            }}>
-            {`</>`}
+      <div className={styles['top-wrapper']}>
+        <div className={styles.top}>
+          <Link to="/">
+            Home
           </Link>
-        </h1>
+        </div>
       </div>
       <div className={styles.center}>
         <div className={styles.logo}>
@@ -32,7 +28,7 @@ const ArticleLayoutHeader = ({ category, title } = {}) => (
           <span>&gt;</span>
         </li>
         <li>
-          <Link to={`/categories/`}>
+          <Link to={`/categories/${ lowerFirst(category) }`}>
             {category}
           </Link>
         </li>

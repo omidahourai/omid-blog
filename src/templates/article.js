@@ -55,7 +55,7 @@ class ArticleTemplate extends Component {
           dangerouslySetInnerHTML={{
           __html: content.childMarkdownRemark.html
         }}/>
-        <ArticleFooter />
+        <ArticleFooter tags={map(tags, t => t.name)} />
       </article>
     )
   }

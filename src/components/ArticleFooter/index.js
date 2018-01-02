@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
+import { map } from 'lodash'
 import Link from 'gatsby-link'
 import IconButton from '../../common/components/IconButton'
 import styles from './styles.module.css'
 
-const ArticleFooter = () => (
+const ArticleFooter = ({ tags }) => (
   <footer className={styles['footer-article']}>
     <div className={styles['meta-tags']}>
-      <Link to="http://infinitythemes.ge/flex-blog/tag/time/" rel="tag">time</Link>
-      <Link to="http://infinitythemes.ge/flex-blog/tag/trendy/" rel="tag">trendy</Link>
-      <Link to="http://infinitythemes.ge/flex-blog/tag/trip/" rel="tag">trip</Link>
+    {map(tags, tag => (
+      <Link
+        to={`/tag/${ tag }/`}
+        rel="tag">
+          {tag}
+        </Link>
+    ))}
     </div>	
     <div className={styles['meta-share']}>
     <IconButton
