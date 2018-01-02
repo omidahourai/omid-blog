@@ -18,7 +18,7 @@
     margin-bottom: 20px;
     font-family: "Open Sans", sans-serif;
     line-height: .65rem;
-    
+
     &>a {
         background-color: #f8f8f8;
         border-color: #e8e8e8;
@@ -54,6 +54,10 @@
         width: 40px;
         height: 40px;
         margin: 0 4px;
+        &:active,
+        &:focus {
+            border: 1px solid;
+        }
     }
 
     &:before {

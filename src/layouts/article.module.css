@@ -1,7 +1,7 @@
 #site {
     display: grid;
     grid-template-areas: "header header header" "navigation main ads" "footer footer footer";
-    grid-template-columns: 150px 1fr 150px;
+    grid-template-columns: 10px 1fr 10px;
     grid-template-rows: auto 1fr 30px;
     grid-column-gap: 20px;
     min-height: 100vh;
@@ -10,4 +10,22 @@
 .main-layout {
     grid-area: main;
     overflow: hidden;
+}
+
+@media only screen and (min-width: 480px) {
+  #site {
+      grid-template-columns: 50px 1fr 50px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  #site {
+      grid-template-columns: 100px 1fr 100px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #site {
+      grid-template-columns: 150px 1fr 150px;
+  }
 }

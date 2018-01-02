@@ -1,43 +1,43 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
+import { map } from 'lodash'
+import moment from 'moment'
 import styles from './styles.module.css'
 
-const ArticleHeader = ({ category } = {}) => (
+const ArticleHeader = ({ category, title, createdAt, firstName, lastName } = {}) => {
+  const fullName = `${ firstName } ${ lastName }`
+  const authorLink = {
+    to: `/author/${ (firstName + lastName).toLowerCase() }/`,
+    title: `Articles by ${ fullName }`,
+    rel: `author`,
+  }
+  return (
     <header className={styles['header-article']}>
-      <div className={styles.top}>
-        <h1 style={{ margin: 0 }}>
-          <Link
-            to="/"
-            style={{
-              color: 'blue',
-              textDecoration: 'none',
-            }}>
-            {`</>`}
-          </Link>
-        </h1>
-      </div>
-      <div className={styles.center}>
-        <div className={styles.logo}>
-          [ header bkgr img ]
-        </div>
-      </div>
-      <ul className={styles.breadcrumbs}>
-        <li>
-          <Link to="/">
-            Home
-          </Link>
-        </li>
-        <li className={styles.separator}>
-        &gt;
-        </li>
-        <li>
-          <Link className={styles.active} to={`/categories/`}>
+      <div className={styles['meta-categories']}>
+        <span className={styles['category-prefix']}>In</span>
+        <Link
+          to={`/categories/${category}`}
+          rel="category tag">
             {category}
-          </Link>
-        </li>
-      </ul>
+        </Link>
+      </div>
+      <h2 className={styles['post-title']}>{title}</h2>
+      <div className={styles['meta-author-date']}>
+        <span className={styles['meta-date']}>
+          {moment(createdAt).format('MMMM D, YYYY')}
+        </span>
+        <span className={styles['author-prefix']}>
+          By
+        </span>
+        <Link
+          className={styles['meta-author']}
+          {...authorLink}>
+          {fullName}
+        </Link>
+      </div>
     </header>
   )
+}
 
-  export default ArticleHeader
+ export default ArticleHeader
