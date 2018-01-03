@@ -9,15 +9,17 @@ const LayoutHeader = ({ children }) => (
       <div className={styles['top-wrapper']}>
         <div className={styles.top}>
           <Link to="/">
-            Home
+            Blog | Omid Ahourai
           </Link>
         </div>
       </div>
+      {/*
       <div className={styles.center}>
         <div className={styles.logo}>
           [ header bkgr img ]
         </div>
       </div>
+      */}
       {children}
     </header>
   )

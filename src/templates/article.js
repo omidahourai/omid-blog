@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types"
 import Img from "gatsby-image"
 import ArticleFooter from '../components/ArticleFooter'
 import ArticleHeader from '../components/ArticleHeader'
-import styles from './styles.module.css'
+import styles from './article.module.css'
 import Helmet from 'react-helmet'
 
 // import { rhythm } from "../utils/typography"
@@ -16,7 +16,6 @@ const propTypes = {
 
 class ArticleTemplate extends Component {
   componentDidMount() {
-    console.log(this.props)
     this.props.updateLayout({
       title: this.props.data.contentfulArticle.title,
       categoryName: this.props.data.contentfulArticle.category.name,
@@ -46,8 +45,6 @@ class ArticleTemplate extends Component {
         title: hero.title,
         src: `${ hero.file.url }?w=${ dim }&h=${ dim }&q=70`,
         srcSet: `${ hero.file.url }?w=${ dim2x }&h=${ dim2x }&q=70 2x`,
-        height: {dim},
-        width: {dim},
     }
 
     return (

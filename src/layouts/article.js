@@ -17,7 +17,7 @@ class ArticleLayout extends Component {
   render() {
     const { author } = this.state
     return (
-      <div id={styles.site}>
+      <div className={styles.site}>
         <LayoutHeader
           category={this.state.category}
           title={this.state.title}>

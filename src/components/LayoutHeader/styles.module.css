@@ -11,13 +11,26 @@
 .top-wrapper {
     height: 48px;
     background-color: #272727;
-    padding: 0 1.1rem;
+    padding: 0 10px;
+}
+
+@media only screen and (min-width: 980px) {
+  .top-wrapper {
+      padding: 0 50px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .top-wrapper {
+      padding: 0 150px;
+  }
 }
 
 .top {
     height: 100%;
     display: flex;
     align-items: center;
+    padding: 0 1rem;
 
     & a {
         font-size: 1rem;
