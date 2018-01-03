@@ -1,24 +1,54 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import { map } from 'lodash'
+import { lowerFirst, result, map } from 'lodash'
 import moment from 'moment'
+import ArticleHeader from '../ArticleHeader'
 import styles from './styles.module.css'
 
-const ArticlePreview = ({ id, slug, title, summary, updatedAt, tags }) => (
-    <article>
-        <Link to={`/articles/${slug}/`}>
-            <h2>{title}</h2>
-            <p className="content">{summary}</p>
-            <div className={styles.bottom}>
-                <div className={styles.published}>
-                    <time>{moment(updatedAt).format('MMMM D, YYYY')}</time>
-                </div>
-                <div className={styles.tags}>
-                    {map(tags, (tag, index) => <span key={index}>{tag.name}</span>)}
-                </div>
+const ArticlePreview = ({
+    articleUrl,
+    authorName,
+    authorUrl,
+    categoryName,
+    categoryUrl,
+    heroImgTitle,
+    heroImgUrl,
+    summary,
+    title,
+    publishDate,
+}) => {
+    const dim = 1000
+    const dim2x = dim * 2
+    const heroImgMeta = {
+        alt: heroImgTitle,
+        title: heroImgTitle,
+        src: `${ heroImgUrl }?w=${ dim }&h=${ dim }&q=70`,
+        srcSet: `${ heroImgUrl }?w=${ dim2x }&h=${ dim2x }&q=70 2x`,
+        height: {dim},
+        width: {dim},
+    }
+
+    return (
+        <article>
+            <div className={styles.hero}>
+                <img {...heroImgMeta} />
             </div>
-        </Link>
-    </article>
-)
+            <ArticleHeader
+                articleUrl={articleUrl}
+                authorName={authorName}
+                authorUrl={authorUrl}
+                categoryName={categoryName}
+                categoryUrl={categoryUrl}
+                isPreview={true}
+                publishDate={publishDate}
+                title={title} />
+            <div className={styles.content}>
+                <p>{summary}</p>
+            </div>
+            <footer className={styles.footer}>
+            </footer>
+        </article>
+    )
+}
 
 export default ArticlePreview

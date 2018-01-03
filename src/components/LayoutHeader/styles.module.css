@@ -1,6 +1,6 @@
 @value primary, primaryHighlight from '../../common/styles/index.module.css';
 
-.header-article {
+.header {
     grid-area: header;
     display: flex;
     flex-direction: column;
@@ -47,6 +47,7 @@
     }
 }
 
+/*
 .bottom {
     padding: 0 30px;
     text-align: center;
@@ -54,34 +55,4 @@
     padding: 0 25px;
     box-shadow: 0px 1px 5px rgba(185, 185, 185, 0.5);
 }
-
-.breadcrumbs {
-    height: 48px;
-    padding: 0 2rem;
-    list-style-type: none;
-    margin: 0;
-    display: flex;
-    align-items: stretch;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #e8e8e8;
-
-    & li {
-        margin: 0 1rem 0 0;
-        display: flex;
-        align-items: center;
-    }
-
-    & a {
-        text-decoration: none;
-        &:hover {
-            color: primaryHighlight;
-        }
-    }
-    & a,
-    & li {
-        color: #666;
-        &.current {
-            color: primary;
-        }
-    }
-}
+*/

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { map, result } from 'lodash'
 import Link from 'gatsby-link'
-import ArticleLayoutHeader from '../components/ArticleLayoutHeader'
+import ArticleBreadcrumbs from '../components/ArticleBreadcrumbs'
+import LayoutHeader from '../components/LayoutHeader'
 import ArticleAuthor from '../components/ArticleAuthor'
 
 import './index.css'
@@ -14,17 +15,22 @@ class ArticleLayout extends Component {
     this.state = {}
   }
   render() {
+    const { author } = this.state
     return (
       <div id={styles.site}>
-        <ArticleLayoutHeader
+        <LayoutHeader
           category={this.state.category}
-          title={this.state.title} />
+          title={this.state.title}>
+          <ArticleBreadcrumbs
+            category={this.state.categoryName}
+            title={this.state.title}/>
+        </LayoutHeader>
         <main className={styles['main-layout']}>
           {this.props.children({
             ...this.props,
             updateLayout: (s) => this.setState(s),
           })}
-          {map(this.state.authors, author => (
+          {author ? (
             <ArticleAuthor
               key={author.id}
               firstName={author.firstName}
@@ -32,7 +38,7 @@ class ArticleLayout extends Component {
               description={author.description.description}
               photoUrl={author.photo.file.url}
             />
-          ))}
+          ) : ''}
         </main>
       </div>
     )

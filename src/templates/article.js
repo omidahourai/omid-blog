@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { first, join, map } from 'lodash'
+import { lowerFirst, result, first, join, map } from 'lodash'
 import Link from "gatsby-link"
 import * as PropTypes from "prop-types"
 import Img from "gatsby-image"
@@ -16,39 +16,57 @@ const propTypes = {
 
 class ArticleTemplate extends Component {
   componentDidMount() {
+    console.log(this.props)
     this.props.updateLayout({
       title: this.props.data.contentfulArticle.title,
-      category: this.props.data.contentfulArticle.category.name,
-      authors: this.props.data.contentfulArticle.authors,
+      categoryName: this.props.data.contentfulArticle.category.name,
+      author: this.props.data.contentfulArticle.author,
     })
   }
   render() {
-    const article = this.props.data.contentfulArticle
     const {
-        title,
+        author,
         content,
-        image,
-        authors,
-        category,
-        createdAt,
-        summary,
+        hero,
         tags,
-    } = article
-    const author = first(authors);
+        title,
+        category,
+        category : { name : categoryName },
+        createdAt : publishDate,
+        summary : { summary },
+    } = this.props.data.contentfulArticle
+    const authorName = `${ author.firstName } ${ author.lastName }`
+    const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
+    const categoryUrl = `/categories/${ lowerFirst(categoryName) }`
+
+    const dim = 1000
+    const dim2x = dim * 2
+    const heroImgMeta = {
+        alt: hero.title,
+        title: hero.title,
+        src: `${ hero.file.url }?w=${ dim }&h=${ dim }&q=70`,
+        srcSet: `${ hero.file.url }?w=${ dim2x }&h=${ dim2x }&q=70 2x`,
+        height: {dim},
+        width: {dim},
+    }
+
     return (
       <article className={styles.article}>
         <Helmet
           title={`Omid Ahourai's Blog | ${ title }`}
           meta={[
-            { name: 'description', content: `${ summary.summary }` },
+            { name: 'description', content: `${ summary }` },
             { name: 'keywords', content: join(map(tags, ({ name }) => name), ', ') },
           ]}
         />
+        <div className={styles.hero}>
+          <img {...heroImgMeta} />
+        </div>
         <ArticleHeader
-          firstName={author.firstName}
-          lastName={author.lastName}
-          category={category.name}
-          createdAt={createdAt}
+          authorName={authorName}
+          categoryName={categoryName}
+          categoryUrl={categoryUrl}
+          publishDate={publishDate}
           title={title} />
         <div
           className={styles.content}
@@ -69,7 +87,15 @@ export const pageQuery = graphql`
   query ArticleQuery($id: String!) {
     contentfulArticle(id: { eq: $id }) {
       title
-      summary {
+      hero {
+        id
+        title
+        description
+        file {
+          url
+        }
+      }
+    summary {
         id
         summary
       }
@@ -78,7 +104,7 @@ export const pageQuery = graphql`
           html
         }
       }
-      authors {
+      author {
         id
         firstName
         lastName
@@ -94,7 +120,6 @@ export const pageQuery = graphql`
       category {
         name
       }
-      slug
       createdAt
       tags {
         name

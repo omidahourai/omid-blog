@@ -3,7 +3,7 @@ import Link from 'gatsby-link'
 import styles from './styles.module.css'
 
 
-const ArticleFooter = ({ firstName, lastName, description, photoUrl }) => {
+const ArticleAuthor = ({ firstName, lastName, description, photoUrl }) => {
   const photoDim = 110
   const photoDim2x = photoDim * 2
   const fullName = `${ firstName } ${ lastName }`
@@ -37,4 +37,4 @@ const ArticleFooter = ({ firstName, lastName, description, photoUrl }) => {
   )
 }
 
-  export default ArticleFooter
+  export default ArticleAuthor

@@ -1,0 +1,32 @@
+@value primary, primaryHighlight from '../../common/styles/index.module.css';
+
+.breadcrumbs {
+    height: 48px;
+    padding: 0 2rem;
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+    align-items: stretch;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e8e8e8;
+
+    & li {
+        margin: 0 1rem 0 0;
+        display: flex;
+        align-items: center;
+    }
+
+    & a {
+        text-decoration: none;
+        &:hover {
+            color: primaryHighlight;
+        }
+    }
+    & a,
+    & li {
+        color: #666;
+        &.current {
+            color: primary;
+        }
+    }
+}
