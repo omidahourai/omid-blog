@@ -22,6 +22,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "dotenv": "^4.0.0",
     "gatsby": "^1.9.147",
     "gatsby-cli": "^1.1.28",
@@ -36,7 +37,6 @@
     "slash": "^1.0.0"
   },
   "devDependencies": {
-    "axios": "^0.17.1",
     "prettier": "^1.9.2"
   }
 }
