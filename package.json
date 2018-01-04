@@ -36,6 +36,7 @@
     "slash": "^1.0.0"
   },
   "devDependencies": {
+    "axios": "^0.17.1",
     "prettier": "^1.9.2"
   }
 }

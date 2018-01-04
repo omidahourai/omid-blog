@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import { lowerFirst, first, map, result } from 'lodash'
@@ -45,16 +45,25 @@ const ArticlePreviewList = ({ edges }) => {
     )
 }
 
-const HomePage = ({ data }) => {
-    console.log('data',data)
-    if ( !data ) {
-        return <div>No Data :(</div>
+class HomePage extends Component {
+    componentDidMount() {
+        this.props.updateLayout({
+            instagram: this.props.pathContext.instagram,
+        })
+      }
+    
+    render() {
+        const { data } = this.props
+        console.log('data',data)
+        if ( !data ) {
+            return <div>No Data :(</div>
+        }
+        return (
+            <div className={styles['article-previews']}>
+                <ArticlePreviewList edges={data.us.edges} />
+            </div>
+        )
     }
-    return (
-        <div className={styles['article-previews']}>
-            <ArticlePreviewList edges={data.us.edges} />
-        </div>
-    )
 }
 
 export default HomePage

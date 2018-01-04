@@ -4,6 +4,7 @@ import { map, result } from 'lodash'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import LayoutHeader from '../components/LayoutHeader'
+import InstagramBanner from '../components/InstagramBanner'
 
 import './index.css'
 import styles from './styles.module.css'
@@ -31,9 +32,16 @@ class HomeLayout extends Component {
             updateLayout: (s) => this.setState(s),
           })}
         </main>
-        <footer className={styles['footer-layout']}>
-          Footer
-        </footer>
+        <div className={styles.bottom}>
+          {this.state.instagram ?
+            <InstagramBanner feedData={this.state.instagram.data} />
+          : ''}
+          <footer className={styles.footer}>
+            <p>
+              Copyright 2018 Omid Ahourai. All Rights Reserved.
+            </p>
+          </footer>
+        </div>
       </div>
     )
   }

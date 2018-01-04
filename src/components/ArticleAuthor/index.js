@@ -8,7 +8,9 @@ const ArticleAuthor = ({ firstName, lastName, description, photoUrl }) => {
   const photoDim2x = photoDim * 2
   const fullName = `${ firstName } ${ lastName }`
   const authorLink = {
-    to: `/author/${ (firstName + lastName).toLowerCase() }/`,
+    // TODO: CREATE AUTHOR PAGE
+    // to: `/author/${ (firstName + lastName).toLowerCase() }/`,
+    to: '#',
     title: `Articles by ${ fullName }`,
     rel: `author`,
   }

@@ -7,13 +7,17 @@ import styles from './styles.module.css'
 const ArticleFooter = ({ tags }) => (
   <footer className={styles['footer-article']}>
     <div className={styles['meta-tags']}>
-    {map(tags, tag => (
-      <Link
-        to={`/tag/${ tag }/`}
-        rel="tag">
-          {tag}
-        </Link>
-    ))}
+    {map(tags, tag => {
+      // TODO: CREATE TAG PAGE
+      // const tagUrl = `/tag/${ tag }/`
+      const tagUrl = '#'
+      return (
+        <Link
+          to={tagUrl}
+          rel="tag">
+            {tag}
+          </Link>
+      )})}
     </div>	
     <div className={styles['meta-share']}>
     <IconButton
