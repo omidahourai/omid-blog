@@ -22,7 +22,7 @@ const ArticleFooter = ({ tags }) => (
     <div className={styles['meta-share']}>
     <IconButton
         icon="facebook"
-        onClick={() => window.open('http://facebook.com/omidahourai')}
+        onClick={() => window.open('http://facebook.com/Omid-Ahourai-296038887569459/')}
         title="Like Omid Ahourai on Facebook" />
     <IconButton
         icon="twitter"

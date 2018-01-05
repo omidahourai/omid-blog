@@ -18,7 +18,11 @@ exports.onPreBootstrap = () => {
         }
         return axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${ IG_ACCESS_TOKEN }`)
             .then(response => {
-                console.log(response.data);
+                if ( process.env.NODE_ENV === 'development' ) {
+                    console.log('Instagram >>', JSON.stringify(response.data, null, '\t'));
+                } else {
+                    console.log(`Instagram >> received data from ${ response.data.data.length } posts.`);
+                }
                 instagram = response.data
                 resolve();
             })
@@ -55,7 +59,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 reject(errors)
             }
 
-            console.log('got articles',JSON.stringify(data, null, '\t'))
+            if ( process.env.NODE_ENV === 'development' ) {
+                console.log('Contentful >>',JSON.stringify(data, null, '\t'))
+            } else {
+                console.log(`Contentful >> received data from ${ data.allContentfulArticle.edges.length } articles.`)
+            }
 
             const template = path.resolve(`./src/templates/article.js`)
             forEach(data.allContentfulArticle.edges, edge => {
