@@ -1,0 +1,8 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "window.title": "Omid's Blog — ${activeEditorMedium}",
+    "files.exclude": {
+      "**/.DS_Store": true, // this is a default value
+      "**/node_modules": true, // this excludes all folders 
+    },
+  }

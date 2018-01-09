@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import { lowerFirst, first, map, result } from 'lodash'
 import ArticlePreview from '../components/ArticlePreview'
@@ -60,6 +61,12 @@ class HomePage extends Component {
         }
         return (
             <div className={styles['article-previews']}>
+                <Helmet
+                    title="Omid Ahourai - Blog"
+                    meta={[
+                        { name: 'description', content: 'Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.' },
+                        { name: 'keywords', content: 'omid ahourai, omid, ahourai, digital nomad, ardentkid, storyfork' },
+                ]}/>
                 <ArticlePreviewList edges={data.us.edges} />
             </div>
         )

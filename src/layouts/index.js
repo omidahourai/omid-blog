@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { map, result } from 'lodash'
 import Link from 'gatsby-link'
-import Helmet from 'react-helmet'
 import LayoutHeader from '../components/LayoutHeader'
 import InstagramBanner from '../components/InstagramBanner'
 
@@ -18,13 +17,6 @@ class HomeLayout extends Component {
   render() {
     return (
       <div className={styles.site}>
-        <Helmet
-          title="Gatsby Default Starter"
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
-        />
         <LayoutHeader />
         <main className={styles['main-layout']}>
           {this.props.children({
