@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'gatsby-link'
 import { lowerFirst, result, map } from 'lodash'
 import moment from 'moment'
-import ArticleHeader from '../ArticleHeader'
+import ArticlePreviewHeader from '../ArticlePreviewHeader'
 import styles from './styles.module.css'
 
 const ArticlePreview = ({
@@ -21,7 +21,7 @@ const ArticlePreview = ({
     const dim2x = dim * 2
     const heroImgMeta = {
         alt: heroImgTitle,
-        title: heroImgTitle,
+        title: title,
         src: `${ heroImgUrl }?w=${ dim }&h=${ dim }&q=70`,
         srcSet: `${ heroImgUrl }?w=${ dim2x }&h=${ dim2x }&q=70 2x`,
         height: {dim},
@@ -31,9 +31,11 @@ const ArticlePreview = ({
     return (
         <article>
             <div className={styles.hero}>
-                <img {...heroImgMeta} />
+                <Link to={articleUrl}>
+                    <img {...heroImgMeta} />
+                </Link>
             </div>
-            <ArticleHeader
+            <ArticlePreviewHeader
                 articleUrl={articleUrl}
                 authorName={authorName}
                 authorUrl={authorUrl}

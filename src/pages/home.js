@@ -3,55 +3,40 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import { lowerFirst, first, map, result } from 'lodash'
-import ArticlePreview from '../components/ArticlePreview'
+import ArticlePreviewList from '../components/ArticlePreviewList'
 import styles from './styles.module.css'
-
-const ArticlePreviewList = ({ edges }) => {
-    return (
-        <ul>
-            {map(edges, ({node}) => {
-                const {
-                    author,
-                    hero,
-                    slug,
-                    title,
-                    category : { name : categoryName },
-                    id : key,
-                    createdAt : publishDate,
-                    summary : { summary },
-                } = node
-                const authorName = `${ author.firstName } ${ author.lastName }`
-                const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
-                const categoryUrl = `/categories/${ lowerFirst(categoryName) }`
-                const articleUrl = `/articles/${slug}/`
-            
-                return (
-                    <li key={key}>
-                        <ArticlePreview
-                            articleUrl={articleUrl}
-                            authorUrl={authorUrl}
-                            authorName={authorName}
-                            categoryName={categoryName}
-                            categoryUrl={categoryUrl}
-                            heroImgTitle={hero.title}
-                            heroImgUrl={hero.file.url}
-                            summary={summary}
-                            title={title}
-                            publishDate={publishDate}
-                        />
-                    </li>
-                )}
-            )}
-        </ul>
-    )
-}
 
 class HomePage extends Component {
     componentDidMount() {
         this.props.updateLayout({
             instagram: this.props.pathContext.instagram,
         })
-      }
+    }
+
+    getMetaData() {
+        return {
+            title: `Omid Ahourai's Blog`,
+            meta: [
+                { name: 'description', content: 'Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.' },
+                { name: 'keywords', content: 'omid ahourai, omid, ahourai, digital nomad, ardentkid, storyfork' },
+                // { property: 'og:site_name', content: `Blog - Omid Ahourai` },
+                // { property: 'og:type', content: 'article' },
+                // { property: 'og:title', content: title },
+                // { property: 'og:description', content: summary },
+                // { property: 'og:url', content: `http://omid.com/articles/${slug}` },
+                // { property: 'og:image', content: `${hero.file.url}?w=1200&q=70` },
+                // { name: 'twitter:card', content: 'summary_large_image' },
+                // { name: 'twitter:title', content: title },
+                // { name: 'twitter:description', content: summary },
+                // { name: 'twitter:url', content: `http://omid.com/articles/${slug}` },
+                // { name: 'twitter:image', content: `${hero.file.url}?w=1200&q=70` },
+                // { name: 'twitter:label1', content: 'Written by' },
+                // { name: 'twitter:data1', content: `${ author.firstName } ${ author.lastName }` },
+                // { name: 'twitter:label2', content: 'Filed under' },
+                // { name: 'twitter:data2', content: category },
+            ]
+        }
+    }
     
     render() {
         const { data } = this.props
@@ -60,13 +45,8 @@ class HomePage extends Component {
             return <div>No Data :(</div>
         }
         return (
-            <div className={styles['article-previews']}>
-                <Helmet
-                    title="Omid Ahourai - Blog"
-                    meta={[
-                        { name: 'description', content: 'Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.' },
-                        { name: 'keywords', content: 'omid ahourai, omid, ahourai, digital nomad, ardentkid, storyfork' },
-                ]}/>
+            <div className="article-previews">
+                <Helmet {...this.getMetaData()}/>
                 <ArticlePreviewList edges={data.us.edges} />
             </div>
         )
@@ -83,7 +63,7 @@ HomePage.PropTypes = {
 
 export const pageQuery = graphql`
   query getAllArticles {
-    us: allContentfulArticle(filter: { node_locale: { eq: "en-US" } }) {
+    us: allContentfulArticle(sort: { order: DESC, fields: [createdAt] }, filter: { node_locale: { eq: "en-US" } }) {
       edges {
         node {
             id

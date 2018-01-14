@@ -10,8 +10,15 @@ import Helmet from 'react-helmet'
 
 // import { rhythm } from "../utils/typography"
 
-const propTypes = {
-  data: PropTypes.object.isRequired,
+const parseHeroImgMeta = (hero) => {
+  const dim = 1000
+  const dim2x = dim * 2
+  return {
+      alt: hero.title,
+      title: hero.title,
+      src: `${ hero.file.url }?w=${ dim }&h=${ dim }&q=70`,
+      srcSet: `${ hero.file.url }?w=${ dim2x }&h=${ dim2x }&q=70 2x`,
+  }
 }
 
 class ArticleTemplate extends Component {
@@ -22,42 +29,48 @@ class ArticleTemplate extends Component {
       author: this.props.data.contentfulArticle.author,
     })
   }
+
+  getMetaData() {
+    const {slug, title, author, tags, hero, category, summary : { summary }} = this.props.data.contentfulArticle
+    return {
+      title: `Omid Ahourai's Blog | ${ title }`,
+      meta: [
+        { name: 'description', content: `${ summary }` },
+        { name: 'keywords', content: join(map(tags, ({ name }) => name), ', ') },
+        { property: 'og:site_name', content: `Blog - Omid Ahourai` },
+        { property: 'og:type', content: 'article' },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: summary },
+        { property: 'og:url', content: `http://omid.com/articles/${slug}` },
+        { property: 'og:image', content: `${hero.file.url}?w=1200&q=70` },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: summary },
+        { name: 'twitter:url', content: `http://omid.com/articles/${slug}` },
+        { name: 'twitter:image', content: `${hero.file.url}?w=1200&q=70` },
+        { name: 'twitter:label1', content: 'Written by' },
+        { name: 'twitter:data1', content: `${ author.firstName } ${ author.lastName }` },
+        { name: 'twitter:label2', content: 'Filed under' },
+        { name: 'twitter:data2', content: category },
+      ]
+    }
+  }
+
   render() {
     const {
-        author,
-        content,
-        hero,
-        tags,
-        title,
-        category,
+        author, content, hero, tags, title,
         category : { name : categoryName },
         createdAt : publishDate,
-        summary : { summary },
     } = this.props.data.contentfulArticle
     const authorName = `${ author.firstName } ${ author.lastName }`
     const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
     const categoryUrl = `/categories/${ lowerFirst(categoryName) }`
 
-    const dim = 1000
-    const dim2x = dim * 2
-    const heroImgMeta = {
-        alt: hero.title,
-        title: hero.title,
-        src: `${ hero.file.url }?w=${ dim }&h=${ dim }&q=70`,
-        srcSet: `${ hero.file.url }?w=${ dim2x }&h=${ dim2x }&q=70 2x`,
-    }
-
     return (
       <article className={styles.article}>
-        <Helmet
-          title={`Omid Ahourai's Blog | ${ title }`}
-          meta={[
-            { name: 'description', content: `${ summary }` },
-            { name: 'keywords', content: join(map(tags, ({ name }) => name), ', ') },
-          ]}
-        />
+        <Helmet {...this.getMetaData()}/>
         <div className={styles.hero}>
-          <img {...heroImgMeta} />
+          <img {...parseHeroImgMeta(hero)} />
         </div>
         <ArticleHeader
           authorName={authorName}
@@ -76,7 +89,9 @@ class ArticleTemplate extends Component {
   }
 }
 
-ArticleTemplate.propTypes = propTypes
+ArticleTemplate.propTypes = {
+  data: PropTypes.object.isRequired,
+}
 
 export default ArticleTemplate
 
@@ -84,6 +99,7 @@ export const pageQuery = graphql`
   query ArticleQuery($id: String!) {
     contentfulArticle(id: { eq: $id }) {
       title
+      slug
       hero {
         id
         title

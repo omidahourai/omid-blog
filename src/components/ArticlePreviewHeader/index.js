@@ -28,7 +28,9 @@ const ArticleHeader = ({
         </Link>
       </div>
       <h2 className={styles['post-title']}>
+        <Link className={styles['post-link']} to={articleUrl}>
           {title}
+        </Link>
       </h2>
       <div className={styles['meta-author-date']}>
         <span className={styles['meta-date']}>
