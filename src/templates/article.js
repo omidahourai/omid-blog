@@ -11,7 +11,7 @@ import Helmet from 'react-helmet'
 // import { rhythm } from "../utils/typography"
 
 const parseHeroImgMeta = (hero) => {
-  const dim = 1000
+  const dim = 1200
   const dim2x = dim * 2
   return {
       alt: hero.title,
