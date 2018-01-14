@@ -11,7 +11,7 @@ import Helmet from 'react-helmet'
 // import { rhythm } from "../utils/typography"
 
 const parseHeroImgMeta = (hero) => {
-  const dim = 1200
+  const dim = 1000
   const dim2x = dim * 2
   return {
       alt: hero.title,
@@ -42,7 +42,7 @@ class ArticleTemplate extends Component {
         { property: 'og:title', content: title },
         { property: 'og:description', content: summary },
         { property: 'og:url', content: `http://omid.com/articles/${slug}` },
-        { property: 'og:image', content: `${hero.file.url}?w=1200&q=70` },
+        { property: 'og:image', content: `http:${hero.file.url}?w=1200&h=630q=70` },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: title },
         { name: 'twitter:description', content: summary },

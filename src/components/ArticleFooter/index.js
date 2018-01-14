@@ -13,6 +13,7 @@ const ArticleFooter = ({ tags }) => (
       const tagUrl = '#'
       return (
         <Link
+          key={tag}
           to={tagUrl}
           rel="tag">
             {tag}
