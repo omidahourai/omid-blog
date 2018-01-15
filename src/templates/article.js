@@ -3,8 +3,8 @@ import { lowerFirst, result, first, join, map } from 'lodash'
 import Link from "gatsby-link"
 import * as PropTypes from "prop-types"
 import Img from "gatsby-image"
-import ArticleFooter from '../components/ArticleFooter'
-import ArticleHeader from '../components/ArticleHeader'
+import ArticleFooter from 'components/ArticleFooter'
+import ArticleHeader from 'components/ArticleHeader'
 import styles from './article.module.css'
 import Helmet from 'react-helmet'
 
@@ -41,12 +41,12 @@ class ArticleTemplate extends Component {
         { property: 'og:type', content: 'article' },
         { property: 'og:title', content: title },
         { property: 'og:description', content: summary },
-        { property: 'og:url', content: `http://omid.com/articles/${slug}` },
+        { property: 'og:url', content: `http://www.omid.com/articles/${slug}` },
         { property: 'og:image', content: `http:${hero.file.url}?w=1200&h=630q=70` },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: title },
         { name: 'twitter:description', content: summary },
-        { name: 'twitter:url', content: `http://omid.com/articles/${slug}` },
+        { name: 'twitter:url', content: `http://www.omid.com/articles/${slug}` },
         { name: 'twitter:image', content: `http:${hero.file.url}?w=1200&q=70` },
         { name: 'twitter:label1', content: 'Written by' },
         { name: 'twitter:data1', content: `${ author.firstName } ${ author.lastName }` },

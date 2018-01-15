@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { map } from 'lodash'
 import Link from 'gatsby-link'
-import IconButton from '../../common/components/IconButton'
+import IconButton from 'common/components/IconButton'
 import styles from './styles.module.css'
 
 const ArticleFooter = ({ tags }) => (

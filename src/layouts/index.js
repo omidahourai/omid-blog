@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { map, result } from 'lodash'
 import Link from 'gatsby-link'
-import LayoutHeader from '../components/LayoutHeader'
-import InstagramBanner from '../components/InstagramBanner'
+import LayoutHeader from 'components/LayoutHeader'
+import InstagramBanner from 'components/InstagramBanner'
+import SideBar from 'components/SideBar'
 
 import './index.css'
 import styles from './styles.module.css'
@@ -24,6 +25,9 @@ class HomeLayout extends Component {
             updateLayout: (s) => this.setState(s),
           })}
         </main>
+        <div className={styles.sidebar}>
+          <SideBar />
+        </div>
         <div className={styles.bottom}>
           {this.state.instagram ?
             <InstagramBanner feedData={this.state.instagram.data} />

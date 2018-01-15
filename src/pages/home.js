@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import { lowerFirst, first, map, result } from 'lodash'
-import ArticlePreviewList from '../components/ArticlePreviewList'
+import ArticlePreviewList from 'components/ArticlePreviewList'
 import styles from './styles.module.css'
 
 class HomePage extends Component {
@@ -23,7 +23,7 @@ class HomePage extends Component {
                 { property: 'og:type', content: 'website' },
                 { property: 'og:title', content: `Omid Ahourai's Blog` },
                 { property: 'og:description', content: 'Read about my life! Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.' },
-                { property: 'og:url', content: `http://omid.com/` },
+                { property: 'og:url', content: `http://www.omid.com/` },
                 // { property: 'og:image', content: `${hero.file.url}?w=1200&q=70` },
                 // { name: 'twitter:card', content: 'summary_large_image' },
                 // { name: 'twitter:title', content: title },

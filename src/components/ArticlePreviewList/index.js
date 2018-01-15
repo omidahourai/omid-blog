@@ -1,6 +1,6 @@
 import React from 'react'
 import { lowerFirst, map } from 'lodash'
-import ArticlePreview from '../ArticlePreview'
+import ArticlePreview from 'components/ArticlePreview'
 import styles from './styles.module.css'
 
 const parseNode = ({

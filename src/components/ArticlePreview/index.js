@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'gatsby-link'
 import { lowerFirst, result, map } from 'lodash'
 import moment from 'moment'
-import ArticlePreviewHeader from '../ArticlePreviewHeader'
+import ArticlePreviewHeader from 'components/ArticlePreviewHeader'
 import styles from './styles.module.css'
 
 const ArticlePreview = ({
