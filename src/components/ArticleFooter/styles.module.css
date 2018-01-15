@@ -9,6 +9,7 @@
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    margin-bottom: 2rem;
 }
 
 .meta-tags {
@@ -38,27 +39,35 @@
         }
     }
 }
-
+.btn {
+    border: 1px solid;
+    border-radius: 50%;
+    border-color: #333;
+    padding: 0;
+    width: 2.6rem;
+    height: 2.6rem;
+    margin: 0 4px;
+    background-color: #f8f8f8;
+    &:active,
+    &:focus {
+        border: 1px solid;
+    }
+    &:hover {
+        background-color: #CCC;
+    }
+    & svg {
+        padding: 0.7rem;
+    }
+    & svg>* {
+        fill: #333;
+    }
+    &:hover svg>* {
+        fill: #333 !important;
+    }
+}
 .meta-share {
     display: inline-block;
     position: relative;
-
-    & svg>* {
-        fill: #f8f8f8; 
-    }
-    & button {
-        background: #333;
-        border: 1px solid;
-        border-radius: 50%;
-        border-color: #333;
-        width: 40px;
-        height: 40px;
-        margin: 0 4px;
-        &:active,
-        &:focus {
-            border: 1px solid;
-        }
-    }
 
     &:before {
         right: 100%;
@@ -72,7 +81,6 @@
     &:before,
     &:after {
         border-color: #e8e8e8;
-
         content: "";
         position: absolute;
         height: 1px;
@@ -82,4 +90,15 @@
         width: 1000px;
         box-sizing: border-box;
     }
+}
+
+.share-text {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+
 }

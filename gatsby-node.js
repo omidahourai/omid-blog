@@ -71,7 +71,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 const { id, slug } = edge.node
                 const prevId = result(edges, `[${index-1}].node.id`) || ''
                 const nextId = result(edges, `[${index+1}].node.id`) || ''
-                console.log(prevId)
                 createPage({
                     layout: 'article',
                     path: `/articles/${slug}/`,

@@ -40,5 +40,16 @@
         font-family: "Open Sans", sans-serif;
         font-size: .85rem;
         line-height: 1.35rem;
+        margin: 0;
+    }
+}
+
+.share {
+    margin-top: 0.5rem;
+    & a {
+        padding: 0.5rem;
+        &:hover svg>*{
+            fill: primary;
+        }
     }
 }

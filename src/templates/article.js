@@ -44,7 +44,7 @@ class ArticleTemplate extends Component {
         { property: 'og:title', content: title },
         { property: 'og:description', content: summary },
         { property: 'og:url', content: `http://www.omid.com/articles/${slug}` },
-        { property: 'og:image', content: `http:${hero.file.url}?w=1200&h=630q=70` },
+        { property: 'og:image', content: `http:${hero.file.url}?w=1200&h=630&q=70` },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: title },
         { name: 'twitter:description', content: summary },
@@ -60,11 +60,10 @@ class ArticleTemplate extends Component {
 
   render() {
     const {
-        author, content, hero, tags, title,
+        author, content, hero, tags, title, slug,
         category : { name : categoryName },
         createdAt : publishDate,
     } = this.props.data.article
-    console.log('article data:',this.props)
     const authorName = `${ author.firstName } ${ author.lastName }`
     const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
     const categoryUrl = `/categories/${ lowerFirst(categoryName) }`
@@ -86,7 +85,10 @@ class ArticleTemplate extends Component {
           dangerouslySetInnerHTML={{
           __html: content.childMarkdownRemark.html
         }}/>
-        <ArticleFooter tags={map(tags, t => t.name)} />
+        <ArticleFooter
+          tags={map(tags, t => t.name)}
+          title={title}
+          slug={slug}/>
       </article>
     )
   }
