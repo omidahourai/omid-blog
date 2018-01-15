@@ -3,8 +3,8 @@ import { lowerFirst, result, first, join, map } from 'lodash'
 import Link from "gatsby-link"
 import * as PropTypes from "prop-types"
 import Img from "gatsby-image"
-import ArticleFooter from 'components/ArticleFooter'
 import ArticleHeader from 'components/ArticleHeader'
+import ArticleFooter from 'components/ArticleFooter'
 import styles from './article.module.css'
 import Helmet from 'react-helmet'
 
@@ -24,14 +24,16 @@ const parseHeroImgMeta = (hero) => {
 class ArticleTemplate extends Component {
   componentDidMount() {
     this.props.updateLayout({
-      title: this.props.data.contentfulArticle.title,
-      categoryName: this.props.data.contentfulArticle.category.name,
-      author: this.props.data.contentfulArticle.author,
+      title: this.props.data.article.title,
+      categoryName: this.props.data.article.category.name,
+      author: this.props.data.article.author,
+      next: this.props.data.next,
+      prev: this.props.data.prev,
     })
   }
 
   getMetaData() {
-    const {slug, title, author, tags, hero, category, summary : { summary }} = this.props.data.contentfulArticle
+    const {slug, title, author, tags, hero, category, summary : { summary }} = this.props.data.article
     return {
       title: `Omid Ahourai's Blog | ${ title }`,
       meta: [
@@ -61,7 +63,8 @@ class ArticleTemplate extends Component {
         author, content, hero, tags, title,
         category : { name : categoryName },
         createdAt : publishDate,
-    } = this.props.data.contentfulArticle
+    } = this.props.data.article
+    console.log('article data:',this.props)
     const authorName = `${ author.firstName } ${ author.lastName }`
     const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
     const categoryUrl = `/categories/${ lowerFirst(categoryName) }`
@@ -96,8 +99,8 @@ ArticleTemplate.propTypes = {
 export default ArticleTemplate
 
 export const pageQuery = graphql`
-  query ArticleQuery($id: String!) {
-    contentfulArticle(id: { eq: $id }) {
+  query ArticleQuery($id: String!, $nextId: String, $prevId: String) {
+    article: contentfulArticle(id: { eq: $id }) {
       title
       slug
       hero {
@@ -108,7 +111,7 @@ export const pageQuery = graphql`
           url
         }
       }
-    summary {
+      summary {
         id
         summary
       }
@@ -137,6 +140,32 @@ export const pageQuery = graphql`
       tags {
         name
       }
+    }
+    prev: contentfulArticle(id: { eq: $prevId }) {
+      title
+      slug
+      hero {
+        id
+        title
+        description
+        file {
+          url
+        }
+      }
+      createdAt
+    }
+    next: contentfulArticle(id: { eq: $nextId }) {
+      title
+      slug
+      hero {
+        id
+        title
+        description
+        file {
+          url
+        }
+      }
+      createdAt
     }
   }
 `

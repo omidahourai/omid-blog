@@ -5,6 +5,7 @@ import Link from 'gatsby-link'
 import ArticleBreadcrumbs from 'components/ArticleBreadcrumbs'
 import LayoutHeader from 'components/LayoutHeader'
 import ArticleAuthor from 'components/ArticleAuthor'
+import ArticleNextPrev from 'components/ArticleNextPrev'
 
 import './index.css'
 import styles from './article.module.css'
@@ -15,7 +16,7 @@ class ArticleLayout extends Component {
     this.state = {}
   }
   render() {
-    const { author } = this.state
+    const { author, prev, next } = this.state
     return (
       <div className={styles.site}>
         <LayoutHeader
@@ -39,6 +40,13 @@ class ArticleLayout extends Component {
               photoUrl={author.photo.file.url}
             />
           ) : ''}
+          {prev || next ? (
+            <ArticleNextPrev
+              prevData={prev}
+              nextData={next}
+            />
+          ) : ''}
+
         </main>
       </div>
     )

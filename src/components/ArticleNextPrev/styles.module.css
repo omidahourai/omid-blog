@@ -1,0 +1,82 @@
+@value primary, primaryHighlight from 'common/styles/index.module.css';
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    & p,
+    & h4 {
+        color: #333;
+        margin: 0;
+    }
+    & a {
+        &:hover h4 {
+            color: primary;
+        }
+    }
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 2rem;
+    & p {
+        font-family: "Open Sans", sans-serif;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+    & h4 {
+        vertical-align: baseline;
+        font-family: 'Playfair Display', serif;
+        font-size: 1rem;
+        line-height: initial;
+        letter-spacing: .05rem;
+        font-weight: 400;
+    }
+
+}
+
+.prev,
+.next {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    text-decoration: none;
+}
+
+.thumbnail {
+    min-width: 75px;
+    width: 75px;
+    height: 75px;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        object-fit: cover;
+    }
+}
+
+.text {
+    flex-grow: 1;
+}
+
+.prev {
+    & .text {
+        margin-left: 1rem;
+    }
+}
+
+.next {
+    text-align: right;
+    & .thumbnail {
+        order: 1;
+    }
+    & .text {
+        margin-right: 1rem;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .thumbnail {
+        display: none;
+    }
+}

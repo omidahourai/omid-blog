@@ -1,4 +1,4 @@
-const { forEach } = require('lodash')
+const { result, forEach } = require('lodash')
 // const Promise = require(`bluebird`)
 const path = require('path')
 const slash = require('slash')
@@ -34,7 +34,7 @@ exports.onPreBootstrap = () => {
 }
 
 const ARTICLES_QUERY = `{
-    allContentfulArticle(limit: 1000) {
+    allContentfulArticle(sort: { order: ASC, fields: [createdAt] }, limit: 1000) {
         edges {
             node {
                 id
@@ -66,13 +66,17 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             }
 
             const template = path.resolve(`./src/templates/article.js`)
-            forEach(data.allContentfulArticle.edges, edge => {
+            const edges = data.allContentfulArticle.edges
+            forEach(edges, (edge, index) => {
                 const { id, slug } = edge.node
+                const prevId = result(edges, `[${index-1}].node.id`) || ''
+                const nextId = result(edges, `[${index+1}].node.id`) || ''
+                console.log(prevId)
                 createPage({
                     layout: 'article',
                     path: `/articles/${slug}/`,
                     component: slash(template),
-                    context: { id, slug },
+                    context: { id, slug, prevId, nextId },
                 })
             })
             resolve()
