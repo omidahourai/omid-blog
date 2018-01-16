@@ -33,7 +33,7 @@ const ArticleFooter = ({ title, tags, slug }) => (
       </AnchorCircleIcon>
       <AnchorCircleIcon 
         className={styles.btn}
-        href={`https://twitter.com/share?text=Check out this article by @omidahourai: ${ title }&hashtags=${ tags.join(',') }&url=${ `http://www.omid.com/article/${ slug }` }`}
+        href={`https://twitter.com/share?text=Check out this article by @omidahourai: ${ title }&hashtags=${ tags.join(',') }&url=${ `http://www.omid.com/articles/${ slug }` }`}
         rel="external"
         title="Share on Twitter">
         <FaTwitter />
