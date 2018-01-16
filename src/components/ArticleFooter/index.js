@@ -3,7 +3,7 @@ import { map } from 'lodash'
 import Link from 'gatsby-link'
 import IconButton from 'common/components/IconButton'
 import styles from './styles.module.css'
-import ButtonCircle from 'common/components/ButtonCircle'
+import { AnchorCircleIcon } from 'common/components'
 import { FaFacebook, FaTwitter, FaInstagram } from 'common/icons';
 
 const ArticleFooter = ({ title, tags, slug }) => (
@@ -24,18 +24,20 @@ const ArticleFooter = ({ title, tags, slug }) => (
     </div>	
     <p className={styles['share-text']}>Share this article</p>
     <div className={styles['meta-share']}>
-      <ButtonCircle 
+      <AnchorCircleIcon 
         className={styles.btn}
-        onClick={() => window.open(`https://facebook.com/sharer/sharer.php?u=${ decodeURIComponent( `http://www.omid.com/article/${ slug }` )}`)}
+        href={`https://facebook.com/sharer/sharer.php?u=${ decodeURIComponent( `http://www.omid.com/article/${ slug }`)}`}
+        rel="external"
         title="Share on Facebook">
         <FaFacebook />
-      </ButtonCircle>
-      <ButtonCircle 
+      </AnchorCircleIcon>
+      <AnchorCircleIcon 
         className={styles.btn}
-        onClick={() => window.open(`https://twitter.com/share?text=Check out this article by @omidahourai: ${ title }&hashtags=${ tags.join(',') }&url=${ `http://www.omid.com/article/${ slug }` }`)}
+        href={`https://twitter.com/share?text=Check out this article by @omidahourai: ${ title }&hashtags=${ tags.join(',') }&url=${ `http://www.omid.com/article/${ slug }` }`}
+        rel="external"
         title="Share on Twitter">
         <FaTwitter />
-      </ButtonCircle>
+      </AnchorCircleIcon>
     </div>
   </footer>
 )

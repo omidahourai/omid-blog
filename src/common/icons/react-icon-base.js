@@ -21,7 +21,7 @@ const IconBase = ({ children, color, size, style, width, height, background, ...
       style={{
         verticalAlign: 'middle',
         color: color || reactIconBase.color,
-        [`background-color`]: background || '',
+        [`backgroundColor`]: background || '',
         ...(reactIconBase.style || {}),
         ...style
       }}

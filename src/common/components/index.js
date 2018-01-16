@@ -1,0 +1,1 @@
+export { AnchorCircleIcon } from './AnchorCircleIcon'

@@ -39,6 +39,7 @@ const ArticleAuthor = ({ firstName, lastName, description, photoUrl }) => {
           <a 
             href="http://facebook.com/Omid-Ahourai-296038887569459/"
             target="_blank"
+            rel="external"
             title="Like Omid Ahourai on Facebook"
             alt="Like Omid Ahourai on Facebook">
             <FaFacebook />
@@ -46,6 +47,7 @@ const ArticleAuthor = ({ firstName, lastName, description, photoUrl }) => {
           <a 
             href="https://twitter.com/omidahourai"
             target="_blank"
+            rel="external"
             title="Follow Omid Ahourai on Twitter"
             alt="Follow Omid Ahourai on Twitter">
             <FaTwitter />
@@ -53,6 +55,7 @@ const ArticleAuthor = ({ firstName, lastName, description, photoUrl }) => {
           <a 
             href="https://instagram.com/omidahourai"
             target="_blank"
+            rel="external"
             title="Follow Omid Ahourai on Instagram"
             alt="Follow Omid Ahourai on Instagram">
             <FaInstagram />

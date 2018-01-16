@@ -6,6 +6,7 @@ import LayoutHeader from 'components/LayoutHeader'
 import InstagramBanner from 'components/InstagramBanner'
 import SideBar from 'components/SideBar'
 
+import 'react-tippy/dist/tippy.css';
 import './index.css'
 import styles from './styles.module.css'
 

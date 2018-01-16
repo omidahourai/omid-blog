@@ -1,3 +1,4 @@
+// copy from react-icons: https://gorangajic.github.io/react-icons/fa.html
 export { FaArrowDown } from './arrow-down'
 export { FaArrowLeft } from './arrow-left'
 export { FaArrowRight } from './arrow-right'
@@ -13,6 +14,7 @@ export { FaEnvelope } from './envelope'
 export { FaFacebookOfficial } from './facebook-official'
 export { FaFacebookSquare } from './facebook-square'
 export { FaFacebook } from './facebook'
+export { FaHeart } from './heart'
 export { FaHeartO } from './heart-o'
 export { FaInstagram } from './instagram'
 export { FaLinkedinSquare } from './linkedin-square'

@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas: "header header header" "navigation main ads" "footer footer footer";
     grid-template-columns: 10px minmax(200px, 1180px) 10px;
-    grid-template-rows: auto 1fr 30px;
+    grid-template-rows: auto 1fr auto;
     grid-column-gap: 20px;
     min-height: 100vh;
 }
