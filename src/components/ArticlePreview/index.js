@@ -2,10 +2,10 @@ import React from 'react'
 import Link from 'gatsby-link'
 import { lowerFirst, result, map } from 'lodash'
 import moment from 'moment'
-import ArticlePreviewHeader from 'components/ArticlePreviewHeader'
+import { ArticlePreviewHeader, SocialLinksShare } from 'components'
 import styles from './styles.module.css'
 
-const ArticlePreview = ({
+export const ArticlePreview = ({
     articleUrl,
     authorName,
     authorUrl,
@@ -13,9 +13,12 @@ const ArticlePreview = ({
     categoryUrl,
     heroImgTitle,
     heroImgUrl,
-    summary,
+    summaryHtml,
+    publishedOn,
+    updatedOn,
     title,
-    publishDate,
+    tags,
+    slug,
 }) => {
     const dim = 1000
     const dim2x = dim * 2
@@ -29,8 +32,8 @@ const ArticlePreview = ({
     }
 
     return (
-        <article>
-            <div className={styles.hero}>
+        <article className={`post ${styles.post}`}>
+            <div className={`media ${styles.hero}`}>
                 <Link to={articleUrl}>
                     <img {...heroImgMeta} />
                 </Link>
@@ -42,12 +45,21 @@ const ArticlePreview = ({
                 categoryName={categoryName}
                 categoryUrl={categoryUrl}
                 isPreview={true}
-                publishDate={publishDate}
+                publishedOn={publishedOn}
                 title={title} />
-            <div className={styles.content}>
-                <p>{summary}</p>
-            </div>
-            <footer className={styles.footer}>
+            <div
+                className={`content ${styles.content}`}
+                dangerouslySetInnerHTML={{
+                __html: summaryHtml
+            }}/>
+            <footer className={`footer ${styles.footer}`}>
+                <SocialLinksShare
+                    slug={slug}
+                    title={title}
+                    category={categoryName}
+                    imageUrl={`http:${ heroImgUrl }?w=1000&h=1000`}
+                    tags={tags}
+                />
             </footer>
         </article>
     )

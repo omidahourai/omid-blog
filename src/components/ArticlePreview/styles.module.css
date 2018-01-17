@@ -1,10 +1,21 @@
+@value (
+    fontSansSerif
+ ) from 'common/styles/index.module.css';
+
+.post {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .bottom {
     display: relative;
 }
 .content {
-    font-family: 'Open Sans', sans-serif;
+    font-family: fontSansSerif;
     font-size: .85rem;
     line-height: 1.35rem;
+    margin-bottom: 1rem;
 
     &>p {
         text-align: justify;
@@ -27,4 +38,15 @@
 }
 .published {
 
+}
+
+.footer {
+    text-align: center;
+    overflow: hidden;
+
+    flex-grow: 1;
+    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 }

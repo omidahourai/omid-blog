@@ -1,4 +1,9 @@
-@value primary, primaryHighlight from 'common/styles/index.module.css';
+@value (
+    primary,
+    primaryHighlight,
+    fontSerif,
+    fontSansSerif
+ ) from 'common/styles/index.module.css';
 
 .header-article {
     text-align: center;
@@ -8,14 +13,14 @@
     margin-bottom: 0.5rem;
     
     &>.category-prefix {
-        font-family: 'Playfair Display';
+        font-family: fontSerif;
         font-style: italic;
         font-weight: 400;
         font-style: italic;
         margin-right: 4px;
     }
     &>a {
-        font-family: "Open Sans", sans-serif;
+        font-family: fontSansSerif;
         text-transform: uppercase;
         font-size: 0.8rem;
         font-weight: 700;
@@ -32,13 +37,13 @@
 .meta-author-date {
     color: #AAA;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .meta-date {
     font-size: 15px;
     margin-right: 5px;
-    font-family: "Open Sans", sans-serif;
+    font-family: fontSansSerif;
 }
 
 .author-prefix {
@@ -56,7 +61,7 @@
     font-weight: 600;
     text-decoration: none;
     color: primary;
-    font-family: "Open Sans", sans-serif;
+    font-family: fontSansSerif;
     &:hover {
         color: primaryHighlight;
         text-decoration: underline;
@@ -67,7 +72,7 @@
     margin: 0;
     padding: 0;
     vertical-align: baseline;
-    font-family: 'Playfair Display', serif;
+    font-family: fontSerif;
     font-size: 2.5rem;
     line-height: 3rem;
     letter-spacing: .05rem;

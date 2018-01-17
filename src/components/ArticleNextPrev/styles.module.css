@@ -1,4 +1,9 @@
-@value primary, primaryHighlight from 'common/styles/index.module.css';
+@value (
+    primary,
+    primaryHighlight,
+    fontSerif,
+    fontSansSerif
+ ) from 'common/styles/index.module.css';
 
 .wrapper {
     width: 100%;
@@ -16,7 +21,7 @@
     border-bottom: 1px solid #e8e8e8;
     margin-bottom: 2rem;
     & p {
-        font-family: "Open Sans", sans-serif;
+        font-family: fontSansSerif;
         text-transform: uppercase;
         font-size: 0.8rem;
         font-weight: 700;
@@ -24,7 +29,7 @@
     }
     & h4 {
         vertical-align: baseline;
-        font-family: 'Playfair Display', serif;
+        font-family: fontSerif;
         font-size: 1rem;
         line-height: initial;
         letter-spacing: .05rem;

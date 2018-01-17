@@ -1,6 +1,6 @@
 import React from 'react'
 import { lowerFirst, map } from 'lodash'
-import ArticlePreview from 'components/ArticlePreview'
+import { ArticlePreview } from 'components'
 import styles from './styles.module.css'
 
 const parseNode = ({
@@ -8,9 +8,11 @@ const parseNode = ({
     hero,
     slug,
     title,
-    category : { name : categoryName },
-    createdAt : publishDate,
-    summary : { summary },
+    tags,
+    publishedOn,
+    updatedOn,
+    category: { name: categoryName },
+    summary: { childMarkdownRemark: { html: summaryHtml } },
 }) => {
     const authorName = `${ author.firstName } ${ author.lastName }`
     const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
@@ -24,13 +26,16 @@ const parseNode = ({
         categoryUrl,
         heroImgTitle: hero.title,
         heroImgUrl: hero.file.url,
-        summary,
+        summaryHtml,
         title,
-        publishDate,
+        publishedOn,
+        updatedOn,
+        tags,
+        slug,
     }
 }
 
-const ArticlePreviewList = ({ edges }) => (
+export const ArticlePreviewList = ({ edges }) => (
     <ul className={styles.articles}>
         {map(edges, ({node}) => (
             <li key={node.id}>

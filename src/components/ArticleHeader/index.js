@@ -5,13 +5,13 @@ import { lowerFirst, map } from 'lodash'
 import moment from 'moment'
 import styles from './styles.module.css'
 
-const ArticleHeader = ({
+export const ArticleHeader = ({
   articleUrl,
   authorName,
   authorUrl,
   categoryName,
   categoryUrl,
-  publishDate,
+  publishedOn,
   title,
 }) => {
   // TODO: CREATE THESE PAGES
@@ -32,7 +32,7 @@ const ArticleHeader = ({
       </h2>
       <div className={styles['meta-author-date']}>
         <span className={styles['meta-date']}>
-          {moment(publishDate).format('MMMM D, YYYY')}
+          {moment(publishedOn).format('MMMM D, YYYY')}
         </span>
         <span className={styles['author-prefix']}>
           By

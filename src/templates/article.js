@@ -1,12 +1,14 @@
 import React, { Component } from "react"
 import { lowerFirst, result, first, join, map } from 'lodash'
-import Link from "gatsby-link"
+import Link from 'gatsby-link'
+import Img from 'gatsby-image'
 import * as PropTypes from "prop-types"
-import Img from "gatsby-image"
-import ArticleHeader from 'components/ArticleHeader'
-import ArticleFooter from 'components/ArticleFooter'
 import styles from './article.module.css'
 import Helmet from 'react-helmet'
+import {
+  ArticleHeader,
+  ArticleFooter,
+} from 'components'
 
 // import { rhythm } from "../utils/typography"
 
@@ -61,13 +63,13 @@ class ArticleTemplate extends Component {
   render() {
     const {
         author, content, hero, tags, title, slug,
+        publishedOn,
+        updatedOn,
         category : { name : categoryName },
-        createdAt : publishDate,
     } = this.props.data.article
     const authorName = `${ author.firstName } ${ author.lastName }`
     const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
     const categoryUrl = `/categories/${ lowerFirst(categoryName) }`
-
     return (
       <article className={styles.article}>
         <Helmet {...this.getMetaData()}/>
@@ -78,7 +80,8 @@ class ArticleTemplate extends Component {
           authorName={authorName}
           categoryName={categoryName}
           categoryUrl={categoryUrl}
-          publishDate={publishDate}
+          publishedOn={publishedOn}
+          updatedOn={updatedOn}
           title={title} />
         <div
           className={styles.content}
@@ -86,6 +89,8 @@ class ArticleTemplate extends Component {
           __html: content.childMarkdownRemark.html
         }}/>
         <ArticleFooter
+          category={categoryName}
+          imageUrl={`http:${ hero.file.url }?w=1000&h=1000`}
           tags={map(tags, t => t.name)}
           title={title}
           slug={slug}/>
@@ -138,7 +143,8 @@ export const pageQuery = graphql`
       category {
         name
       }
-      createdAt
+      publishedOn
+      updatedOn
       tags {
         name
       }
@@ -154,7 +160,8 @@ export const pageQuery = graphql`
           url
         }
       }
-      createdAt
+      publishedOn
+      updatedOn
     }
     next: contentfulArticle(id: { eq: $nextId }) {
       title
@@ -167,7 +174,8 @@ export const pageQuery = graphql`
           url
         }
       }
-      createdAt
+      publishedOn
+      updatedOn
     }
   }
 `

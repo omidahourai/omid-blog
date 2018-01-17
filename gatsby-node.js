@@ -34,7 +34,7 @@ exports.onPreBootstrap = () => {
 }
 
 const ARTICLES_QUERY = `{
-    allContentfulArticle(sort: { order: ASC, fields: [createdAt] }, limit: 1000) {
+    allContentfulArticle(sort: { order: ASC, fields: [publishedOn] }, limit: 1000) {
         edges {
             node {
                 id

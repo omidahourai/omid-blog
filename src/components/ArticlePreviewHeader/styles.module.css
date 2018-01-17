@@ -1,21 +1,27 @@
-@value primary, primaryHighlight from 'common/styles/index.module.css';
+@value (
+    primary,
+    primaryHighlight,
+    fontSerif,
+    fontSansSerif
+ ) from 'common/styles/index.module.css';
 
-.header-article {
+.header {
     text-align: center;
+    margin-bottom: 0.5rem;
 }
 
-.meta-categories {
+.category {
     margin-bottom: 0.5rem;
     
-    &>.category-prefix {
-        font-family: 'Playfair Display';
+    &>span {
+        font-family: fontSerif;
         font-style: italic;
         font-weight: 400;
         font-style: italic;
         margin-right: 4px;
     }
     &>a {
-        font-family: "Open Sans", sans-serif;
+        font-family: fontSansSerif;
         text-transform: uppercase;
         font-size: 0.8rem;
         font-weight: 700;
@@ -38,7 +44,7 @@
 .meta-date {
     font-size: 15px;
     margin-right: 5px;
-    font-family: "Open Sans", sans-serif;
+    font-family: fontSansSerif;
 }
 
 .author-prefix {
@@ -56,7 +62,7 @@
     font-weight: 600;
     text-decoration: none;
     color: primary;
-    font-family: "Open Sans", sans-serif;
+    font-family: fontSansSerif;
     &:hover {
         color: primaryHighlight;
         text-decoration: underline;
@@ -64,27 +70,38 @@
 }
 
 .post-title {
+    color: #111;
     margin: 0;
     padding: 0;
     vertical-align: baseline;
-    font-family: 'Playfair Display', serif;
+    font-family: fontSerif;
     font-size: 1.5rem;
     line-height: initial;
     letter-spacing: .05rem;
     margin-bottom: 1rem;
     font-weight: 400;
+    & a {
         &:hover {
-        color: primaryHighlight;
+            color: primary;
+        }
     }
-
 }
 
 .post-link {
     text-decoration: none;
     &:hover {
-        color: primaryHighlight;
+        color: primary;
     }
     &:visited {
-        color: primary;
+        color: #111;
+    }
+}
+
+@media only screen and (min-width: 640px) and (max-width: 980px) {
+    .post-title {
+        min-height: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

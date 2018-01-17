@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { map, result } from 'lodash'
 import Link from 'gatsby-link'
-import ArticleBreadcrumbs from 'components/ArticleBreadcrumbs'
-import LayoutHeader from 'components/LayoutHeader'
-import ArticleAuthor from 'components/ArticleAuthor'
-import ArticleNextPrev from 'components/ArticleNextPrev'
+import {
+  ArticleBreadcrumbs,
+  LayoutHeader,
+  ArticleAuthor,
+  ArticleNextPrev,
+} from 'components'
 
 import './index.css'
 import styles from './article.module.css'

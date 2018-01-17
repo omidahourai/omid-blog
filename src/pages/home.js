@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
-import { lowerFirst, first, map, result } from 'lodash'
-import ArticlePreviewList from 'components/ArticlePreviewList'
+import { forEach, lowerFirst, first, map, result } from 'lodash'
+import {
+    ArticlePreviewList,
+    SideBar,
+} from 'components'
 import styles from './styles.module.css'
 
 class HomePage extends Component {
@@ -44,10 +47,20 @@ class HomePage extends Component {
         if ( !data ) {
             return <div>No Data :(</div>
         }
+        console.log(data.author)
+        data.author.fullName = `${ data.author.firstName } ${ data.author.lastName }`
+        forEach(data.articles.edges, edge => edge.node.author.fullName = `${ edge.node.author.firstName } ${ edge.node.author.lastName }`)
         return (
-            <div className="article-previews">
+            <div className={styles.wrapper}>
                 <Helmet {...this.getMetaData()}/>
-                <ArticlePreviewList edges={data.us.edges} />
+                <div className={`article-previews ${ styles.articles }`}>
+                    <ArticlePreviewList edges={data.articles.edges} />
+                </div>
+                <div className={`sidebar ${ styles.sidebar }`}>
+                    <SideBar
+                        instagramData={this.props.pathContext.instagram.data}
+                        {...data.author} />
+                </div>
             </div>
         )
     }
@@ -62,46 +75,74 @@ HomePage.PropTypes = {
 }
 
 export const pageQuery = graphql`
-  query getAllArticles {
-    us: allContentfulArticle(sort: { order: DESC, fields: [createdAt] }, filter: { node_locale: { eq: "en-US" } }) {
-      edges {
-        node {
-            id
-            title
-            summary {
-                id
-                summary
+  query getAllBlogData {
+        author: contentfulAuthor(firstName: {eq: "Omid"}, lastName: {eq: "Ahourai"}){
+            firstName
+            lastName
+            shortTitle
+            photo {
+                file {
+                    photoUrl: url
+                }
             }
-            hero {
+            altPhoto {
+                file {
+                    photoUrl: url
+                }
+            }
+            shortDescription
+            description {
+                text: description
+            }
+            facebookHandle
+            twitterHandle
+            instagramHandle
+            linkedinHandle
+            emailAddress
+        }
+        articles: allContentfulArticle(sort: { order: DESC, fields: [publishedOn] }, filter: { node_locale: { eq: "en-US" } }) {
+        edges {
+            node {
                 id
                 title
-                description
-                file {
-                  url
+                summary {
+                    childMarkdownRemark {
+                        html
+                    }
+                    id
+                    summary
                 }
-              }
-            category {
-                name
-            }
-            content {
-                id
-                content
-            }
-            author {
-                id
-                firstName
-                lastName
-                description {
+                hero {
+                    id
+                    title
                     description
+                    file {
+                    url
+                    }
                 }
+                category {
+                    name
+                }
+                content {
+                    id
+                    content
+                }
+                author {
+                    id
+                    firstName
+                    lastName
+                    description {
+                        description
+                    }
+                }
+                tags {
+                    name
+                }
+                slug
+                publishedOn
+                updatedOn
             }
-            tags {
-                name
-            }
-            slug
-            createdAt
         }
-      }
     }
   }
 `

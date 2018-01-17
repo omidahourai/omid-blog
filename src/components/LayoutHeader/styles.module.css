@@ -1,4 +1,8 @@
-@value primary, primaryHighlight from 'common/styles/index.module.css';
+@value (
+    primary,
+    primaryHighlight,
+    fontSansSerif
+ ) from 'common/styles/index.module.css';
 
 .header {
     grid-area: header;
@@ -36,7 +40,7 @@
         font-size: 1rem;
         text-decoration: none;
         color: #FFF;
-        font-family: "Open Sans", sans-serif;
+        font-family: fontSansSerif;
         font-stretch: 100%;
         font-weight: 600;
         text-transform: uppercase;

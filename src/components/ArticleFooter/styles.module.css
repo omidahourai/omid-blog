@@ -1,4 +1,4 @@
-@value primary, primaryHighlight from 'common/styles/index.module.css';
+@value primary, primaryHighlight, fontSansSerif from 'common/styles/index.module.css';
 
 .footer-article {
     text-align: center;
@@ -17,7 +17,7 @@
     font-size: 12px;
     text-transform: uppercase;
     margin-bottom: 20px;
-    font-family: "Open Sans", sans-serif;
+    font-family: fontSansSerif;
     line-height: .65rem;
 
     &>a {
@@ -37,32 +37,6 @@
         &:hover {
             color: primary;
         }
-    }
-}
-.btn {
-    border: 1px solid;
-    border-radius: 50%;
-    border-color: #333;
-    padding: 0;
-    width: 2.6rem;
-    height: 2.6rem;
-    margin: 0 4px;
-    background-color: #f8f8f8;
-    &:active,
-    &:focus {
-        border: 1px solid;
-    }
-    &:hover {
-        background-color: #CCC;
-    }
-    & svg {
-        padding: 0.7rem;
-    }
-    & svg>* {
-        fill: #333;
-    }
-    &:hover svg>* {
-        fill: #333 !important;
     }
 }
 .meta-share {
@@ -95,7 +69,7 @@
 .share-text {
     width: 100%;
     margin-bottom: 0.5rem;
-    font-family: "Open Sans", sans-serif;
+    font-family: fontSansSerif;
     text-transform: uppercase;
     font-size: 0.8rem;
     font-weight: 400;

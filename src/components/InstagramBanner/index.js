@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { map, result } from 'lodash'
+import { slice, map, result } from 'lodash'
 import Link from 'gatsby-link'
 import styles from './styles.module.css'
 import { FaInstagram, FaHeart } from 'common/icons'
 import { Tooltip } from 'react-tippy'
 
-const InstagramBanner = ({ feedData }) => {
+export const InstagramBanner = ({ feedData }) => {
   const imageData = map( feedData, item => {
     let text = result(item, 'caption.text') || ''
     if (text.length > 50) {
@@ -23,7 +23,7 @@ const InstagramBanner = ({ feedData }) => {
   })
   return (
     <ul className={styles.instagram}> 
-        {map(imageData, image => (
+        {map(slice(imageData, 9), image => (
             <li key={image.key}>
                 {/*<Tooltip
                   title="Welcome to React"

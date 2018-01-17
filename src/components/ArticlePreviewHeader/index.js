@@ -5,22 +5,22 @@ import { lowerFirst, map } from 'lodash'
 import moment from 'moment'
 import styles from './styles.module.css'
 
-const ArticleHeader = ({
+export const ArticlePreviewHeader = ({
   articleUrl,
   authorName,
   authorUrl,
   categoryName,
   categoryUrl,
-  publishDate,
+  publishedOn,
   title,
 }) => {
   // TODO: CREATE THESE PAGES
   categoryUrl = '#'
   authorUrl = '#'
   return (
-    <header className={styles['header-article']}>
-      <div className={styles['meta-categories']}>
-        <span className={styles['category-prefix']}>In</span>
+    <header className={`entry-header ${styles.header}`}>
+      <div className={`entry-category ${styles.category}`}>
+        <span>In</span>
         <Link
           to={categoryUrl}
           rel="category tag">
@@ -34,7 +34,7 @@ const ArticleHeader = ({
       </h2>
       <div className={styles['meta-author-date']}>
         <span className={styles['meta-date']}>
-          {moment(publishDate).format('MMMM D, YYYY')}
+          {moment(publishedOn).format('MMMM D, YYYY')}
         </span>
         <span className={styles['author-prefix']}>
           By
@@ -51,4 +51,4 @@ const ArticleHeader = ({
   )
 }
 
- export default ArticleHeader
+ export default ArticlePreviewHeader

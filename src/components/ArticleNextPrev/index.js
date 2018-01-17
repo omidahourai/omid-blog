@@ -42,7 +42,7 @@ const NextPrev = ({ title, hero, direction, slug }) => {
   )
 }
 
-const ArticleNextPrev = ({ prevData, nextData }) => {
+export const ArticleNextPrev = ({ prevData, nextData }) => {
   return (
     <div className={styles.wrapper}>
       {prevData ? (
@@ -59,4 +59,4 @@ const ArticleNextPrev = ({ prevData, nextData }) => {
   )
 }
 
-  export default ArticleNextPrev
+export default ArticleNextPrev

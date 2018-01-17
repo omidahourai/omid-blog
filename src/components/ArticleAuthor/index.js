@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 import { FaFacebook, FaTwitter, FaInstagram } from 'common/icons';
 
 
-const ArticleAuthor = ({ firstName, lastName, description, photoUrl }) => {
+export const ArticleAuthor = ({ firstName, lastName, description, photoUrl }) => {
   const photoDim = 110
   const photoDim2x = photoDim * 2
   const fullName = `${ firstName } ${ lastName }`
@@ -66,4 +66,4 @@ const ArticleAuthor = ({ firstName, lastName, description, photoUrl }) => {
   )
 }
 
-  export default ArticleAuthor
+export default ArticleAuthor

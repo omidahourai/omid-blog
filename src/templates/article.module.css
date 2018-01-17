@@ -1,13 +1,24 @@
-@value primary, primaryHighlight from 'common/styles/index.module.css';
+@value (
+    primary,
+    primaryHighlight,
+    fontSansSerif
+ ) from 'common/styles/index.module.css';
 
 .article {
     margin-bottom: 2rem;
 }
 
 .content {
-    font-family: "Open Sans", sans-serif;
+    font-family: fontSansSerif;
     font-size: .85rem;
     line-height: 1.35rem;
+    & a {
+        text-decoration: none;
+        color: primary;
+        &:hover {
+            color: primaryHighlight
+        }
+    }
 }
 
 .hero {

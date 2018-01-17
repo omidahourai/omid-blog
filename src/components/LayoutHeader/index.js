@@ -4,7 +4,7 @@ import { lowerFirst } from 'lodash'
 import Link from 'gatsby-link'
 import styles from './styles.module.css'
 
-const LayoutHeader = ({ children }) => (
+export const LayoutHeader = ({ children }) => (
     <header className={styles.header}>
       <div className={styles['top-wrapper']}>
         <div className={styles.top}>

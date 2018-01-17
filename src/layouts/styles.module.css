@@ -1,3 +1,7 @@
+@value (
+    fontSansSerif
+ ) from 'common/styles/index.module.css';
+
 .site {
     composes: siteGrid from './common.module.css'
 }
@@ -45,7 +49,7 @@
     & p {
         margin: 1rem 0;
         color: #fff;
-        font-family: 'Open Sans', sans-serif;
+        font-family: fontSansSerif;
         font-size: 14px;
         line-height: 22px;
         letter-spacing: 0.5px;
