@@ -7,27 +7,41 @@
 .btn {
     border: 1px solid;
     border-radius: 50%;
-    border-color: #333;
+    border-color: #e8e8e8;
     padding: 0;
-    width: 2.6rem;
-    height: 2.6rem;
+    width: 2.2rem;
+    height: 2.2rem;
     margin: 0 4px;
     background-color: #f8f8f8;
+    transition: 0.25s all ease-out;
+    & svg {
+        padding: 0.6rem;
+        &>* {
+            fill: #333;
+        }
+    }
+
     &:active,
     &:focus {
-        border: 1px solid;
+        border: 1px solid #e8e8e8;
     }
     &:hover {
         background-color: #CCC;
-    }
-    & svg {
-        padding: 0.7rem;
-    }
-    & svg>* {
-        fill: #333;
-    }
-    &:hover svg>* {
-        fill: #333 !important;
+        & svg>* {
+            fill: #FFF !important;
+        }
+        &.facebook {
+            background-color: #3b5998;
+            border-color: #3b5998;
+        }
+        &.twitter {
+            background-color: #00aced;
+            border-color: #00aced;
+        }
+        &.pinterest {
+            background-color: #c92228;
+            border-color: #c92228;
+        }
     }
 }
 
