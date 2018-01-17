@@ -57,9 +57,11 @@ class HomePage extends Component {
                     <ArticlePreviewList edges={data.articles.edges} />
                 </div>
                 <div className={`sidebar ${ styles.sidebar }`}>
-                    <SideBar
-                        instagramData={this.props.pathContext.instagram.data}
-                        {...data.author} />
+                    {this.props.pathContext.instagram ? (
+                        <SideBar
+                            instagramData={this.props.pathContext.instagram.data}
+                            {...data.author} />
+                    ) : ''}
                 </div>
             </div>
         )
