@@ -11,12 +11,10 @@ export const ArticleFooter = ({ title, tags, slug, category, imageUrl }) => (
     <div className={styles['meta-tags']}>
     {map(tags, tag => {
       // TODO: CREATE TAG PAGE
-      // const tagUrl = `/tag/${ tag }/`
-      const tagUrl = '#'
       return (
         <Link
           key={tag}
-          to={tagUrl}
+          to={`/tag/${ tag }/`}
           rel="tag">
             {tag}
           </Link>

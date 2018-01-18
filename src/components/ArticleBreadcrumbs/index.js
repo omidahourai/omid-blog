@@ -4,11 +4,7 @@ import { lowerFirst } from 'lodash'
 import Link from 'gatsby-link'
 import styles from './styles.module.css'
 
-export const ArticleBreadcrumbs = ({ categoryName, title }) => {
-    // TODO: CREATE CATEGORY PAGE
-    // const categoryUrl = `/categories/${ lowerFirst(category) }`
-    // const categoryUrl = '#'
-    return (
+export const ArticleBreadcrumbs = ({ categoryName, title }) => (
     <ul className={styles.breadcrumbs}>
     <li>
         <Link to="/">
@@ -30,7 +26,6 @@ export const ArticleBreadcrumbs = ({ categoryName, title }) => {
         <span>{title}</span>
     </li>
     </ul>
-  )
-}
+)
 
 export default ArticleBreadcrumbs

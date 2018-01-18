@@ -34,6 +34,16 @@ exports.onPreBootstrap = () => {
 }
 
 const ARTICLES_QUERY = `{
+    tags: allContentfulTag {
+        edges {
+            node {
+                name
+                article {
+                    id
+                }
+            }
+        }
+    }
     categories: allContentfulCategory {
         edges {
             node {
@@ -93,10 +103,20 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 if (!article) return;
                 console.log('creating category page ',categoryName)
                 createPage({
-                    layout: 'category',
+                    layout: 'categoryTag',
                     path: `/${lowerFirst(categoryName)}/`,
                     component: slash(path.resolve(`./src/templates/category.js`)),
                     context: { categoryName },
+                })
+            })
+            forEach(data.tags.edges, ({node: {name: tagName, article}}) => {
+                if (!article) return;
+                console.log('creating tag page ',tagName)
+                createPage({
+                    layout: 'categoryTag',
+                    path: `/tag/${tagName}/`,
+                    component: slash(path.resolve(`./src/templates/tag.js`)),
+                    context: { tagName },
                 })
             })
             resolve()

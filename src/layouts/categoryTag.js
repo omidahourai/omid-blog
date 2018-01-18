@@ -10,9 +10,9 @@ import {
 
 import 'react-tippy/dist/tippy.css';
 import './index.css'
-import styles from './styles.module.css'
+import styles from './categoryTag.module.css'
 
-class HomeLayout extends Component {
+class CategoryTagLayout extends Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -36,8 +36,8 @@ class HomeLayout extends Component {
   }
 }
 
-HomeLayout.propTypes = {
+CategoryTagLayout.propTypes = {
   children: PropTypes.func,
 }
 
-export default HomeLayout
+export default CategoryTagLayout

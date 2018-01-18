@@ -15,7 +15,6 @@ export const ArticlePreviewHeader = ({
   title,
 }) => {
   // TODO: CREATE THESE PAGES
-  // categoryUrl = '#'
   authorUrl = '#'
   return (
     <header className={`entry-header ${styles.header}`}>

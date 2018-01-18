@@ -70,7 +70,6 @@
 }
 
 .post-title {
-    color: #111;
     margin: 0;
     padding: 0;
     vertical-align: baseline;
@@ -81,6 +80,7 @@
     margin-bottom: 1rem;
     font-weight: 400;
     & a {
+        color: #111;
         &:hover {
             color: primary;
         }
