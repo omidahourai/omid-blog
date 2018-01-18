@@ -152,6 +152,9 @@ export const pageQuery = graphql`
     prev: contentfulArticle(id: { eq: $prevId }) {
       title
       slug
+      category {
+        name
+      }
       hero {
         id
         title
@@ -166,6 +169,9 @@ export const pageQuery = graphql`
     next: contentfulArticle(id: { eq: $nextId }) {
       title
       slug
+      category {
+        name
+      }
       hero {
         id
         title
