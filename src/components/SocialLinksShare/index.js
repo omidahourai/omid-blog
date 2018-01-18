@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styles from './styles.module.css'
 import { lowerFirst } from 'lodash'
+import { Tooltip } from 'react-tippy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {
   FaFacebook,
@@ -13,7 +14,6 @@ import {
   AnchorCircleIcon,
   ButtonCircleIcon,
 } from 'common/components'
-import { Tooltip } from 'react-tippy'
 
 export class SocialLinksShare extends Component {
   constructor(props) {

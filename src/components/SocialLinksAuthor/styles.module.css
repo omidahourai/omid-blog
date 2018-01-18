@@ -20,12 +20,32 @@
         border: 1px solid #CCC;
     }
     &:hover {
-        background-color: primary;
-        border-color: primary;
+        background-color: #CCC;
         & svg>* {
             fill: #FFF !important;
         }
+        &.facebook {
+            background-color: #3b5998;
+            border-color: #3b5998;
+        }
+        &.twitter {
+            background-color: #00aced;
+            border-color: #00aced;
+        }
+        &.instagram {
+            background-color: #D62BFF;
+            border-color: #D62BFF;
+        }
+        &.linkedin {
+            background-color: #c92228;
+            border-color: #c92228;
+        }
+        &.email {
+            background-color: #FF9022;
+            border-color: #FF9022;
+        }
     }
+
     & svg {
         padding: 0.7rem;
         width: 100%;
