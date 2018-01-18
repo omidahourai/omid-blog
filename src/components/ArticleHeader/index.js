@@ -15,7 +15,7 @@ export const ArticleHeader = ({
   title,
 }) => {
   // TODO: CREATE THESE PAGES
-  categoryUrl = '#'
+  // categoryUrl = '#'
   authorUrl = '#'
   return (
     <header className={styles['header-article']}>

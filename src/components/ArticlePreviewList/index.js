@@ -16,8 +16,9 @@ const parseNode = ({
 }) => {
     const authorName = `${ author.firstName } ${ author.lastName }`
     const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
-    const categoryUrl = `/categories/${ lowerFirst(categoryName) }`
-    const articleUrl = `/articles/${slug}/`
+    const catLower = lowerFirst(categoryName)
+    const categoryUrl = `/${ catLower }/`
+    const articleUrl = `/${catLower}/${slug}/`
     return {
         articleUrl,
         authorUrl,
@@ -35,11 +36,11 @@ const parseNode = ({
     }
 }
 
-export const ArticlePreviewList = ({ edges }) => (
+export const ArticlePreviewList = ({ articles }) => (
     <ul className={styles.articles}>
-        {map(edges, ({node}) => (
-            <li key={node.id}>
-                <ArticlePreview {...parseNode(node)}/>
+        {map(articles, article => (
+            <li key={article.id}>
+                <ArticlePreview {...parseNode(article)}/>
             </li>
         ))}
     </ul>

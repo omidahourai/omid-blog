@@ -1,0 +1,19 @@
+@value (
+    primary,
+    primaryHighlight,
+    fontSansSerif
+ ) from 'common/styles/index.module.css';
+
+.footer {
+    background-color: #333;
+    text-align: center;
+    & p {
+        margin: 1rem 0;
+        color: #fff;
+        font-family: fontSansSerif;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 0.5px;
+        margin-bottom: 17px;
+    }
+}

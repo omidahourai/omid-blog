@@ -29,9 +29,6 @@ class HomeLayout extends Component {
           })}
         </main>
         <div className={styles.bottom}>
-          {this.state.instagram ?
-            <InstagramBanner feedData={this.state.instagram.data} />
-          : ''}
           <SiteFooter />
         </div>
       </div>

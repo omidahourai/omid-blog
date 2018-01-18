@@ -13,7 +13,7 @@ export const SocialLinksShare = ({ slug, title, category, imageUrl, tags }) => (
   <div className={`social-share ${ styles.share }`}>
     <AnchorCircleIcon 
       className={`${styles.btn} ${styles.facebook}`}
-      href={encodeURI(`https://facebook.com/sharer/sharer.php?u=${ decodeURIComponent( `http://www.omid.com/articles/${ slug }`)}`)}
+      href={encodeURI(`https://facebook.com/sharer/sharer.php?u=${ decodeURIComponent( `http://www.omid.com/${lowerFirst(category)}/${ slug }`)}`)}
       rel="external"
       target="_blank"
       title="Share on Facebook">
@@ -21,7 +21,7 @@ export const SocialLinksShare = ({ slug, title, category, imageUrl, tags }) => (
     </AnchorCircleIcon>
     <AnchorCircleIcon 
       className={`${styles.btn} ${styles.twitter}`}
-      href={encodeURI(`https://twitter.com/share?text=Check out this article by @omidahourai: ${ title }&hashtags=${ tags.join(',') }&url=${ `http://www.omid.com/articles/${ slug }` }`)}
+      href={encodeURI(`https://twitter.com/share?text=Check out this article by @omidahourai: ${ title }&hashtags=${ tags.join(',') }&url=${ `http://www.omid.com/${lowerFirst(category)}/${ slug }` }`)}
       rel="external"
       target="_blank"
       title="Share on Twitter">

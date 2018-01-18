@@ -4,10 +4,10 @@ import { lowerFirst } from 'lodash'
 import Link from 'gatsby-link'
 import styles from './styles.module.css'
 
-export const ArticleBreadcrumbs = ({ category, title }) => {
+export const ArticleBreadcrumbs = ({ categoryName, title }) => {
     // TODO: CREATE CATEGORY PAGE
     // const categoryUrl = `/categories/${ lowerFirst(category) }`
-    const categoryUrl = '#'
+    // const categoryUrl = '#'
     return (
     <ul className={styles.breadcrumbs}>
     <li>
@@ -19,8 +19,8 @@ export const ArticleBreadcrumbs = ({ category, title }) => {
         <span>&gt;</span>
     </li>
     <li>
-        <Link to={categoryUrl}>
-        {category}
+        <Link to={`/${lowerFirst(categoryName)}/`}>
+        {categoryName}
         </Link>
     </li>
     <li className={styles.separator}>

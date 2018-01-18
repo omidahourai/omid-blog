@@ -7,6 +7,7 @@ import {
   LayoutHeader,
   ArticleAuthor,
   ArticleNextPrev,
+  SiteFooter,
 } from 'components'
 
 import './index.css'
@@ -25,7 +26,7 @@ class ArticleLayout extends Component {
           category={this.state.category}
           title={this.state.title}>
           <ArticleBreadcrumbs
-            category={this.state.categoryName}
+            categoryName={this.state.categoryName}
             title={this.state.title}/>
         </LayoutHeader>
         <main className={styles['main-layout']}>
@@ -50,6 +51,9 @@ class ArticleLayout extends Component {
           ) : ''}
 
         </main>
+        <div className={styles.bottom}>
+          <SiteFooter/>
+        </div>
       </div>
     )
   }

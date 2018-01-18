@@ -1,4 +1,4 @@
-const { result, forEach } = require('lodash')
+const { lowerFirst, result, forEach } = require('lodash')
 // const Promise = require(`bluebird`)
 const path = require('path')
 const slash = require('slash')
@@ -34,11 +34,24 @@ exports.onPreBootstrap = () => {
 }
 
 const ARTICLES_QUERY = `{
-    allContentfulArticle(sort: { order: ASC, fields: [publishedOn] }, limit: 1000) {
+    categories: allContentfulCategory {
+        edges {
+            node {
+                name
+                article {
+                    id
+                }
+            }
+        }
+    }
+    articles: allContentfulArticle(sort: { order: ASC, fields: [publishedOn] }, limit: 1000) {
         edges {
             node {
                 id
                 slug
+                category {
+                    name
+                }
             }
         }
     }
@@ -62,20 +75,28 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             if ( process.env.NODE_ENV === 'development' ) {
                 console.log('Contentful >>',JSON.stringify(data, null, '\t'))
             } else {
-                console.log(`Contentful >> received data from ${ data.allContentfulArticle.edges.length } articles.`)
+                console.log(`Contentful >> received data from ${ data.articles.edges.length } articles.`)
             }
 
-            const template = path.resolve(`./src/templates/article.js`)
-            const edges = data.allContentfulArticle.edges
-            forEach(edges, (edge, index) => {
-                const { id, slug } = edge.node
-                const prevId = result(edges, `[${index-1}].node.id`) || ''
-                const nextId = result(edges, `[${index+1}].node.id`) || ''
+            forEach(data.articles.edges, (edge, index) => {
+                const { id, slug, category: { name: categoryName } } = edge.node
+                const prevId = result(data.articles.edges, `[${index-1}].node.id`) || ''
+                const nextId = result(data.articles.edges, `[${index+1}].node.id`) || ''
                 createPage({
                     layout: 'article',
-                    path: `/articles/${slug}/`,
-                    component: slash(template),
+                    path: `/${lowerFirst(categoryName)}/${slug}/`,
+                    component: slash(path.resolve(`./src/templates/article.js`)),
                     context: { id, slug, prevId, nextId },
+                })
+            })
+            forEach(data.categories.edges, ({node: {name: categoryName, article}}) => {
+                if (!article) return;
+                console.log('creating category page ',categoryName)
+                createPage({
+                    layout: 'category',
+                    path: `/${lowerFirst(categoryName)}/`,
+                    component: slash(path.resolve(`./src/templates/category.js`)),
+                    context: { categoryName },
                 })
             })
             resolve()

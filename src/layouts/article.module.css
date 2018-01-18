@@ -8,3 +8,9 @@
     margin: 0 auto;
     max-width: 835px;
 }
+
+.bottom {
+    grid-area: footer;
+    display: flex;
+    flex-direction: column;
+}

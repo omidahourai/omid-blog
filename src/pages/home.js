@@ -50,11 +50,12 @@ class HomePage extends Component {
         console.log(data.author)
         data.author.fullName = `${ data.author.firstName } ${ data.author.lastName }`
         forEach(data.articles.edges, edge => edge.node.author.fullName = `${ edge.node.author.firstName } ${ edge.node.author.lastName }`)
+        const articles = map(data.articles.edges, ({node}) => node)
         return (
             <div className={styles.wrapper}>
                 <Helmet {...this.getMetaData()}/>
                 <div className={`article-previews ${ styles.articles }`}>
-                    <ArticlePreviewList edges={data.articles.edges} />
+                    <ArticlePreviewList articles={articles} />
                 </div>
                 <div className={`sidebar ${ styles.sidebar }`}>
                     {this.props.pathContext.instagram ? (
@@ -78,31 +79,31 @@ HomePage.PropTypes = {
 
 export const pageQuery = graphql`
   query getAllBlogData {
-        author: contentfulAuthor(firstName: {eq: "Omid"}, lastName: {eq: "Ahourai"}){
-            firstName
-            lastName
-            shortTitle
-            photo {
-                file {
-                    photoUrl: url
-                }
+    author: contentfulAuthor(firstName: {eq: "Omid"}, lastName: {eq: "Ahourai"}){
+        firstName
+        lastName
+        shortTitle
+        photo {
+            file {
+                photoUrl: url
             }
-            altPhoto {
-                file {
-                    photoUrl: url
-                }
-            }
-            shortDescription
-            description {
-                text: description
-            }
-            facebookHandle
-            twitterHandle
-            instagramHandle
-            linkedinHandle
-            emailAddress
         }
-        articles: allContentfulArticle(sort: { order: DESC, fields: [publishedOn] }, filter: { node_locale: { eq: "en-US" } }) {
+        altPhoto {
+            file {
+                photoUrl: url
+            }
+        }
+        shortDescription
+        description {
+            text: description
+        }
+        facebookHandle
+        twitterHandle
+        instagramHandle
+        linkedinHandle
+        emailAddress
+    }
+    articles: allContentfulArticle(sort: { order: DESC, fields: [publishedOn] }, filter: { node_locale: { eq: "en-US" } }) {
         edges {
             node {
                 id
@@ -119,7 +120,7 @@ export const pageQuery = graphql`
                     title
                     description
                     file {
-                    url
+                        url
                     }
                 }
                 category {
@@ -146,5 +147,4 @@ export const pageQuery = graphql`
             }
         }
     }
-  }
-`
+}`

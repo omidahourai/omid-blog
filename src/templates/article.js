@@ -35,7 +35,7 @@ class ArticleTemplate extends Component {
   }
 
   getMetaData() {
-    const {slug, title, author, tags, hero, category, summary : { summary }} = this.props.data.article
+    const {slug, title, author, tags, hero, category : { name : categoryName }, summary : { summary }} = this.props.data.article
     return {
       title: `Omid Ahourai's Blog | ${ title }`,
       meta: [
@@ -45,17 +45,17 @@ class ArticleTemplate extends Component {
         { property: 'og:type', content: 'article' },
         { property: 'og:title', content: title },
         { property: 'og:description', content: summary },
-        { property: 'og:url', content: `http://www.omid.com/articles/${slug}` },
+        { property: 'og:url', content: `http://www.omid.com/${lowerFirst(categoryName)}/${slug}` },
         { property: 'og:image', content: `http:${hero.file.url}?w=1200&h=630&q=70` },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: title },
         { name: 'twitter:description', content: summary },
-        { name: 'twitter:url', content: `http://www.omid.com/articles/${slug}` },
+        { name: 'twitter:url', content: `http://www.omid.com/${lowerFirst(categoryName)}/${slug}` },
         { name: 'twitter:image', content: `http:${hero.file.url}?w=1200&q=70` },
         { name: 'twitter:label1', content: 'Written by' },
         { name: 'twitter:data1', content: `${ author.firstName } ${ author.lastName }` },
         { name: 'twitter:label2', content: 'Filed under' },
-        { name: 'twitter:data2', content: category },
+        { name: 'twitter:data2', content: categoryName },
       ]
     }
   }
@@ -69,7 +69,7 @@ class ArticleTemplate extends Component {
     } = this.props.data.article
     const authorName = `${ author.firstName } ${ author.lastName }`
     const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
-    const categoryUrl = `/categories/${ lowerFirst(categoryName) }`
+    const categoryUrl = `/${ lowerFirst(categoryName) }/`
     return (
       <article className={styles.article}>
         <Helmet {...this.getMetaData()}/>
