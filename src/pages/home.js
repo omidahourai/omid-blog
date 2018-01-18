@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
-import { forEach, lowerFirst, first, map, result } from 'lodash'
+import { without, forEach, lowerFirst, first, map, result } from 'lodash'
 import {
     ArticlePreviewList,
     SideBar,
@@ -51,6 +51,11 @@ class HomePage extends Component {
         data.author.fullName = `${ data.author.firstName } ${ data.author.lastName }`
         forEach(data.articles.edges, edge => edge.node.author.fullName = `${ edge.node.author.firstName } ${ edge.node.author.lastName }`)
         const articles = map(data.articles.edges, ({node}) => node)
+        const categories = without(map(data.categories.edges, ({node}) => node.article && {
+            categoryName: node.categoryName,
+            count: node.article.length,
+        }), null)
+        console.log('all cats',categories)
         return (
             <div className={styles.wrapper}>
                 <Helmet {...this.getMetaData()}/>
@@ -61,6 +66,7 @@ class HomePage extends Component {
                     {this.props.pathContext.instagram ? (
                         <SideBar
                             instagramData={this.props.pathContext.instagram.data}
+                            categories={categories}
                             {...data.author} />
                     ) : ''}
                 </div>
@@ -102,6 +108,16 @@ export const pageQuery = graphql`
         instagramHandle
         linkedinHandle
         emailAddress
+    }
+    categories: allContentfulCategory {
+        edges {
+            node {
+                categoryName: name
+                article {
+                    id
+                }
+            }
+        }
     }
     articles: allContentfulArticle(sort: { order: DESC, fields: [publishedOn] }, filter: { node_locale: { eq: "en-US" } }) {
         edges {

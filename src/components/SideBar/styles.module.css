@@ -43,11 +43,11 @@
   }
 }
 
+.categories,
 .followme,
 .instagram {
     position: relative;
     z-index: 0;
-    text-transform: uppercase;
     font-size: 16px;
     line-height: 29px;
     letter-spacing: 1.5px;
@@ -56,6 +56,7 @@
     clear: both;
     overflow: hidden;
     & h3 {
+        text-transform: uppercase;
         display: inline-block;
         position: relative;
         font-weight: 400;
@@ -150,6 +151,41 @@
     z-index: 2;
     position: absolute;
 
+}
+
+.categories {
+    & ul {
+        margin: 0;
+        list-style-type: none;
+        font-family: fontSansSerif;
+        letter-spacing: normal;
+    }
+
+    & li {
+        margin: 0;
+        font-size: 15px;
+        border-bottom: 1px solid #e8e8e8;
+        position: relative;
+        line-height: 2.5rem;
+        & a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            text-decoration: none;
+            &:hover .name {
+                color: primary;
+            }
+        }
+    }
+
+    & .name {
+        color: #333;
+    }
+
+    & .count {
+        color: #aaa;
+    }
 }
 
 @media only screen and (min-width: 980px) {

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { slice, map, result } from 'lodash'
 import Link from 'gatsby-link'
 import styles from './styles.module.css'
+import { lowerFirst } from 'lodash';
 import { SocialLinksAuthor } from 'components';
 import { FaInstagram, FaHeart } from 'common/icons';
 
@@ -32,6 +33,7 @@ export const SideBar = ({
   linkedinHandle,
   emailAddress,
   instagramData,
+  categories,
   altPhoto: {file: {photoUrl}},
 }) => {
   const authorLink = {
@@ -96,7 +98,18 @@ export const SideBar = ({
           ))}
         </ul>
       </section>
-      <section className={`categories`}>
+      <section className={`categories ${styles.categories}`}>
+        <h3>Categories</h3>
+        <ul>
+        {map(categories, ({categoryName, count}) => (
+          <li>
+            <a href={`/${lowerFirst(categoryName)}/`}>
+              <span className={styles.name}>{categoryName}</span>
+              <span className={styles.count}>({count})</span>
+            </a>
+          </li>
+        ))}
+        </ul>
       </section>
     </aside>
   )
