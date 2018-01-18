@@ -62,9 +62,7 @@ class ArticleTemplate extends Component {
 
   render() {
     const {
-        author, content, hero, tags, title, slug,
-        publishedOn,
-        updatedOn,
+        id, author, content, hero, tags, title, slug, publishedOn, updatedOn,
         category : { name : categoryName },
     } = this.props.data.article
     const authorName = `${ author.firstName } ${ author.lastName }`
@@ -89,6 +87,7 @@ class ArticleTemplate extends Component {
           __html: content.childMarkdownRemark.html
         }}/>
         <ArticleFooter
+          id={id}
           category={categoryName}
           imageUrl={`http:${ hero.file.url }?w=1000&h=1000`}
           tags={map(tags, t => t.name)}
@@ -108,6 +107,7 @@ export default ArticleTemplate
 export const pageQuery = graphql`
   query ArticleQuery($id: String!, $nextId: String, $prevId: String) {
     article: contentfulArticle(id: { eq: $id }) {
+      id
       title
       slug
       hero {
@@ -150,6 +150,7 @@ export const pageQuery = graphql`
       }
     }
     prev: contentfulArticle(id: { eq: $prevId }) {
+      id
       title
       slug
       category {
@@ -167,6 +168,7 @@ export const pageQuery = graphql`
       updatedOn
     }
     next: contentfulArticle(id: { eq: $nextId }) {
+      id
       title
       slug
       category {

@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 import { SocialLinksShare } from 'components'
 import { FaFacebook, FaTwitter, FaPinterestP } from 'common/icons';
 
-export const ArticleFooter = ({ title, tags, slug, category, imageUrl }) => (
+export const ArticleFooter = ({ id, title, tags, slug, category, imageUrl }) => (
   <footer className={styles['footer-article']}>
     <div className={styles['meta-tags']}>
     {map(tags, tag => {
@@ -23,6 +23,7 @@ export const ArticleFooter = ({ title, tags, slug, category, imageUrl }) => (
     <p className={styles['share-text']}>Share this article</p>
     <div className={styles['meta-share']}>
       <SocialLinksShare
+        id={id}
         slug={slug}
         title={title}
         tags={tags}

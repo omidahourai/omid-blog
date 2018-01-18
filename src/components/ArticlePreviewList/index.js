@@ -4,6 +4,7 @@ import { ArticlePreview } from 'components'
 import styles from './styles.module.css'
 
 const parseNode = ({
+    id,
     author,
     hero,
     slug,
@@ -20,6 +21,7 @@ const parseNode = ({
     const categoryUrl = `/${ catLower }/`
     const articleUrl = `/${catLower}/${slug}/`
     return {
+        id,
         articleUrl,
         authorUrl,
         authorName,

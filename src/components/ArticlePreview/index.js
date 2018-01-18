@@ -6,6 +6,7 @@ import { ArticlePreviewHeader, SocialLinksShare } from 'components'
 import styles from './styles.module.css'
 
 export const ArticlePreview = ({
+    id,
     articleUrl,
     authorName,
     authorUrl,
@@ -54,6 +55,7 @@ export const ArticlePreview = ({
             }}/>
             <footer className={`footer ${styles.footer}`}>
                 <SocialLinksShare
+                    id={id}
                     slug={slug}
                     title={title}
                     category={categoryName}

@@ -42,6 +42,10 @@
             background-color: #c92228;
             border-color: #c92228;
         }
+        &.weblink {
+            background-color: #FF9022;
+            border-color: #FF9022;
+        }
     }
 }
 
