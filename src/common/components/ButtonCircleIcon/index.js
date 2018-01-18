@@ -4,7 +4,13 @@ import { pick }from 'lodash'
 import styles from './styles.module.css'
 
 
-export const ButtonCircleIcon = ({ style, className, onClick, title, children }) => (
+export const ButtonCircleIcon = ({
+    style,
+    className,
+    title,
+    children,
+    onClick = () => {},
+}) => (
     <button
         className={[styles.btn].concat(className).join(' ')}
         style={style}
@@ -17,7 +23,8 @@ export const ButtonCircleIcon = ({ style, className, onClick, title, children })
 
 ButtonCircleIcon.propTypes = {
     style: PropTypes.object,
-    icon: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    title: PropTypes.string,
     onClick: PropTypes.func,
 }
 
