@@ -68,13 +68,20 @@ const ARTICLES_QUERY = `{
 }`
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
-    const { createPage, deletePage } = boundActionCreators
+    const { createPage, createRedirect, deletePage } = boundActionCreators
     return new Promise((resolve, reject) => {
         createPage({
             layout: 'index',
             path: '/',
             component: slash(path.resolve(`./src/pages/home.js`)),
             context: { instagram }
+        })
+
+        createRedirect({
+            fromPath: '/home',
+            toPath: '/',
+            isPermanent: true,
+            redirectInBrowser: true,
         })
 
         graphql(ARTICLES_QUERY).then(({errors, data}) => {
@@ -88,10 +95,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 console.log(`Contentful >> received data from ${ data.articles.edges.length } articles.`)
             }
 
+            // ARTICLE PAGES
             forEach(data.articles.edges, (edge, index) => {
                 const { id, slug, category: { name: categoryName } } = edge.node
                 const prevId = result(data.articles.edges, `[${index-1}].node.id`) || ''
                 const nextId = result(data.articles.edges, `[${index+1}].node.id`) || ''
+                const articlePath = `/${lowerFirst(categoryName)}/${slug}/`
+                console.log(`>> Creating Article Page: ${articlePath}`)
                 createPage({
                     layout: 'article',
                     path: `/${lowerFirst(categoryName)}/${slug}/`,
@@ -99,9 +109,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     context: { id, slug, prevId, nextId },
                 })
             })
+            // CATEGORY PAGES
             forEach(data.categories.edges, ({node: {name: categoryName, article}}) => {
                 if (!article) return;
-                console.log('creating category page ',categoryName)
+                console.log(`>> Creating Category Page: /${lowerFirst(categoryName)}/`)
                 createPage({
                     layout: 'categoryTag',
                     path: `/${lowerFirst(categoryName)}/`,
@@ -109,9 +120,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     context: { categoryName },
                 })
             })
+            // TAG PAGES
             forEach(data.tags.edges, ({node: {name: tagName, article}}) => {
                 if (!article) return;
-                console.log('creating tag page ',tagName)
+                console.log(`>> Creating Tag Page: /tag/${tagName}/`)
                 createPage({
                     layout: 'categoryTag',
                     path: `/tag/${tagName}/`,
@@ -119,6 +131,26 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     context: { tagName },
                 })
             })
+            // REDIRECTS
+            forEach(data.articles.edges, (edge, index) => {
+                const { id, slug, category: { name: categoryName } } = edge.node
+                const articlePath = `/${lowerFirst(categoryName)}/${slug}/`
+                console.log(`>> Creating Redirect: /article/${id}/ -> ${articlePath}`)
+                createRedirect({
+                    fromPath: `/article/${id}/`,
+                    toPath: articlePath,
+                    isPermanent: true,
+                    redirectInBrowser: true,
+                })
+                console.log(`>> Create Redirect: /articles/${slug}/ -> ${articlePath}`)
+                createRedirect({
+                    fromPath: `/articles/${slug}/`,
+                    toPath: articlePath,
+                    isPermanent: true,
+                    redirectInBrowser: true,
+                })
+            })
+
             resolve()
         })
     })
