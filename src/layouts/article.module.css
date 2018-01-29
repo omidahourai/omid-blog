@@ -2,7 +2,7 @@
     composes: siteGrid from './common.module.css';
 }
 
-.main-layout {
+.wrapper {
     grid-area: main;
     overflow: hidden;
     margin: 0 auto;
@@ -13,4 +13,8 @@
     grid-area: footer;
     display: flex;
     flex-direction: column;
+}
+
+.sidebar {
+    display: none;
 }

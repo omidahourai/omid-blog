@@ -101,8 +101,8 @@ export const SideBar = ({
       <section className={`categories ${styles.categories}`}>
         <h3>Categories</h3>
         <ul>
-        {map(categories, ({categoryName, count}) => (
-          <li>
+        {map(categories, ({categoryName, count}, index) => (
+          <li key={index}>
             <a href={`/${lowerFirst(categoryName)}/`}>
               <span className={styles.name}>{categoryName}</span>
               <span className={styles.count}>({count})</span>

@@ -43,19 +43,23 @@ class HomePage extends Component {
     
     render() {
         const { data } = this.props
-        // console.log('data',data)
         if ( !data ) {
             return <div>No Data :(</div>
         }
-        console.log(data.author)
+        // console.log(data.author)
         data.author.fullName = `${ data.author.firstName } ${ data.author.lastName }`
-        forEach(data.articles.edges, edge => edge.node.author.fullName = `${ edge.node.author.firstName } ${ edge.node.author.lastName }`)
+        forEach(data.articles.edges, edge => {
+            const author = edge.node.author ? edge.node.author : {
+                firstName: 'AUTHOR',
+                lastName: 'NOT SET',
+            }
+            author.fullName = `${ author.firstName } ${ author.lastName }`
+        })
         const articles = map(data.articles.edges, ({node}) => node)
         const categories = without(map(data.categories.edges, ({node}) => node.article && {
             categoryName: node.categoryName,
             count: node.article.length,
         }), null)
-        console.log('all cats',categories)
         return (
             <div className={styles.wrapper}>
                 <Helmet {...this.getMetaData()}/>

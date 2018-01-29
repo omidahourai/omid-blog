@@ -1,5 +1,5 @@
 import React from 'react'
-import { lowerFirst, map } from 'lodash'
+import { result, lowerFirst, map } from 'lodash'
 import { ArticlePreview } from 'components'
 import styles from './styles.module.css'
 
@@ -12,9 +12,17 @@ const parseNode = ({
     tags,
     publishedOn,
     updatedOn,
-    category: { name: categoryName },
-    summary: { childMarkdownRemark: { html: summaryHtml } },
+    category,
+    summary,
 }) => {
+    hero = hero || {file: {}}
+    category = category || {}
+    author = author || {
+        firstName: 'AUTHOR',
+        lastName: 'NOT SET',
+    }
+    const categoryName = category.name
+    const summaryHtml = result(summary, 'childMarkdownRemark.html') || 'SUMMARY NOT SET'
     const authorName = `${ author.firstName } ${ author.lastName }`
     const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
     const catLower = lowerFirst(categoryName)

@@ -21,7 +21,8 @@ export class SocialLinksShare extends Component {
     this.state = {}
   }
   render() {
-    const { id, slug, title, category, imageUrl, tags } = this.props
+    let { id, slug, title, category, imageUrl, tags } = this.props
+    tags = tags || []
     return( 
       <div className={`social-share ${ styles.share }`}>
         <Tooltip

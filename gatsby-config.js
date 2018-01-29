@@ -1,8 +1,28 @@
 require('dotenv').config()
 
-module.exports = {
+const title = `Omid Ahourai - Blog`
+
+const config = process.env.NODE_ENV === 'development' ? {
   siteMetadata: {
-    title: `StoryFork Blog`,
+    title: `DEV - ${title}`,
+  },
+  plugins: [
+    'gatsby-plugin-resolve-src',
+    `gatsby-plugin-sass`,
+    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID || ``,
+        accessToken: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN || ``,
+        host: 'preview.contentful.com',
+      },
+    },
+    `gatsby-plugin-netlify`,
+  ],
+} : { // production
+  siteMetadata: {
+    title,
   },
   plugins: [
     'gatsby-plugin-resolve-src',
@@ -27,3 +47,5 @@ module.exports = {
     `gatsby-plugin-netlify`,
   ],
 }
+
+module.exports = config

@@ -43,7 +43,6 @@ class TagTemplate extends Component {
         const { tag } = data
         const { articles, name: tagName } = tag
         forEach(articles, article => article.author.fullName = `${ article.author.firstName } ${ article.author.lastName }`)
-        console.log('cat data>>',tag,articles)
         return (
             <div className={styles.wrapper}>
                 <Helmet {...this.getMetaData(tagName)}/>

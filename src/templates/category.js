@@ -43,7 +43,6 @@ class CategoryTemplate extends Component {
         const { category } = data
         const { articles, name: categoryName } = category
         forEach(articles, article => article.author.fullName = `${ article.author.firstName } ${ article.author.lastName }`)
-        console.log('cat data>>',category,articles)
         return (
             <div className={styles.wrapper}>
                 <Helmet {...this.getMetaData(categoryName)}/>

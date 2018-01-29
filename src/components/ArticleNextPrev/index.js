@@ -9,6 +9,7 @@ const c ={
 }
 
 const parseImgMeta = ({hero, title}) => {
+  hero = hero || {file: {}}
   const width = hero.width || 75
   const height = hero.height || 75
   const width2x = width * 2

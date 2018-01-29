@@ -97,7 +97,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
             // ARTICLE PAGES
             forEach(data.articles.edges, (edge, index) => {
-                const { id, slug, category: { name: categoryName } } = edge.node
+                const { id, slug, category } = edge.node
+                if (!id || !slug || !category) {
+                    return;
+                }
+                const categoryName =  category.name
                 const prevId = result(data.articles.edges, `[${index-1}].node.id`) || ''
                 const nextId = result(data.articles.edges, `[${index+1}].node.id`) || ''
                 const articlePath = `/${lowerFirst(categoryName)}/${slug}/`
@@ -133,7 +137,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             })
             // REDIRECTS
             forEach(data.articles.edges, (edge, index) => {
-                const { id, slug, category: { name: categoryName } } = edge.node
+                const { id, slug, category } = edge.node
+                if (!id || !slug || !category) {
+                    return;
+                }
+                const categoryName = category.name
                 const articlePath = `/${lowerFirst(categoryName)}/${slug}/`
                 console.log(`>> Creating Redirect: /article/${id}/ -> ${articlePath}`)
                 createRedirect({

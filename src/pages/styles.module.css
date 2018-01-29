@@ -7,7 +7,6 @@
 }
 
 .sidebar {
-    grid-area: sidebar;
     position: static;
     width: 345px;
     height: 1239px;

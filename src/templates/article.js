@@ -3,6 +3,7 @@ import { lowerFirst, result, first, join, map } from 'lodash'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import * as PropTypes from "prop-types"
+import './article.css'
 import styles from './article.module.css'
 import Helmet from 'react-helmet'
 import {
@@ -25,13 +26,14 @@ const parseHeroImgMeta = (hero) => {
 
 class ArticleTemplate extends Component {
   componentDidMount() {
-    this.props.updateLayout({
-      title: this.props.data.article.title,
-      categoryName: this.props.data.article.category.name,
-      author: this.props.data.article.author,
-      next: this.props.data.next,
-      prev: this.props.data.prev,
-    })
+    const {
+      next,
+      prev,
+      categories,
+      article: {title, author, category: {name: categoryName}},
+    } = this.props.data
+    const instagramData = result(this, 'props.pathContext.instagram.data') || []
+    this.props.updateLayout({next, prev, categories, categoryName, title, author, instagramData})
   }
 
   getMetaData() {
@@ -69,7 +71,7 @@ class ArticleTemplate extends Component {
     const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
     const categoryUrl = `/${ lowerFirst(categoryName) }/`
     return (
-      <article className={styles.article}>
+      <article className={`article ${styles.article}`}>
         <Helmet {...this.getMetaData()}/>
         <div className={styles.hero}>
           <img {...parseHeroImgMeta(hero)} />
@@ -131,14 +133,26 @@ export const pageQuery = graphql`
         id
         firstName
         lastName
+        shortTitle
         description {
-          description
+          text: description
         }
         photo {
           file {
-            url
+            photoUrl: url
           }
         }
+        altPhoto {
+          file {
+              photoUrl: url
+            }
+        }
+        shortDescription
+        facebookHandle
+        twitterHandle
+        instagramHandle
+        linkedinHandle
+        emailAddress
       }
       category {
         name
@@ -147,6 +161,16 @@ export const pageQuery = graphql`
       updatedOn
       tags {
         name
+      }
+    }
+    categories: allContentfulCategory {
+      edges {
+        node {
+          categoryName: name
+          article {
+            id
+          }
+        }
       }
     }
     prev: contentfulArticle(id: { eq: $prevId }) {

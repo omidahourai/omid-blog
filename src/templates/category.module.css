@@ -5,19 +5,3 @@
 .articles {
     // grid-area: main;
 }
-
-.sidebar {
-    grid-area: sidebar;
-    position: static;
-    width: 345px;
-    height: 1239px;
-    display: block;
-    vertical-align: baseline;
-    float: left;
-}
-
-@media only screen and (max-width: 979px) {
-  .sidebar {
-      display: none;
-  }
-}
