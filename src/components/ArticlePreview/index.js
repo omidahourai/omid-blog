@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import { lowerFirst, result, map } from 'lodash'
+import { result, map } from 'lodash'
 import moment from 'moment'
 import { ArticlePreviewHeader, SocialLinksShare } from 'components'
 import styles from './styles.module.css'

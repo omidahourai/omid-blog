@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styles from './styles.module.css'
-import { lowerFirst } from 'lodash'
 
 const c ={
   PREVIOUS: 'PREVIOUS',
@@ -27,9 +26,9 @@ const NoDataBlock = ({ direction }) => (
   </div>
 )
 
-const NextPrev = ({ title, hero, direction, slug, category: {name: categoryName} }) => {
+const NextPrev = ({ id, title, hero, direction, slug, category: {name: categoryName} }) => {
   return  (
-      <Link to={`/${lowerFirst(categoryName)}/${slug}`}
+      <Link to={`/article/${id}/`}
         className={direction === c.NEXT ? styles.next : styles.prev}
         title={title}
         alt={title}>

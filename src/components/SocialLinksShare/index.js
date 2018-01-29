@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
 import styles from './styles.module.css'
-import { lowerFirst } from 'lodash'
 import { Tooltip } from 'react-tippy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import {
@@ -38,7 +37,7 @@ export class SocialLinksShare extends Component {
           style={{paddingTop: 5}}>
           <AnchorCircleIcon 
             className={`${styles.btn} ${styles.facebook}`}
-            href={encodeURI(`https://facebook.com/sharer/sharer.php?u=${ decodeURIComponent( `http://www.omid.com/${lowerFirst(category)}/${ slug }`)}`)}
+            href={encodeURI(`https://facebook.com/sharer/sharer.php?u=${ decodeURIComponent( `http://omid.com/article/${id}/`)}`)}
             rel="external"
             target="_blank"
             title="Share on Facebook">
@@ -58,7 +57,7 @@ export class SocialLinksShare extends Component {
           style={{paddingTop: 5}}>
           <AnchorCircleIcon 
             className={`${styles.btn} ${styles.twitter}`}
-            href={encodeURI(`https://twitter.com/share?text=Check out this article by @omidahourai: ${ title }&hashtags=${ tags.join(',') }&url=${ `http://www.omid.com/${lowerFirst(category)}/${ slug }` }`)}
+            href={encodeURI(`https://twitter.com/share?text=Check out this article by @omidahourai: ${ title }&hashtags=${ tags.join(',') }&url=${ `http://omid.com/article/${id}/` }`)}
             rel="external"
             target="_blank"
             title="Share on Twitter">
@@ -78,7 +77,7 @@ export class SocialLinksShare extends Component {
           style={{paddingTop: 5}}>
           <AnchorCircleIcon 
             className={`${styles.btn} ${styles.pinterest}`}
-            href={`https://pinterest.com/pin/create/button/?url=http://omid.com/${lowerFirst(category)}/${slug}/&media=${imageUrl}`}
+            href={`https://pinterest.com/pin/create/button/?url=http://omid.com/article/${id}/&media=${imageUrl}`}
             rel="external"
             target="_blank"
             alt="Share on Pinterest">

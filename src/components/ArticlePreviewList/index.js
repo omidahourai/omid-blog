@@ -25,9 +25,8 @@ const parseNode = ({
     const summaryHtml = result(summary, 'childMarkdownRemark.html') || 'SUMMARY NOT SET'
     const authorName = `${ author.firstName } ${ author.lastName }`
     const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
-    const catLower = lowerFirst(categoryName)
-    const categoryUrl = `/${ catLower }/`
-    const articleUrl = `/${catLower}/${slug}/`
+    const categoryUrl = `/${ lowerFirst(categoryName) }/`
+    const articleUrl = `/article/${id}/`
     return {
         id,
         articleUrl,

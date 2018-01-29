@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
-import { forEach, lowerFirst, first, map, result } from 'lodash'
+import { forEach, first, map, result } from 'lodash'
 import {
     ArticlePreviewList,
     SideBar,

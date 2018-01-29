@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
-import { lowerFirst, map } from 'lodash'
 import moment from 'moment'
 import styles from './styles.module.css'
 
