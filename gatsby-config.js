@@ -37,6 +37,12 @@ const config = process.env.NODE_ENV === 'development' ? {
       },
     },
     {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: '180777232501525',
+      },
+    },
+    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-112467017-1",

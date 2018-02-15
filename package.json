@@ -28,6 +28,7 @@
     "gatsby-cli": "^1.1.28",
     "gatsby-image": "^1.0.31",
     "gatsby-link": "^1.6.32",
+    "gatsby-plugin-facebook-pixel": "^1.0.3",
     "gatsby-plugin-google-analytics": "^1.0.15",
     "gatsby-plugin-netlify": "^1.0.14",
     "gatsby-plugin-react-helmet": "^1.0.8",
