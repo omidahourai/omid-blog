@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+const path = require('path')
 const title = `Omid Ahourai - Blog`
 
 const config = process.env.NODE_ENV === 'development' ? {
@@ -7,7 +7,18 @@ const config = process.env.NODE_ENV === 'development' ? {
     title: `DEV - ${title}`,
   },
   plugins: [
-    'gatsby-plugin-resolve-src',
+    // 'gatsby-plugin-resolve-src',
+    {
+        resolve: 'gatsby-plugin-root-import',
+        options: {
+            src: path.join(__dirname, 'src'),
+            components: path.join(__dirname, 'src/components'),
+            common: path.join(__dirname, 'src/common'),
+            layouts: path.join(__dirname, 'src/layouts'),
+            pages: path.join(__dirname, 'src/pages'),
+            templates: path.join(__dirname, 'src/templates')
+        },
+    },
     `gatsby-plugin-sass`,
     `gatsby-transformer-remark`,
     {
@@ -25,7 +36,7 @@ const config = process.env.NODE_ENV === 'development' ? {
     title,
   },
   plugins: [
-    'gatsby-plugin-resolve-src',
+    // 'gatsby-plugin-resolve-src',
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     `gatsby-transformer-remark`,

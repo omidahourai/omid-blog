@@ -1,5 +1,4 @@
 const { lowerFirst, result, forEach } = require('lodash')
-// const Promise = require(`bluebird`)
 const path = require('path')
 const slash = require('slash')
 const axios = require('axios')
@@ -11,27 +10,25 @@ const IG_ACCESS_TOKEN = '403340749.de8e262.ed321a7e075b4152b2663b39f5b6be61'
 // get https://api.instagram.com/v1/users/self/media/recent/?access_token=403340749.de8e262.ed321a7e075b4152b2663b39f5b6be61
 
 let instagram = require('./src/data/instagram.json')
-exports.onPreBootstrap = () => {
-    return new Promise((resolve, reject) => {
-        if ( process.env.NODE_ENV === 'development' ) {
-            return resolve()
-        }
-        return axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${ IG_ACCESS_TOKEN }`)
-            .then(response => {
-                if ( process.env.NODE_ENV === 'development' ) {
-                    console.log('Instagram >>', JSON.stringify(response.data, null, '\t'));
-                } else {
-                    console.log(`Instagram >> received data from ${ response.data.data.length } posts.`);
-                }
-                instagram = response.data
-                resolve();
-            })
-            .catch(error => {
-                console.log('err',error)
-                reject(error)
-            })
-    })
-}
+exports.onPreBootstrap = () => new Promise((resolve, reject) => {
+    if ( process.env.NODE_ENV === 'development' ) {
+        return resolve()
+    }
+    return axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${ IG_ACCESS_TOKEN }`)
+        .then(response => {
+            if ( process.env.NODE_ENV === 'development' ) {
+                console.log('Instagram >>', JSON.stringify(response.data, null, '\t'));
+            } else {
+                console.log(`Instagram >> received data from ${ response.data.data.length } posts.`);
+            }
+            instagram = response.data
+            resolve();
+        })
+        .catch(error => {
+            console.log('err',error)
+            reject(error)
+        })
+})
 
 const ARTICLES_QUERY = `{
     tags: allContentfulTag {
@@ -67,8 +64,8 @@ const ARTICLES_QUERY = `{
     }
 }`
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-    const { createPage, createRedirect, deletePage } = boundActionCreators
+exports.createPages = ({ graphql, actions }) => {
+    const { createPage, createRedirect, deletePage } = actions
     return new Promise((resolve, reject) => {
         createPage({
             layout: 'index',
@@ -164,8 +161,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     })
 }
 
-// exports.onPostBootstrap = ({ boundActionCreators }) => {
-//     const { deletePage } = boundActionCreators
+// exports.onPostBootstrap = ({ actions }) => {
+//     const { deletePage } = actions
 //     return new Promise((resolve, reject) => {
 //         deletePage({
 //             path: '/home/',

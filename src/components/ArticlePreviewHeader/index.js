@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
+import React from 'react'
+import { Link } from 'gatsby'
 import moment from 'moment'
 import styles from './styles.module.css'
 
@@ -19,29 +18,26 @@ export const ArticlePreviewHeader = ({
     <header className={`entry-header ${styles.header}`}>
       <div className={`entry-category ${styles.category}`}>
         <span>In</span>
-        <Link
-          to={categoryUrl}
-          rel="category tag">
-            {categoryName}
+        <Link to={categoryUrl} rel="category tag">
+          {categoryName}
         </Link>
       </div>
-      <h2 className={styles['post-title']}>
-        <Link className={styles['post-link']} to={articleUrl}>
+      <h2 className={styles.postTitle}>
+        <Link className={styles.postLink} to={articleUrl}>
           {title}
         </Link>
       </h2>
-      <div className={styles['meta-author-date']}>
-        <span className={styles['meta-date']}>
+      <div className={styles.metaAuthorDate}>
+        <span className={styles.metaDate}>
           {moment(publishedOn).format('MMMM D, YYYY')}
         </span>
-        <span className={styles['author-prefix']}>
-          By
-        </span>
+        <span className={styles.authorPrefix}>By</span>
         <Link
-          className={styles['meta-author']}
+          className={styles.metaAuthor}
           to={authorUrl}
-          title={`Articles by ${ authorName }`}
-          rel="author">
+          title={`Articles by ${authorName}`}
+          rel="author"
+        >
           {authorName}
         </Link>
       </div>
@@ -49,4 +45,4 @@ export const ArticlePreviewHeader = ({
   )
 }
 
- export default ArticlePreviewHeader
+export default ArticlePreviewHeader

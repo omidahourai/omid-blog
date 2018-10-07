@@ -1,3 +1,3 @@
-import definitions from './definitions.json';
+import definitions from './definitions.json'
 
-export default definitions;
+export default definitions

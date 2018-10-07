@@ -1,15 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { slice, map, result } from 'lodash'
-import Link from 'gatsby-link'
 import styles from './styles.module.css'
 import { FaInstagram, FaHeart } from 'common/icons'
-import { Tooltip } from 'react-tippy'
 
 export const InstagramBanner = ({ feedData }) => {
-  const imageData = map( feedData, item => {
+  const imageData = map(feedData, item => {
     let text = result(item, 'caption.text') || ''
     if (text.length > 50) {
-      text = text.slice(0,50)+'...'
+      text = text.slice(0, 50) + '...'
     }
     return {
       text,
@@ -22,10 +20,10 @@ export const InstagramBanner = ({ feedData }) => {
     }
   })
   return (
-    <ul className={styles.instagram}> 
-        {map(slice(imageData, 9), image => (
-            <li key={image.key}>
-                {/*<Tooltip
+    <ul className={styles.instagram}>
+      {map(slice(imageData, 9), image => (
+        <li key={image.key}>
+          {/*<Tooltip
                   title="Welcome to React"
                   position="top"
                   duration="250"
@@ -39,18 +37,18 @@ export const InstagramBanner = ({ feedData }) => {
                     marginLeft: '50%',
                     marginTop: '-100',
                   }}>*/}
-                  <a href={image.link} target="_blank">
-                    <FaInstagram color="#FFF" size="2rem"/>
-                    <span className={styles.likes}>
-                      <FaHeart color="#FFF" size="1rem"/>
-                      <span>{image.likes}</span>
-                    </span>
-                  </a>
-                {/*</Tooltip>*/}
-                <div className={styles.overlay}></div>
-                <img src={image.url} alt={image.text} title={image.text} />
-            </li>
-        ))}
+          <a href={image.link} target="_blank">
+            <FaInstagram color="#FFF" size="2rem" />
+            <span className={styles.likes}>
+              <FaHeart color="#FFF" size="1rem" />
+              <span>{image.likes}</span>
+            </span>
+          </a>
+          {/*</Tooltip>*/}
+          <div className={styles.overlay} />
+          <img src={image.url} alt={image.text} title={image.text} />
+        </li>
+      ))}
     </ul>
   )
 }

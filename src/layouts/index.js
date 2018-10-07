@@ -1,19 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { map, result } from 'lodash'
-import Link from 'gatsby-link'
-import {
-  LayoutHeader,
-  InstagramBanner,
-  SiteFooter,
-} from 'components'
+import { LayoutHeader, InstagramBanner, SiteFooter } from 'components'
 
-import 'react-tippy/dist/tippy.css';
+import 'react-tippy/dist/tippy.css'
 import './index.css'
 import styles from './styles.module.css'
 
 class HomeLayout extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {}
   }
@@ -22,16 +16,18 @@ class HomeLayout extends Component {
     return (
       <div className={styles.site}>
         <LayoutHeader />
-        <main className={styles['main-layout']}>
+        <main className={styles.mainLayout}>
           {this.props.children({
             ...this.props,
-            updateLayout: (s) => this.setState(s),
+            updateLayout: s => this.setState(s),
           })}
         </main>
         <div className={styles.bottom}>
-          {this.state.instagram ?
+          {this.state.instagram ? (
             <InstagramBanner feedData={this.state.instagram.data} />
-          : ''}
+          ) : (
+            ''
+          )}
           <SiteFooter />
         </div>
       </div>

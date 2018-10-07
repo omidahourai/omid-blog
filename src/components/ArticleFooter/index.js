@@ -1,27 +1,30 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { map } from 'lodash'
-import Link from 'gatsby-link'
-import IconButton from 'common/components/IconButton'
+import { Link } from 'gatsby'
 import styles from './styles.module.css'
 import { SocialLinksShare } from 'components'
-import { FaFacebook, FaTwitter, FaPinterestP } from 'common/icons';
 
-export const ArticleFooter = ({ id, title, tags, slug, category, imageUrl }) => (
-  <footer className={styles['footer-article']}>
-    <div className={styles['meta-tags']}>
-    {map(tags, tag => {
-      // TODO: CREATE TAG PAGE
-      return (
-        <Link
-          key={tag}
-          to={`/tag/${ tag }/`}
-          rel="tag">
+export const ArticleFooter = ({
+  id,
+  title,
+  tags,
+  slug,
+  category,
+  imageUrl,
+}) => (
+  <footer className={styles.footerArticle}>
+    <div className={styles.metaTags}>
+      {map(tags, tag => {
+        // TODO: CREATE TAG PAGE
+        return (
+          <Link key={tag} to={`/tag/${tag}/`} rel="tag">
             {tag}
           </Link>
-      )})}
-    </div>	
-    <p className={styles['share-text']}>Share this article</p>
-    <div className={styles['meta-share']}>
+        )
+      })}
+    </div>
+    <p className={styles.shareText}>Share this article</p>
+    <div className={styles.metaShare}>
       <SocialLinksShare
         id={id}
         slug={slug}

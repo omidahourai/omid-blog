@@ -1,7 +1,55 @@
 import React, { Component } from 'react'
-import { Link } from 'gatsby'
+import * as Gatsby from 'gatsby'
+import styled from 'styled-components'
+import { theme } from 'common/styles'
 import styles from './styles.module.css'
 import { FaFacebook, FaTwitter, FaInstagram } from 'common/icons'
+
+const Wrapper = styled.div`
+  padding: 0 1rem 1rem 1rem;
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 2rem;
+`
+const Avatar = styled.div`
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    width: ${({ width }) => `${width}px`}
+    height: ${({ height }) => `${height}px`}
+`
+const Body = styled.div`
+  text-align: center;
+`
+const Header = styled.h4`
+  font-family: ${theme.font.serif};
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin: 0.8rem 0;
+`
+const Link = styled(Gatsby.Link)`
+  text-decoration: none;
+  color: primary;
+  &:hover {
+    color: ${theme.color.primaryHighlight};
+  }
+`
+const DescriptionText = styled.p`
+  font-family: ${theme.font.sansSerif};
+  font-size: 0.85rem;
+  line-height: 1.35rem;
+  margin: 0;
+`
+const ShareIcons = styled.div`
+  margin-top: 0.5rem;
+  & a {
+    padding: 0.5rem;
+    &:hover svg > * {
+      fill: primary;
+    }
+  }
+`
 
 export const ArticleAuthor = ({
   firstName,
@@ -20,11 +68,8 @@ export const ArticleAuthor = ({
     rel: `author`,
   }
   return (
-    <div className={styles.author}>
-      <div
-        className={styles.avatarWrapper}
-        style={{ width: photoDim, height: photoDim }}
-      >
+    <Wrapper>
+      <Avatar width={photoDim} height={photoDim}>
         <img
           alt={fullName}
           src={`${photoUrl}?w=${photoDim}&h=${photoDim}&q=70`}
@@ -33,13 +78,13 @@ export const ArticleAuthor = ({
           height={photoDim}
           width={photoDim}
         />
-      </div>
-      <div className={styles.description}>
-        <h4>
+      </Avatar>
+      <Body>
+        <Header>
           <Link {...authorLink}>{fullName}</Link>
-        </h4>
-        <p>{description}</p>
-        <div className={styles.share}>
+        </Header>
+        <DescriptionText>{description}</DescriptionText>
+        <ShareIcons>
           <a
             href="http://facebook.com/Omid-Ahourai-296038887569459/"
             target="_blank"
@@ -67,9 +112,9 @@ export const ArticleAuthor = ({
           >
             <FaInstagram />
           </a>
-        </div>
-      </div>
-    </div>
+        </ShareIcons>
+      </Body>
+    </Wrapper>
   )
 }
 
