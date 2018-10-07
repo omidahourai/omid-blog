@@ -19,6 +19,12 @@ const config = process.env.NODE_ENV === 'development' ? {
             templates: path.join(__dirname, 'src/templates')
         },
     },
+    {
+        resolve: `gatsby-plugin-styled-components`,
+        options: {
+            // displayName: false,
+        },
+    }
     `gatsby-plugin-sass`,
     `gatsby-transformer-remark`,
     {
