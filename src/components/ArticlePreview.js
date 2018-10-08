@@ -1,7 +1,51 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { ArticlePreviewHeader, SocialLinksShare } from 'components'
-import styles from './styles.module.css'
+import { theme } from 'common/styles'
+import styled from 'styled-components'
+
+const Wrapper = styled.article`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`
+
+const Hero = styled.div`
+  margin-bottom: 1rem;
+  position: relative;
+  padding-top: 60%;
+
+  & img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    object-fit: cover;
+  }
+`
+const Content = styled.div`
+  font-family: ${theme.font.sansSerif};
+  font-size: 0.85rem;
+  line-height: 1.35rem;
+  margin-bottom: 1rem;
+
+  & > p {
+    text-align: justify;
+  }
+`
+
+const Footer = styled.div`
+  text-align: center;
+  overflow: hidden;
+
+  flex-grow: 1;
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+`
 
 export const ArticlePreview = ({
   id,
@@ -31,12 +75,12 @@ export const ArticlePreview = ({
   }
 
   return (
-    <article className={`post ${styles.post}`}>
-      <div className={`media ${styles.hero}`}>
+    <Wrapper>
+      <Hero>
         <Link to={articleUrl}>
           <img {...heroImgMeta} />
         </Link>
-      </div>
+      </Hero>
       <ArticlePreviewHeader
         articleUrl={articleUrl}
         authorName={authorName}
@@ -47,13 +91,12 @@ export const ArticlePreview = ({
         publishedOn={publishedOn}
         title={title}
       />
-      <div
-        className={`content ${styles.content}`}
+      <Content
         dangerouslySetInnerHTML={{
           __html: summaryHtml,
         }}
       />
-      <footer className={`footer ${styles.footer}`}>
+      <Footer>
         <SocialLinksShare
           id={id}
           slug={slug}
@@ -62,8 +105,8 @@ export const ArticlePreview = ({
           imageUrl={`http:${heroImgUrl}?w=1000&h=1000`}
           tags={tags}
         />
-      </footer>
-    </article>
+      </Footer>
+    </Wrapper>
   )
 }
 

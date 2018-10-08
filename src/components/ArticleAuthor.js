@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import * as Gatsby from 'gatsby'
 import styled from 'styled-components'
 import { theme } from 'common/styles'
-import styles from './styles.module.css'
 import { FaFacebook, FaTwitter, FaInstagram } from 'common/icons'
 
 const Wrapper = styled.div`
@@ -30,7 +29,7 @@ const Header = styled.h4`
 `
 const Link = styled(Gatsby.Link)`
   text-decoration: none;
-  color: primary;
+  color: ${theme.color.primary};
   &:hover {
     color: ${theme.color.primaryHighlight};
   }
@@ -46,7 +45,7 @@ const ShareIcons = styled.div`
   & a {
     padding: 0.5rem;
     &:hover svg > * {
-      fill: primary;
+      fill: ${theme.color.primary};
     }
   }
 `
@@ -74,7 +73,6 @@ export const ArticleAuthor = ({
           alt={fullName}
           src={`${photoUrl}?w=${photoDim}&h=${photoDim}&q=70`}
           srcSet={`${photoUrl}?w=${photoDim2x}&h=${photoDim2x}&q=70 2x`}
-          className={styles.avatar}
           height={photoDim}
           width={photoDim}
         />

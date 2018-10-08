@@ -4,8 +4,25 @@ import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 import { without, forEach, map } from 'lodash'
 import { ArticlePreviewList, SideBar } from 'components'
-import styles from './styles.module.css'
+import './styles.css' // global
+import { HomeLayout } from 'components'
+import styled from 'styled-components'
 
+const Wrapper = styled.div`
+  display: flex;
+`
+const SidebarWrapper = styled.div`
+  position: static;
+  width: 345px;
+  height: 1239px;
+  display: block;
+  vertical-align: baseline;
+  float: left;
+
+  @media only screen and (max-width: 979px) {
+    display: none;
+  }
+`
 class HomePage extends Component {
   componentDidMount() {
     // this.props.updateLayout({
@@ -67,6 +84,7 @@ class HomePage extends Component {
       author.fullName = `${author.firstName} ${author.lastName}`
     })
     const articles = map(data.articles.edges, ({ node }) => node)
+    console.log(articles)
     const categories = without(
       map(
         data.categories.edges,
@@ -79,23 +97,25 @@ class HomePage extends Component {
       null
     )
     return (
-      <div className={styles.wrapper}>
-        <Helmet {...this.getMetaData()} />
-        <div className={`article-previews ${styles.articles}`}>
-          <ArticlePreviewList articles={articles} />
-        </div>
-        <div className={`sidebar ${styles.sidebar}`}>
-          {this.props.pageContext.instagram ? (
-            <SideBar
-              instagramData={this.props.pageContext.instagram.data}
-              categories={categories}
-              {...data.author}
-            />
-          ) : (
-            ''
-          )}
-        </div>
-      </div>
+      <HomeLayout {...this.props}>
+        <Wrapper>
+          <Helmet {...this.getMetaData()} />
+          <div>
+            <ArticlePreviewList articles={articles} />
+          </div>
+          <SidebarWrapper>
+            {this.props.pageContext.instagram ? (
+              <SideBar
+                instagramData={this.props.pageContext.instagram.data}
+                categories={categories}
+                {...data.author}
+              />
+            ) : (
+              ''
+            )}
+          </SidebarWrapper>
+        </Wrapper>
+      </HomeLayout>
     )
   }
 }

@@ -14,7 +14,6 @@ const config = process.env.NODE_ENV === 'development' ? {
             src: path.join(__dirname, 'src'),
             components: path.join(__dirname, 'src/components'),
             common: path.join(__dirname, 'src/common'),
-            layouts: path.join(__dirname, 'src/layouts'),
             pages: path.join(__dirname, 'src/pages'),
             templates: path.join(__dirname, 'src/templates')
         },
@@ -24,7 +23,7 @@ const config = process.env.NODE_ENV === 'development' ? {
         options: {
             // displayName: false,
         },
-    }
+    },
     `gatsby-plugin-sass`,
     `gatsby-transformer-remark`,
     {
