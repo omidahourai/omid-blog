@@ -90,7 +90,7 @@ export const ArticleFooter = ({
   category,
   imageUrl,
 }) => (
-  <Wrapper>
+  <Wrapper key={id}>
     <MetaTags>
       {map(tags, label => (
         <Tag label={label} />

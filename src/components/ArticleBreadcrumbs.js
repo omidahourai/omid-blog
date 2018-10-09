@@ -46,7 +46,7 @@ export const ArticleBreadcrumbs = ({ categoryName, title }) => (
       <Link to={`/${lowerFirst(categoryName)}/`}>{categoryName}</Link>
     </Item>
     <Separator />
-    <Item className={styles.current}>
+    <Item>
       <span>{title}</span>
     </Item>
   </List>

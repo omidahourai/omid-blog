@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types'
 import './article.css'
 import styles from './article.module.css'
 import Helmet from 'react-helmet'
-import { ArticleHeader, ArticleFooter } from 'components'
+import { ArticleLayout, ArticleHeader, ArticleFooter } from 'components'
 
 // import { rhythm } from "../utils/typography"
 
@@ -112,34 +112,36 @@ class ArticleTemplate extends Component {
     // }`.toLowerCase()}`
     const categoryUrl = `/${lowerFirst(categoryName)}/`
     return (
-      <article className={`article ${styles.article}`}>
-        <Helmet {...this.getMetaData()} />
-        <div className={styles.hero}>
-          <img {...parseHeroImgMeta(hero)} />
-        </div>
-        <ArticleHeader
-          authorName={authorName}
-          categoryName={categoryName}
-          categoryUrl={categoryUrl}
-          publishedOn={publishedOn}
-          updatedOn={updatedOn}
-          title={title}
-        />
-        <div
-          className={styles.content}
-          dangerouslySetInnerHTML={{
-            __html: content.childMarkdownRemark.html,
-          }}
-        />
-        <ArticleFooter
-          id={id}
-          category={categoryName}
-          imageUrl={`http:${hero.file.url}?w=1000&h=1000`}
-          tags={map(tags, t => t.name)}
-          title={title}
-          slug={slug}
-        />
-      </article>
+      <ArticleLayout>
+        <article className={`article ${styles.article}`}>
+          <Helmet {...this.getMetaData()} />
+          <div className={styles.hero}>
+            <img {...parseHeroImgMeta(hero)} />
+          </div>
+          <ArticleHeader
+            authorName={authorName}
+            categoryName={categoryName}
+            categoryUrl={categoryUrl}
+            publishedOn={publishedOn}
+            updatedOn={updatedOn}
+            title={title}
+          />
+          <div
+            className={styles.content}
+            dangerouslySetInnerHTML={{
+              __html: content.childMarkdownRemark.html,
+            }}
+          />
+          <ArticleFooter
+            id={id}
+            category={categoryName}
+            imageUrl={`http:${hero.file.url}?w=1000&h=1000`}
+            tags={map(tags, t => t.name)}
+            title={title}
+            slug={slug}
+          />
+        </article>
+      </ArticleLayout>
     )
   }
 }

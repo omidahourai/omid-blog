@@ -68,7 +68,6 @@ exports.createPages = ({ graphql, actions }) => {
     const { createPage, createRedirect, deletePage } = actions
     return new Promise((resolve, reject) => {
         createPage({
-            layout: 'index',
             path: '/',
             component: slash(path.resolve(`./src/pages/home.js`)),
             context: { instagram }
