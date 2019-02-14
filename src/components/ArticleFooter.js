@@ -77,7 +77,7 @@ const ShareWrapper = styled.div`
 `
 
 const Tag = ({ label }) => (
-  <Link key={label} to={`/tag/${label}/`} rel="tag">
+  <Link to={`/tag/${label}/`} rel="tag">
     {label}
   </Link>
 )
@@ -93,7 +93,7 @@ export const ArticleFooter = ({
   <Wrapper key={id}>
     <MetaTags>
       {map(tags, label => (
-        <Tag label={label} />
+        <Tag key={label} label={label} />
       ))}
     </MetaTags>
     <Text>Share this article</Text>

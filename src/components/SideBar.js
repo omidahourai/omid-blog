@@ -1,6 +1,7 @@
 import React from 'react'
 import { map, result } from 'lodash'
 import styled from 'styled-components'
+import { theme } from 'common/styles'
 import {
   SocialLinksAuthor,
   SideBarInstagram,
@@ -23,7 +24,7 @@ const Header = styled.h3`
   font-size: 16px;
   letter-spacing: 1.5px;
   margin-bottom: 1rem;
-  font-family: fontSerif;
+  font-family: ${theme.font.serif};
   text-transform: uppercase;
   &:before {
     right: 100%;
@@ -63,11 +64,11 @@ const Profile = styled.section`
     font-size: 16px;
     letter-spacing: 1.5px;
     margin-bottom: 4px;
-    font-family: fontSerif;
+    font-family: ${theme.font.serif};
     text-transform: uppercase;
   }
   & p {
-    font-family: fontSansSerif;
+    font-family: ${theme.font.sansSerif};
     font-size: 0.85rem;
     line-height: 1.35rem;
     text-align: center;

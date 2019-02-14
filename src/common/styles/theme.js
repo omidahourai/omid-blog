@@ -4,8 +4,6 @@
 // }
 
 // @value primaryHighlight: #46A9EE;
-// @value fontSerif: 'Playfair Display', serif;
-// @value fontSansSerif: 'Open Sans', sans-serif;
 
 export const theme = {
   color: {

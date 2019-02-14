@@ -3,6 +3,7 @@ import { map } from 'lodash'
 import * as Gatsby from 'gatsby'
 import styled from 'styled-components'
 import { lowerFirst } from 'lodash'
+import { theme } from 'common/styles'
 
 const Count = styled.span`
   color: #aaa;
@@ -30,7 +31,7 @@ const Link = styled(Gatsby.Link)`
 const List = styled.ul`
   margin: 0;
   list-style-type: none;
-  font-family: fontSansSerif;
+  font-family: ${theme.font.sansSerif};
   letter-spacing: normal;
 `
 

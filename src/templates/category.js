@@ -72,13 +72,13 @@ class CategoryTemplate extends Component {
   }
 }
 
-export default CategoryTemplate
+// CategoryTemplate.PropTypes = {
+//   data: PropTypes.shape({
+//     category: PropTypes.object,
+//   }),
+// }
 
-CategoryTemplate.PropTypes = {
-  data: PropTypes.shape({
-    category: PropTypes.object,
-  }),
-}
+export default CategoryTemplate
 
 export const pageQuery = graphql`
   query($categoryName: String!) {

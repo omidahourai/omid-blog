@@ -2,12 +2,13 @@ import React from 'react'
 import { lowerFirst } from 'lodash'
 import * as Gatsby from 'gatsby'
 import styled from 'styled-components'
+import { theme } from 'common/styles'
 
 const Link = styled(Gatsby.Link)`
   text-decoration: none;
   color: #666;
   &:hover {
-    color: primaryHighlight;
+    color: ${theme.color.primaryHighlight};
   }
 `
 const Item = styled.li`

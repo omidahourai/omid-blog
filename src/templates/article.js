@@ -3,11 +3,100 @@ import { lowerFirst, join, map } from 'lodash'
 import { graphql } from 'gatsby'
 import * as PropTypes from 'prop-types'
 import './article.css'
-import styles from './article.module.css'
 import Helmet from 'react-helmet'
-import { ArticleLayout, ArticleHeader, ArticleFooter } from 'components'
+import styled from 'styled-components'
+import { theme } from 'common/styles'
+
+// import { ArticleLayout, ArticleHeader, ArticleFooter } from 'components'
+import { ArticleHeader, ArticleFooter } from 'components'
+import {
+  ArticleBreadcrumbs,
+  LayoutHeader,
+  ArticleAuthor,
+  ArticleNextPrev,
+  SiteFooter,
+  SideBar,
+} from 'components'
 
 // import { rhythm } from "../utils/typography"
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-areas: 'header header header' 'padLeft main padRight' 'footer footer footer';
+  grid-template-columns: 0 minmax(200px, 979px) 0;
+  grid-template-rows: auto 1fr auto;
+  grid-column-gap: 10px;
+  min-height: 100vh;
+
+  @media only screen and (min-width: 980px) {
+    grid-template-columns: minmax(0, 1fr) minmax(980px, 1185px) minmax(0, 1fr);
+  }
+`
+
+const ArticleHero = styled.div`
+  margin-bottom: 1rem;
+  position: relative;
+  padding-top: 60%;
+
+  & img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    object-fit: cover;
+  }
+`
+
+const ArticleLayout = styled.article`
+  grid-area: main;
+  overflow: hidden;
+  margin: 0 auto;
+  max-width: 835px;
+  margin-bottom: 2rem;
+
+  & .img-row {
+    margin-bottom: 1.45rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 5px;
+    & .img-wrapper {
+      // flex-basis: 0;
+      // flex-grow: 1;
+      width: 100%;
+    }
+    & img {
+      margin: 0;
+      width: 100%;
+    }
+    & figcaption {
+      display: none;
+      font-size: 0.6rem;
+      line-height: 0.9rem;
+    }
+  }
+`
+const FooterWrapper = styled.div`
+  grid-area: footer;
+  display: flex;
+  flex-direction: column;
+`
+const SideBarWrapper = styled.div`
+  display: none;
+`
+
+const ArticleContent = styled.div`
+  font-family: ${theme.font.sansSerif};
+  font-size: 0.85rem;
+  line-height: 1.35rem;
+  & a {
+    text-decoration: none;
+    color: primary;
+    &:hover {
+      color: ${theme.color.primaryHighlight};
+    }
+  }
+`
 
 const parseHeroImgMeta = hero => {
   const dim = 1000
@@ -21,6 +110,10 @@ const parseHeroImgMeta = hero => {
 }
 
 class ArticleTemplate extends Component {
+  constructor() {
+    super()
+    this.state = {}
+  }
   componentDidMount() {
     // const {
     //   next,
@@ -94,6 +187,7 @@ class ArticleTemplate extends Component {
   }
 
   render() {
+    console.log('props', this.props)
     const {
       id,
       author,
@@ -106,18 +200,27 @@ class ArticleTemplate extends Component {
       updatedOn,
       category: { name: categoryName },
     } = this.props.data.article
+    const { categories, prev, next } = this.props.data
+
     const authorName = `${author.firstName} ${author.lastName}`
     // const authorUrl = `/author/${`${author.firstName}${
     //   author.lastName
     // }`.toLowerCase()}`
     const categoryUrl = `/${lowerFirst(categoryName)}/`
     return (
-      <ArticleLayout>
-        <article className={`article ${styles.article}`}>
+      <Wrapper>
+        <LayoutHeader category={this.state.category} title={this.state.title}>
+          <ArticleBreadcrumbs
+            categoryName={this.state.categoryName}
+            title={this.state.title}
+          />
+        </LayoutHeader>
+
+        <ArticleLayout className={`article`}>
           <Helmet {...this.getMetaData()} />
-          <div className={styles.hero}>
+          <ArticleHero>
             <img {...parseHeroImgMeta(hero)} />
-          </div>
+          </ArticleHero>
           <ArticleHeader
             authorName={authorName}
             categoryName={categoryName}
@@ -126,8 +229,7 @@ class ArticleTemplate extends Component {
             updatedOn={updatedOn}
             title={title}
           />
-          <div
-            className={styles.content}
+          <ArticleContent
             dangerouslySetInnerHTML={{
               __html: content.childMarkdownRemark.html,
             }}
@@ -140,8 +242,33 @@ class ArticleTemplate extends Component {
             title={title}
             slug={slug}
           />
-        </article>
-      </ArticleLayout>
+          {author ? (
+            <ArticleAuthor
+              key={author.id}
+              firstName={author.firstName}
+              lastName={author.lastName}
+              description={author.description.text}
+              photoUrl={author.photo.file.photoUrl}
+            />
+          ) : null}
+          {prev || next ? (
+            <ArticleNextPrev prevData={prev} nextData={next} />
+          ) : null}
+          <SideBarWrapper>
+            {author ? (
+              <SideBar
+                isStatic={this.state.isSidebarFixed}
+                instagramData={this.state.instagramData}
+                categories={this.state.categories}
+                {...author}
+              />
+            ) : null}
+          </SideBarWrapper>
+        </ArticleLayout>
+        <FooterWrapper>
+          <SiteFooter />
+        </FooterWrapper>
+      </Wrapper>
     )
   }
 }

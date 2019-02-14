@@ -71,11 +71,11 @@ class TagTemplate extends Component {
 
 export default TagTemplate
 
-TagTemplate.PropTypes = {
-  data: PropTypes.shape({
-    tag: PropTypes.object,
-  }),
-}
+// TagTemplate.PropTypes = {
+//   data: PropTypes.shape({
+//     tag: PropTypes.object,
+//   }),
+// }
 
 export const pageQuery = graphql`
   query($tagName: String!) {
