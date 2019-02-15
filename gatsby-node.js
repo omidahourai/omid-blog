@@ -1,5 +1,4 @@
 const { lowerFirst, result, forEach } = require('lodash')
-// const Promise = require(`bluebird`)
 const path = require('path')
 const slash = require('slash')
 const axios = require('axios')
@@ -11,27 +10,25 @@ const IG_ACCESS_TOKEN = '403340749.de8e262.ed321a7e075b4152b2663b39f5b6be61'
 // get https://api.instagram.com/v1/users/self/media/recent/?access_token=403340749.de8e262.ed321a7e075b4152b2663b39f5b6be61
 
 let instagram = require('./src/data/instagram.json')
-exports.onPreBootstrap = () => {
-    return new Promise((resolve, reject) => {
-        if ( process.env.NODE_ENV === 'development' ) {
-            return resolve()
-        }
-        return axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${ IG_ACCESS_TOKEN }`)
-            .then(response => {
-                if ( process.env.NODE_ENV === 'development' ) {
-                    console.log('Instagram >>', JSON.stringify(response.data, null, '\t'));
-                } else {
-                    console.log(`Instagram >> received data from ${ response.data.data.length } posts.`);
-                }
-                instagram = response.data
-                resolve();
-            })
-            .catch(error => {
-                console.log('err',error)
-                reject(error)
-            })
-    })
-}
+exports.onPreBootstrap = () => new Promise((resolve, reject) => {
+    if ( process.env.NODE_ENV === 'development' ) {
+        return resolve()
+    }
+    return axios.get(`https://api.instagram.com/v1/users/self/media/recent/?access_token=${ IG_ACCESS_TOKEN }`)
+        .then(response => {
+            if ( process.env.NODE_ENV === 'development' ) {
+                console.log('Instagram >>', JSON.stringify(response.data, null, '\t'));
+            } else {
+                console.log(`Instagram >> received data from ${ response.data.data.length } posts.`);
+            }
+            instagram = response.data
+            resolve();
+        })
+        .catch(error => {
+            console.log('err',error)
+            reject(error)
+        })
+})
 
 const ARTICLES_QUERY = `{
     tags: allContentfulTag {
@@ -67,11 +64,10 @@ const ARTICLES_QUERY = `{
     }
 }`
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-    const { createPage, createRedirect, deletePage } = boundActionCreators
+exports.createPages = ({ graphql, actions }) => {
+    const { createPage, createRedirect, deletePage } = actions
     return new Promise((resolve, reject) => {
         createPage({
-            layout: 'index',
             path: '/',
             component: slash(path.resolve(`./src/pages/home.js`)),
             context: { instagram }
@@ -84,88 +80,85 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             redirectInBrowser: true,
         })
 
-        graphql(ARTICLES_QUERY).then(({errors, data}) => {
-            if (errors) {
-                reject(errors)
-            }
-
-            if ( process.env.NODE_ENV === 'development' ) {
-                console.log('Contentful >>',JSON.stringify(data, null, '\t'))
-            } else {
-                console.log(`Contentful >> received data from ${ data.articles.edges.length } articles.`)
-            }
-
-            // ARTICLE PAGES
-            forEach(data.articles.edges, (edge, index) => {
-                const { id, slug, category } = edge.node
-                if (!id || !slug || !category) {
-                    return;
+        resolve(
+            graphql(ARTICLES_QUERY).then(({errors, data}) => {
+                if (errors) {
+                    reject(errors)
                 }
-                const categoryName =  category.name
-                const prevId = result(data.articles.edges, `[${index-1}].node.id`) || ''
-                const nextId = result(data.articles.edges, `[${index+1}].node.id`) || ''
-                const articlePath = `/${lowerFirst(categoryName)}/${slug}/`
-                console.log(`>> Creating Article Page: ${articlePath}`)
-                createPage({
-                    layout: 'article',
-                    path: `/${lowerFirst(categoryName)}/${slug}/`,
-                    component: slash(path.resolve(`./src/templates/article.js`)),
-                    context: { id, slug, prevId, nextId },
-                })
-            })
-            // CATEGORY PAGES
-            forEach(data.categories.edges, ({node: {name: categoryName, article}}) => {
-                if (!article) return;
-                console.log(`>> Creating Category Page: /${lowerFirst(categoryName)}/`)
-                createPage({
-                    layout: 'categoryTag',
-                    path: `/${lowerFirst(categoryName)}/`,
-                    component: slash(path.resolve(`./src/templates/category.js`)),
-                    context: { categoryName },
-                })
-            })
-            // TAG PAGES
-            forEach(data.tags.edges, ({node: {name: tagName, article}}) => {
-                if (!article) return;
-                console.log(`>> Creating Tag Page: /tag/${tagName}/`)
-                createPage({
-                    layout: 'categoryTag',
-                    path: `/tag/${tagName}/`,
-                    component: slash(path.resolve(`./src/templates/tag.js`)),
-                    context: { tagName },
-                })
-            })
-            // REDIRECTS
-            forEach(data.articles.edges, (edge, index) => {
-                const { id, slug, category } = edge.node
-                if (!id || !slug || !category) {
-                    return;
-                }
-                const categoryName = category.name
-                const articlePath = `/${lowerFirst(categoryName)}/${slug}/`
-                console.log(`>> Creating Redirect: /article/${id}/ -> ${articlePath}`)
-                createRedirect({
-                    fromPath: `/article/${id}/`,
-                    toPath: articlePath,
-                    isPermanent: true,
-                    redirectInBrowser: true,
-                })
-                console.log(`>> Create Redirect: /articles/${slug}/ -> ${articlePath}`)
-                createRedirect({
-                    fromPath: `/articles/${slug}/`,
-                    toPath: articlePath,
-                    isPermanent: true,
-                    redirectInBrowser: true,
-                })
-            })
 
-            resolve()
-        })
+                if ( process.env.NODE_ENV === 'development' ) {
+                    console.log('Contentful >>',JSON.stringify(data, null, '\t'))
+                } else {
+                    console.log(`Contentful >> received data from ${ data.articles.edges.length } articles.`)
+                }
+
+                // ARTICLE PAGES
+                forEach(data.articles.edges, (edge, index) => {
+                    const { id, slug, category } = edge.node
+                    if (!id || !slug || !category) {
+                        return;
+                    }
+                    const categoryName =  category.name
+                    const prevId = result(data.articles.edges, `[${index-1}].node.id`) || ''
+                    const nextId = result(data.articles.edges, `[${index+1}].node.id`) || ''
+                    const articlePath = `/${lowerFirst(categoryName)}/${slug}/`
+                    console.log(`>> Creating Article Page: ${articlePath}`)
+                    createPage({
+                        path: `/${lowerFirst(categoryName)}/${slug}/`,
+                        component: slash(path.resolve(`./src/templates/article.js`)),
+                        context: { id, slug, prevId, nextId },
+                    })
+                })
+                // CATEGORY PAGES
+                forEach(data.categories.edges, ({node: {name: categoryName, article}}) => {
+                    if (!article) return;
+                    console.log(`>> Creating Category Page: /${lowerFirst(categoryName)}/`)
+                    createPage({
+                        path: `/${lowerFirst(categoryName)}/`,
+                        component: slash(path.resolve(`./src/templates/category.js`)),
+                        context: { categoryName },
+                    })
+                })
+                // TAG PAGES
+                forEach(data.tags.edges, ({node: {name: tagName, article}}) => {
+                    if (!article) return;
+                    console.log(`>> Creating Tag Page: /tag/${tagName}/`)
+                    createPage({
+                        path: `/tag/${tagName}/`,
+                        component: slash(path.resolve(`./src/templates/tag.js`)),
+                        context: { tagName },
+                    })
+                })
+                // REDIRECTS
+                forEach(data.articles.edges, (edge, index) => {
+                    const { id, slug, category } = edge.node
+                    if (!id || !slug || !category) {
+                        return;
+                    }
+                    const categoryName = category.name
+                    const articlePath = `/${lowerFirst(categoryName)}/${slug}/`
+                    console.log(`>> Creating Redirect: /article/${id}/ -> ${articlePath}`)
+                    createRedirect({
+                        fromPath: `/article/${id}/`,
+                        toPath: articlePath,
+                        isPermanent: true,
+                        redirectInBrowser: true,
+                    })
+                    console.log(`>> Create Redirect: /articles/${slug}/ -> ${articlePath}`)
+                    createRedirect({
+                        fromPath: `/articles/${slug}/`,
+                        toPath: articlePath,
+                        isPermanent: true,
+                        redirectInBrowser: true,
+                    })
+                })
+            })
+        )
     })
 }
 
-// exports.onPostBootstrap = ({ boundActionCreators }) => {
-//     const { deletePage } = boundActionCreators
+// exports.onPostBootstrap = ({ actions }) => {
+//     const { deletePage } = actions
 //     return new Promise((resolve, reject) => {
 //         deletePage({
 //             path: '/home/',

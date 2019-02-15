@@ -1,101 +1,225 @@
-import React, { Component } from "react"
-import { lowerFirst, result, first, join, map } from 'lodash'
-import Link from 'gatsby-link'
-import Img from 'gatsby-image'
-import * as PropTypes from "prop-types"
-import './article.css'
-import styles from './article.module.css'
+import React, { Component } from 'react'
+import { lowerFirst, join, map } from 'lodash'
+import { graphql } from 'gatsby'
+import * as PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import styled from 'styled-components'
+import { theme } from 'styles'
+import { ArticleHeader, ArticleFooter } from 'components'
+import { Wrapper, LayoutFooter } from './tag'
 import {
-  ArticleHeader,
-  ArticleFooter,
+  ArticleBreadcrumbs,
+  LayoutHeader,
+  ArticleAuthor,
+  ArticleNextPrev,
+  SiteFooter,
+  SideBar,
 } from 'components'
 
-// import { rhythm } from "../utils/typography"
+const ArticleHero = styled.div`
+  margin-bottom: 1rem;
+  position: relative;
+  padding-top: 60%;
 
-const parseHeroImgMeta = (hero) => {
+  & img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    object-fit: cover;
+  }
+`
+
+const ArticleLayout = styled.article`
+  grid-area: main;
+  overflow: hidden;
+  margin: 0 auto;
+  max-width: 835px;
+  margin-bottom: 2rem;
+
+  & .img-row {
+    margin-bottom: 1.45rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 5px;
+    & .img-wrapper {
+      width: 100%;
+    }
+    & img {
+      margin: 0;
+      width: 100%;
+    }
+    & figcaption {
+      display: none;
+      font-size: 0.6rem;
+      line-height: 0.9rem;
+    }
+  }
+`
+const SideBarWrapper = styled.div`
+  display: none;
+`
+const ArticleContent = styled.div`
+  font-family: ${theme.font.sansSerif};
+  font-size: 0.85rem;
+  line-height: 1.35rem;
+  & a {
+    text-decoration: none;
+    color: primary;
+    &:hover {
+      color: ${theme.color.primaryHighlight};
+    }
+  }
+`
+
+const parseHeroImgMeta = hero => {
   const dim = 1000
   const dim2x = dim * 2
   return {
-      alt: hero.title,
-      title: hero.title,
-      src: `${ hero.file.url }?w=${ dim }&h=${ dim }&q=70`,
-      srcSet: `${ hero.file.url }?w=${ dim2x }&h=${ dim2x }&q=70 2x`,
+    alt: hero.title,
+    title: hero.title,
+    src: `${hero.file.url}?w=${dim}&h=${dim}&q=70`,
+    srcSet: `${hero.file.url}?w=${dim2x}&h=${dim2x}&q=70 2x`,
   }
 }
 
-class ArticleTemplate extends Component {
-  componentDidMount() {
-    const {
-      next,
-      prev,
-      categories,
-      article: {title, author, category: {name: categoryName}},
-    } = this.props.data
-    const instagramData = result(this, 'props.pathContext.instagram.data') || []
-    this.props.updateLayout({next, prev, categories, categoryName, title, author, instagramData})
+export default class ArticleTemplate extends Component {
+  constructor() {
+    super()
+    this.state = {}
   }
 
   getMetaData() {
-    const {slug, title, author, tags, hero, category : { name : categoryName }, summary : { summary }} = this.props.data.article
+    const {
+      slug,
+      title,
+      author,
+      tags,
+      hero,
+      category: { name: categoryName },
+      summary: { summary },
+    } = this.props.data.article
     return {
-      title: `Omid Ahourai's Blog | ${ title }`,
+      title: `Omid Ahourai's Blog | ${title}`,
       meta: [
-        { name: 'description', content: `${ summary }` },
-        { name: 'keywords', content: join(map(tags, ({ name }) => name), ', ') },
+        { name: 'description', content: `${summary}` },
+        {
+          name: 'keywords',
+          content: join(map(tags, ({ name }) => name), ', '),
+        },
         { property: 'og:site_name', content: `Blog - Omid Ahourai` },
         { property: 'og:type', content: 'article' },
         { property: 'og:title', content: title },
         { property: 'og:description', content: summary },
-        { property: 'og:url', content: `http://www.omid.com/${lowerFirst(categoryName)}/${slug}` },
-        { property: 'og:image', content: `http:${hero.file.url}?w=1200&h=630&q=70` },
+        {
+          property: 'og:url',
+          content: `http://www.omid.com/${lowerFirst(categoryName)}/${slug}`,
+        },
+        {
+          property: 'og:image',
+          content: `http:${hero.file.url}?w=1200&h=630&q=70`,
+        },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: title },
         { name: 'twitter:description', content: summary },
-        { name: 'twitter:url', content: `http://www.omid.com/${lowerFirst(categoryName)}/${slug}` },
+        {
+          name: 'twitter:url',
+          content: `http://www.omid.com/${lowerFirst(categoryName)}/${slug}`,
+        },
         { name: 'twitter:image', content: `http:${hero.file.url}?w=1200&q=70` },
         { name: 'twitter:label1', content: 'Written by' },
-        { name: 'twitter:data1', content: `${ author.firstName } ${ author.lastName }` },
+        {
+          name: 'twitter:data1',
+          content: `${author.firstName} ${author.lastName}`,
+        },
         { name: 'twitter:label2', content: 'Filed under' },
         { name: 'twitter:data2', content: categoryName },
-      ]
+      ],
     }
   }
 
   render() {
+    console.log('props', this.props)
     const {
-        id, author, content, hero, tags, title, slug, publishedOn, updatedOn,
-        category : { name : categoryName },
+      id,
+      author,
+      content,
+      hero,
+      tags,
+      title,
+      slug,
+      publishedOn,
+      updatedOn,
+      category: { name: categoryName },
     } = this.props.data.article
-    const authorName = `${ author.firstName } ${ author.lastName }`
-    const authorUrl = `/author/${ (`${ author.firstName }${ author.lastName }`).toLowerCase() }`
-    const categoryUrl = `/${ lowerFirst(categoryName) }/`
+    const { prev, next } = this.props.data
+
+    const authorName = `${author.firstName} ${author.lastName}`
+    // const authorUrl = `/author/${`${author.firstName}${
+    //   author.lastName
+    // }`.toLowerCase()}`
+    const categoryUrl = `/${lowerFirst(categoryName)}/`
     return (
-      <article className={`article ${styles.article}`}>
-        <Helmet {...this.getMetaData()}/>
-        <div className={styles.hero}>
-          <img {...parseHeroImgMeta(hero)} />
-        </div>
-        <ArticleHeader
-          authorName={authorName}
-          categoryName={categoryName}
-          categoryUrl={categoryUrl}
-          publishedOn={publishedOn}
-          updatedOn={updatedOn}
-          title={title} />
-        <div
-          className={styles.content}
-          dangerouslySetInnerHTML={{
-          __html: content.childMarkdownRemark.html
-        }}/>
-        <ArticleFooter
-          id={id}
-          category={categoryName}
-          imageUrl={`http:${ hero.file.url }?w=1000&h=1000`}
-          tags={map(tags, t => t.name)}
-          title={title}
-          slug={slug}/>
-      </article>
+      <Wrapper>
+        <LayoutHeader category={this.state.category} title={this.state.title}>
+          <ArticleBreadcrumbs categoryName={categoryName} title={title} />
+        </LayoutHeader>
+
+        <ArticleLayout className={`article`}>
+          <Helmet {...this.getMetaData()} />
+          <ArticleHero>
+            <img alt={''} {...parseHeroImgMeta(hero)} />
+          </ArticleHero>
+          <ArticleHeader
+            authorName={authorName}
+            categoryName={categoryName}
+            categoryUrl={categoryUrl}
+            publishedOn={publishedOn}
+            updatedOn={updatedOn}
+            title={title}
+          />
+          <ArticleContent
+            dangerouslySetInnerHTML={{
+              __html: content.childMarkdownRemark.html,
+            }}
+          />
+          <ArticleFooter
+            id={id}
+            category={categoryName}
+            imageUrl={`http:${hero.file.url}?w=1000&h=1000`}
+            tags={map(tags, t => t.name)}
+            title={title}
+            slug={slug}
+          />
+          {author ? (
+            <ArticleAuthor
+              key={author.id}
+              firstName={author.firstName}
+              lastName={author.lastName}
+              description={author.description.text}
+              photoUrl={author.photo.file.photoUrl}
+            />
+          ) : null}
+          {prev || next ? (
+            <ArticleNextPrev prevData={prev} nextData={next} />
+          ) : null}
+          <SideBarWrapper>
+            {author ? (
+              <SideBar
+                isStatic={this.state.isSidebarFixed}
+                instagramData={this.state.instagramData}
+                categories={this.state.categories}
+                {...author}
+              />
+            ) : null}
+          </SideBarWrapper>
+        </ArticleLayout>
+        <LayoutFooter>
+          <SiteFooter />
+        </LayoutFooter>
+      </Wrapper>
     )
   }
 }
@@ -104,10 +228,8 @@ ArticleTemplate.propTypes = {
   data: PropTypes.object.isRequired,
 }
 
-export default ArticleTemplate
-
 export const pageQuery = graphql`
-  query ArticleQuery($id: String!, $nextId: String, $prevId: String) {
+  query($id: String!, $nextId: String, $prevId: String) {
     article: contentfulArticle(id: { eq: $id }) {
       id
       title
@@ -144,8 +266,8 @@ export const pageQuery = graphql`
         }
         altPhoto {
           file {
-              photoUrl: url
-            }
+            photoUrl: url
+          }
         }
         shortDescription
         facebookHandle
