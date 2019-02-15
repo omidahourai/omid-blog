@@ -93,39 +93,6 @@ export const LinkedinShareButton = props => (
     </ShareButton>
   </Tooltip>
 )
-
-// export const EmailButton = styled.button`
-//   display: inline-block;
-//   border: 1px solid;
-//   border-radius: 50%;
-//   border-color: #e8e8e8;
-//   padding: 0;
-//   width: 2.6rem;
-//   height: 2.6rem;
-//   margin: 0 0.35rem;
-//   background-color: #f8f8f8;
-//   transition: all 0.25s ease-out;
-//   & svg {
-//     padding: 0.7rem;
-//     width: 100%;
-//     height: 100%;
-//   }
-//   &:hover {
-//     background-color: #ff9022;
-//     border-color: #ff9022;
-//     & svg > * {
-//       fill: #fff !important;
-//     }
-//   }
-//   &:focus,
-//   &:active {
-//     outline: 0;
-//   }
-//   &:active svg>* {
-//     fill: #BBB;
-//   }
-// `
-
 export class EmailShareButton extends Component {
   state = {}
   render = () => (

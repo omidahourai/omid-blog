@@ -29,6 +29,14 @@ const List = styled.ul`
   align-items: stretch;
   background-color: #f8f8f8;
   border-bottom: 1px solid #e8e8e8;
+
+  @media only screen and (min-width: 980px) {
+    padding: 0 50px;
+  }
+  @media only screen and (min-width: 1200px) {
+    padding: 0 150px;
+  }
+
 `
 
 const Separator = () => (
