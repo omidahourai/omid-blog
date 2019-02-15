@@ -91,7 +91,7 @@ const parseImgMeta = ({ hero, title }) => {
   const height = hero.height || 75
   const width2x = width * 2
   const height2x = height * 2
-  console.log('herotit',hero,title)
+  console.log('herotit', hero, title)
   return {
     title,
     alt: hero.title,
@@ -108,12 +108,7 @@ const NextPrev = ({
   slug,
   category: { name: categoryName },
 }) => (
-  <Link
-    direction={direction}
-    to={`/article/${id}/`}
-    title={title}
-    alt={title}
-  >
+  <Link direction={direction} to={`/article/${id}/`} title={title} alt={title}>
     <Thumbnail>
       <img alt={''} {...parseImgMeta({ hero, title })} />
     </Thumbnail>

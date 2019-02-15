@@ -1,13 +1,9 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
+  "name": "blog-omidahourai",
+  "description": "Omid Ahourai's Blog",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Omid Ahourai <hello@omid.com>",
   "license": "MIT",
-  "main": "n/a",
-  "keywords": [
-    "gatsby"
-  ],
   "engines": {
     "node": "10.14.2",
     "npm": "6.4.1",

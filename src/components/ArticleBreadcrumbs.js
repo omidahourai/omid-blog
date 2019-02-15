@@ -36,7 +36,6 @@ const List = styled.ul`
   @media only screen and (min-width: 1200px) {
     padding: 0 150px;
   }
-
 `
 
 const Separator = () => (

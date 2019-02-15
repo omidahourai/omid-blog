@@ -43,8 +43,8 @@ const DescriptionText = styled.p`
 
 const ShareIcon = styled.a`
   padding: 0.5rem;
-  svg>* {
-    fill: #BFC1C3;
+  svg > * {
+    fill: #bfc1c3;
   }
   &:hover svg > * {
     fill: ${theme.color.primary};

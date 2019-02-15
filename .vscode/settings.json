@@ -4,8 +4,9 @@
     "files.exclude": {
       "**/.DS_Store": true, // this is a default value
       "**/node_modules": true, // this excludes all folders 
-      ".cache": false,
-      "public": false,
+      ".cache": true,
+      "public": true,
+      ".vscode": true,
     },
     "editor.detectIndentation": false,
   }
