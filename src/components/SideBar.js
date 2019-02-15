@@ -1,7 +1,7 @@
 import React from 'react'
 import { map, result } from 'lodash'
 import styled from 'styled-components'
-import { theme } from 'common/styles'
+import { theme } from 'styles'
 import {
   SocialLinksAuthor,
   SideBarInstagram,
@@ -111,13 +111,13 @@ export const SideBar = ({
     file: { photoUrl },
   },
 }) => {
-  const authorLink = {
-    // TODO: CREATE AUTHOR PAGE
-    // to: `/author/${ (firstName + lastName).toLowerCase() }/`,
-    to: '#',
-    title: `Articles by ${fullName}`,
-    rel: `author`,
-  }
+  // TODO: CREATE AUTHOR PAGE
+  // const authorLink = {
+  //   // to: `/author/${ (firstName + lastName).toLowerCase() }/`,
+  //   to: '#',
+  //   title: `Articles by ${fullName}`,
+  //   rel: `author`,
+  // }
 
   const igImageData = map(instagramData, item => {
     let text = result(item, 'caption.text') || ''

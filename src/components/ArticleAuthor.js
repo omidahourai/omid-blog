@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import * as Gatsby from 'gatsby'
 import styled from 'styled-components'
-import { theme } from 'common/styles'
-import { FaFacebook, FaTwitter, FaInstagram } from 'common/icons'
+import { theme } from 'styles'
+import { FaFacebook, FaTwitter, FaInstagram } from 'icons'
 
 const Wrapper = styled.div`
   padding: 0 1rem 1rem 1rem;
@@ -40,14 +40,18 @@ const DescriptionText = styled.p`
   line-height: 1.35rem;
   margin: 0;
 `
-const ShareIcons = styled.div`
-  margin-top: 0.5rem;
-  & a {
-    padding: 0.5rem;
-    &:hover svg > * {
-      fill: ${theme.color.primary};
-    }
+
+const ShareIcon = styled.a`
+  padding: 0.5rem;
+  svg>* {
+    fill: #BFC1C3;
   }
+  &:hover svg > * {
+    fill: ${theme.color.primary};
+  }
+`
+const ShareWrapper = styled.div`
+  margin-top: 0.5rem;
 `
 
 export const ArticleAuthor = ({
@@ -82,8 +86,8 @@ export const ArticleAuthor = ({
           <Link {...authorLink}>{fullName}</Link>
         </Header>
         <DescriptionText>{description}</DescriptionText>
-        <ShareIcons>
-          <a
+        <ShareWrapper>
+          <ShareIcon
             href="http://facebook.com/Omid-Ahourai-296038887569459/"
             target="_blank"
             rel="external"
@@ -91,8 +95,8 @@ export const ArticleAuthor = ({
             alt="Like Omid Ahourai on Facebook"
           >
             <FaFacebook />
-          </a>
-          <a
+          </ShareIcon>
+          <ShareIcon
             href="https://twitter.com/omidahourai"
             target="_blank"
             rel="external"
@@ -100,8 +104,8 @@ export const ArticleAuthor = ({
             alt="Follow Omid Ahourai on Twitter"
           >
             <FaTwitter />
-          </a>
-          <a
+          </ShareIcon>
+          <ShareIcon
             href="https://instagram.com/omidahourai"
             target="_blank"
             rel="external"
@@ -109,8 +113,8 @@ export const ArticleAuthor = ({
             alt="Follow Omid Ahourai on Instagram"
           >
             <FaInstagram />
-          </a>
-        </ShareIcons>
+          </ShareIcon>
+        </ShareWrapper>
       </Body>
     </Wrapper>
   )

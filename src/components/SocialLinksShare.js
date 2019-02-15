@@ -34,14 +34,8 @@ const Wrapper = styled.div`
   }
 `
 export class SocialLinksShare extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-  render() {
-    let { id, slug, title, category, imageUrl, tags } = this.props
-    tags = tags || []
-    return (
+  state = {}
+  render = () => (
       <Wrapper>
         <FacebookShareButton
           tooltip={{ title: 'Share on Facebook' }}
@@ -52,7 +46,7 @@ export class SocialLinksShare extends Component {
             padding: '0.6rem',
             href: encodeURI(
               `https://facebook.com/sharer/sharer.php?u=${decodeURIComponent(
-                `http://omid.com/article/${id}/`
+                `http://omid.com/article/${this.props.id}/`
               )}`
             ),
             alt: `Share on Facebook`,
@@ -67,9 +61,9 @@ export class SocialLinksShare extends Component {
             margin: '0 4px',
             padding: '0.6rem',
             href: encodeURI(
-              `https://twitter.com/share?text=Check out this article by @omidahourai: ${title}&hashtags=${tags.join(
+              `https://twitter.com/share?text=Check out this article by @omidahourai: ${this.props.title}&hashtags=${(this.props.tags || []).join(
                 ','
-              )}&url=${`http://omid.com/article/${id}/`}`
+              )}&url=${`http://omid.com/article/${this.props.id}/`}`
             ),
             alt: 'Share on Twitter',
             title: 'Share on Twitter',
@@ -82,13 +76,13 @@ export class SocialLinksShare extends Component {
             height: '2.2rem',
             margin: '0 4px',
             padding: '0.6rem',
-            href: `https://pinterest.com/pin/create/button/?url=http://omid.com/article/${id}/&media=${imageUrl}`,
+            href: `https://pinterest.com/pin/create/button/?url=http://omid.com/article/${this.props.id}/&media=${this.props.imageUrl}`,
             title: 'Share on Pinterest',
             alt: 'Share on Pinterest',
           }}
         />
         <LinkShareButton
-          url={`http://omid.com/article/${id}/`}
+          url={`http://omid.com/article/${this.props.id}/`}
           link={{
             width: '2.2rem',
             height: '2.2rem',
@@ -99,6 +93,5 @@ export class SocialLinksShare extends Component {
       </Wrapper>
     )
   }
-}
 
 export default SocialLinksShare

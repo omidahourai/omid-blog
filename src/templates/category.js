@@ -81,11 +81,11 @@ class CategoryTemplate extends Component {
   }
 }
 
-// CategoryTemplate.PropTypes = {
-//   data: PropTypes.shape({
-//     category: PropTypes.object,
-//   }),
-// }
+CategoryTemplate.propTypes = {
+  data: PropTypes.shape({
+    category: PropTypes.object,
+  }),
+}
 
 export default CategoryTemplate
 

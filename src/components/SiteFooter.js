@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { theme } from 'common/styles'
+import { theme } from 'styles'
 
 const Wrapper = styled.footer`
   background-color: #333;

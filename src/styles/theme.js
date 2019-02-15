@@ -1,19 +1,7 @@
-// @value primary: #00A9FF;
-// :global {
-//   @import '//fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i';
-// }
-
-// @value primaryHighlight: #46A9EE;
-
 export const theme = {
   color: {
     primary: '#00A9FF',
     primaryHighlight: '#46A9EE',
-    // secondary: '#53C1DE',
-    // white: "#FFF",
-    // black: "#222",
-    // border: "rgba(0,0,0,0.1)",
-    // base: "rgba(0,0,0,0.4)",
     alert: '#FF4258',
     success: 'mediumseagreen',
     info: '#4C98E6',
@@ -25,13 +13,13 @@ export const theme = {
   },
   font: {
     serif: `
-            'Playfair Display',
-            serif
-        `,
+      'Playfair Display',
+      serif
+    `,
     sansSerif: `
-            'Open Sans',
-            sans-serif
-        `,
+      'Open Sans',
+      sans-serif
+    `,
     base: '13px',
     small: '11px',
     xsmall: '9px',

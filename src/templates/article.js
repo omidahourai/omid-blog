@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import * as PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
-import { theme } from 'common/styles'
+import { theme } from 'styles'
 import { ArticleHeader, ArticleFooter } from 'components'
 import { Wrapper, LayoutFooter } from './tag'
 import {
@@ -154,7 +154,7 @@ export default class ArticleTemplate extends Component {
       updatedOn,
       category: { name: categoryName },
     } = this.props.data.article
-    const { categories, prev, next } = this.props.data
+    const { prev, next } = this.props.data
 
     const authorName = `${author.firstName} ${author.lastName}`
     // const authorUrl = `/author/${`${author.firstName}${
@@ -170,7 +170,7 @@ export default class ArticleTemplate extends Component {
         <ArticleLayout className={`article`}>
           <Helmet {...this.getMetaData()} />
           <ArticleHero>
-            <img {...parseHeroImgMeta(hero)} />
+            <img alt={''} {...parseHeroImgMeta(hero)} />
           </ArticleHero>
           <ArticleHeader
             authorName={authorName}

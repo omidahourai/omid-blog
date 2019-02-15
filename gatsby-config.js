@@ -11,6 +11,8 @@ const common = {
           src: path.join(__dirname, 'src'),
           components: path.join(__dirname, 'src/components'),
           common: path.join(__dirname, 'src/common'),
+          styles: path.join(__dirname, 'src/styles'),
+          icons: path.join(__dirname, 'src/icons'),
           pages: path.join(__dirname, 'src/pages'),
           templates: path.join(__dirname, 'src/templates')
       },

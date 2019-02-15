@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Tooltip } from 'react-tippy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import styled from 'styled-components'
-import { theme } from 'common/styles'
+// import { theme } from 'styles'
 
 import {
   FaFacebook,
@@ -11,7 +11,7 @@ import {
   FaLinkedin,
   FaEnvelopeO,
   WebLinkIcon,
-} from 'common/icons'
+} from 'icons'
 
 const tooltipDefault = {
   title: 'Follow on Twitter',

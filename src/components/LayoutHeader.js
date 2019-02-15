@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import { theme } from 'common/styles'
+import { theme } from 'styles'
 
 const HeaderGrid = styled.header`
   grid-area: header;

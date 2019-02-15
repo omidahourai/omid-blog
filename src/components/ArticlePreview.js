@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { ArticlePreviewHeader, SocialLinksShare } from 'components'
-import { theme } from 'common/styles'
 import styled from 'styled-components'
+import { theme } from 'styles'
 
 const Wrapper = styled.article`
   display: flex;
@@ -78,7 +78,7 @@ export const ArticlePreview = ({
     <Wrapper>
       <Hero>
         <Link to={articleUrl}>
-          <img {...heroImgMeta} />
+          <img alt={''} {...heroImgMeta} />
         </Link>
       </Hero>
       <ArticlePreviewHeader

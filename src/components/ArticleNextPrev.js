@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Gatsby from 'gatsby'
 import styled from 'styled-components'
-import { theme } from 'common/styles'
+import { theme } from 'styles'
 
 const c = {
   PREVIOUS: 'PREVIOUS',
@@ -46,6 +46,9 @@ const Link = styled(Gatsby.Link)`
   margin-bottom: 2rem;
   text-decoration: none;
   ${({ direction }) => (direction === c.NEXT ? nextLink : prevLink)};
+  &:hover {
+    text-decoration: none;
+  }
 `
 const Wrapper = styled.div`
   width: 100%;
@@ -88,6 +91,7 @@ const parseImgMeta = ({ hero, title }) => {
   const height = hero.height || 75
   const width2x = width * 2
   const height2x = height * 2
+  console.log('herotit',hero,title)
   return {
     title,
     alt: hero.title,
@@ -103,24 +107,22 @@ const NextPrev = ({
   direction,
   slug,
   category: { name: categoryName },
-}) => {
-  return (
-    <Link
-      direction={direction}
-      to={`/article/${id}/`}
-      title={title}
-      alt={title}
-    >
-      <Thumbnail>
-        <img {...parseImgMeta({ hero, title })} />
-      </Thumbnail>
-      <TextWrapper>
-        <p>{direction === c.NEXT ? 'NEWER >' : '< OLDER'}</p>
-        <h4>{title}</h4>
-      </TextWrapper>
-    </Link>
-  )
-}
+}) => (
+  <Link
+    direction={direction}
+    to={`/article/${id}/`}
+    title={title}
+    alt={title}
+  >
+    <Thumbnail>
+      <img alt={''} {...parseImgMeta({ hero, title })} />
+    </Thumbnail>
+    <TextWrapper>
+      <p>{direction === c.NEXT ? 'NEWER >' : '< OLDER'}</p>
+      <h4>{title}</h4>
+    </TextWrapper>
+  </Link>
+)
 
 export const ArticleNextPrev = ({ prevData, nextData }) => {
   return (

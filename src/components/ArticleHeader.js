@@ -2,7 +2,7 @@ import React from 'react'
 import * as Gatsby from 'gatsby'
 import moment from 'moment'
 import styled from 'styled-components'
-import { theme } from 'common/styles'
+import { theme } from 'styles'
 
 const Wrapper = styled.header`
   text-align: center;

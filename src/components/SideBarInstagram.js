@@ -1,7 +1,7 @@
 import React from 'react'
 import { slice, map } from 'lodash'
 import styled from 'styled-components'
-import { FaInstagram, FaHeart } from 'common/icons'
+import { FaInstagram, FaHeart } from 'icons'
 
 const Likes = styled.span`
   color: #fff;

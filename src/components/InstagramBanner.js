@@ -1,7 +1,7 @@
 import React from 'react'
 import { slice, map, result } from 'lodash'
 import styled from 'styled-components'
-import { FaInstagram, FaHeart } from 'common/icons'
+import { FaInstagram, FaHeart } from 'icons'
 
 const Likes = styled.span`
   color: #fff;
@@ -105,7 +105,7 @@ export const InstagramBanner = ({ feedData }) => {
                     marginLeft: '50%',
                     marginTop: '-100',
                   }}>*/}
-          <a href={image.link} target="_blank">
+          <a href={image.link} target="_blank" rel="noopener noreferrer">
             <FaInstagram color="#FFF" size="2rem" />
             <Likes>
               <FaHeart color="#FFF" size="1rem" />

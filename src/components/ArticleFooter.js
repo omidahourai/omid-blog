@@ -3,7 +3,7 @@ import { map } from 'lodash'
 import * as Gatsby from 'gatsby'
 import { SocialLinksShare } from 'components'
 import styled from 'styled-components'
-import { theme } from 'common/styles'
+import { theme } from 'styles'
 
 const Link = styled(Gatsby.Link)`
   background-color: #f8f8f8;

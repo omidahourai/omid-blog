@@ -2,7 +2,7 @@ import React from 'react'
 import { lowerFirst } from 'lodash'
 import * as Gatsby from 'gatsby'
 import styled from 'styled-components'
-import { theme } from 'common/styles'
+import { theme } from 'styles'
 
 const Link = styled(Gatsby.Link)`
   text-decoration: none;

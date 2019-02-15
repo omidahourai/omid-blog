@@ -38,8 +38,8 @@ IconBase.propTypes = {
   style: PropTypes.object,
 }
 
-IconBase.contextTypes = {
-  reactIconBase: PropTypes.shape(IconBase.propTypes),
-}
+// IconBase.contextTypes = {
+//   reactIconBase: PropTypes.shape(IconBase.propTypes),
+// }
 
 export default IconBase

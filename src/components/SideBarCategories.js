@@ -3,7 +3,7 @@ import { map } from 'lodash'
 import * as Gatsby from 'gatsby'
 import styled from 'styled-components'
 import { lowerFirst } from 'lodash'
-import { theme } from 'common/styles'
+import { theme } from 'styles'
 
 const Count = styled.span`
   color: #aaa;
