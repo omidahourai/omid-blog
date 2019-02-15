@@ -2,13 +2,11 @@ import React, { Component } from 'react'
 import { lowerFirst, join, map } from 'lodash'
 import { graphql } from 'gatsby'
 import * as PropTypes from 'prop-types'
-import './article.css'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import { theme } from 'common/styles'
-
-// import { ArticleLayout, ArticleHeader, ArticleFooter } from 'components'
 import { ArticleHeader, ArticleFooter } from 'components'
+import { Wrapper, LayoutFooter } from './tag'
 import {
   ArticleBreadcrumbs,
   LayoutHeader,
@@ -17,20 +15,6 @@ import {
   SiteFooter,
   SideBar,
 } from 'components'
-
-// import { rhythm } from "../utils/typography"
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-areas: 'header header header' 'padLeft main padRight' 'footer footer footer';
-  grid-template-columns: 0 minmax(200px, 979px) 0;
-  grid-template-rows: auto 1fr auto;
-  grid-column-gap: 10px;
-  min-height: 100vh;
-
-  @media only screen and (min-width: 980px) {
-    grid-template-columns: minmax(0, 1fr) minmax(980px, 1185px) minmax(0, 1fr);
-  }
-`
 
 const ArticleHero = styled.div`
   margin-bottom: 1rem;
@@ -61,8 +45,6 @@ const ArticleLayout = styled.article`
     flex-wrap: wrap;
     padding: 0 5px;
     & .img-wrapper {
-      // flex-basis: 0;
-      // flex-grow: 1;
       width: 100%;
     }
     & img {
@@ -76,15 +58,9 @@ const ArticleLayout = styled.article`
     }
   }
 `
-const FooterWrapper = styled.div`
-  grid-area: footer;
-  display: flex;
-  flex-direction: column;
-`
 const SideBarWrapper = styled.div`
   display: none;
 `
-
 const ArticleContent = styled.div`
   font-family: ${theme.font.sansSerif};
   font-size: 0.85rem;
@@ -109,32 +85,10 @@ const parseHeroImgMeta = hero => {
   }
 }
 
-class ArticleTemplate extends Component {
+export default class ArticleTemplate extends Component {
   constructor() {
     super()
     this.state = {}
-  }
-  componentDidMount() {
-    // const {
-    //   next,
-    //   prev,
-    //   categories,
-    //   article: {
-    //     title,
-    //     author,
-    //     category: { name: categoryName },
-    //   },
-    // } = this.props.data
-    // const instagramData = result(this, 'props.pageContext.instagram.data') || []
-    // this.props.updateLayout({
-    //   next,
-    //   prev,
-    //   categories,
-    //   categoryName,
-    //   title,
-    //   author,
-    //   instagramData,
-    // })
   }
 
   getMetaData() {
@@ -210,10 +164,7 @@ class ArticleTemplate extends Component {
     return (
       <Wrapper>
         <LayoutHeader category={this.state.category} title={this.state.title}>
-          <ArticleBreadcrumbs
-            categoryName={this.state.categoryName}
-            title={this.state.title}
-          />
+          <ArticleBreadcrumbs categoryName={categoryName} title={title} />
         </LayoutHeader>
 
         <ArticleLayout className={`article`}>
@@ -265,9 +216,9 @@ class ArticleTemplate extends Component {
             ) : null}
           </SideBarWrapper>
         </ArticleLayout>
-        <FooterWrapper>
+        <LayoutFooter>
           <SiteFooter />
-        </FooterWrapper>
+        </LayoutFooter>
       </Wrapper>
     )
   }
@@ -276,8 +227,6 @@ class ArticleTemplate extends Component {
 ArticleTemplate.propTypes = {
   data: PropTypes.object.isRequired,
 }
-
-export default ArticleTemplate
 
 export const pageQuery = graphql`
   query($id: String!, $nextId: String, $prevId: String) {

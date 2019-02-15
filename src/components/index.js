@@ -15,4 +15,11 @@ export { default as SideBarCategories } from './SideBarCategories'
 export { default as SideBarInstagram } from './SideBarInstagram'
 export { SiteFooter } from './SiteFooter'
 export { default as HomeLayout } from './HomeLayout'
-export { default as ArticleLayout } from './ArticleLayout'
+export {
+  FacebookShareButton,
+  TwitterShareButton,
+  InstagramShareButton,
+  LinkedinShareButton,
+  EmailShareButton,
+  LinkShareButton,
+} from './Button'

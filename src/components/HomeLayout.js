@@ -3,7 +3,6 @@ import { LayoutHeader, InstagramBanner, SiteFooter } from 'components'
 import styled from 'styled-components'
 import 'react-tippy/dist/tippy.css'
 
-// used as .site class in article and categoryTag layouts too
 const Wrapper = styled.div`
   display: grid;
   grid-template-areas: 'header header header' 'padLeft main padRight' 'footer footer footer';

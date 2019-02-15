@@ -4,9 +4,9 @@ import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 import { without, forEach, map } from 'lodash'
 import { ArticlePreviewList, SideBar } from 'components'
-import './styles.css' // global
 import { HomeLayout } from 'components'
 import styled from 'styled-components'
+import './styles.css'
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,20 +16,12 @@ const SidebarWrapper = styled.div`
   width: 345px;
   height: 1239px;
   display: block;
-  vertical-align: baseline;
   float: left;
-
   @media only screen and (max-width: 979px) {
     display: none;
   }
 `
 class HomePage extends Component {
-  componentDidMount() {
-    // this.props.updateLayout({
-    //   instagram: this.props.pageContext.instagram,
-    // })
-  }
-
   getMetaData() {
     return {
       title: `Omid Ahourai's Blog`,
@@ -84,7 +76,6 @@ class HomePage extends Component {
       author.fullName = `${author.firstName} ${author.lastName}`
     })
     const articles = map(data.articles.edges, ({ node }) => node)
-    console.log(articles)
     const categories = without(
       map(
         data.categories.edges,
@@ -97,7 +88,7 @@ class HomePage extends Component {
       null
     )
     return (
-      <HomeLayout {...this.props}>
+      <HomeLayout {...this.props} instagram={this.props.pageContext.instagram}>
         <Wrapper>
           <Helmet {...this.getMetaData()} />
           <div>
@@ -110,9 +101,7 @@ class HomePage extends Component {
                 categories={categories}
                 {...data.author}
               />
-            ) : (
-              ''
-            )}
+            ) : null}
           </SidebarWrapper>
         </Wrapper>
       </HomeLayout>

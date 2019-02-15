@@ -622,3 +622,35 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+.article .img-row {
+    margin-bottom: 1.45rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 5px;
+}
+.article .img-row .img-wrapper {
+  width: 100%;
+}
+.article .img-row img {
+  width: 100%;
+  margin: 0;
+}
+.article .img-row figcaption {
+  display:none;
+  font-size: 0.6rem;
+  line-height: 0.9rem;
+}
+
+@media only screen and (min-width: 420px) and (max-width: 979px) {
+  .article .img-row .img-wrapper.col-md-4 {
+      width: 50%;
+      padding: 0 5px;
+  }
+}
+@media only screen and (min-width: 640px) {
+  .article .img-row .img-wrapper.col-md-4 {
+      width: 25%;
+      padding: 0 5px;
+  }
+}

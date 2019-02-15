@@ -10,12 +10,12 @@ const Wrapper = styled.div`
   margin-bottom: 2rem;
 `
 const Avatar = styled.div`
-    margin: 0 auto;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 1px solid #ccc;
-    width: ${({ width }) => `${width}px`}
-    height: ${({ height }) => `${height}px`}
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  width: ${({ width }) => `${width}px`};
+  height: ${({ height }) => `${height}px`};
 `
 const Body = styled.div`
   text-align: center;

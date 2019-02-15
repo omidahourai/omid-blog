@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
-import { forEach } from 'lodash'
-import { ArticlePreviewList } from 'components'
-import styles from './category.module.css'
+import { map } from 'lodash'
+import { ArticlePreviewList, LayoutHeader, SiteFooter } from 'components'
+// import styled from 'styled-components'
+
+import { Wrapper, LayoutArticles, LayoutFooter } from './tag'
 
 class CategoryTemplate extends Component {
   getMetaData(categoryName) {
@@ -54,20 +56,27 @@ class CategoryTemplate extends Component {
     }
     const { category } = data
     const { articles, name: categoryName } = category
-    forEach(
-      articles,
-      article =>
-        (article.author.fullName = `${article.author.firstName} ${
-          article.author.lastName
-        }`)
-    )
+    const articlesData = map(articles, article => ({
+      ...article,
+      author: article.author
+        ? {
+            ...article.author,
+            fullName: `${article.author.firstName} ${article.author.lastName}`,
+          }
+        : null,
+    }))
+
     return (
-      <div className={styles.wrapper}>
+      <Wrapper>
         <Helmet {...this.getMetaData(categoryName)} />
-        <div className={`article-previews ${styles.articles}`}>
-          <ArticlePreviewList articles={articles} />
-        </div>
-      </div>
+        <LayoutHeader />
+        <LayoutArticles>
+          <ArticlePreviewList articles={articlesData} />
+        </LayoutArticles>
+        <LayoutFooter>
+          <SiteFooter />
+        </LayoutFooter>
+      </Wrapper>
     )
   }
 }

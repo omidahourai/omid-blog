@@ -1,29 +1,30 @@
 require('dotenv').config()
 const path = require('path')
 const title = `Omid Ahourai - Blog`
+console.log('env',process.env.NODE_ENV)
+
+const common = {
+  plugins: [
+    {
+      resolve: 'gatsby-plugin-root-import',
+      options: {
+          src: path.join(__dirname, 'src'),
+          components: path.join(__dirname, 'src/components'),
+          common: path.join(__dirname, 'src/common'),
+          pages: path.join(__dirname, 'src/pages'),
+          templates: path.join(__dirname, 'src/templates')
+      },
+    },
+  ]
+}
 
 const config = process.env.NODE_ENV === 'development' ? {
   siteMetadata: {
     title: `DEV - ${title}`,
   },
   plugins: [
-    // 'gatsby-plugin-resolve-src',
-    {
-        resolve: 'gatsby-plugin-root-import',
-        options: {
-            src: path.join(__dirname, 'src'),
-            components: path.join(__dirname, 'src/components'),
-            common: path.join(__dirname, 'src/common'),
-            pages: path.join(__dirname, 'src/pages'),
-            templates: path.join(__dirname, 'src/templates')
-        },
-    },
-    {
-        resolve: `gatsby-plugin-styled-components`,
-        options: {
-            // displayName: false,
-        },
-    },
+    ...common.plugins,
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-sass`,
     `gatsby-transformer-remark`,
     {
@@ -41,8 +42,15 @@ const config = process.env.NODE_ENV === 'development' ? {
     title,
   },
   plugins: [
-    // 'gatsby-plugin-resolve-src',
+    ...common.plugins,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-styled-components`,
+    // {
+    //   resolve: `gatsby-plugin-styled-components`,
+    //   options: {
+    //       displayName: false,
+    //   },
+    // },
     `gatsby-plugin-sass`,
     `gatsby-transformer-remark`,
     {
@@ -62,7 +70,6 @@ const config = process.env.NODE_ENV === 'development' ? {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-112467017-1",
-        // Setting this parameter is optional
         anonymize: false,
       },
     },
