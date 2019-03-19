@@ -72,6 +72,10 @@ const ArticleContent = styled.div`
       color: ${theme.color.primaryHighlight};
     }
   }
+  ${({category}) => category === 'Poetry' && `
+    text-align: center;
+    font-style: italic;
+  `}
 `
 
 const parseHeroImgMeta = hero => {
@@ -181,6 +185,7 @@ export default class ArticleTemplate extends Component {
             title={title}
           />
           <ArticleContent
+            category={categoryName}
             dangerouslySetInnerHTML={{
               __html: content.childMarkdownRemark.html,
             }}
