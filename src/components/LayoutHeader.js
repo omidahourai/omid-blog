@@ -3,6 +3,13 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { theme } from 'styles'
 
+const Cursive = styled.span`
+    font-family: 'Dancing Script', cursive;
+    color: #FFF;
+    font-size: 1.2rem;
+    padding-left: 30px;
+`
+
 const HeaderGrid = styled.header`
   grid-area: header;
   display: flex;
@@ -27,6 +34,8 @@ const TopBar = styled.div`
   display: flex;
   align-items: center;
   padding: 0 1rem;
+  display: flex;
+  flex-direction: row;
 
   & a {
     font-size: 1rem;
@@ -44,6 +53,7 @@ export const LayoutHeader = ({ children }) => (
     <Wrapper>
       <TopBar>
         <Link to="/">Blog | Omid Ahourai</Link>
+        <Cursive>Emotional rants, poetry, experiences</Cursive>
       </TopBar>
     </Wrapper>
     {children}
