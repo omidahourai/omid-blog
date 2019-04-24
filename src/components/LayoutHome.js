@@ -1,6 +1,6 @@
 import React from 'react'
-import { LayoutHeader, InstagramBanner, SiteFooter } from 'components'
 import styled from 'styled-components'
+import { LayoutHeader, InstagramBanner, SiteFooter } from 'components'
 import 'react-tippy/dist/tippy.css'
 
 const Wrapper = styled.div`
@@ -24,19 +24,17 @@ const FooterWrapper = styled.div`
   flex-direction: column;
 `
 
-const HomeLayout = props => (
+const LayoutHome = props => (
   <Wrapper>
     <LayoutHeader />
     <ContentWrapper>{props.children}</ContentWrapper>
     <FooterWrapper>
-      {props.instagram ? (
-        <InstagramBanner feedData={props.instagram.data} />
-      ) : (
-        ''
+      {props.instagram && (
+        <InstagramBanner feedData={props.instagram} />
       )}
       <SiteFooter />
     </FooterWrapper>
   </Wrapper>
 )
 
-export default HomeLayout
+export default LayoutHome

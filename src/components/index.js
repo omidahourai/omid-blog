@@ -14,7 +14,7 @@ export { default as SideBar } from './SideBar'
 export { default as SideBarCategories } from './SideBarCategories'
 export { default as SideBarInstagram } from './SideBarInstagram'
 export { SiteFooter } from './SiteFooter'
-export { default as HomeLayout } from './HomeLayout'
+export { default as LayoutHome } from './LayoutHome'
 export {
   FacebookShareButton,
   TwitterShareButton,

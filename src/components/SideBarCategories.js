@@ -48,4 +48,13 @@ const SideBarCategories = ({ categories }) => (
   </List>
 )
 
+export const query = graphql`
+  fragment SideBarCategoriesFragment on ContentfulCategory {
+    categoryName
+    article {
+      id
+    }
+  }
+`
+
 export default SideBarCategories

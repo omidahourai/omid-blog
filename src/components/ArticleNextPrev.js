@@ -119,21 +119,19 @@ const NextPrev = ({
   </Link>
 )
 
-export const ArticleNextPrev = ({ prevData, nextData }) => {
-  return (
-    <Wrapper>
-      {prevData ? (
-        <NextPrev direction={c.PREVIOUS} {...prevData} />
-      ) : (
-        <NoDataBlock direction={c.PREVIOUS} />
-      )}
-      {nextData ? (
-        <NextPrev direction={c.NEXT} {...nextData} />
-      ) : (
-        <NoDataBlock direction={c.NEXT} />
-      )}
-    </Wrapper>
-  )
-}
+export const ArticleNextPrev = ({ prevData, nextData }) => (
+  <Wrapper>
+    {prevData ? (
+      <NextPrev direction={c.PREVIOUS} {...prevData} />
+    ) : (
+      <NoDataBlock direction={c.PREVIOUS} />
+    )}
+    {nextData ? (
+      <NextPrev direction={c.NEXT} {...nextData} />
+    ) : (
+      <NoDataBlock direction={c.NEXT} />
+    )}
+  </Wrapper>
+)
 
 export default ArticleNextPrev

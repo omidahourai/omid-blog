@@ -156,6 +156,7 @@ export default class ArticleTemplate extends Component {
       slug,
       publishedOn,
       updatedOn,
+      variables,
       category: { name: categoryName },
     } = this.props.data.article
     const { prev, next } = this.props.data
@@ -164,10 +165,19 @@ export default class ArticleTemplate extends Component {
     // const authorUrl = `/author/${`${author.firstName}${
     //   author.lastName
     // }`.toLowerCase()}`
+    console.log('article vars',variables)
     const categoryUrl = `/${lowerFirst(categoryName)}/`
+    const dark = find(variables, {key: 'theme', value: 'dark'})
+    const theme = dark ? {
+      bg: '#333',
+      color: '#FFF',
+    } : {
+      bg: '#FFF',
+      color: '#454545',
+    }
     return (
       <Wrapper>
-        <LayoutHeader category={this.state.category} title={this.state.title}>
+        <LayoutHeader category={this.state.category} theme={theme} title={this.state.title}>
           <ArticleBreadcrumbs categoryName={categoryName} title={title} />
         </LayoutHeader>
 
@@ -239,6 +249,10 @@ export const pageQuery = graphql`
       id
       title
       slug
+      variables {
+        key
+        value
+      }
       hero {
         id
         title
@@ -293,10 +307,7 @@ export const pageQuery = graphql`
     categories: allContentfulCategory {
       edges {
         node {
-          categoryName: name
-          article {
-            id
-          }
+          ...SideBarCategoriesFragment
         }
       }
     }

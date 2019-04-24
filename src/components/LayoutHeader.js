@@ -16,6 +16,10 @@ const HeaderGrid = styled.header`
   flex-direction: column;
   height: 100%;
   padding-bottom: 3rem;
+  ${({theme}) => `
+    color: ${theme.color};
+    background-color: ${theme.bg};
+  `}
 `
 const Wrapper = styled.div`
   height: 48px;
@@ -48,8 +52,8 @@ const TopBar = styled.div`
   }
 `
 
-export const LayoutHeader = ({ children }) => (
-  <HeaderGrid>
+export const LayoutHeader = ({ children, theme }) => (
+  <HeaderGrid theme={theme}>
     <Wrapper>
       <TopBar>
         <Link to="/">Blog | Omid Ahourai</Link>

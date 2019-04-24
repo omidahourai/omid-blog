@@ -1,5 +1,4 @@
 import React from 'react'
-import { map, result } from 'lodash'
 import styled from 'styled-components'
 import { theme } from 'styles'
 import {
@@ -78,91 +77,38 @@ const Wrapper = styled.aside`
   padding-left: 15px;
   width: 312px;
 `
-
-const parseImgMeta = ({ photoUrl, title }) => {
-  const width = 250
-  const height = 250
-  const r = width * 0.5
-  const r2x = r * 2
-  const width2x = width * 2
-  const height2x = height * 2
-  return {
-    title,
-    width,
-    height,
-    alt: title,
-    src: `${photoUrl}?w=${width}&h=${height}&r=${r}&q=70`,
-    srcSet: `${photoUrl}?w=${width2x}&h=${height2x}&r=${r2x}&q=70 2x`,
-  }
-}
-
-export const SideBar = ({
-  fullName,
-  shortTitle,
-  shortDescription,
-  facebookHandle,
-  twitterHandle,
-  instagramHandle,
-  linkedinHandle,
-  emailAddress,
-  instagramData,
-  categories,
-  altPhoto: {
-    file: { photoUrl },
-  },
-}) => {
-  // TODO: CREATE AUTHOR PAGE
-  // const authorLink = {
-  //   // to: `/author/${ (firstName + lastName).toLowerCase() }/`,
-  //   to: '#',
-  //   title: `Articles by ${fullName}`,
-  //   rel: `author`,
-  // }
-
-  const igImageData = map(instagramData, item => {
-    let text = result(item, 'caption.text') || ''
-    if (text.length > 50) {
-      text = text.slice(0, 50) + '...'
-    }
-    return {
-      text,
-      key: item.id,
-      url: item.images.standard_resolution.url,
-      width: item.images.standard_resolution.width,
-      height: item.images.standard_resolution.height,
-      likes: item.likes.count,
-      link: item.link,
-    }
-  })
-
-  return (
-    <Wrapper>
-      <Profile>
-        <Image {...parseImgMeta({ photoUrl, title: shortTitle })} />
-        <h6>{shortTitle}</h6>
-        <p>{shortDescription}</p>
-      </Profile>
-      <Section>
-        <Header>Follow Me</Header>
-        <SocialLinksAuthor
-          facebookHandle={`Omid-Ahourai-296038887569459`}
-          twitterHandle={`omidahourai`}
-          instagramHandle={`omidahourai`}
-          linkedinHandle={`omidahourai`}
-          emailAddress={`hello@omid.com`}
-          fullName={fullName}
-        />
-      </Section>
-      <Section>
-        <Header>Instagram</Header>
-        <SideBarInstagram data={igImageData} />
-      </Section>
-      <Section>
-        <Header>Categories</Header>
-        <SideBarCategories categories={categories} />
-      </Section>
-    </Wrapper>
-  )
-}
-
-export default SideBar
+// TODO: CREATE AUTHOR PAGE
+// const authorLink = {
+//   // to: `/author/${ (firstName + lastName).toLowerCase() }/`,
+//   to: '#',
+//   title: `Articles by ${fullName}`,
+//   rel: `author`,
+// }
+export default props => (
+  <Wrapper>
+    <Profile>
+      <Image {...props.authorThumbnail} />
+      <h6>{props.author.shortTitle}</h6>
+      <p>{props.author.shortDescription}</p>
+    </Profile>
+    <Section>
+      <Header>Follow Me</Header>
+      <SocialLinksAuthor
+        facebookHandle={`Omid-Ahourai-296038887569459`}
+        twitterHandle={`omidahourai`}
+        instagramHandle={`omidahourai`}
+        linkedinHandle={`omidahourai`}
+        emailAddress={`hello@omid.com`}
+        fullName={props.author.fullName}
+      />
+    </Section>
+    <Section>
+      <Header>Instagram</Header>
+      <SideBarInstagram data={props.igImageData} />
+    </Section>
+    <Section>
+      <Header>Categories</Header>
+      <SideBarCategories categories={props.categories} />
+    </Section>
+  </Wrapper>
+)
