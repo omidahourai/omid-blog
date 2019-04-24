@@ -31,7 +31,7 @@ exports.onPreBootstrap = () => new Promise((resolve, reject) => {
 })
 
 const ARTICLES_QUERY = `{
-    tags: allContentfulTag {
+    allContentfulTag {
         edges {
             node {
                 name
@@ -41,17 +41,17 @@ const ARTICLES_QUERY = `{
             }
         }
     }
-    categories: allContentfulCategory {
+    allContentfulCategory {
         edges {
-            node {
-                name
-                article {
-                    id
-                }
+          node {
+            name
+            article {
+              id
             }
-        }
+          }
+      }
     }
-    articles: allContentfulArticle(sort: { order: ASC, fields: [publishedOn] }, limit: 1000) {
+    allContentfulArticle(sort: { order: ASC, fields: [publishedOn] }, limit: 1000) {
         edges {
             node {
                 id
@@ -89,48 +89,48 @@ exports.createPages = ({ graphql, actions }) => {
                 if ( process.env.NODE_ENV === 'development' ) {
                     console.log('Contentful >>',JSON.stringify(data, null, '\t'))
                 } else {
-                    console.log(`Contentful >> received data from ${ data.articles.edges.length } articles.`)
+                    console.log(`Contentful >> received data from ${ data.allContentfulArticle.edges.length } articles.`)
                 }
 
                 // ARTICLE PAGES
-                forEach(data.articles.edges, (edge, index) => {
+                forEach(data.allContentfulArticle.edges, (edge, index) => {
                     const { id, slug, category } = edge.node
                     if (!id || !slug || !category) {
                         return;
                     }
                     const categoryName =  category.name
-                    const prevId = result(data.articles.edges, `[${index-1}].node.id`) || ''
-                    const nextId = result(data.articles.edges, `[${index+1}].node.id`) || ''
+                    const prevId = result(data.allContentfulArticle.edges, `[${index-1}].node.id`) || ''
+                    const nextId = result(data.allContentfulArticle.edges, `[${index+1}].node.id`) || ''
                     const articlePath = `/${lowerFirst(categoryName)}/${slug}/`
                     console.log(`>> Creating Article Page: ${articlePath}`)
                     createPage({
                         path: `/${lowerFirst(categoryName)}/${slug}/`,
-                        component: slash(path.resolve(`./src/templates/article.js`)),
+                        component: slash(path.resolve(`./src/containers/Article.js`)),
                         context: { id, slug, prevId, nextId },
                     })
                 })
                 // CATEGORY PAGES
-                forEach(data.categories.edges, ({node: {name: categoryName, article}}) => {
+                forEach(data.allContentfulCategory.edges, ({node: {name: categoryName, article}}) => {
                     if (!article) return;
                     console.log(`>> Creating Category Page: /${lowerFirst(categoryName)}/`)
                     createPage({
                         path: `/${lowerFirst(categoryName)}/`,
-                        component: slash(path.resolve(`./src/templates/category.js`)),
+                        component: slash(path.resolve(`./src/containers/Category.js`)),
                         context: { categoryName },
                     })
                 })
                 // TAG PAGES
-                forEach(data.tags.edges, ({node: {name: tagName, article}}) => {
+                forEach(data.allContentfulTag.edges, ({node: {name: tagName, article}}) => {
                     if (!article) return;
                     console.log(`>> Creating Tag Page: /tag/${tagName}/`)
                     createPage({
                         path: `/tag/${tagName}/`,
-                        component: slash(path.resolve(`./src/templates/tag.js`)),
+                        component: slash(path.resolve(`./src/containers/Tag.js`)),
                         context: { tagName },
                     })
                 })
                 // REDIRECTS
-                forEach(data.articles.edges, (edge, index) => {
+                forEach(data.allContentfulArticle.edges, (edge, index) => {
                     const { id, slug, category } = edge.node
                     if (!id || !slug || !category) {
                         return;

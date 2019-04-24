@@ -1,6 +1,6 @@
 import React from 'react'
 import { map } from 'lodash'
-import * as Gatsby from 'gatsby'
+import { Link as GatsbyLink, graphql } from 'gatsby'
 import styled from 'styled-components'
 import { lowerFirst } from 'lodash'
 import { theme } from 'styles'
@@ -18,7 +18,7 @@ const Item = styled.li`
   position: relative;
   line-height: 2.5rem;
 `
-const Link = styled(Gatsby.Link)`
+const Link = styled(GatsbyLink)`
   width: 100%;
   height: 100%;
   display: flex;
@@ -35,7 +35,7 @@ const List = styled.ul`
   letter-spacing: normal;
 `
 
-const SideBarCategories = ({ categories }) => (
+export default ({ categories }) => (
   <List>
     {map(categories, ({ categoryName, count }, index) => (
       <Item key={index}>
@@ -49,12 +49,14 @@ const SideBarCategories = ({ categories }) => (
 )
 
 export const query = graphql`
-  fragment SideBarCategoriesFragment on ContentfulCategory {
-    categoryName
-    article {
-      id
+  fragment SideBarCategoriesFragment on ContentfulCategoryConnection {
+    edges {
+        node {
+          name
+          article {
+            id
+          }
+        }
     }
   }
 `
-
-export default SideBarCategories

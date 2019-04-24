@@ -13,8 +13,8 @@ import {
   ArticleAuthor,
   ArticleNextPrev,
   SiteFooter,
-  SideBar,
 } from 'components'
+import SideBar from 'containers/SideBar'
 
 const ArticleHero = styled.div`
   margin-bottom: 1rem;
@@ -167,7 +167,7 @@ export default class ArticleTemplate extends Component {
     // }`.toLowerCase()}`
     console.log('article vars',variables)
     const categoryUrl = `/${lowerFirst(categoryName)}/`
-    const dark = find(variables, {key: 'theme', value: 'dark'})
+    const dark = variables && variables.find(({key, value}) => key === 'theme' && value === 'dark')
     const theme = dark ? {
       bg: '#333',
       color: '#FFF',
@@ -225,7 +225,9 @@ export default class ArticleTemplate extends Component {
               <SideBar
                 isStatic={this.state.isSidebarFixed}
                 instagramData={this.state.instagramData}
-                categories={this.state.categories}
+                instagram={props.instagram}
+                categories={props.categories}
+                author={props.author}
                 {...author}
               />
             ) : null}
@@ -305,11 +307,7 @@ export const pageQuery = graphql`
       }
     }
     categories: allContentfulCategory {
-      edges {
-        node {
-          ...SideBarCategoriesFragment
-        }
-      }
+      ...SideBarCategoriesFragment
     }
     prev: contentfulArticle(id: { eq: $prevId }) {
       id

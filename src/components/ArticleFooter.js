@@ -1,5 +1,4 @@
 import React from 'react'
-import { map } from 'lodash'
 import * as Gatsby from 'gatsby'
 import { SocialLinksShare } from 'components'
 import styled from 'styled-components'
@@ -82,32 +81,23 @@ const Tag = ({ label }) => (
   </Link>
 )
 
-export const ArticleFooter = ({
-  id,
-  title,
-  tags,
-  slug,
-  category,
-  imageUrl,
-}) => (
-  <Wrapper key={id}>
+export default props => (
+  <Wrapper key={props.article.id}>
     <MetaTags>
-      {map(tags, label => (
-        <Tag key={label} label={label} />
+      {props.article.tags.map(({name}) => (
+        <Tag key={name} label={name} />
       ))}
     </MetaTags>
     <Text>Share this article</Text>
     <ShareWrapper>
       <SocialLinksShare
-        id={id}
-        slug={slug}
-        title={title}
-        tags={tags}
-        category={category}
-        imageUrl={imageUrl}
+        id={props.article.id}
+        slug={props.article.slug}
+        title={props.article.title}
+        tags={props.article.tags}
+        category={props.category}
+        imageUrl={`http:${props.article.hero.file.url}?w=1000&h=1000`}
       />
     </ShareWrapper>
   </Wrapper>
 )
-
-export default ArticleFooter

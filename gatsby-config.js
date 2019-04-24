@@ -10,6 +10,7 @@ const common = {
       options: {
           src: path.join(__dirname, 'src'),
           components: path.join(__dirname, 'src/components'),
+          containers: path.join(__dirname, 'src/containers'),
           common: path.join(__dirname, 'src/common'),
           styles: path.join(__dirname, 'src/styles'),
           icons: path.join(__dirname, 'src/icons'),

@@ -2,11 +2,10 @@
 {
     "window.title": "Omid's Blog — ${activeEditorMedium}",
     "files.exclude": {
-      "**/.DS_Store": true, // this is a default value
-      "**/node_modules": true, // this excludes all folders 
       ".cache": true,
+      "**/.DS_Store": true,
       "public": true,
-      ".vscode": true,
+      "node_modules": true,
     },
     "editor.detectIndentation": false,
     "workbench.colorCustomizations": {

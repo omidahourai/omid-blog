@@ -1,8 +1,11 @@
 import SideBar from 'components/SideBar'
-import { compose, withHandlers } from 'recompose'
+import { compose, withHandlers, withProps } from 'recompose'
 import { result } from 'lodash'
 
 export default compose(
+  withProps(props => {
+    console.log('sidebar props',props)
+  }),
   withProps(props => ({
     igImageData: props.instagram.map(item => {
       let text = result(item, 'caption.text') || ''

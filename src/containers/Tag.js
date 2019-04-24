@@ -1,7 +1,43 @@
 import { graphql } from 'gatsby'
 import { compose, withProps } from 'recompose'
-import PageHome from 'containers/PageHome'
-import './styles.css'
+import Tag from 'components/Tag'
+
+export const pageQuery = graphql`
+  query($tagName: String!) {
+    tag: contentfulTag(name: { eq: $tagName }) {
+      name
+      articles: article {
+        id
+        title
+        tags {
+          name
+        }
+        summary {
+          childMarkdownRemark {
+            html
+          }
+        }
+        hero {
+          title
+          description
+          file {
+            url
+          }
+        }
+        category {
+          name
+        }
+        author {
+          firstName
+          lastName
+        }
+        slug
+        publishedOn
+        updatedOn
+      }
+    }
+  }
+`
 
 export default compose(
   withProps(props => ({
@@ -20,7 +56,7 @@ export default compose(
         },
         { property: 'og:site_name', content: `Blog - Omid Ahourai` },
         { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: `Omid Ahourai's Blog` },
+        { property: 'og:title', content: `Omid Ahourai Blog - ${props.tag.name}` },
         {
           property: 'og:description',
           content:
@@ -38,88 +74,7 @@ export default compose(
         // { name: 'twitter:label2', content: 'Filed under' },
         // { name: 'twitter:data2', content: category },
       ],
-    }
-  }))
-)(PageHome)
-
-export const query = graphql`
-  query {
-    contentfulAuthor(
-      firstName: { eq: "Omid" }
-      lastName: { eq: "Ahourai" }
-    ) {
-      firstName
-      lastName
-      shortTitle
-      photo {
-        file {
-          photoUrl: url
-        }
-      }
-      altPhoto {
-        file {
-          photoUrl: url
-        }
-      }
-      shortDescription
-      description {
-        text: description
-      }
-      facebookHandle
-      twitterHandle
-      instagramHandle
-      linkedinHandle
-      emailAddress
-    }
-    allContentfulCategory {
-      ...SideBarCategoriesFragment
-    }
-    allContentfulArticle (
-      sort: { order: DESC, fields: [publishedOn] }
-      filter: { node_locale: { eq: "en-US" } }
-    ) {
-      edges {
-        node {
-          id
-          title
-          summary {
-            childMarkdownRemark {
-              html
-            }
-            id
-            summary
-          }
-          hero {
-            id
-            title
-            description
-            file {
-              url
-            }
-          }
-          category {
-            name
-          }
-          content {
-            id
-            content
-          }
-          author {
-            id
-            firstName
-            lastName
-            description {
-              description
-            }
-          }
-          tags {
-            name
-          }
-          slug
-          publishedOn
-          updatedOn
-        }
-      }
-    }
-  }
-`
+    },
+    articles: props.tag.articles,
+  })),
+)(Tag)
