@@ -65,7 +65,7 @@ export const query = graphql`
       }
     }
     categories: allContentfulCategory {
-      ...SideBarCategoriesFragment
+      ...SideBarFragment
     }
     prev: contentfulArticle(id: { eq: $prevId }) {
       id

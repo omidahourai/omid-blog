@@ -21,9 +21,6 @@ const getAuthorThumbnail = props => {
 }
 
 export default compose(
-  withProps(props => {
-    console.log('1 containers/Sidebar >> props',props)
-  }),
   withProps(props => ({
     igImageData: props.instagram.map(item => {
       let text = result(item, 'caption.text') || ''
@@ -43,6 +40,6 @@ export default compose(
     authorThumbnail: getAuthorThumbnail(props),
   })),
   withProps(props => {
-    console.log('2 containers/Sidebar >> props',props)
+    console.log('{props} [containers/Sidebar]',props)
   }),
 )(SideBar)

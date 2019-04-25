@@ -35,13 +35,13 @@ const List = styled.ul`
   letter-spacing: normal;
 `
 
-export default ({ categories }) => (
+export default props => (
   <List>
-    {map(categories, ({ categoryName, count }, index) => (
+    {map(props.categories, ({ name, article }, index) => (
       <Item key={index}>
-        <Link to={`/${lowerFirst(categoryName)}/`}>
-          <Name>{categoryName}</Name>
-          <Count>({count})</Count>
+        <Link to={`/${lowerFirst(name)}/`}>
+          <Name>{name}</Name>
+          <Count>({article.length})</Count>
         </Link>
       </Item>
     ))}
@@ -49,14 +49,10 @@ export default ({ categories }) => (
 )
 
 export const query = graphql`
-  fragment SideBarCategoriesFragment on ContentfulCategoryConnection {
-    edges {
-        node {
-          name
-          article {
-            id
-          }
-        }
+  fragment SideBarCategoryFragment on ContentfulCategory {
+    name
+    article {
+      id
     }
   }
 `

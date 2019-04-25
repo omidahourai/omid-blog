@@ -33,25 +33,6 @@ const ArticleLayout = styled.article`
   margin: 0 auto;
   max-width: 835px;
   margin-bottom: 2rem;
-
-  & .img-row {
-    margin-bottom: 1.45rem;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 5px;
-    & .img-wrapper {
-      width: 100%;
-    }
-    & img {
-      margin: 0;
-      width: 100%;
-    }
-    & figcaption {
-      display: none;
-      font-size: 0.6rem;
-      line-height: 0.9rem;
-    }
-  }
 `
 const SideBarWrapper = styled.div`
   display: none;
@@ -71,6 +52,36 @@ const ArticleContent = styled.div`
     text-align: center;
     font-style: italic;
   `}
+  .img-row {
+    margin-bottom: 1.45rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 5px;
+    img {
+      width: 100%;
+      margin: 0;
+    }
+    figcaption {
+      display:none;
+      font-size: 0.6rem;
+      line-height: 0.9rem;
+    }
+    .img-wrapper {
+      width: 100%;
+    }
+    @media only screen and (min-width: 420px) and (max-width: 979px) {
+      .col-md-4 {
+          width: 50%;
+          padding: 0 5px;
+      }
+    }
+    @media only screen and (min-width: 640px) {
+      .col-md-4 {
+          width: 25%;
+          padding: 0 5px;
+      }
+    }
+  }
 `
 
 export default props => (

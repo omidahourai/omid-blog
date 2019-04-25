@@ -112,3 +112,13 @@ export default props => (
     </Section>
   </Wrapper>
 )
+
+export const query = graphql`
+  fragment SideBarFragment on ContentfulCategoryConnection {
+    edges {
+        node {
+          ...SideBarCategoryFragment
+        }
+    }
+  }
+`
