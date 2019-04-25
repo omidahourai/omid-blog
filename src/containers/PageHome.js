@@ -3,7 +3,7 @@ import { compose, withProps } from 'recompose'
 
 export default compose(
   withProps(props => ({
-    instagram: props.pageContext.instagram && props.pageContext.instagram.data,
+    instagram: props.pageContext.instagram ? props.pageContext.instagram.data : [],
   })),
   withProps(({data}) => ({
     author: {...data.contentfulAuthor, fullName: `${data.contentfulAuthor.firstName} ${data.contentfulAuthor.lastName}`},

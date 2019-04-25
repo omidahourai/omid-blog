@@ -1,8 +1,9 @@
 import React from 'react'
-import * as Gatsby from 'gatsby'
 import styled from 'styled-components'
+import { pick } from 'lodash'
 import { theme } from 'styles'
 import { FaFacebook, FaTwitter, FaInstagram } from 'icons'
+import * as Gatsby from 'gatsby'
 
 const Wrapper = styled.div`
   padding: 0 1rem 1rem 1rem;
@@ -54,70 +55,49 @@ const ShareWrapper = styled.div`
   margin-top: 0.5rem;
 `
 
-export const ArticleAuthor = ({
-  firstName,
-  lastName,
-  description,
-  photoUrl,
-}) => {
-  const photoDim = 110
-  const photoDim2x = photoDim * 2
-  const fullName = `${firstName} ${lastName}`
-  const authorLink = {
-    // TODO: CREATE AUTHOR PAGE
-    // to: `/author/${ (firstName + lastName).toLowerCase() }/`,
-    to: '#',
-    title: `Articles by ${fullName}`,
-    rel: `author`,
-  }
-  return (
-    <Wrapper>
-      <Avatar width={photoDim} height={photoDim}>
-        <img
-          alt={fullName}
-          src={`${photoUrl}?w=${photoDim}&h=${photoDim}&q=70`}
-          srcSet={`${photoUrl}?w=${photoDim2x}&h=${photoDim2x}&q=70 2x`}
-          height={photoDim}
-          width={photoDim}
-        />
-      </Avatar>
-      <Body>
-        <Header>
-          <Link {...authorLink}>{fullName}</Link>
-        </Header>
-        <DescriptionText>{description}</DescriptionText>
-        <ShareWrapper>
-          <ShareIcon
-            href="http://facebook.com/Omid-Ahourai-296038887569459/"
-            target="_blank"
-            rel="external"
-            title="Like Omid Ahourai on Facebook"
-            alt="Like Omid Ahourai on Facebook"
-          >
-            <FaFacebook />
-          </ShareIcon>
-          <ShareIcon
-            href="https://twitter.com/omidahourai"
-            target="_blank"
-            rel="external"
-            title="Follow Omid Ahourai on Twitter"
-            alt="Follow Omid Ahourai on Twitter"
-          >
-            <FaTwitter />
-          </ShareIcon>
-          <ShareIcon
-            href="https://instagram.com/omidahourai"
-            target="_blank"
-            rel="external"
-            title="Follow Omid Ahourai on Instagram"
-            alt="Follow Omid Ahourai on Instagram"
-          >
-            <FaInstagram />
-          </ShareIcon>
-        </ShareWrapper>
-      </Body>
-    </Wrapper>
-  )
-}
-
-export default ArticleAuthor
+export default props => (
+  <Wrapper>
+    <Avatar {...pick(props, ['width', 'height'])}>
+      <img {...props.avatarImageMeta} />
+    </Avatar>
+    <Body>
+      <Header>
+        <Link {...props.authorLink}>
+          {props.author.fullName}
+        </Link>
+      </Header>
+      <DescriptionText>
+        {props.author.description.text}
+      </DescriptionText>
+      <ShareWrapper>
+        <ShareIcon
+          href="http://facebook.com/Omid-Ahourai-296038887569459/"
+          target="_blank"
+          rel="external"
+          title="Like Omid Ahourai on Facebook"
+          alt="Like Omid Ahourai on Facebook"
+        >
+          <FaFacebook />
+        </ShareIcon>
+        <ShareIcon
+          href="https://twitter.com/omidahourai"
+          target="_blank"
+          rel="external"
+          title="Follow Omid Ahourai on Twitter"
+          alt="Follow Omid Ahourai on Twitter"
+        >
+          <FaTwitter />
+        </ShareIcon>
+        <ShareIcon
+          href="https://instagram.com/omidahourai"
+          target="_blank"
+          rel="external"
+          title="Follow Omid Ahourai on Instagram"
+          alt="Follow Omid Ahourai on Instagram"
+        >
+          <FaInstagram />
+        </ShareIcon>
+      </ShareWrapper>
+    </Body>
+  </Wrapper>
+)

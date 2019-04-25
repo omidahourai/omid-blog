@@ -1,4 +1,4 @@
-export { ArticleAuthor } from './ArticleAuthor'
+export { default as ArticleAuthor } from './ArticleAuthor'
 export { ArticleBreadcrumbs } from './ArticleBreadcrumbs'
 export { default as ArticleFooter } from './ArticleFooter'
 export { ArticleHeader } from './ArticleHeader'

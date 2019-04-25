@@ -119,6 +119,9 @@ const parseHeroImgMeta = hero => {
 }
 
 export default compose(
+  withProps(props => ({
+    instagram: props.pageContext.instagram ? props.pageContext.instagram.data : [], 
+  })),
   withProps(({data: {article}}) => ({
     meta: {
       title: `Omid Ahourai's Blog | ${article.title}`,
@@ -159,6 +162,7 @@ export default compose(
     }
   })),
   withProps(({data: {article}}) => ({
+    article,
     heroImageMeta: parseHeroImgMeta(article.hero),
     category: {
       ...article.category,

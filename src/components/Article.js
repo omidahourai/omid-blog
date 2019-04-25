@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import { theme } from 'styles'
 import { Wrapper, LayoutFooter } from 'components/Tag'
-import ArticleAuthor from 'components/ArticleAuthor'
+import ArticleAuthor from 'containers/ArticleAuthor'
 import ArticleBreadcrumbs from 'components/ArticleBreadcrumbs'
 import ArticleFooter from 'components/ArticleFooter'
 import ArticleHeader from 'components/ArticleHeader'
@@ -73,7 +73,9 @@ const ArticleContent = styled.div`
   `}
 `
 
-export default props => (
+export default props => {
+  console.log('sidebar props>>>',props)
+  return (
   <Wrapper>
     <LayoutHeader theme={props.theme}>
       <ArticleBreadcrumbs
@@ -104,15 +106,13 @@ export default props => (
         article={props.article}
         category={props.category}
       />
-      {props.author && (
-        <ArticleAuthor
-          key={props.author.id}
-          firstName={props.author.firstName}
-          lastName={props.author.lastName}
-          description={props.author.description.text}
-          photoUrl={props.author.photo.file.photoUrl}
-        />
-      )}
+      <ArticleAuthor
+        author={props.author}
+        firstName={props.author.firstName}
+        lastName={props.author.lastName}
+        description={props.author.description.text}
+        photoUrl={props.author.photo.file.photoUrl}
+      />
       {(props.prev || props.next) && (
         <ArticleNextPrev prevData={props.prev} nextData={props.next} />
       )}
@@ -130,4 +130,4 @@ export default props => (
       <SiteFooter />
     </LayoutFooter>
   </Wrapper>
-)
+)}
