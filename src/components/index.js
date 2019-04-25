@@ -1,7 +1,5 @@
 export { default as ArticleAuthor } from './ArticleAuthor'
 export { default as ArticleFooter } from './ArticleFooter'
-export { ArticleNextPrev } from './ArticleNextPrev'
-export { ArticlePreview } from './ArticlePreview'
 export { default as ArticlePreviewHeader } from './ArticlePreviewHeader'
 export { default as ArticlePreviewList } from './ArticlePreviewList'
 export { SocialLinksAuthor } from './SocialLinksAuthor'
@@ -16,6 +14,7 @@ export {
   FacebookShareButton,
   TwitterShareButton,
   InstagramShareButton,
+  PinterestShareButton,
   LinkedinShareButton,
   EmailShareButton,
   LinkShareButton,

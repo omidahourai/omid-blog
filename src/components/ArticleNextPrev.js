@@ -1,7 +1,7 @@
 import React from 'react'
-import * as Gatsby from 'gatsby'
 import styled from 'styled-components'
 import { theme } from 'styles'
+import * as Gatsby from 'gatsby'
 
 const c = {
   PREVIOUS: 'PREVIOUS',
@@ -91,7 +91,6 @@ const parseImgMeta = ({ hero, title }) => {
   const height = hero.height || 75
   const width2x = width * 2
   const height2x = height * 2
-  console.log('herotit', hero, title)
   return {
     title,
     alt: hero.title,
@@ -105,8 +104,6 @@ const NextPrev = ({
   title,
   hero,
   direction,
-  slug,
-  category: { name: categoryName },
 }) => (
   <Link direction={direction} to={`/article/${id}/`} title={title} alt={title}>
     <Thumbnail>
@@ -119,19 +116,17 @@ const NextPrev = ({
   </Link>
 )
 
-export const ArticleNextPrev = ({ prevData, nextData }) => (
+export default props => (
   <Wrapper>
-    {prevData ? (
-      <NextPrev direction={c.PREVIOUS} {...prevData} />
+    {props.prevData ? (
+      <NextPrev direction={c.PREVIOUS} {...props.prevData} />
     ) : (
       <NoDataBlock direction={c.PREVIOUS} />
     )}
-    {nextData ? (
-      <NextPrev direction={c.NEXT} {...nextData} />
+    {props.nextData ? (
+      <NextPrev direction={c.NEXT} {...props.nextData} />
     ) : (
       <NoDataBlock direction={c.NEXT} />
     )}
   </Wrapper>
 )
-
-export default ArticleNextPrev

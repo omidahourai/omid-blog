@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import {
   FaFacebook,
   FaTwitter,
+  FaPinterestP,
   FaInstagram,
   FaLinkedin,
   FaEnvelopeO,
@@ -79,6 +80,13 @@ export const TwitterShareButton = props => (
     </ShareButton>
   </Tooltip>
 )
+export const PinterestShareButton = props => (
+  <Tooltip {...tooltipDefault} {...props.tooltip}>
+    <ShareButton {...linkDefault} {...props.link} bg={`#E60223`}>
+      <FaPinterestP />
+    </ShareButton>
+  </Tooltip>
+)
 export const InstagramShareButton = props => (
   <Tooltip {...tooltipDefault} {...props.tooltip}>
     <ShareButton {...linkDefault} {...props.link} bg={`#D62BFF`}>
@@ -88,7 +96,7 @@ export const InstagramShareButton = props => (
 )
 export const LinkedinShareButton = props => (
   <Tooltip {...tooltipDefault} {...props.tooltip}>
-    <ShareButton {...linkDefault} {...props.link} bg={`#C92228`}>
+    <ShareButton {...linkDefault} {...props.link} bg={`#0E76A8`}>
       <FaLinkedin />
     </ShareButton>
   </Tooltip>

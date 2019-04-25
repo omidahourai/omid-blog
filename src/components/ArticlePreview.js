@@ -48,67 +48,37 @@ const Footer = styled.div`
   justify-content: center;
 `
 
-export const ArticlePreview = ({
-  id,
-  articleUrl,
-  authorName,
-  authorUrl,
-  categoryName,
-  categoryUrl,
-  heroImgTitle,
-  heroImgUrl,
-  summaryHtml,
-  publishedOn,
-  updatedOn,
-  title,
-  tags,
-  slug,
-}) => {
-  const dim = 1000
-  const dim2x = dim * 2
-  const heroImgMeta = {
-    alt: heroImgTitle,
-    title: title,
-    src: `${heroImgUrl}?w=${dim}&h=${dim}&q=70`,
-    srcSet: `${heroImgUrl}?w=${dim2x}&h=${dim2x}&q=70 2x`,
-    height: { dim },
-    width: { dim },
-  }
-
-  return (
-    <Wrapper>
-      <Hero>
-        <Link to={articleUrl}>
-          <img alt={''} {...heroImgMeta} />
-        </Link>
-      </Hero>
-      <ArticlePreviewHeader
-        articleUrl={articleUrl}
-        authorName={authorName}
-        authorUrl={authorUrl}
-        categoryName={categoryName}
-        categoryUrl={categoryUrl}
-        isPreview={true}
-        publishedOn={publishedOn}
-        title={title}
+export default props => (
+  <Wrapper>
+    <Hero>
+      <Link to={props.articleUrl}>
+        <img alt={''} {...props.heroImageMeta} />
+      </Link>
+    </Hero>
+    <ArticlePreviewHeader
+      articleUrl={props.articleUrl}
+      authorName={props.authorName}
+      authorUrl={props.authorUrl}
+      categoryName={props.categoryName}
+      categoryUrl={props.categoryUrl}
+      isPreview={true}
+      publishedOn={props.publishedOn}
+      title={props.title}
+    />
+    <Content
+      dangerouslySetInnerHTML={{
+        __html: props.summaryHtml,
+      }}
+    />
+    <Footer>
+      <SocialLinksShare
+        id={props.id}
+        slug={props.slug}
+        title={props.title}
+        category={props.categoryName}
+        imageUrl={`http:${props.heroImgUrl}?w=1000&h=1000`}
+        tags={props.tags}
       />
-      <Content
-        dangerouslySetInnerHTML={{
-          __html: summaryHtml,
-        }}
-      />
-      <Footer>
-        <SocialLinksShare
-          id={id}
-          slug={slug}
-          title={title}
-          category={categoryName}
-          imageUrl={`http:${heroImgUrl}?w=1000&h=1000`}
-          tags={tags}
-        />
-      </Footer>
-    </Wrapper>
-  )
-}
-
-export default ArticlePreview
+    </Footer>
+  </Wrapper>
+)

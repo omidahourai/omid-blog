@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import {
   FacebookShareButton,
   TwitterShareButton,
-  InstagramShareButton,
+  // InstagramShareButton,
+  PinterestShareButton,
   LinkShareButton,
 } from 'components'
 
@@ -69,7 +70,7 @@ export default props => (
         title: 'Share on Twitter',
       }}
     />
-    <InstagramShareButton
+    <PinterestShareButton
       tooltip={{ title: 'Share on Pinterest' }}
       link={{
         width: '2.2rem',

@@ -1,7 +1,7 @@
 import React from 'react'
-import { result, lowerFirst, map } from 'lodash'
-import { ArticlePreview } from 'components'
+import ArticlePreview from 'containers/ArticlePreview'
 import styled from 'styled-components'
+import { result, lowerFirst, map } from 'lodash'
 
 const Wrapper = styled.ul`
   list-style-type: none;
