@@ -89,9 +89,9 @@ export default props => (
       <AuthorPrefix>{'By'}</AuthorPrefix>
       <AuthorLink
         to={props.authorUrl || '#'}
-        title={`Articles by ${props.authorName}`}
+        title={`Articles by ${props.author.fullName}`}
         rel={'author'}>
-        {props.authorName}
+        {props.author.fullName}
       </AuthorLink>
     </Meta>
   </Wrapper>

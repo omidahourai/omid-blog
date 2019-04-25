@@ -9,11 +9,10 @@ export const query = graphql`
     article: contentfulArticle(id: { eq: $id }) {
       id
       title
-        
-      variables {
-        key
-        value
-      }
+      # variables {
+      #   key
+      #   value
+      # }
       hero {
         id
         title

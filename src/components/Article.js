@@ -73,9 +73,7 @@ const ArticleContent = styled.div`
   `}
 `
 
-export default props => {
-  console.log('sidebar props>>>',props)
-  return (
+export default props => (
   <Wrapper>
     <LayoutHeader theme={props.theme}>
       <ArticleBreadcrumbs
@@ -127,4 +125,4 @@ export default props => {
       <SiteFooter />
     </LayoutFooter>
   </Wrapper>
-)}
+)

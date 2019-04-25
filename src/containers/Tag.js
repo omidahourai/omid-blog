@@ -2,7 +2,7 @@ import { graphql } from 'gatsby'
 import { compose, withProps } from 'recompose'
 import Tag from 'components/Tag'
 
-export const pageQuery = graphql`
+export const query = graphql`
   query($tagName: String!) {
     tag: contentfulTag(name: { eq: $tagName }) {
       name
@@ -40,6 +40,9 @@ export const pageQuery = graphql`
 `
 
 export default compose(
+  withProps(({data}) => ({
+    tag: data.tag,
+  })),
   withProps(props => ({
     meta: {
       title: `Omid Ahourai's Blog`,
