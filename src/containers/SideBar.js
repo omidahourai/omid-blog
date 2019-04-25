@@ -1,5 +1,5 @@
 import SideBar from 'components/SideBar'
-import { compose, withHandlers, withProps } from 'recompose'
+import { compose, withProps } from 'recompose'
 import { result } from 'lodash'
 
 const getAuthorThumbnail = props => {
@@ -22,7 +22,7 @@ const getAuthorThumbnail = props => {
 
 export default compose(
   withProps(props => {
-    console.log('11sidebar props',props)
+    console.log('1 containers/Sidebar >> props',props)
   }),
   withProps(props => ({
     igImageData: props.instagram.map(item => {
@@ -43,6 +43,6 @@ export default compose(
     authorThumbnail: getAuthorThumbnail(props),
   })),
   withProps(props => {
-    console.log('sidebar props',props)
+    console.log('2 containers/Sidebar >> props',props)
   }),
 )(SideBar)

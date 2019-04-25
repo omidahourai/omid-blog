@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { theme } from 'styles'
 import { Wrapper, LayoutFooter } from 'components/Tag'
 import ArticleAuthor from 'containers/ArticleAuthor'
-import ArticleBreadcrumbs from 'components/ArticleBreadcrumbs'
-import ArticleFooter from 'components/ArticleFooter'
+import ArticleBreadcrumbs from 'containers/ArticleBreadcrumbs'
+import ArticleFooter from 'containers/ArticleFooter'
 import ArticleHeader from 'components/ArticleHeader'
 import ArticleNextPrev from 'components/ArticleNextPrev'
 import LayoutHeader from 'components/LayoutHeader'
@@ -89,12 +89,9 @@ export default props => {
         <img alt={props.heroImageMeta.alt} {...props.heroImageMeta} />
       </ArticleHero>
       <ArticleHeader
-        authorName={props.author.fullName}
-        categoryName={props.category.name}
-        categoryUrl={props.category.url}
-        publishedOn={props.publishedOn}
-        updatedOn={props.updatedOn}
-        title={props.article.title}
+        category={props.category}
+        article={props.article}
+        author={props.author}
       />
       <ArticleContent
         category={props.category.name}

@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import { ArticlePreviewHeader, SocialLinksShare } from 'components'
+import SocialLinksShare from 'components/SocialLinksShare'
 import styled from 'styled-components'
+import { Link } from 'gatsby'
 import { theme } from 'styles'
+import { ArticlePreviewHeader } from 'components'
 
 const Wrapper = styled.article`
   display: flex;

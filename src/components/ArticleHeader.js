@@ -1,8 +1,8 @@
 import React from 'react'
-import * as Gatsby from 'gatsby'
 import moment from 'moment'
 import styled from 'styled-components'
 import { theme } from 'styles'
+import * as Gatsby from 'gatsby'
 
 const Wrapper = styled.header`
   text-align: center;
@@ -73,38 +73,26 @@ const AuthorLink = styled(Gatsby.Link)`
   }
 `
 
-export const ArticleHeader = ({
-  articleUrl,
-  authorName,
-  authorUrl,
-  categoryName,
-  categoryUrl,
-  publishedOn,
-  title,
-}) => {
-  authorUrl = '#'
-  return (
-    <Wrapper>
-      <Category>
-        <Prefix>In</Prefix>
-        <CategoryLink to={categoryUrl} rel="category tag">
-          {categoryName}
-        </CategoryLink>
-      </Category>
-      <Title>{title}</Title>
-      <Meta>
-        <PublishDate>{moment(publishedOn).format('MMMM D, YYYY')}</PublishDate>
-        <AuthorPrefix>By</AuthorPrefix>
-        <AuthorLink
-          to={authorUrl}
-          title={`Articles by ${authorName}`}
-          rel="author"
-        >
-          {authorName}
-        </AuthorLink>
-      </Meta>
-    </Wrapper>
-  )
-}
-
-export default ArticleHeader
+export default props => (
+  <Wrapper>
+    <Category>
+      <Prefix>{'In'}</Prefix>
+      <CategoryLink
+        rel={'category tag'}
+        to={props.category.url}>
+        {props.category.name}
+      </CategoryLink>
+    </Category>
+    <Title>{props.article.title}</Title>
+    <Meta>
+      <PublishDate>{moment(props.article.publishedOn).format('MMMM D, YYYY')}</PublishDate>
+      <AuthorPrefix>{'By'}</AuthorPrefix>
+      <AuthorLink
+        to={props.authorUrl || '#'}
+        title={`Articles by ${props.authorName}`}
+        rel={'author'}>
+        {props.authorName}
+      </AuthorLink>
+    </Meta>
+  </Wrapper>
+)

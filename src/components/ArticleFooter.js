@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Gatsby from 'gatsby'
-import { SocialLinksShare } from 'components'
+import SocialLinksShare from 'components/SocialLinksShare'
 import styled from 'styled-components'
 import { theme } from 'styles'
 

@@ -1,8 +1,7 @@
 import React from 'react'
-import { lowerFirst } from 'lodash'
-import * as Gatsby from 'gatsby'
 import styled from 'styled-components'
 import { theme } from 'styles'
+import * as Gatsby from 'gatsby'
 
 const Link = styled(Gatsby.Link)`
   text-decoration: none;
@@ -44,20 +43,18 @@ const Separator = () => (
   </Item>
 )
 
-export const ArticleBreadcrumbs = ({ categoryName, title }) => (
+export default props => (
   <List>
     <Item>
-      <Link to="/">Home</Link>
+      <Link to="/">{'Home'}</Link>
     </Item>
     <Separator />
     <Item>
-      <Link to={`/${lowerFirst(categoryName)}/`}>{categoryName}</Link>
+      <Link to={props.categoryUrl}>{props.categoryName}</Link>
     </Item>
     <Separator />
     <Item>
-      <span>{title}</span>
+      <span>{props.title}</span>
     </Item>
   </List>
 )
-
-export default ArticleBreadcrumbs
