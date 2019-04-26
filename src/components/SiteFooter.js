@@ -16,10 +16,8 @@ const Wrapper = styled.footer`
   }
 `
 
-export const SiteFooter = () => (
+export default props => (
   <Wrapper>
-    <p>Copyright 2018 Omid Ahourai. All Rights Reserved.</p>
+    <p>{'Copyright 2018 Omid Ahourai. All Rights Reserved.'}</p>
   </Wrapper>
 )
-
-export default SiteFooter

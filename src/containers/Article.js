@@ -40,12 +40,12 @@ export const query = graphql`
         }
         photo {
           file {
-            photoUrl: url
+            url
           }
         }
         altPhoto {
           file {
-            photoUrl: url
+            url
           }
         }
         shortDescription
@@ -64,9 +64,7 @@ export const query = graphql`
         name
       }
     }
-    categories: allContentfulCategory {
-      ...SideBarFragment
-    }
+    # ...SideBarCategoriesFragment
     prev: contentfulArticle(id: { eq: $prevId }) {
       id
       title

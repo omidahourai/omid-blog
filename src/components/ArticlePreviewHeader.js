@@ -1,8 +1,7 @@
 import React from 'react'
-import * as Gatsby from 'gatsby'
-import moment from 'moment'
 import styled from 'styled-components'
 import { theme } from 'styles'
+import * as Gatsby from 'gatsby'
 
 const Link = styled(Gatsby.Link)``
 const Wrapper = styled.header`
@@ -87,37 +86,25 @@ const Prefix = styled.span`
   padding-left: 5px;
 `
 
-const ArticlePreviewHeader = ({
-  articleUrl,
-  authorName,
-  authorUrl,
-  categoryName,
-  categoryUrl,
-  publishedOn,
-  title,
-}) => {
-  // TODO: CREATE THESE PAGES
-  authorUrl = '#'
-  return (
-    <Wrapper>
-      <Category>
-        <span>In</span>
-        <Link to={categoryUrl} rel="category tag">
-          {categoryName}
-        </Link>
-      </Category>
-      <Title>
-        <Link to={articleUrl}>{title}</Link>
-      </Title>
-      <Meta>
-        <PublishDate>{moment(publishedOn).format('MMMM D, YYYY')}</PublishDate>
-        <Prefix>By</Prefix>
-        <Link to={authorUrl} title={`Articles by ${authorName}`} rel="author">
-          {authorName}
-        </Link>
-      </Meta>
-    </Wrapper>
-  )
-}
-
-export default ArticlePreviewHeader
+export default props => (
+  <Wrapper>
+    <Category>
+      <span>{'In'}</span>
+      <Link to={props.categoryUrl} rel={'category tag'}>
+        {props.categoryName}
+      </Link>
+    </Category>
+    <Title>
+      <Link to={props.articleUrl}>{props.title}</Link>
+    </Title>
+    <Meta>
+      <PublishDate>{props.publishDate}</PublishDate>
+      <Prefix>{'By'}</Prefix>
+      <Link to={props.authorUrl}
+        title={`Article by ${props.authorName}`}
+        rel={'author'}>
+        {props.authorName}
+      </Link>
+    </Meta>
+  </Wrapper>
+)

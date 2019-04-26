@@ -1,5 +1,5 @@
 import React from 'react'
-import SocialLinksShare from 'components/SocialLinksShare'
+import SocialLinksShare from 'containers/SocialLinksShare'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 import { theme } from 'styles'
@@ -9,13 +9,14 @@ const Wrapper = styled.article`
   display: flex;
   flex-direction: column;
   height: 100%;
+  & a {
+    text-decoration: none;
+  }
 `
-
 const Hero = styled.div`
   margin-bottom: 1rem;
   position: relative;
   padding-top: 60%;
-
   & img {
     position: absolute;
     top: 0;
@@ -31,16 +32,20 @@ const Content = styled.div`
   font-size: 0.85rem;
   line-height: 1.35rem;
   margin-bottom: 1rem;
-
   & > p {
     text-align: justify;
+  }
+  & h2 {
+    margin-bottom: 1rem;
+  }
+  h2, p {
+    color: #333;
   }
 `
 
 const Footer = styled.div`
   text-align: center;
   overflow: hidden;
-
   flex-grow: 1;
   margin-top: auto;
   display: flex;
@@ -55,30 +60,14 @@ export default props => (
         <img alt={''} {...props.heroImageMeta} />
       </Link>
     </Hero>
-    <ArticlePreviewHeader
-      articleUrl={props.articleUrl}
-      authorName={props.authorName}
-      authorUrl={props.authorUrl}
-      categoryName={props.categoryName}
-      categoryUrl={props.categoryUrl}
-      isPreview={true}
-      publishedOn={props.publishedOn}
-      title={props.title}
-    />
+    <ArticlePreviewHeader {...props} articleUrl={props.articleUrl}/>
     <Content
       dangerouslySetInnerHTML={{
         __html: props.summaryHtml,
       }}
     />
     <Footer>
-      <SocialLinksShare
-        id={props.id}
-        slug={props.slug}
-        title={props.title}
-        category={props.categoryName}
-        imageUrl={`http:${props.heroImgUrl}?w=1000&h=1000`}
-        tags={props.tags}
-      />
+      <SocialLinksShare {...props} />
     </Footer>
   </Wrapper>
 )

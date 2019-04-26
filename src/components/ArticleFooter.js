@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Gatsby from 'gatsby'
-import SocialLinksShare from 'components/SocialLinksShare'
+import SocialLinksShare from 'containers/SocialLinksShare'
 import styled from 'styled-components'
 import { theme } from 'styles'
 
@@ -88,16 +88,9 @@ export default props => (
         <Tag key={name} label={name} />
       ))}
     </MetaTags>
-    <Text>Share this article</Text>
+    <Text>{'Share this article'}</Text>
     <ShareWrapper>
-      <SocialLinksShare
-        id={props.article.id}
-        slug={props.article.slug}
-        title={props.article.title}
-        tags={props.article.tags}
-        category={props.category}
-        imageUrl={`http:${props.article.hero.file.url}?w=1000&h=1000`}
-      />
+      <SocialLinksShare {...props.article} />
     </ShareWrapper>
   </Wrapper>
 )

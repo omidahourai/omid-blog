@@ -2,13 +2,14 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import { theme } from 'styles'
-import { Wrapper, LayoutFooter } from 'components/Tag'
+import { Grid } from 'components/PageLayout'
+import { LayoutFooter } from 'components/PageLayout'
 import ArticleAuthor from 'containers/ArticleAuthor'
 import ArticleBreadcrumbs from 'containers/ArticleBreadcrumbs'
 import ArticleFooter from 'containers/ArticleFooter'
 import ArticleHeader from 'components/ArticleHeader'
 import ArticleNextPrev from 'components/ArticleNextPrev'
-import LayoutHeader from 'components/LayoutHeader'
+import LayoutHeader from 'containers/LayoutHeader'
 import SideBar from 'containers/SideBar'
 import SiteFooter from 'components/SiteFooter'
 
@@ -85,7 +86,7 @@ const ArticleContent = styled.div`
 `
 
 export default props => (
-  <Wrapper>
+  <Grid>
     <LayoutHeader theme={props.theme}>
       <ArticleBreadcrumbs
         categoryName={props.category.name}
@@ -117,7 +118,7 @@ export default props => (
         firstName={props.author.firstName}
         lastName={props.author.lastName}
         description={props.author.description.text}
-        photoUrl={props.author.photo.file.photoUrl}
+        photoUrl={props.author.photo.file.url}
       />
       {(props.prev || props.next) && (
         <ArticleNextPrev prevData={props.prev} nextData={props.next} />
@@ -135,5 +136,5 @@ export default props => (
     <LayoutFooter>
       <SiteFooter />
     </LayoutFooter>
-  </Wrapper>
+  </Grid>
 )

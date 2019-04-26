@@ -1,44 +1,27 @@
 import { graphql } from 'gatsby'
 import { compose, withProps } from 'recompose'
+import Category from 'components/Category'
 
-export const pageQuery = graphql`
+export const query = graphql`
   query($categoryName: String!) {
     category: contentfulCategory(name: { eq: $categoryName }) {
       name
-      articles: article {
-        id
-        title
-        tags {
-          name
-        }
-        summary {
-          childMarkdownRemark {
-            html
-          }
-        }
-        hero {
-          title
-          description
-          file {
-            url
-          }
-        }
-        category {
-          name
-        }
-        author {
-          firstName
-          lastName
-        }
-        slug
-        publishedOn
-        updatedOn
-      }
+      ...CategoryArticlePreviewListFragment
     }
   }
 `
 
 export default compose(
+  withProps(({data}) => ({
+    category: data.category,
+    articles: data.category.articles.map(article => ({
+      ...article,
+      author: article.author ? {
+            ...article.author,
+            fullName: `${article.author.firstName} ${article.author.lastName}`,
+          } : null,
+    })),
+  })),
   withProps(props => ({
     meta: {
       title: `Omid Ahourai's Blog`,
@@ -78,13 +61,5 @@ export default compose(
       ],
     }
   })),
-  withProps(({data: {category}}) => ({
-    articles: category.articles.map(article => ({
-      ...article,
-      author: article.author ? {
-            ...article.author,
-            fullName: `${article.author.firstName} ${article.author.lastName}`,
-          } : null,
-    }))
-  }))
-)
+  withProps(props => console.log('{props} containers/Category',props)),
+)(Category)

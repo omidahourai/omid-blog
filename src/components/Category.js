@@ -1,13 +1,17 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { ArticlePreviewList, LayoutHeader, SiteFooter } from 'components'
-import { Wrapper, LayoutArticles, LayoutFooter } from './tag'
+import LayoutHeader from 'containers/LayoutHeader'
+import SiteFooter from 'components/SiteFooter'
+import ArticlePreviewList from 'containers/ArticlePreviewList'
+import { Grid } from 'components/PageLayout'
+import { LayoutArticles } from 'components/PageLayout'
+import { LayoutFooter } from 'components/PageLayout'
 
 export default props => (
   !props.data ? (
     <div>{'No Data :('}</div>
   ) : (
-    <Wrapper>
+    <Grid>
       <Helmet {...props.meta} />
       <LayoutHeader />
       <LayoutArticles>
@@ -16,6 +20,6 @@ export default props => (
       <LayoutFooter>
         <SiteFooter />
       </LayoutFooter>
-    </Wrapper>
+    </Grid>
   )
 )

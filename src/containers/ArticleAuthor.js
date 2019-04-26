@@ -7,8 +7,8 @@ const parseAvatarImageMeta = ({
   width,
   height,
   alt: author.fullName,
-  src: `${author.photo.file.photoUrl}?w=${width}&h=${height}&q=70`,
-  srcSet: `${author.photo.file.photoUrl}?w=${width2x}&h=${height2x}&q=70 2x`,
+  src: `${author.photo.file.url}?w=${width}&h=${height}&q=70`,
+  srcSet: `${author.photo.file.url}?w=${width2x}&h=${height2x}&q=70 2x`,
 })
 
 export default compose(

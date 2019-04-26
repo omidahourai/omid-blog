@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { LayoutHeader, InstagramBanner, SiteFooter } from 'components'
+import SiteFooter from 'components/SiteFooter'
+import InstagramBanner from 'components/InstagramBanner'
+import LayoutHeader from 'containers/LayoutHeader'
 import 'react-tippy/dist/tippy.css'
 
 const Wrapper = styled.div`
@@ -27,7 +29,9 @@ const FooterWrapper = styled.div`
 const LayoutHome = props => (
   <Wrapper>
     <LayoutHeader />
-    <ContentWrapper>{props.children}</ContentWrapper>
+    <ContentWrapper>
+      {props.children}
+    </ContentWrapper>
     <FooterWrapper>
       {props.instagram && (
         <InstagramBanner feedData={props.instagram} />

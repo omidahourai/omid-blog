@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import { graphql } from 'gatsby'
 import { theme } from 'styles'
-import {
-  SocialLinksAuthor,
-  SideBarInstagram,
-  SideBarCategories,
-} from 'components'
+import SocialLinksAuthor from 'components/SocialLinksAuthor'
+import SideBarInstagram from 'components/SideBarInstagram'
+import SideBarCategories from 'containers/SideBarCategories'
 
 const Image = styled.img`
   margin: 0 auto 13px auto;
@@ -23,7 +22,7 @@ const Header = styled.h3`
   font-size: 16px;
   letter-spacing: 1.5px;
   margin-bottom: 1rem;
-  font-family: ${theme.font.serif};
+  font-family: ${props => props.theme.font.serif};
   text-transform: uppercase;
   &:before {
     right: 100%;
@@ -63,11 +62,11 @@ const Profile = styled.section`
     font-size: 16px;
     letter-spacing: 1.5px;
     margin-bottom: 4px;
-    font-family: ${theme.font.serif};
+    font-family: ${props => props.theme.font.serif};
     text-transform: uppercase;
   }
   & p {
-    font-family: ${theme.font.sansSerif};
+    font-family: ${props => props.theme.font.sansSerif};
     font-size: 0.85rem;
     line-height: 1.35rem;
     text-align: center;
@@ -86,39 +85,35 @@ const Wrapper = styled.aside`
 // }
 export default props => (
   <Wrapper>
-    <Profile>
+    <Profile theme={theme}>
       <Image {...props.authorThumbnail} />
-      <h6>{props.author.shortTitle}</h6>
-      <p>{props.author.shortDescription}</p>
+      <h6>{props.authorTitle}</h6>
+      <p>{props.authorDescription}</p>
     </Profile>
     <Section>
-      <Header>Follow Me</Header>
+      <Header theme={theme}>
+        {'Follow Me'}
+      </Header>
       <SocialLinksAuthor
-        facebookHandle={`Omid-Ahourai-296038887569459`}
-        twitterHandle={`omidahourai`}
-        instagramHandle={`omidahourai`}
-        linkedinHandle={`omidahourai`}
-        emailAddress={`hello@omid.com`}
-        fullName={props.author.fullName}
+        facebookHandle={props.authorFacebookHandle}
+        twitterHandle={props.authorTwitterHandle}
+        instagramHandle={props.authorInstagramHandle}
+        linkedinHandle={props.authorLinkedinHandle}
+        emailAddress={props.authorEmail}
+        fullName={props.authorName}
       />
     </Section>
     <Section>
-      <Header>Instagram</Header>
+      <Header theme={theme}>
+        {'Instagram'}
+      </Header>
       <SideBarInstagram data={props.igImageData} />
     </Section>
     <Section>
-      <Header>Categories</Header>
+      <Header theme={theme}>
+        {'Categories'}
+      </Header>
       <SideBarCategories categories={props.categories} />
     </Section>
   </Wrapper>
 )
-
-export const query = graphql`
-  fragment SideBarFragment on ContentfulCategoryConnection {
-    edges {
-        node {
-          ...SideBarCategoryFragment
-        }
-    }
-  }
-`

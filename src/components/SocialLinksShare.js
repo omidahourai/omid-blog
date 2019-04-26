@@ -1,12 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  // InstagramShareButton,
-  PinterestShareButton,
-  LinkShareButton,
-} from 'components'
+import { FacebookShareButton } from 'components/Button'
+import { TwitterShareButton } from 'components/Button'
+import { PinterestShareButton } from 'components/Button'
+import { LinkShareButton } from 'components/Button'
+// import { InstagramShareButton } from 'components'
 
 const Wrapper = styled.div`
   display: inline-block;
@@ -37,61 +35,35 @@ const Wrapper = styled.div`
 export default props => (
   <Wrapper>
     <FacebookShareButton
-      tooltip={{ title: 'Share on Facebook' }}
+      tooltip={{ title: props.facebookTitle }}
       link={{
-        width: '2.2rem',
-        height: '2.2rem',
-        margin: '0 4px',
-        padding: '0.6rem',
-        href: encodeURI(
-          `https://facebook.com/sharer/sharer.php?u=${decodeURIComponent(
-            `http://omid.com/article/${props.id}/`
-          )}`
-        ),
-        alt: `Share on Facebook`,
-        title: `Share on Facebook`,
+        ...props.linkStyles,
+        href: props.facebookUrl,
+        alt: props.facebookTitle,
+        title: props.facebookTitle,
       }}
     />
     <TwitterShareButton
-      tooltip={{ title: 'Share on Twitter' }}
+      tooltip={{ title: props.twitterTitle }}
       link={{
-        width: '2.2rem',
-        height: '2.2rem',
-        margin: '0 4px',
-        padding: '0.6rem',
-        href: encodeURI(
-          `https://twitter.com/share?text=Check out this article by @omidahourai: ${
-            props.title
-          }&hashtags=${(props.tags || []).join(
-            ','
-          )}&url=${`http://omid.com/article/${props.id}/`}`
-        ),
-        alt: 'Share on Twitter',
-        title: 'Share on Twitter',
+        ...props.linkStyles,
+        href: props.twitterUrl,
+        alt: props.twitterTitle,
+        title: props.twitterTitle,
       }}
     />
     <PinterestShareButton
-      tooltip={{ title: 'Share on Pinterest' }}
+      tooltip={{ title: props.pinterestTitle }}
       link={{
-        width: '2.2rem',
-        height: '2.2rem',
-        margin: '0 4px',
-        padding: '0.6rem',
-        href: `https://pinterest.com/pin/create/button/?url=http://omid.com/article/${
-          props.id
-        }/&media=${props.imageUrl}`,
-        title: 'Share on Pinterest',
-        alt: 'Share on Pinterest',
+        ...props.linkStyles,
+        href: props.pinterestUrl,
+        title: props.pinterestTitle,
+        alt: props.pinterestTitle,
       }}
     />
     <LinkShareButton
-      url={`http://omid.com/article/${props.id}/`}
-      link={{
-        width: '2.2rem',
-        height: '2.2rem',
-        margin: '0 4px',
-        padding: '0.6rem',
-      }}
+      url={props.url}
+      link={props.linkStyles}
     />
   </Wrapper>
 )

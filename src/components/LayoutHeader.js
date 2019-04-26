@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import styled from 'styled-components'
-import { theme } from 'styles'
+import { Link } from 'gatsby'
 
 const Cursive = styled.span`
     font-family: 'Dancing Script', cursive;
@@ -45,23 +44,20 @@ const TopBar = styled.div`
     font-size: 1rem;
     text-decoration: none;
     color: #fff;
-    font-family: ${theme.font.sansSerif};
+    font-family: ${props => props.theme.font.sansSerif};
     font-stretch: 100%;
     font-weight: 600;
     text-transform: uppercase;
   }
 `
 
-export const LayoutHeader = ({ children, theme }) => (
-  <HeaderGrid theme={theme}>
+export default props => (
+  <HeaderGrid theme={props.theme}>
     <Wrapper>
       <TopBar>
-        <Link to="/">Blog | Omid Ahourai</Link>
-        <Cursive>Emotional rants, poetry, experiences</Cursive>
+        <Link to="/">{'Blog | Omid Ahourai'}</Link>
+        <Cursive>{'Emotional rants, poetry, experiences'}</Cursive>
       </TopBar>
     </Wrapper>
-    {children}
   </HeaderGrid>
 )
-
-export default LayoutHeader

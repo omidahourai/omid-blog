@@ -23,17 +23,14 @@ export default props => (
   ) : (
     <LayoutHome {...props}>
       <Wrapper>
-        <Helmet {...props.meta} />
+        <Helmet meta={props.pageMeta} title={props.pageTitle} />
         <div>
-          <ArticlePreviewList
-            articles={props.articles}
-          />
+          <ArticlePreviewList data={props.data}/>
         </div>
         <SidebarWrapper>
           <SideBar
             instagram={props.instagram}
-            categories={props.categories}
-            author={props.author}
+            data={props.data}
           />
         </SidebarWrapper>
       </Wrapper>

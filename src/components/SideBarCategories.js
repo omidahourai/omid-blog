@@ -31,12 +31,12 @@ const Link = styled(GatsbyLink)`
 const List = styled.ul`
   margin: 0;
   list-style-type: none;
-  font-family: ${theme.font.sansSerif};
+  font-family: ${props => props.theme.font.sansSerif};
   letter-spacing: normal;
 `
 
 export default props => (
-  <List>
+  <List theme={props.theme}>
     {map(props.categories, ({ name, article }, index) => (
       <Item key={index}>
         <Link to={`/${lowerFirst(name)}/`}>
@@ -47,12 +47,3 @@ export default props => (
     ))}
   </List>
 )
-
-export const query = graphql`
-  fragment SideBarCategoryFragment on ContentfulCategory {
-    name
-    article {
-      id
-    }
-  }
-`

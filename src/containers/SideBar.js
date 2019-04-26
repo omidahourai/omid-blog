@@ -1,26 +1,69 @@
 import SideBar from 'components/SideBar'
 import { compose, withProps } from 'recompose'
 import { result } from 'lodash'
+import { graphql } from 'gatsby'
 
-const getAuthorThumbnail = props => {
+export const fragmentCategories = graphql`
+  # fragment SideBarCategoriesFragment on ContentfulCategoryConnection {
+  fragment SideBarCategoriesFragment on Query {
+    categories: allContentfulCategory {
+      edges {
+          node {
+            ...SideBarCategoryFragment
+          }
+      }
+    }
+  }
+`
+export const fragmentAuthor = graphql`
+  fragment SideBarAuthorFragment on Query {
+    author: contentfulAuthor(
+      firstName: { eq: "Omid" }
+      lastName: { eq: "Ahourai" }
+    ) {
+      firstName
+      lastName
+      shortTitle
+      photo { file { url } }
+      altPhoto { file { url } }
+      shortDescription
+      description {
+        text: description
+      }
+      facebookHandle
+      twitterHandle
+      instagramHandle
+      linkedinHandle
+      emailAddress
+    }
+  }
+`
+const getAuthorThumbnail = author => {
   const width = 250
   const height = 250
   const r = width * 0.5
   const r2x = r * 2
   const width2x = width * 2
   const height2x = height * 2
-  const photoUrl = props.author.altPhoto.file.photoUrl
+  const photoUrl = author.altPhoto.file.url
   return {
     width,
     height,
-    title: props.author.shortTitle,
-    alt: props.author.shortTitle,
+    title: author.shortTitle,
+    alt: author.shortTitle,
     src: `${photoUrl}?w=${width}&h=${height}&r=${r}&q=70`,
     srcSet: `${photoUrl}?w=${width2x}&h=${height2x}&r=${r2x}&q=70 2x`,
   }
 }
 
 export default compose(
+  withProps(({data}) => ({
+    author: {...data.author, fullName: `${data.author.firstName} ${data.author.lastName}`},
+    categories: data.categories.edges.filter(({node}) => !!node.article).map(({node}) => node),
+  })),
+  withProps(({pageContext}) => ({
+    instagram: pageContext.instagram ? pageContext.instagram.data : [],
+  })),  
   withProps(props => ({
     igImageData: props.instagram.map(item => {
       let text = result(item, 'caption.text') || ''
@@ -37,9 +80,14 @@ export default compose(
         link: item.link,
       }
     }),
-    authorThumbnail: getAuthorThumbnail(props),
+    authorThumbnail: getAuthorThumbnail(props.author),
+    authorTitle: props.author.shortTitle,
+    authorDescription: props.author.shortDescription,
+    authorFacebookHandle: 'Omid-Ahourai-296038887569459',
+    authorTwitterHandle: 'omidahourai',
+    authorInstagramHandle: 'omidahourai',
+    authorLinkedinHandle: 'omidahourai',
+    authorEmail: 'hello@omid.com',
   })),
-  withProps(props => {
-    console.log('{props} [containers/Sidebar]',props)
-  }),
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/Sidebar]',props)),
 )(SideBar)
