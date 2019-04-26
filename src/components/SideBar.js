@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { graphql } from 'gatsby'
-import { theme } from 'styles'
 import SocialLinksAuthor from 'components/SocialLinksAuthor'
 import SideBarInstagram from 'components/SideBarInstagram'
 import SideBarCategories from 'containers/SideBarCategories'
@@ -85,13 +83,13 @@ const Wrapper = styled.aside`
 // }
 export default props => (
   <Wrapper>
-    <Profile theme={theme}>
+    <Profile theme={props.theme}>
       <Image {...props.authorThumbnail} />
       <h6>{props.authorTitle}</h6>
       <p>{props.authorDescription}</p>
     </Profile>
     <Section>
-      <Header theme={theme}>
+      <Header theme={props.theme}>
         {'Follow Me'}
       </Header>
       <SocialLinksAuthor
@@ -104,13 +102,13 @@ export default props => (
       />
     </Section>
     <Section>
-      <Header theme={theme}>
+      <Header theme={props.theme}>
         {'Instagram'}
       </Header>
       <SideBarInstagram data={props.igImageData} />
     </Section>
     <Section>
-      <Header theme={theme}>
+      <Header theme={props.theme}>
         {'Categories'}
       </Header>
       <SideBarCategories categories={props.categories} />

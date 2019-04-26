@@ -51,7 +51,15 @@ export const queryArticleConnection = graphql`
 `
 export default compose(
   withProps(({data}) => ({
-    articles: data.articles.edges.map(({node}) => node),
+    articles: data.articles.edges.map(({node}) => node).filter(article => (
+      article.author &&
+      article.category &&
+      article.hero &&
+      article.publishedOn &&
+      article.slug &&
+      article.tags &&
+      article.title
+    )),
   })),
-  withProps(props => console.log('{props} [containers/ArticlePreviewList]',props)),
+  process.env.DEBUG && withProps(props => {console.log('{props} [containers/ArticlePreviewList]',props)}),
 )(ArticlePreviewList)

@@ -1,9 +1,8 @@
 import React from 'react'
 import { map } from 'lodash'
-import { Link as GatsbyLink, graphql } from 'gatsby'
+import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
 import { lowerFirst } from 'lodash'
-import { theme } from 'styles'
 
 const Count = styled.span`
   color: #aaa;

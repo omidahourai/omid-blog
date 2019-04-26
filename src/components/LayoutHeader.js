@@ -52,9 +52,9 @@ const TopBar = styled.div`
 `
 
 export default props => (
-  <HeaderGrid theme={props.theme}>
+  <HeaderGrid>
     <Wrapper>
-      <TopBar>
+      <TopBar theme={props.theme}>
         <Link to="/">{'Blog | Omid Ahourai'}</Link>
         <Cursive>{'Emotional rants, poetry, experiences'}</Cursive>
       </TopBar>

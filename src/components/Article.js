@@ -1,17 +1,16 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
-import { theme } from 'styles'
-import { Grid } from 'components/PageLayout'
-import { LayoutFooter } from 'components/PageLayout'
 import ArticleAuthor from 'containers/ArticleAuthor'
 import ArticleBreadcrumbs from 'containers/ArticleBreadcrumbs'
 import ArticleFooter from 'containers/ArticleFooter'
 import ArticleHeader from 'components/ArticleHeader'
-import ArticleNextPrev from 'components/ArticleNextPrev'
+import ArticleNextPrev from 'containers/ArticleNextPrev'
 import LayoutHeader from 'containers/LayoutHeader'
 import SideBar from 'containers/SideBar'
 import SiteFooter from 'components/SiteFooter'
+import { PageGrid } from 'components/PageLayout'
+import { LayoutFooter } from 'components/PageLayout'
 
 const ArticleHero = styled.div`
   margin-bottom: 1rem;
@@ -39,14 +38,14 @@ const SideBarWrapper = styled.div`
   display: none;
 `
 const ArticleContent = styled.div`
-  font-family: ${theme.font.sansSerif};
+  font-family: ${props => props.theme.font.sansSerif};
   font-size: 0.85rem;
   line-height: 1.35rem;
   & a {
     text-decoration: none;
     color: primary;
     &:hover {
-      color: ${theme.color.primaryHighlight};
+      color: ${props => props.theme.color.primaryHighlight};
     }
   }
   ${({category}) => category === 'Poetry' && `
@@ -86,55 +85,53 @@ const ArticleContent = styled.div`
 `
 
 export default props => (
-  <Grid>
-    <LayoutHeader theme={props.theme}>
-      <ArticleBreadcrumbs
-        categoryName={props.category.name}
-        title={props.article.title}
-      />
-    </LayoutHeader>
-    <ArticleLayout>
-      <Helmet {...props.meta} />
-      <ArticleHero>
-        <img alt={props.heroImageMeta.alt} {...props.heroImageMeta} />
-      </ArticleHero>
-      <ArticleHeader
-        category={props.category}
-        article={props.article}
-        author={props.author}
-      />
-      <ArticleContent
-        category={props.category.name}
-        dangerouslySetInnerHTML={{
-          __html: props.article.content.childMarkdownRemark.html,
-        }}
-      />
-      <ArticleFooter
-        article={props.article}
-        category={props.category}
-      />
-      <ArticleAuthor
-        author={props.author}
-        firstName={props.author.firstName}
-        lastName={props.author.lastName}
-        description={props.author.description.text}
-        photoUrl={props.author.photo.file.url}
-      />
-      {(props.prev || props.next) && (
-        <ArticleNextPrev prevData={props.prev} nextData={props.next} />
-      )}
-      <SideBarWrapper>
-        {props.author && (
-          <SideBar
-            instagram={props.instagram}
-            categories={props.categories}
-            author={props.author}
-          />
+  <PageGrid>
+      <LayoutHeader>
+        <ArticleBreadcrumbs
+          categoryName={props.category.name}
+          title={props.article.title}
+        />
+      </LayoutHeader>
+      <ArticleLayout>
+        <Helmet {...props.meta} />
+        <ArticleHero>
+          <img alt={props.heroImageMeta.alt} {...props.heroImageMeta} />
+        </ArticleHero>
+        <ArticleHeader
+          category={props.category}
+          article={props.article}
+          author={props.author}
+        />
+        <ArticleContent
+          category={props.category.name}
+          dangerouslySetInnerHTML={{
+            __html: props.article.content.childMarkdownRemark.html,
+          }}
+        />
+        <ArticleFooter
+          article={props.article}
+          category={props.category}
+        />
+        <ArticleAuthor
+          author={props.author}
+          firstName={props.author.firstName}
+          lastName={props.author.lastName}
+          description={props.author.description.text}
+          photoUrl={props.author.photo.file.url}
+        />
+        {(props.prev || props.next) && (
+          <ArticleNextPrev 
+            data={props.data}
+            prevData={props.prev} nextData={props.next} />
         )}
-      </SideBarWrapper>
-    </ArticleLayout>
-    <LayoutFooter>
-      <SiteFooter />
-    </LayoutFooter>
-  </Grid>
+        <SideBarWrapper>
+          {props.author && (
+            <SideBar {...props} />
+          )}
+        </SideBarWrapper>
+      </ArticleLayout>
+      <LayoutFooter>
+        <SiteFooter />
+      </LayoutFooter>
+  </PageGrid>
 )

@@ -1,5 +1,5 @@
-require('dotenv').config()
 const path = require('path')
+require('dotenv').config({path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`)})
 const title = `Omid Ahourai - Blog`
 console.log('env',process.env.NODE_ENV)
 
@@ -15,6 +15,7 @@ const common = {
           styles: path.join(__dirname, 'src/styles'),
           icons: path.join(__dirname, 'src/icons'),
           pages: path.join(__dirname, 'src/pages'),
+          utils: path.join(__dirname, 'src/utils'),
       },
     },
   ]
@@ -33,11 +34,12 @@ const config = process.env.NODE_ENV === 'development' ? {
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID || ``,
-        accessToken: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN || ``,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || ``,
         host: 'preview.contentful.com',
       },
     },
     `gatsby-plugin-netlify`,
+    'gatsby-plugin-client-side-redirect',
   ],
 } : { // production
   siteMetadata: {
@@ -71,11 +73,13 @@ const config = process.env.NODE_ENV === 'development' ? {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-112467017-1",
+        trackingId: process.env.GA_TRACKING_ID,
         anonymize: false,
+        head: false,
       },
     },
     `gatsby-plugin-netlify`,
+    'gatsby-plugin-client-side-redirect',
   ],
 }
 

@@ -1,6 +1,6 @@
+import Category from 'components/Category'
 import { graphql } from 'gatsby'
 import { compose, withProps } from 'recompose'
-import Category from 'components/Category'
 
 export const query = graphql`
   query($categoryName: String!) {

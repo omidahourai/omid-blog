@@ -1,5 +1,7 @@
 import ArticlePreview from 'components/ArticlePreview'
 import { compose, withProps } from 'recompose'
+import { graphql } from 'gatsby'
+import { lowerFirst } from 'lodash'
 
 export const query = graphql`
   fragment ArticlePreviewFragment on ContentfulArticle {
@@ -37,13 +39,7 @@ export default compose(
     }
   })),
   withProps(props => ({
-    author: props.author || {
-      firstName: 'AUTHOR',
-      lastName: 'NOT SET'
-    },
-  })),
-  withProps(props => ({
-    articleUrl: `/article/${props.id}/`,
+    articleUrl: `/${lowerFirst(props.category.name)}/${props.slug}/`,
     // authorUrl: `/author/${(props.author.firstName + props.author.lastName).toLowerCase()}`,
     // categoryUrl: `/${lowerFirst(props.category.name)}/`,
     // authorName: `${props.author.firstName} ${props.author.lastName}`,

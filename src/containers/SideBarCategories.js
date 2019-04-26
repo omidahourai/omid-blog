@@ -1,6 +1,6 @@
 import SideBarCategories from 'components/SideBarCategories'
 import { compose, withProps } from 'recompose'
-import { theme } from 'styles'
+import { graphql } from 'gatsby'
 
 export const query = graphql`
   fragment SideBarCategoryFragment on ContentfulCategory {
@@ -11,8 +11,5 @@ export const query = graphql`
   }
 `
 export default compose(
-  withProps(props => ({
-    theme,
-  })),
   process.env.DEBUG && withProps(props => console.log('{props} [containers/SideBarCategories]',props)),
 )(SideBarCategories)

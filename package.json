@@ -27,6 +27,7 @@
     "dotenv": "^6.2.0",
     "gatsby": "^2.3.29",
     "gatsby-image": "^2.0.29",
+    "gatsby-plugin-client-side-redirect": "^0.0.2",
     "gatsby-plugin-facebook-pixel": "^1.0.3",
     "gatsby-plugin-google-analytics": "^2.0.13",
     "gatsby-plugin-netlify": "^2.0.10",

@@ -3,104 +3,30 @@ import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
 import Article from 'components/Article'
 
+export const queryPageArticle = graphql`
+  fragment PageArticleFragment on Query {
+    article: contentfulArticle(id: { eq: $id }) {
+      title
+      category
+      slug
+      tags { name }
+      summary { summary }
+      hero { file { url } }
+      author { firstName lastName }
+    }
+  }
+`
 
 export const query = graphql`
   query($id: String!, $nextId: String, $prevId: String) {
-    article: contentfulArticle(id: { eq: $id }) {
-      id
-      title
-      # variables {
-      #   key
-      #   value
-      # }
-      hero {
-        id
-        title
-        description
-        file {
-          url
-        }
-      }
-      summary {
-        id
-        summary
-      }
-      content {
-        childMarkdownRemark {
-          html
-        }
-      }
-      author {
-        id
-        firstName
-        lastName
-        shortTitle
-        description {
-          text: description
-        }
-        photo {
-          file {
-            url
-          }
-        }
-        altPhoto {
-          file {
-            url
-          }
-        }
-        shortDescription
-        facebookHandle
-        twitterHandle
-        instagramHandle
-        linkedinHandle
-        emailAddress
-      }
-      category {
-        name
-      }
-      publishedOn
-      updatedOn
-      tags {
-        name
-      }
-    }
-    # ...SideBarCategoriesFragment
-    prev: contentfulArticle(id: { eq: $prevId }) {
-      id
-      title
-      slug
-      category {
-        name
-      }
-      hero {
-        id
-        title
-        description
-        file {
-          url
-        }
-      }
-      publishedOn
-      updatedOn
-    }
-    next: contentfulArticle(id: { eq: $nextId }) {
-      id
-      title
-      slug
-      category {
-        name
-      }
-      hero {
-        id
-        title
-        description
-        file {
-          url
-        }
-      }
-      publishedOn
-      updatedOn
-    }
+    article: contentfulArticle(id: { eq: $id }) { id }
+    n: contentfulArticle(id: { eq: $nextId }) { id }
+    p: contentfulArticle(id: { eq: $prevId }) { id }
+    ...PageArticleFragment
+    ...SideBarAuthorFragment
+    ...SideBarCategoriesFragment
+    ...ArticlePrevFragment
+    ...ArticleNextFragment
   }
 `
 

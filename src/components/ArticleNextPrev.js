@@ -85,46 +85,27 @@ const NoDataBlock = styled.div`
   ${({ direction }) => (direction === c.NEXT ? nextLink : prevLink)};
 `
 
-const parseImgMeta = ({ hero, title }) => {
-  hero = hero || { file: {} }
-  const width = hero.width || 75
-  const height = hero.height || 75
-  const width2x = width * 2
-  const height2x = height * 2
-  return {
-    title,
-    alt: hero.title,
-    src: `${hero.file.url}?w=${width}&h=${height}&q=70`,
-    srcSet: `${hero.file.url}?w=${width2x}&h=${height2x}&q=70 2x`,
-  }
-}
-
-const NextPrev = ({
-  id,
-  title,
-  hero,
-  direction,
-}) => (
-  <Link direction={direction} to={`/article/${id}/`} title={title} alt={title}>
+const NextPrev = props => (
+  <Link direction={props.direction} {...props.link}>
     <Thumbnail>
-      <img alt={''} {...parseImgMeta({ hero, title })} />
+      <img alt={''} {...props.imageMeta} />
     </Thumbnail>
     <TextWrapper>
-      <p>{direction === c.NEXT ? 'NEWER >' : '< OLDER'}</p>
-      <h4>{title}</h4>
+      <p>{props.direction === c.NEXT ? 'NEWER >' : '< OLDER'}</p>
+      <h4>{props.title}</h4>
     </TextWrapper>
   </Link>
 )
 
 export default props => (
   <Wrapper>
-    {props.prevData ? (
-      <NextPrev direction={c.PREVIOUS} {...props.prevData} />
+    {props.prevArticle ? (
+      <NextPrev direction={c.PREVIOUS} {...props.prevArticle} />
     ) : (
       <NoDataBlock direction={c.PREVIOUS} />
     )}
-    {props.nextData ? (
-      <NextPrev direction={c.NEXT} {...props.nextData} />
+    {props.nextArticle ? (
+      <NextPrev direction={c.NEXT} {...props.nextArticle} />
     ) : (
       <NoDataBlock direction={c.NEXT} />
     )}

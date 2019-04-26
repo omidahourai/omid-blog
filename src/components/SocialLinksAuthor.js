@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  InstagramShareButton,
-  LinkedinShareButton,
-  EmailShareButton,
-} from 'components'
+import { FacebookShareButton } from 'components/Button'
+import { TwitterShareButton } from 'components/Button'
+import { InstagramShareButton } from 'components/Button'
+import { LinkedinShareButton } from 'components/Button'
+import { EmailShareButton } from 'components/Button'
 
 const Wrapper = styled.div`
   margin-top: 1rem;

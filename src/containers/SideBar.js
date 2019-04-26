@@ -4,7 +4,6 @@ import { result } from 'lodash'
 import { graphql } from 'gatsby'
 
 export const fragmentCategories = graphql`
-  # fragment SideBarCategoriesFragment on ContentfulCategoryConnection {
   fragment SideBarCategoriesFragment on Query {
     categories: allContentfulCategory {
       edges {
@@ -57,6 +56,7 @@ const getAuthorThumbnail = author => {
 }
 
 export default compose(
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/Sidebar]',props)),
   withProps(({data}) => ({
     author: {...data.author, fullName: `${data.author.firstName} ${data.author.lastName}`},
     categories: data.categories.edges.filter(({node}) => !!node.article).map(({node}) => node),

@@ -1,4 +1,13 @@
+import React from 'react'
+import theme from 'styles/theme'
 import styled from 'styled-components'
+import { ThemeProvider } from 'styled-components'
+
+export const Page = props => (
+  <ThemeProvider theme={theme}>
+    {props.children}
+  </ThemeProvider>
+)
 
 export const Grid = styled.div`
   display: grid;
@@ -12,6 +21,10 @@ export const Grid = styled.div`
     grid-template-columns: minmax(0, 1fr) minmax(980px, 1185px) minmax(0, 1fr);
   }
 `
+
+export const PageGrid = props => (
+  <Page><Grid>{props.children}</Grid></Page>
+)
 
 export const LayoutArticles = styled.main`
   display: flex;

@@ -1,6 +1,8 @@
 import moment from 'moment'
 import ArticlePreviewHeader from 'components/ArticlePreviewHeader'
 import { compose, withProps } from 'recompose'
+import { graphql } from 'gatsby'
+import { lowerFirst } from 'lodash'
 
 export const query = graphql`
   fragment ArticlePreviewHeaderFragment on ContentfulArticle {
@@ -12,12 +14,6 @@ export const query = graphql`
 `
 
 export default compose(
-  withProps(props => ({
-    author: props.author || {
-      firstName: 'AUTHOR',
-      lastName: 'NOT SET'
-    },
-  })),
   withProps(props => ({
     authorUrl: '#',
     articleUrl: props.articleUrl,

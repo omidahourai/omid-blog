@@ -1,8 +1,10 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
-import { LayoutHome, ArticlePreviewList } from 'components'
+import ArticlePreviewList from 'containers/ArticlePreviewList'
 import SideBar from 'containers/SideBar'
+import LayoutHome from 'components/LayoutHome'
+import Page from 'components/Page'
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,22 +20,21 @@ const SidebarWrapper = styled.div`
   }
 `
 export default props => (
-  !props.data ? (
-      <div>{'No Data :('}</div>
-  ) : (
-    <LayoutHome {...props}>
-      <Wrapper>
-        <Helmet meta={props.pageMeta} title={props.pageTitle} />
-        <div>
-          <ArticlePreviewList data={props.data}/>
-        </div>
-        <SidebarWrapper>
-          <SideBar
-            instagram={props.instagram}
-            data={props.data}
-          />
-        </SidebarWrapper>
-      </Wrapper>
-    </LayoutHome>
-  )
+  <Page>
+    {!props.data ? (
+        <div>{'No Data :('}</div>
+    ) : (
+      <LayoutHome {...props}>
+        <Wrapper>
+          <Helmet meta={props.pageMeta} title={props.pageTitle} />
+          <div>
+            <ArticlePreviewList data={props.data}/>
+          </div>
+          <SidebarWrapper>
+            <SideBar {...props}/>
+          </SidebarWrapper>
+        </Wrapper>
+      </LayoutHome>
+    )}
+  </Page>
 )

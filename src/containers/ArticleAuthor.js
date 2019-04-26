@@ -1,15 +1,5 @@
-import { compose, withProps } from 'recompose'
 import ArticleAuthor from 'components/ArticleAuthor'
-
-const parseAvatarImageMeta = ({
-  width, height, width2x, height2x, author,
-}) => ({
-  width,
-  height,
-  alt: author.fullName,
-  src: `${author.photo.file.url}?w=${width}&h=${height}&q=70`,
-  srcSet: `${author.photo.file.url}?w=${width2x}&h=${height2x}&q=70 2x`,
-})
+import { compose, withProps } from 'recompose'
 
 export default compose(
   withProps({dim: 110}),
@@ -20,7 +10,13 @@ export default compose(
     height: dim,
   })),
   withProps(props => ({
-    avatarImageMeta: parseAvatarImageMeta(props),
+    avatarImageMeta: {
+      width: props.width,
+      height: props.height,
+      alt: props.author.fullName,
+      src: `${props.author.photo.file.url}?w=${props.width}&h=${props.height}&q=70`,
+      srcSet: `${props.author.photo.file.url}?w=${props.width2x}&h=${props.height2x}&q=70 2x`,
+    },
     authorLink: {
       to: '#',
       title: `Articles by ${props.author.fullName}`,

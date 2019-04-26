@@ -1,5 +1,6 @@
 import SocialLinksShare from 'components/SocialLinksShare'
 import { compose, withProps } from 'recompose'
+import { graphql } from 'gatsby'
 
 export const query = graphql`
   fragment SocialLinksFragment on ContentfulArticle {
@@ -31,5 +32,5 @@ export default compose(
     twitterUrl: encodeURI(`https://twitter.com/share?text=Check out this article by @omidahourai: ${props.title}&hashtags=${props.hashtags}&url=${props.url}`),
     facebookUrl: encodeURI(`https://facebook.com/sharer/sharer.php?u=${decodeURIComponent(props.url)}`),
   })),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/SocialLinksShare]',props)),
+  process.env.DEBUG && withProps(props => {console.log('{props} [containers/SocialLinksShare]',props)}),
 )(SocialLinksShare)

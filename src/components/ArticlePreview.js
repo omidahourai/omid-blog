@@ -1,9 +1,8 @@
 import React from 'react'
 import SocialLinksShare from 'containers/SocialLinksShare'
 import styled from 'styled-components'
+import ArticlePreviewHeader from 'containers/ArticlePreviewHeader'
 import { Link } from 'gatsby'
-import { theme } from 'styles'
-import { ArticlePreviewHeader } from 'components'
 
 const Wrapper = styled.article`
   display: flex;
@@ -28,7 +27,7 @@ const Hero = styled.div`
   }
 `
 const Content = styled.div`
-  font-family: ${theme.font.sansSerif};
+  font-family: ${props => props.theme.font.sansSerif};
   font-size: 0.85rem;
   line-height: 1.35rem;
   margin-bottom: 1rem;
@@ -60,7 +59,7 @@ export default props => (
         <img alt={''} {...props.heroImageMeta} />
       </Link>
     </Hero>
-    <ArticlePreviewHeader {...props} articleUrl={props.articleUrl}/>
+    <ArticlePreviewHeader {...props} />
     <Content
       dangerouslySetInnerHTML={{
         __html: props.summaryHtml,

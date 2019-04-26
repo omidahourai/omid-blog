@@ -6,9 +6,9 @@ import 'styles/global.css'
 export const query = graphql`
   query {
     ...SideBarAuthorFragment
-    # ...SideBarCategoriesFragment
-    # ...ArticlePreviewListFragment
-    articles: allContentfulArticle (
+    ...SideBarCategoriesFragment
+    ...ArticlePreviewListFragment
+    allContentfulArticle (
       sort: { order: DESC, fields: [publishedOn] }
       filter: { node_locale: { eq: "en-US" } }
     ) {

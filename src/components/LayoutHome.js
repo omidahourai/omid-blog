@@ -28,7 +28,7 @@ const FooterWrapper = styled.div`
 
 const LayoutHome = props => (
   <Wrapper>
-    <LayoutHeader />
+    <LayoutHeader theme={props.theme} />
     <ContentWrapper>
       {props.children}
     </ContentWrapper>

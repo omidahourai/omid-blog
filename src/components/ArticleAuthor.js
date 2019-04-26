@@ -58,7 +58,7 @@ const ShareWrapper = styled.div`
 export default props => (
   <Wrapper>
     <Avatar {...pick(props, ['width', 'height'])}>
-      <img {...props.avatarImageMeta} />
+      <img alt={''} {...props.avatarImageMeta} />
     </Avatar>
     <Body>
       <Header>
