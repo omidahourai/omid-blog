@@ -1,6 +1,7 @@
 import SocialLinksShare from 'components/SocialLinksShare'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
+import * as selectors from 'selectors'
 
 export const query = graphql`
   fragment SocialLinksFragment on ContentfulArticle {
@@ -12,10 +13,12 @@ export const query = graphql`
 `
 
 export default compose(
+  process.env.DEBUG && withProps(props => {console.log('{props} [containers/SocialLinksShare]',props)}),
+
   withProps(props => ({
-    tags: props.tags.map(({name}) => name),
-    url: `http://omid.com/article/${props.id}/`,
-    imageUrl: `http:${props.hero.file.url}?w=1000&h=1000`,
+    tags: selectors.getArticleTagNames(props.data),
+    url: selectors.getArticleShareUrl(props.data),
+    imageUrl: selectors.getArticleHeroShare(props.data),
     linkStyles: {
       width: '2.2rem',
       height: '2.2rem',

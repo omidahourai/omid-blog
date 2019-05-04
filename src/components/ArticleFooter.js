@@ -82,15 +82,15 @@ const Tag = ({ label }) => (
 )
 
 export default props => (
-  <Wrapper key={props.article.id}>
+  <Wrapper key={props.articleId}>
     <MetaTags>
-      {props.article.tags.map(({name}) => (
-        <Tag key={name} label={name} />
+      {props.tags.map(tag => (
+        <Tag key={tag} label={tag} />
       ))}
     </MetaTags>
     <Text>{'Share this article'}</Text>
     <ShareWrapper>
-      <SocialLinksShare {...props.article} />
+      <SocialLinksShare {...props} />
     </ShareWrapper>
   </Wrapper>
 )

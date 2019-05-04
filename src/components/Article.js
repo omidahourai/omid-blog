@@ -87,23 +87,16 @@ const ArticleContent = styled.div`
 export default props => (
   <PageGrid>
       <LayoutHeader>
-        <ArticleBreadcrumbs
-          categoryName={props.category.name}
-          title={props.article.title}
-        />
+        <ArticleBreadcrumbs {...props}/>
       </LayoutHeader>
       <ArticleLayout>
-        <Helmet {...props.meta} />
+        <Helmet title={props.pageTitle} meta={props.pageMeta} />
         <ArticleHero>
           <img alt={props.heroImageMeta.alt} {...props.heroImageMeta} />
         </ArticleHero>
-        <ArticleHeader
-          category={props.category}
-          article={props.article}
-          author={props.author}
-        />
+        <ArticleHeader {...props}/>
         <ArticleContent
-          category={props.category.name}
+          category={props.categoryName}
           dangerouslySetInnerHTML={{
             __html: props.article.content.childMarkdownRemark.html,
           }}
@@ -111,6 +104,7 @@ export default props => (
         <ArticleFooter
           article={props.article}
           category={props.category}
+          {...props}
         />
         <ArticleAuthor
           author={props.author}

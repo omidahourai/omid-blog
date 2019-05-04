@@ -5,9 +5,16 @@ import 'styles/global.css'
 
 export const query = graphql`
   query {
-    ...SideBarAuthorFragment
-    ...SideBarCategoriesFragment
+    categories: allContentfulCategory {
+      ...SideBarCategoriesFragment
+    }
     ...ArticlePreviewListFragment
+    author: contentfulAuthor(
+      firstName: { eq: "Omid" }
+      lastName: { eq: "Ahourai" }
+    ) {
+      ...SideBarAuthorFragment
+    }
     allContentfulArticle (
       sort: { order: DESC, fields: [publishedOn] }
       filter: { node_locale: { eq: "en-US" } }

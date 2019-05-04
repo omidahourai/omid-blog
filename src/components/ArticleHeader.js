@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import styled from 'styled-components'
 import { theme } from 'styles'
 import * as Gatsby from 'gatsby'
@@ -79,19 +78,19 @@ export default props => (
       <Prefix>{'In'}</Prefix>
       <CategoryLink
         rel={'category tag'}
-        to={props.category.url}>
-        {props.category.name}
+        to={props.categoryUrl}>
+        {props.categoryName}
       </CategoryLink>
     </Category>
-    <Title>{props.article.title}</Title>
+    <Title>{props.articleTitle}</Title>
     <Meta>
-      <PublishDate>{moment(props.article.publishedOn).format('MMMM D, YYYY')}</PublishDate>
+      <PublishDate>{props.publishDate}</PublishDate>
       <AuthorPrefix>{'By'}</AuthorPrefix>
       <AuthorLink
-        to={props.authorUrl || '#'}
-        title={`Articles by ${props.author.fullName}`}
+        to={props.authorUrl}
+        title={`Articles by ${props.authorName}`}
         rel={'author'}>
-        {props.author.fullName}
+        {props.authorName}
       </AuthorLink>
     </Meta>
   </Wrapper>

@@ -14,7 +14,6 @@
     "start": "gatsby serve",
     "stage": "yarn build && yarn start",
     "dev": "GATSBY_GRAPHQL_IDE=playground gatsby develop",
-    "graphql": "node ./node_modules/graphql-cli/dist/bin.js",
     "yoga": "node ./node_modules/graphql-yoga/dist/index.js",
     "gql-playground": "yarn graphql playground",
     "gql-schema": "yarn graphql get-schema",
@@ -49,6 +48,7 @@
     "react-router-dom": "^4.3.1",
     "react-tippy": "^1.2.3",
     "recompose": "^0.30.0",
+    "reselect": "^4.0.0",
     "slash": "^2.0.0",
     "styled-components": "^4.1.3"
   },

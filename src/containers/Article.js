@@ -1,32 +1,45 @@
+import Article from 'components/Article'
 import { lowerFirst } from 'lodash'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
-import Article from 'components/Article'
+import * as selectors from 'selectors'
 
 export const queryPageArticle = graphql`
-  fragment PageArticleFragment on Query {
-    article: contentfulArticle(id: { eq: $id }) {
-      title
-      category
-      slug
-      tags { name }
-      summary { summary }
-      hero { file { url } }
-      author { firstName lastName }
-    }
+  fragment PageArticleFragment on ContentfulArticle {
+    id
+    title
+    slug
+    content { childMarkdownRemark { html } }
+    category { name }
+    tags { name }
+    summary { summary }
+    hero { file { url } }
+    author { firstName lastName }
   }
 `
 
 export const query = graphql`
   query($id: String!, $nextId: String, $prevId: String) {
-    article: contentfulArticle(id: { eq: $id }) { id }
-    n: contentfulArticle(id: { eq: $nextId }) { id }
-    p: contentfulArticle(id: { eq: $prevId }) { id }
-    ...PageArticleFragment
-    ...SideBarAuthorFragment
-    ...SideBarCategoriesFragment
-    ...ArticlePrevFragment
-    ...ArticleNextFragment
+    article: contentfulArticle(id: { eq: $id }) {
+      ...PageArticleFragment
+      ...ArticleHeaderFragment
+      ...ArticleFooterFragment
+    }
+    next: contentfulArticle(id: { eq: $nextId }) {
+      ...ArticleNextPrevFieldsFragment
+    }
+    prev: contentfulArticle(id: { eq: $prevId }) {
+      ...ArticleNextPrevFieldsFragment
+    }
+    author: contentfulAuthor(
+      firstName: { eq: "Omid" }
+      lastName: { eq: "Ahourai" }
+    ) {
+      ...SideBarAuthorFragment
+    }
+    categories: allContentfulCategory {
+      ...SideBarCategoriesFragment
+    }
   }
 `
 
@@ -45,56 +58,14 @@ export default compose(
   withProps(props => ({
     instagram: props.pageContext.instagram ? props.pageContext.instagram.data : [], 
   })),
-  withProps(({data: {article}}) => ({
-    meta: {
-      title: `Omid Ahourai's Blog | ${article.title}`,
-      meta: [
-        { name: 'description', content: `${article.summary.summary}` },
-        {
-          name: 'keywords',
-          content: article.tags.map(({ name }) => name).join(', '),
-        },
-        { property: 'og:site_name', content: `Blog - Omid Ahourai` },
-        { property: 'og:type', content: 'article' },
-        { property: 'og:title', content: article.title },
-        { property: 'og:description', content: article.summary.summary },
-        {
-          property: 'og:url',
-          content: `http://www.omid.com/${lowerFirst(article.category.name)}/${article.slug}`,
-        },
-        {
-          property: 'og:image',
-          content: `http:${article.hero.file.url}?w=1200&h=630&q=70`,
-        },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: article.title },
-        { name: 'twitter:description', content: article.summary.summary },
-        {
-          name: 'twitter:url',
-          content: `http://www.omid.com/${lowerFirst(article.category.name)}/${article.slug}`,
-        },
-        { name: 'twitter:image', content: `http:${article.hero.file.url}?w=1200&q=70` },
-        { name: 'twitter:label1', content: 'Written by' },
-        {
-          name: 'twitter:data1',
-          content: `${article.author.firstName} ${article.author.lastName}`,
-        },
-        { name: 'twitter:label2', content: 'Filed under' },
-        { name: 'twitter:data2', content: article.category.name },
-      ],
-    }
+  withProps(({data}) => ({
+    ...data,
   })),
-  withProps(({data: {article}}) => ({
-    article,
+  withProps(p => console.log('cat art',p)),
+  withProps(({article, ...props}) => ({
     heroImageMeta: parseHeroImgMeta(article.hero),
-    category: {
-      ...article.category,
-      url: `/${lowerFirst(article.category.name)}/`
-    },
-    author: {
-      ...article.author,
-      fullName: `${article.author.firstName} ${article.author.lastName}`,
-    },
+    authorName: selectors.getAuthorName(props.data),
+    articleUrl: selectors.getArticleUrl(props.data),
     theme: article.variables && article.variables.find(({key, value}) => key === 'theme' && value === 'dark')
       ? { // dark
         bg: '#333',
@@ -104,8 +75,42 @@ export default compose(
         color: '#454545',
       },
   })),
-  withProps(({data}) => ({
-    prev: data.prev,
-    next: data.next,
+  withProps(({article, category, ...props}) => ({
+    pageKeywords: selectors.getArticleTags(props.data).map(({ name }) => name).join(', '),
+    pageDescription: selectors.getArticleSummary(props.data),
+    pageArticleUrl: `http://www.omid.com/${props.articleUrl}`,
+    pageHeroUrl: selectors.getArticleHero(props.data),
+    articleTitle: selectors.getArticleTitle(props.data),
+    categoryName: selectors.getCategoryName(props.data),
+    categoryUrl: selectors.getCategoryUrl(props.data),
   })),
+  withProps(props => ({
+    pageTitle: `Omid Ahourai's Blog | ${props.articleTitle}`,
+    pageMeta: [
+      { name: 'description', content: `${props.pageDescription}` },
+      { name: 'keywords', content: props.pageKeywords },
+      { property: 'og:site_name', content: `Blog - Omid Ahourai` },
+      { property: 'og:type', content: 'article' },
+      { property: 'og:title', content: props.articleTitle },
+      { property: 'og:description', content: props.pageDescription },
+      {
+        property: 'og:url',
+        content: props.pageArticleUrl,
+      },
+      {
+        property: 'og:image',
+        content: props.pageHeroUrl,
+      },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: props.articleTitle },
+      { name: 'twitter:description', content: props.pageDescription },
+      { name: 'twitter:url', content: props.pageArticleUrl },
+      { name: 'twitter:image', content: props.pageHeroUrl },
+      { name: 'twitter:label1', content: 'Written by' },
+      { name: 'twitter:data1', content: `${props.authorName}` },
+      { name: 'twitter:label2', content: 'Filed under' },
+      { name: 'twitter:data2', content: props.categoryName },
+    ],
+  })),
+  process.env.DEBUG && withProps(props => {console.log('{props} [containers/Article]',props)}),
 )(Article)

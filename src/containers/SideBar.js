@@ -4,37 +4,30 @@ import { result } from 'lodash'
 import { graphql } from 'gatsby'
 
 export const fragmentCategories = graphql`
-  fragment SideBarCategoriesFragment on Query {
-    categories: allContentfulCategory {
-      edges {
-          node {
-            ...SideBarCategoryFragment
-          }
-      }
+  fragment SideBarCategoriesFragment on ContentfulCategoryConnection {
+    edges {
+        node {
+          ...SideBarCategoryFragment
+        }
     }
   }
 `
 export const fragmentAuthor = graphql`
-  fragment SideBarAuthorFragment on Query {
-    author: contentfulAuthor(
-      firstName: { eq: "Omid" }
-      lastName: { eq: "Ahourai" }
-    ) {
-      firstName
-      lastName
-      shortTitle
-      photo { file { url } }
-      altPhoto { file { url } }
-      shortDescription
-      description {
-        text: description
-      }
-      facebookHandle
-      twitterHandle
-      instagramHandle
-      linkedinHandle
-      emailAddress
+  fragment SideBarAuthorFragment on ContentfulAuthor {
+    firstName
+    lastName
+    shortTitle
+    photo { file { url } }
+    altPhoto { file { url } }
+    shortDescription
+    description {
+      text: description
     }
+    facebookHandle
+    twitterHandle
+    instagramHandle
+    linkedinHandle
+    emailAddress
   }
 `
 const getAuthorThumbnail = author => {

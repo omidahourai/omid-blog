@@ -14,22 +14,6 @@ export const queryArticleFields = graphql`
   }
 `
 
-export const queryArticlePrev = graphql`
-  fragment ArticlePrevFragment on Query {
-    prevArticle: contentfulArticle(id: { eq: $prevId }) {
-      ...ArticleNextPrevFieldsFragment
-    }
-  }
-`
-
-export const queryArticleNext = graphql`
-  fragment ArticleNextFragment on Query {
-    nextArticle: contentfulArticle(id: { eq: $nextId }) {
-      ...ArticleNextPrevFieldsFragment
-    }
-  }
-`
-
 export default compose(
   withProps(({data}) => ({
     prevArticle: {
