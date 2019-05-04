@@ -2,6 +2,7 @@ import ArticlePreview from 'components/ArticlePreview'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
 import { lowerFirst } from 'lodash'
+import * as selectors from 'selectors'
 
 export const query = graphql`
   fragment ArticlePreviewFragment on ContentfulArticle {
@@ -26,7 +27,7 @@ export default compose(
     width: props.dim,
     height: props.dim,
     dim2x: props.dim * 2,
-    heroImgUrl: `http:${props.hero.file.url}?w=1000&h=1000`,
+    heroImgUrl: selectors.getArticleHeroShare(props.data),
   })),
   withProps(props => ({
     heroImageMeta: {
@@ -36,14 +37,9 @@ export default compose(
       title: props.title,
       src: `${props.heroImgUrl}?w=${props.dim}&h=${props.dim}&q=70`,
       srcSet: `${props.heroImgUrl}?w=${props.dim2x}&h=${props.dim2x}&q=70 2x`,
-    }
-  })),
-  withProps(props => ({
-    articleUrl: `/${lowerFirst(props.category.name)}/${props.slug}/`,
-    // authorUrl: `/author/${(props.author.firstName + props.author.lastName).toLowerCase()}`,
-    // categoryUrl: `/${lowerFirst(props.category.name)}/`,
-    // authorName: `${props.author.firstName} ${props.author.lastName}`,
-    summaryHtml: props.summary.childMarkdownRemark.html || 'SUMMARY NOT SET',
+    },
+    articleUrl: selectors.getArticleUrl(props.data),
+    summaryHtml: selectors.getArticleSummaryHtml(props.data),
   })),
   withProps(props => console.log('{props} [containers/ArticlePreview]',props)),
 )(ArticlePreview)

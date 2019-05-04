@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { theme } from 'styles'
 import * as Gatsby from 'gatsby'
 
 const Link = styled(Gatsby.Link)``
@@ -12,23 +11,23 @@ const Category = styled.div`
   margin-bottom: 0.5rem;
 
   span {
-    font-family: ${theme.font.serif};
+    font-family: ${({theme}) => theme.font.serif};
     font-style: italic;
     font-weight: 400;
     font-style: italic;
     margin-right: 4px;
   }
   ${Link} {
-    font-family: ${theme.font.sansSerif};
+    font-family: ${({theme}) => theme.font.sansSerif};
     text-transform: uppercase;
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-decoration: none;
-    color: ${theme.color.primary};
+    color: ${({theme}) => theme.color.primary};
     &:hover {
       text-decoration: underline;
-      color: ${theme.color.primaryHighlight};
+      color: ${({theme}) => theme.color.primaryHighlight};
     }
   }
 `
@@ -36,7 +35,7 @@ const Title = styled.h2`
   margin: 0;
   padding: 0;
   vertical-align: baseline;
-  font-family: ${theme.font.serif};
+  font-family: ${({theme}) => theme.font.serif};
   font-size: 1.5rem;
   line-height: initial;
   letter-spacing: 0.05rem;
@@ -49,7 +48,7 @@ const Title = styled.h2`
       color: #111;
     }
     &:hover {
-      color: ${theme.color.primary};
+      color: ${({theme}) => theme.color.primary};
       text-decoration: none;
     }
   }
@@ -63,10 +62,10 @@ const Meta = styled.div`
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
-    color: ${theme.color.primary};
-    font-family: ${theme.font.sansSerif};
+    color: ${({theme}) => theme.color.primary};
+    font-family: ${({theme}) => theme.font.sansSerif};
     &:hover {
-      color: ${theme.color.primaryHighlight};
+      color: ${({theme}) => theme.color.primaryHighlight};
       text-decoration: underline;
     }
   }
@@ -74,7 +73,7 @@ const Meta = styled.div`
 const PublishDate = styled.span`
   font-size: 15px;
   margin-right: 5px;
-  font-family: ${theme.font.sansSerif};
+  font-family: ${({theme}) => theme.font.sansSerif};
 `
 const Prefix = styled.span`
   font-family: 'Playpair Display';

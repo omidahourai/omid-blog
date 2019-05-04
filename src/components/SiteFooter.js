@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { theme } from 'styles'
 
 const Wrapper = styled.footer`
   background-color: #333;
@@ -8,7 +7,7 @@ const Wrapper = styled.footer`
   & p {
     margin: 1rem 0;
     color: #fff;
-    font-family: ${theme.font.sansSerif};
+    font-family: ${({theme}) => theme.font.sansSerif};
     font-size: 14px;
     line-height: 22px;
     letter-spacing: 0.5px;

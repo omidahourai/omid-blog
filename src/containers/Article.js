@@ -1,5 +1,4 @@
 import Article from 'components/Article'
-import { lowerFirst } from 'lodash'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
 import * as selectors from 'selectors'
@@ -25,10 +24,10 @@ export const query = graphql`
       ...ArticleHeaderFragment
       ...ArticleFooterFragment
     }
-    next: contentfulArticle(id: { eq: $nextId }) {
+    nextArticle: contentfulArticle(id: { eq: $nextId }) {
       ...ArticleNextPrevFieldsFragment
     }
-    prev: contentfulArticle(id: { eq: $prevId }) {
+    prevArticle: contentfulArticle(id: { eq: $prevId }) {
       ...ArticleNextPrevFieldsFragment
     }
     author: contentfulAuthor(
@@ -36,6 +35,7 @@ export const query = graphql`
       lastName: { eq: "Ahourai" }
     ) {
       ...SideBarAuthorFragment
+      ...ArticleAuthorFragment
     }
     categories: allContentfulCategory {
       ...SideBarCategoriesFragment
@@ -43,46 +43,20 @@ export const query = graphql`
   }
 `
 
-const parseHeroImgMeta = hero => {
-  const dim = 1000
-  const dim2x = dim * 2
-  return {
-    alt: hero.title,
-    title: hero.title,
-    src: `${hero.file.url}?w=${dim}&h=${dim}&q=70`,
-    srcSet: `${hero.file.url}?w=${dim2x}&h=${dim2x}&q=70 2x`,
-  }
-}
-
 export default compose(
   withProps(props => ({
-    instagram: props.pageContext.instagram ? props.pageContext.instagram.data : [], 
-  })),
-  withProps(({data}) => ({
-    ...data,
-  })),
-  withProps(p => console.log('cat art',p)),
-  withProps(({article, ...props}) => ({
-    heroImageMeta: parseHeroImgMeta(article.hero),
-    authorName: selectors.getAuthorName(props.data),
-    articleUrl: selectors.getArticleUrl(props.data),
-    theme: article.variables && article.variables.find(({key, value}) => key === 'theme' && value === 'dark')
-      ? { // dark
-        bg: '#333',
-        color: '#FFF',
-      } : { // light (default)
-        bg: '#FFF',
-        color: '#454545',
-      },
-  })),
-  withProps(({article, category, ...props}) => ({
-    pageKeywords: selectors.getArticleTags(props.data).map(({ name }) => name).join(', '),
+    instagram: props.pageContext.instagram ? props.pageContext.instagram.data : [],
+    pageKeywords: selectors.getArticleTagNames(props.data).join(', '),
     pageDescription: selectors.getArticleSummary(props.data),
-    pageArticleUrl: `http://www.omid.com/${props.articleUrl}`,
+    pageArticleUrl: selectors.getArticleFullUrl(props.data),
     pageHeroUrl: selectors.getArticleHero(props.data),
     articleTitle: selectors.getArticleTitle(props.data),
+    articleHero: selectors.getArticleHeroImageMeta(props.data),
+    articleContentHtml: selectors.getArticleContentHtml(props.data),
+    authorName: selectors.getAuthorName(props.data),
     categoryName: selectors.getCategoryName(props.data),
     categoryUrl: selectors.getCategoryUrl(props.data),
+    mode: selectors.getArticleMode(props.data),
   })),
   withProps(props => ({
     pageTitle: `Omid Ahourai's Blog | ${props.articleTitle}`,
@@ -93,14 +67,8 @@ export default compose(
       { property: 'og:type', content: 'article' },
       { property: 'og:title', content: props.articleTitle },
       { property: 'og:description', content: props.pageDescription },
-      {
-        property: 'og:url',
-        content: props.pageArticleUrl,
-      },
-      {
-        property: 'og:image',
-        content: props.pageHeroUrl,
-      },
+      { property: 'og:url', content: props.pageArticleUrl },
+      { property: 'og:image', content: props.pageHeroUrl },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: props.articleTitle },
       { name: 'twitter:description', content: props.pageDescription },

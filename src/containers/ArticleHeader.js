@@ -1,4 +1,3 @@
-import { lowerFirst } from 'lodash'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
 import ArticleHeader from 'components/ArticleHeader'
@@ -23,5 +22,5 @@ export default compose(
     authorUrl: selectors.getAuthorUrl(props.data),
     authorName: selectors.getAuthorName(props.data),
   })),
-  process.env.DEBUG && withProps(props => {console.log('{props} [containers/Article]',props)}),
-)(Article)
+  process.env.DEBUG && withProps(props => {console.log('{props} [containers/ArticleHeader]',props)}),
+)(ArticleHeader)

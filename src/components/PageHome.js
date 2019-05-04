@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import ArticlePreviewList from 'containers/ArticlePreviewList'
 import SideBar from 'containers/SideBar'
 import LayoutHome from 'components/LayoutHome'
-import Page from 'components/Page'
+import { Page } from 'components/PageLayout'
 
 const Wrapper = styled.div`
   display: flex;

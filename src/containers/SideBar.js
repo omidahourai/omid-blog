@@ -2,6 +2,7 @@ import SideBar from 'components/SideBar'
 import { compose, withProps } from 'recompose'
 import { result } from 'lodash'
 import { graphql } from 'gatsby'
+import { withTheme } from 'styled-components'
 
 export const fragmentCategories = graphql`
   fragment SideBarCategoriesFragment on ContentfulCategoryConnection {
@@ -49,7 +50,8 @@ const getAuthorThumbnail = author => {
 }
 
 export default compose(
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/Sidebar]',props)),
+  withTheme,
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/Sidebar]',props,withTheme)),
   withProps(({data}) => ({
     author: {...data.author, fullName: `${data.author.firstName} ${data.author.lastName}`},
     categories: data.categories.edges.filter(({node}) => !!node.article).map(({node}) => node),

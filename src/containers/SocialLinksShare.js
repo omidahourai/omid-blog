@@ -16,7 +16,8 @@ export default compose(
   process.env.DEBUG && withProps(props => {console.log('{props} [containers/SocialLinksShare]',props)}),
 
   withProps(props => ({
-    tags: selectors.getArticleTagNames(props.data),
+    title: selectors.getArticleTitle(props.data),
+    hashtags: selectors.getArticleTagNames(props.data).join(','),
     url: selectors.getArticleShareUrl(props.data),
     imageUrl: selectors.getArticleHeroShare(props.data),
     linkStyles: {
@@ -27,7 +28,6 @@ export default compose(
     }
   })),
   withProps(props => ({
-    hashtags: props.tags.join(','),
     facebookTitle: 'Share on Facebook',
     twitterTitle: 'Share on Twitter',
     pinterestTitle: 'Share on Pinterest',

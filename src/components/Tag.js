@@ -6,7 +6,6 @@ import SiteFooter from 'components/SiteFooter'
 import { PageGrid } from 'components/PageLayout'
 import { LayoutArticles } from 'components/PageLayout'
 import { LayoutFooter } from 'components/PageLayout'
-import Page from 'components/Page'
 
 export default props => (
   <React.Fragment>

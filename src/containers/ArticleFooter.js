@@ -1,5 +1,6 @@
 import ArticleFooter from 'components/ArticleFooter'
 import { compose, withProps } from 'recompose'
+import * as selectors from 'selectors'
 
 export const query = graphql`
   fragment ArticleFooterFragment on ContentfulArticle {
@@ -9,8 +10,8 @@ export const query = graphql`
 `
 
 export default compose(
-  withProps(props => ({
-    articleId: props.article.id,
-    tags: props.article.tags.map(({name}) => name),
+  withProps(({data}) => ({
+    articleId: selectors.getArticleId(data),
+    tags: selectors.getArticleTagNames(data),
   })),
 )(ArticleFooter)

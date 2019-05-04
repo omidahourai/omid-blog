@@ -20,7 +20,7 @@ const Header = styled.h3`
   font-size: 16px;
   letter-spacing: 1.5px;
   margin-bottom: 1rem;
-  font-family: ${props => props.theme.font.serif};
+  font-family: ${({theme}) => theme.font.serif};
   text-transform: uppercase;
   &:before {
     right: 100%;
@@ -60,11 +60,11 @@ const Profile = styled.section`
     font-size: 16px;
     letter-spacing: 1.5px;
     margin-bottom: 4px;
-    font-family: ${props => props.theme.font.serif};
+    font-family: ${({theme}) => theme.font.serif};
     text-transform: uppercase;
   }
   & p {
-    font-family: ${props => props.theme.font.sansSerif};
+    font-family: ${({theme}) => theme.font.sansSerif};
     font-size: 0.85rem;
     line-height: 1.35rem;
     text-align: center;
@@ -83,13 +83,13 @@ const Wrapper = styled.aside`
 // }
 export default props => (
   <Wrapper>
-    <Profile theme={props.theme}>
+    <Profile>
       <Image {...props.authorThumbnail} />
       <h6>{props.authorTitle}</h6>
       <p>{props.authorDescription}</p>
     </Profile>
     <Section>
-      <Header theme={props.theme}>
+      <Header>
         {'Follow Me'}
       </Header>
       <SocialLinksAuthor
@@ -102,13 +102,13 @@ export default props => (
       />
     </Section>
     <Section>
-      <Header theme={props.theme}>
+      <Header>
         {'Instagram'}
       </Header>
       <SideBarInstagram data={props.igImageData} />
     </Section>
     <Section>
-      <Header theme={props.theme}>
+      <Header>
         {'Categories'}
       </Header>
       <SideBarCategories categories={props.categories} />

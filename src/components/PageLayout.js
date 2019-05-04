@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
 export const Page = props => (
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={{mode: 'light', ...theme}}>
     {props.children}
   </ThemeProvider>
 )

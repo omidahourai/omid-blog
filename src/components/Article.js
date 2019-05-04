@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import ArticleAuthor from 'containers/ArticleAuthor'
 import ArticleBreadcrumbs from 'containers/ArticleBreadcrumbs'
 import ArticleFooter from 'containers/ArticleFooter'
-import ArticleHeader from 'components/ArticleHeader'
+import ArticleHeader from 'containers/ArticleHeader'
 import ArticleNextPrev from 'containers/ArticleNextPrev'
 import LayoutHeader from 'containers/LayoutHeader'
 import SideBar from 'containers/SideBar'
@@ -38,14 +38,14 @@ const SideBarWrapper = styled.div`
   display: none;
 `
 const ArticleContent = styled.div`
-  font-family: ${props => props.theme.font.sansSerif};
+  font-family: ${({theme}) => theme.font.sansSerif};
   font-size: 0.85rem;
   line-height: 1.35rem;
   & a {
     text-decoration: none;
     color: primary;
     &:hover {
-      color: ${props => props.theme.color.primaryHighlight};
+      color: ${({theme}) => theme.color.primaryHighlight};
     }
   }
   ${({category}) => category === 'Poetry' && `
@@ -86,43 +86,27 @@ const ArticleContent = styled.div`
 
 export default props => (
   <PageGrid>
+      <Helmet title={props.pageTitle} meta={props.pageMeta} />
       <LayoutHeader>
         <ArticleBreadcrumbs {...props}/>
       </LayoutHeader>
       <ArticleLayout>
-        <Helmet title={props.pageTitle} meta={props.pageMeta} />
         <ArticleHero>
-          <img alt={props.heroImageMeta.alt} {...props.heroImageMeta} />
+          <img alt={props.articleHero.alt} {...props.articleHero} />
         </ArticleHero>
         <ArticleHeader {...props}/>
         <ArticleContent
           category={props.categoryName}
           dangerouslySetInnerHTML={{
-            __html: props.article.content.childMarkdownRemark.html,
+            __html: props.articleContentHtml,
           }}
         />
-        <ArticleFooter
-          article={props.article}
-          category={props.category}
-          {...props}
-        />
-        <ArticleAuthor
-          author={props.author}
-          firstName={props.author.firstName}
-          lastName={props.author.lastName}
-          description={props.author.description.text}
-          photoUrl={props.author.photo.file.url}
-        />
-        {(props.prev || props.next) && (
-          <ArticleNextPrev 
-            data={props.data}
-            prevData={props.prev} nextData={props.next} />
-        )}
-        <SideBarWrapper>
-          {props.author && (
-            <SideBar {...props} />
-          )}
-        </SideBarWrapper>
+        <ArticleFooter data={props.data} />
+        <ArticleAuthor data={props.data} />
+        <ArticleNextPrev data={props.data} />
+        {/*
+          <SideBar {...props} />
+        */}
       </ArticleLayout>
       <LayoutFooter>
         <SiteFooter />

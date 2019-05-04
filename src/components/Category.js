@@ -1,6 +1,5 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import Page from 'components/Page'
 import LayoutHeader from 'containers/LayoutHeader'
 import SiteFooter from 'components/SiteFooter'
 import ArticlePreviewList from 'containers/ArticlePreviewList'

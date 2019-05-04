@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { theme } from 'styles'
 import * as Gatsby from 'gatsby'
 
 const Link = styled(Gatsby.Link)`
   text-decoration: none;
   color: #666;
   &:hover {
-    color: ${theme.color.primaryHighlight};
+    color: ${({theme}) => theme.color.primaryHighlight};
   }
 `
 const Item = styled.li`

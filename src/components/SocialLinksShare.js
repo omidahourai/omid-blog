@@ -4,7 +4,7 @@ import { FacebookShareButton } from 'components/Button'
 import { TwitterShareButton } from 'components/Button'
 import { PinterestShareButton } from 'components/Button'
 import { LinkShareButton } from 'components/Button'
-// import { InstagramShareButton } from 'components'
+// import { InstagramShareButton } from 'components/InstagramShareButton'
 
 const Wrapper = styled.div`
   display: inline-block;

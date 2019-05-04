@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { pick } from 'lodash'
-import { theme } from 'styles'
 import { FaFacebook, FaTwitter, FaInstagram } from 'icons'
 import * as Gatsby from 'gatsby'
 
@@ -22,7 +21,7 @@ const Body = styled.div`
   text-align: center;
 `
 const Header = styled.h4`
-  font-family: ${theme.font.serif};
+  font-family: ${({theme}) => theme.font.serif};
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 0.5px;
@@ -30,13 +29,13 @@ const Header = styled.h4`
 `
 const Link = styled(Gatsby.Link)`
   text-decoration: none;
-  color: ${theme.color.primary};
+  color: ${({theme}) => theme.color.primary};
   &:hover {
-    color: ${theme.color.primaryHighlight};
+    color: ${({theme}) => theme.color.primaryHighlight};
   }
 `
 const DescriptionText = styled.p`
-  font-family: ${theme.font.sansSerif};
+  font-family: ${({theme}) => theme.font.sansSerif};
   font-size: 0.85rem;
   line-height: 1.35rem;
   margin: 0;
@@ -48,7 +47,7 @@ const ShareIcon = styled.a`
     fill: #bfc1c3;
   }
   &:hover svg > * {
-    fill: ${theme.color.primary};
+    fill: ${({theme}) => theme.color.primary};
   }
 `
 const ShareWrapper = styled.div`
@@ -58,16 +57,16 @@ const ShareWrapper = styled.div`
 export default props => (
   <Wrapper>
     <Avatar {...pick(props, ['width', 'height'])}>
-      <img alt={''} {...props.avatarImageMeta} />
+      <img alt={''} {...props.authorImageMeta} />
     </Avatar>
     <Body>
       <Header>
         <Link {...props.authorLink}>
-          {props.author.fullName}
+          {props.authorName}
         </Link>
       </Header>
       <DescriptionText>
-        {props.author.description.text}
+        {props.authorDescription}
       </DescriptionText>
       <ShareWrapper>
         <ShareIcon

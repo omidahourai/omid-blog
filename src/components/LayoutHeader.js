@@ -44,7 +44,7 @@ const TopBar = styled.div`
     font-size: 1rem;
     text-decoration: none;
     color: #fff;
-    font-family: ${props => props.theme.font.sansSerif};
+    font-family: ${({theme}) => theme.font.sansSerif};
     font-stretch: 100%;
     font-weight: 600;
     text-transform: uppercase;
@@ -54,7 +54,7 @@ const TopBar = styled.div`
 export default props => (
   <HeaderGrid>
     <Wrapper>
-      <TopBar theme={props.theme}>
+      <TopBar>
         <Link to="/">{'Blog | Omid Ahourai'}</Link>
         <Cursive>{'Emotional rants, poetry, experiences'}</Cursive>
       </TopBar>

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Tooltip } from 'react-tippy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import styled from 'styled-components'
-// import { theme } from 'styles'
+import theme from 'styled-theming'
 
 import {
   FaFacebook,
@@ -26,10 +26,41 @@ const tooltipDefault = {
   arrow: 'true',
   style: { paddingTop: 9 },
 }
+
 const linkDefault = {
   href: '#',
   target: '_blank',
   rel: 'external',
+  kind: 'default',
+}
+
+const buttonTheme = {
+  backgroundColor: theme('mode', {
+    light: '#F8F8F8',
+    dark: '#999999',
+  }),
+  borderColor: theme('mode', {
+    light: '#E8E8E8',
+    dark: '#999999',
+  }),
+  hover: {
+    backgroundColor: theme.variants('mode', 'kind', {
+      default: { light: '#CCCCCC', dark: '#CCCCCC' },
+      facebook: { light: '#3B5998', dark: '#3B5998' },
+      twitter: { light: '#00ACED', dark: '#00ACED' },
+      instagram: { light: '#D62BFF', dark: '#D62BFF' },
+      pinterest: { light: '#E60223', dark: '#E60223' },
+      linkedin: { light: '#0E76A8', dark: '#0E76A8' },
+    }),
+    borderColor: theme.variants('mode', 'kind', {
+      default: { light: '#E8E8E8', dark: '#E8E8E8' },
+      facebook: { light: '#3B5998', dark: '#FFFFFF' },
+      twitter: { light: '#00ACED', dark: '#FFFFFF' },
+      instagram: { light: '#D62BFF', dark: '#FFFFFF' },
+      pinterest: { light: '#E60223', dark: '#FFFFFF' },
+      linkedin: { light: '#0E76A8', dark: '#FFFFFF' },
+    }),
+  }
 }
 
 export const ShareButton = styled.a`
@@ -38,15 +69,15 @@ export const ShareButton = styled.a`
   display: inline-block;
   border: 1px solid;
   border-radius: 50%;
-  border-color: #e8e8e8;
   padding: 0;
   margin: ${({ margin }) => margin || '0 0.35rem'};
-  background-color: #f8f8f8;
+  border-color: ${buttonTheme.borderColor};
+  background-color: ${buttonTheme.backgroundColor};
   transition: all 0.25s ease-out;
   &:hover {
-    background-color: ${({ bg }) => bg || '#CCC'};
-    border-color: ${({ bg }) => bg || '#E8E8E8'};
     cursor: pointer;
+    background-color: ${buttonTheme.hover.backgroundColor};
+    border-color: ${buttonTheme.hover.borderColor};
     svg > * {
       fill: #fff;
     }
@@ -64,10 +95,15 @@ export const ShareButton = styled.a`
     outline: 0;
   }
 `
+ShareButton.defaultProps = {
+  mode: 'light',
+  kind: 'default',
+}
 
 export const FacebookShareButton = props => (
   <Tooltip {...tooltipDefault} {...props.tooltip}>
-    <ShareButton {...linkDefault} {...props.link} bg={`#3B5998`}>
+  {console.log('propsddddd',ShareButton.props)}
+    <ShareButton {...linkDefault} {...props.link} kind={'facebook'}>
       <FaFacebook />
     </ShareButton>
   </Tooltip>
@@ -75,28 +111,28 @@ export const FacebookShareButton = props => (
 
 export const TwitterShareButton = props => (
   <Tooltip {...tooltipDefault} {...props.tooltip}>
-    <ShareButton {...linkDefault} {...props.link} bg={`#00ACED`}>
+    <ShareButton {...linkDefault} {...props.link} kind={'twitter'}>
       <FaTwitter />
     </ShareButton>
   </Tooltip>
 )
 export const PinterestShareButton = props => (
   <Tooltip {...tooltipDefault} {...props.tooltip}>
-    <ShareButton {...linkDefault} {...props.link} bg={`#E60223`}>
+    <ShareButton {...linkDefault} {...props.link} kind={'pinterest'}>
       <FaPinterestP />
     </ShareButton>
   </Tooltip>
 )
 export const InstagramShareButton = props => (
   <Tooltip {...tooltipDefault} {...props.tooltip}>
-    <ShareButton {...linkDefault} {...props.link} bg={`#D62BFF`}>
+    <ShareButton {...linkDefault} {...props.link} kind={'instagram'}>
       <FaInstagram />
     </ShareButton>
   </Tooltip>
 )
 export const LinkedinShareButton = props => (
   <Tooltip {...tooltipDefault} {...props.tooltip}>
-    <ShareButton {...linkDefault} {...props.link} bg={`#0E76A8`}>
+    <ShareButton {...linkDefault} {...props.link} kind={'linkedin'}>
       <FaLinkedin />
     </ShareButton>
   </Tooltip>
