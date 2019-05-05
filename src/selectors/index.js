@@ -6,14 +6,16 @@ const getAuthor = data => data.author
 const getArticle = data => data.article
 const getArticles = data => data.articles
 const getCategory = data => data.category || getArticle(data).category
+export const getCategory = data => data.categories
+export const getInstagram = ctx => ctx.instagram ? ctx.instagram.data : []
 
-const getImageMeta = ({ dim, baseUrl, title }) => ({
-  width: dim,
-  height: dim,
+const getImageMeta = ({ r, dim, baseUrl, title }) => ({
+  width: r ? r*2 : dim,
+  height: r ? r*2 : dim,
   alt: title,
   title: title,
-  src: `${baseUrl}?w=${dim * 2}&h=${dim * 2}&q=70`,
-  srcSet: `${baseUrl}?w=${dim2x}&h=${dim2x}&q=70 2x`,
+  src: `${baseUrl}?w=${r ? r*2 : dim}&h=${r ? r*2 : dim}${r ? `&r=${r}` : ''}&q=70`,
+  srcSet: `${baseUrl}?w=${r ? r*4 : dim*2}&h=${r ? r*4 : dim*2}${r ? `&r=${r*2}` : ''}&q=70 2x`,
 })
 // const createSelector = (fn, res) => args => res(fn(args))
 
@@ -24,6 +26,12 @@ export const getCategoryUrl = createSelector(
 export const getCategoryName = createSelector(
   getCategory,
   category => category.name
+)
+export const getValidCategories = createSelector(
+  getCategories,
+  categories => categories.edges
+    .filter(({ node }) => !!node.article)
+    .map(({ node }) => node)
 )
 
 export const getCompletedArticles = createSelector(
@@ -129,15 +137,50 @@ export const getAuthorName = createSelector(
   getAuthor,
   author => (author ? `${author.firstName} ${author.lastName}` : '')
 )
+export const getAuthorShortTitle = createSelector(
+  getAuthor,
+  author => author.shortTitle
+)
 export const getAuthorDescription = createSelector(
   getAuthor,
   author => author.description.text
+)
+export const getAuthorShortDescription = createSelector(
+  getAuthor,
+  author => author.shortDescription
 )
 export const getAuthorBaseImageUrl = createSelector(
   getAuthor,
   author => author.photo.file.url
 )
+export const getAuthorBaseAltImageUrl = createSelector(
+  getAuthor,
+  author => author.altPhoto.file.url
+)
 export const getAuthorImageMeta = createSelector(
   [getAuthorBaseImageUrl, getAuthorName],
   (baseUrl, title) => getImageMeta({ dim: 110, baseUrl, title })
+)
+
+export const getAuthorThumbImageMeta = createSelector(
+  [getAuthorBaseAltImageUrl, getAuthorShortTitle],
+  (baseUrl, title) => getImageMeta({ r: 125, baseUrl, title })
+)
+export const getInstagramImageMeta = createSelector(
+  getInstagram,
+  instagram => instagram.map(item => {
+    let text = result(item, 'caption.text') || ''
+    if (text.length > 50) {
+      text = text.slice(0, 50) + '...'
+    }
+    return {
+      text,
+      key: item.id,
+      url: item.images.standard_resolution.url,
+      width: item.images.standard_resolution.width,
+      height: item.images.standard_resolution.height,
+      likes: item.likes.count,
+      link: item.link,
+    }
+  })
 )

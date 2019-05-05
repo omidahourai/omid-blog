@@ -14,7 +14,7 @@ export default props => (
       <div>{'No Data :('}</div>
     ) : (
       <PageGrid>
-        <LayoutHeader theme={props.theme} />
+        <LayoutHeader />
         <LayoutArticles>
           <ArticlePreviewList data={props.data} />
         </LayoutArticles>

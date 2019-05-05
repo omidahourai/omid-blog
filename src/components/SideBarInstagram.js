@@ -69,9 +69,9 @@ const List = styled.ul`
   grid-column-gap: 4px;
   grid-row-gap: 4px;
 `
-const SideBarInstagram = ({ data }) => (
+export default props => (
   <List>
-    {map(slice(data, 0, 9), image => (
+    {map(slice(props.instagram, 0, 9), image => (
       <Item key={image.key}>
         <OverlayLink href={image.link} target="_blank">
           <FaInstagram color="#FFF" size="2rem" />
@@ -86,5 +86,3 @@ const SideBarInstagram = ({ data }) => (
     ))}
   </List>
 )
-
-export default SideBarInstagram

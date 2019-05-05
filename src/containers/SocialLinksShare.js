@@ -21,11 +21,6 @@ export const query = graphql`
 `
 
 export default compose(
-  process.env.DEBUG &&
-    withProps(props => {
-      console.log('{props} [containers/SocialLinksShare]', props)
-    }),
-
   withProps(props => ({
     title: selectors.getArticleTitle(props.data),
     hashtags: selectors.getArticleTagNames(props.data).join(','),

@@ -24,7 +24,7 @@ export default props => (
     {!props.data ? (
       <div>{'No Data :('}</div>
     ) : (
-      <LayoutHome {...props}>
+      <LayoutHome>
         <Wrapper>
           <Helmet meta={props.pageMeta} title={props.pageTitle} />
           <div>

@@ -61,21 +61,19 @@ export const query = graphql`
 `
 
 export default compose(
-  withProps(props => ({
-    instagram: props.pageContext.instagram
-      ? props.pageContext.instagram.data
-      : [],
-    pageKeywords: selectors.getArticleTagNames(props.data).join(', '),
-    pageDescription: selectors.getArticleSummary(props.data),
-    pageArticleUrl: selectors.getArticleFullUrl(props.data),
-    pageHeroUrl: selectors.getArticleHero(props.data),
-    articleTitle: selectors.getArticleTitle(props.data),
-    articleHero: selectors.getArticleHeroImageMeta(props.data),
-    articleContentHtml: selectors.getArticleContentHtml(props.data),
-    authorName: selectors.getAuthorName(props.data),
-    categoryName: selectors.getCategoryName(props.data),
-    categoryUrl: selectors.getCategoryUrl(props.data),
-    mode: selectors.getArticleMode(props.data),
+  withProps(({ data, pageContext }) => ({
+    instagram: selectors.getInstagram(pageContext),
+    pageKeywords: selectors.getArticleTagNames(data).join(', '),
+    pageDescription: selectors.getArticleSummary(data),
+    pageArticleUrl: selectors.getArticleFullUrl(data),
+    pageHeroUrl: selectors.getArticleHero(data),
+    articleTitle: selectors.getArticleTitle(data),
+    articleHero: selectors.getArticleHeroImageMeta(data),
+    articleContentHtml: selectors.getArticleContentHtml(data),
+    authorName: selectors.getAuthorName(data),
+    categoryName: selectors.getCategoryName(data),
+    categoryUrl: selectors.getCategoryUrl(data),
+    mode: selectors.getArticleMode(data),
   })),
   withProps(props => ({
     pageTitle: `Omid Ahourai's Blog | ${props.articleTitle}`,

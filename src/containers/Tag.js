@@ -12,10 +12,6 @@ export const query = graphql`
 `
 
 export default compose(
-  withProps(({ data }) => ({
-    tag: data.tag,
-    articles: data.tag.articles,
-  })),
   withProps(props => ({
     pageTitle: `Omid Ahourai's Blog`,
     pageMeta: [
@@ -33,7 +29,7 @@ export default compose(
       { property: 'og:type', content: 'website' },
       {
         property: 'og:title',
-        content: `Omid Ahourai Blog - ${props.tag.name}`,
+        content: `Omid Ahourai Blog - ${props.data.tag.name}`,
       },
       {
         property: 'og:description',

@@ -100,11 +100,6 @@ export default compose(
       // { name: 'twitter:data2', content: category },
     ],
   })),
-  withProps(props => ({
-    instagram: props.pageContext.instagram
-      ? props.pageContext.instagram.data
-      : [],
-  })),
   process.env.DEBUG &&
     withProps(props => console.log('{props} [containers/PageHome]', props))
 )(PageHome)

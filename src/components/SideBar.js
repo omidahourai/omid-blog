@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import SocialLinksAuthor from 'components/SocialLinksAuthor'
-import SideBarInstagram from 'components/SideBarInstagram'
+import SocialLinksAuthor from 'containers/SocialLinksAuthor'
+import SideBarInstagram from 'containers/SideBarInstagram'
 import SideBarCategories from 'containers/SideBarCategories'
 
 const Image = styled.img`
@@ -90,22 +90,15 @@ export default props => (
     </Profile>
     <Section>
       <Header>{'Follow Me'}</Header>
-      <SocialLinksAuthor
-        facebookHandle={props.authorFacebookHandle}
-        twitterHandle={props.authorTwitterHandle}
-        instagramHandle={props.authorInstagramHandle}
-        linkedinHandle={props.authorLinkedinHandle}
-        emailAddress={props.authorEmail}
-        fullName={props.authorName}
-      />
+      <SocialLinksAuthor data={props.data} />
     </Section>
     <Section>
       <Header>{'Instagram'}</Header>
-      <SideBarInstagram data={props.igImageData} />
+      <SideBarInstagram data={props.data} />
     </Section>
     <Section>
       <Header>{'Categories'}</Header>
-      <SideBarCategories categories={props.categories} />
+      <SideBarCategories data={props.data} />
     </Section>
   </Wrapper>
 )
