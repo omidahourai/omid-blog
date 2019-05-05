@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 
 const Cursive = styled.span`
-    font-family: 'Dancing Script', cursive;
-    color: #FFF;
-    font-size: 1.2rem;
-    padding-left: 30px;
+  font-family: 'Dancing Script', cursive;
+  color: #fff;
+  font-size: 1.2rem;
+  padding-left: 30px;
 `
 
 const HeaderGrid = styled.header`
@@ -15,7 +15,7 @@ const HeaderGrid = styled.header`
   flex-direction: column;
   height: 100%;
   padding-bottom: 3rem;
-  ${({theme}) => `
+  ${({ theme }) => `
     color: ${theme.color};
     background-color: ${theme.bg};
   `}
@@ -44,7 +44,7 @@ const TopBar = styled.div`
     font-size: 1rem;
     text-decoration: none;
     color: #fff;
-    font-family: ${({theme}) => theme.font.sansSerif};
+    font-family: ${({ theme }) => theme.font.sansSerif};
     font-stretch: 100%;
     font-weight: 600;
     text-transform: uppercase;

@@ -12,43 +12,42 @@ import SiteFooter from 'components/SiteFooter'
 import { PageGrid } from 'components/PageLayout'
 import { LayoutFooter } from 'components/PageLayout'
 
+const ArticleHeroImage = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  object-fit: cover;
+`
 const ArticleHero = styled.div`
   margin-bottom: 1rem;
   position: relative;
   padding-top: 60%;
-  & img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100%;
-    object-fit: cover;
-  }
 `
 
-const ArticleLayout = styled.article`
+const LayoutArticle = styled.article`
   grid-area: main;
   overflow: hidden;
   margin: 0 auto;
   max-width: 835px;
   margin-bottom: 2rem;
 `
-const SideBarWrapper = styled.div`
-  display: none;
-`
 const ArticleContent = styled.div`
-  font-family: ${({theme}) => theme.font.sansSerif};
+  font-family: ${({ theme }) => theme.font.sansSerif};
   font-size: 0.85rem;
   line-height: 1.35rem;
   & a {
     text-decoration: none;
     color: primary;
     &:hover {
-      color: ${({theme}) => theme.color.primaryHighlight};
+      color: ${({ theme }) => theme.color.primaryHighlight};
     }
   }
-  ${({category}) => category === 'Poetry' && `
+  ${({ category }) =>
+    category === 'Poetry' &&
+    `
     text-align: center;
     font-style: italic;
   `}
@@ -62,7 +61,7 @@ const ArticleContent = styled.div`
       margin: 0;
     }
     figcaption {
-      display:none;
+      display: none;
       font-size: 0.6rem;
       line-height: 0.9rem;
     }
@@ -71,14 +70,14 @@ const ArticleContent = styled.div`
     }
     @media only screen and (min-width: 420px) and (max-width: 979px) {
       .col-md-4 {
-          width: 50%;
-          padding: 0 5px;
+        width: 50%;
+        padding: 0 5px;
       }
     }
     @media only screen and (min-width: 640px) {
       .col-md-4 {
-          width: 25%;
-          padding: 0 5px;
+        width: 25%;
+        padding: 0 5px;
       }
     }
   }
@@ -86,30 +85,30 @@ const ArticleContent = styled.div`
 
 export default props => (
   <PageGrid>
-      <Helmet title={props.pageTitle} meta={props.pageMeta} />
-      <LayoutHeader>
-        <ArticleBreadcrumbs {...props}/>
-      </LayoutHeader>
-      <ArticleLayout>
-        <ArticleHero>
-          <img alt={props.articleHero.alt} {...props.articleHero} />
-        </ArticleHero>
-        <ArticleHeader {...props}/>
-        <ArticleContent
-          category={props.categoryName}
-          dangerouslySetInnerHTML={{
-            __html: props.articleContentHtml,
-          }}
-        />
-        <ArticleFooter data={props.data} />
-        <ArticleAuthor data={props.data} />
-        <ArticleNextPrev data={props.data} />
-        {/*
-          <SideBar {...props} />
-        */}
-      </ArticleLayout>
-      <LayoutFooter>
-        <SiteFooter />
-      </LayoutFooter>
+    <Helmet title={props.pageTitle} meta={props.pageMeta} />
+    <LayoutHeader>
+      <ArticleBreadcrumbs data={props.data} />
+    </LayoutHeader>
+    <LayoutArticle>
+      <ArticleHero>
+        <ArticleHeroImage alt={props.articleHero.alt} {...props.articleHero} />
+      </ArticleHero>
+      <ArticleHeader {...props} />
+      <ArticleContent
+        category={props.categoryName}
+        dangerouslySetInnerHTML={{
+          __html: props.articleContentHtml,
+        }}
+      />
+      <ArticleFooter data={props.data} />
+      <ArticleAuthor data={props.data} />
+      <ArticleNextPrev data={props.data} />
+      {/*
+        <SideBar {...props} />
+      */}
+    </LayoutArticle>
+    <LayoutFooter>
+      <SiteFooter />
+    </LayoutFooter>
   </PageGrid>
 )

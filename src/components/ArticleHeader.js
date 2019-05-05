@@ -8,21 +8,21 @@ const Wrapper = styled.header`
 const Category = styled.div`
   margin-bottom: 0.5rem;
   & > a {
-    font-family: ${({theme}) => theme.font.sansSerif};
+    font-family: ${({ theme }) => theme.font.sansSerif};
     text-transform: uppercase;
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-decoration: none;
-    color: ${({theme}) => theme.color.primary};
+    color: ${({ theme }) => theme.color.primary};
     &:hover {
       text-decoration: underline;
-      color: ${({theme}) => theme.color.primaryHighlight};
+      color: ${({ theme }) => theme.color.primaryHighlight};
     }
   }
 `
 const Prefix = styled.span`
-  font-family: ${({theme}) => theme.font.serif};
+  font-family: ${({ theme }) => theme.font.serif};
   font-style: italic;
   font-weight: 400;
   font-style: italic;
@@ -32,7 +32,7 @@ const Title = styled.h2`
   margin: 0;
   padding: 0;
   vertical-align: baseline;
-  font-family: ${({theme}) => theme.font.serif};
+  font-family: ${({ theme }) => theme.font.serif};
   font-size: 2.5rem;
   line-height: 3rem;
   letter-spacing: 0.05rem;
@@ -47,7 +47,7 @@ const Meta = styled.div`
 const PublishDate = styled.span`
   font-size: 15px;
   margin-right: 5px;
-  font-family: ${({theme}) => theme.font.sansSerif};
+  font-family: ${({ theme }) => theme.font.sansSerif};
 `
 const AuthorPrefix = styled.span`
   font-family: 'Playpair Display';
@@ -63,10 +63,10 @@ const AuthorLink = styled(Gatsby.Link)`
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
-  color: ${({theme}) => theme.color.primary};
-  font-family: ${({theme}) => theme.font.sansSerif};
+  color: ${({ theme }) => theme.color.primary};
+  font-family: ${({ theme }) => theme.font.sansSerif};
   &:hover {
-    color: ${({theme}) => theme.color.primaryHighlight};
+    color: ${({ theme }) => theme.color.primaryHighlight};
     text-decoration: underline;
   }
 `
@@ -75,9 +75,7 @@ export default props => (
   <Wrapper>
     <Category>
       <Prefix>{'In'}</Prefix>
-      <CategoryLink
-        rel={'category tag'}
-        to={props.categoryUrl}>
+      <CategoryLink rel={'category tag'} to={props.categoryUrl}>
         {props.categoryName}
       </CategoryLink>
     </Category>
@@ -88,7 +86,8 @@ export default props => (
       <AuthorLink
         to={props.authorUrl}
         title={`Articles by ${props.authorName}`}
-        rel={'author'}>
+        rel={'author'}
+      >
         {props.authorName}
       </AuthorLink>
     </Meta>

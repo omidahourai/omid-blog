@@ -15,7 +15,7 @@ export const query = graphql`
     ) {
       ...SideBarAuthorFragment
     }
-    allContentfulArticle (
+    allContentfulArticle(
       sort: { order: DESC, fields: [publishedOn] }
       filter: { node_locale: { eq: "en-US" } }
     ) {
@@ -31,7 +31,7 @@ export const query = graphql`
             summary
           }
           # hero {
-            id
+          id
           #   title
           #   description
           #   file {
@@ -101,7 +101,10 @@ export default compose(
     ],
   })),
   withProps(props => ({
-    instagram: props.pageContext.instagram ? props.pageContext.instagram.data : [],
+    instagram: props.pageContext.instagram
+      ? props.pageContext.instagram.data
+      : [],
   })),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/PageHome]',props)),
+  process.env.DEBUG &&
+    withProps(props => console.log('{props} [containers/PageHome]', props))
 )(PageHome)

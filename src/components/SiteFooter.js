@@ -7,7 +7,7 @@ const Wrapper = styled.footer`
   & p {
     margin: 1rem 0;
     color: #fff;
-    font-family: ${({theme}) => theme.font.sansSerif};
+    font-family: ${({ theme }) => theme.font.sansSerif};
     font-size: 14px;
     line-height: 22px;
     letter-spacing: 0.5px;

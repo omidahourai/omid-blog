@@ -59,13 +59,13 @@ const Wrapper = styled.div`
   }
   & a {
     &:hover h4 {
-      color: ${({theme}) => theme.color.primary};
+      color: ${({ theme }) => theme.color.primary};
     }
   }
   border-bottom: 1px solid #e8e8e8;
   margin-bottom: 2rem;
   & p {
-    font-family: ${({theme}) => theme.font.sansSerif};
+    font-family: ${({ theme }) => theme.font.sansSerif};
     text-transform: uppercase;
     font-size: 0.8rem;
     font-weight: 700;
@@ -73,7 +73,7 @@ const Wrapper = styled.div`
   }
   & h4 {
     vertical-align: baseline;
-    font-family: ${({theme}) => theme.font.sansSerif};
+    font-family: ${({ theme }) => theme.font.sansSerif};
     font-size: 1rem;
     line-height: initial;
     letter-spacing: 0.05rem;
@@ -87,7 +87,7 @@ const NoDataBlock = styled.div`
 const NextPrev = props => (
   <Link direction={props.direction} {...props.link}>
     <Thumbnail>
-      <img alt={''} {...props.imageMeta} />
+      <img alt={props.thumbImageMeta.alt} {...props.thumbImageMeta} />
     </Thumbnail>
     <TextWrapper>
       <p>{props.direction === c.NEXT ? 'NEWER >' : '< OLDER'}</p>

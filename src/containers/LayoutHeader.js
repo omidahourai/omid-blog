@@ -4,5 +4,6 @@ import { compose, withProps } from 'recompose'
 
 export default compose(
   withTheme,
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/LayoutHeader]',props)),
+  process.env.DEBUG &&
+    withProps(props => console.log('{props} [containers/LayoutHeader]', props))
 )(LayoutHeader)

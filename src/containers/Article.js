@@ -8,12 +8,29 @@ export const queryPageArticle = graphql`
     id
     title
     slug
-    content { childMarkdownRemark { html } }
-    category { name }
-    tags { name }
-    summary { summary }
-    hero { file { url } }
-    author { firstName lastName }
+    content {
+      childMarkdownRemark {
+        html
+      }
+    }
+    category {
+      name
+    }
+    tags {
+      name
+    }
+    summary {
+      summary
+    }
+    hero {
+      file {
+        url
+      }
+    }
+    author {
+      firstName
+      lastName
+    }
   }
 `
 
@@ -45,7 +62,9 @@ export const query = graphql`
 
 export default compose(
   withProps(props => ({
-    instagram: props.pageContext.instagram ? props.pageContext.instagram.data : [],
+    instagram: props.pageContext.instagram
+      ? props.pageContext.instagram.data
+      : [],
     pageKeywords: selectors.getArticleTagNames(props.data).join(', '),
     pageDescription: selectors.getArticleSummary(props.data),
     pageArticleUrl: selectors.getArticleFullUrl(props.data),
@@ -80,5 +99,8 @@ export default compose(
       { name: 'twitter:data2', content: props.categoryName },
     ],
   })),
-  process.env.DEBUG && withProps(props => {console.log('{props} [containers/Article]',props)}),
+  process.env.DEBUG &&
+    withProps(props => {
+      console.log('{props} [containers/Article]', props)
+    })
 )(Article)

@@ -12,14 +12,16 @@ export const query = graphql`
 `
 
 export default compose(
-  withProps(({data}) => ({
+  withProps(({ data }) => ({
     category: data.category,
     articles: data.category.articles.map(article => ({
       ...article,
-      author: article.author ? {
+      author: article.author
+        ? {
             ...article.author,
             fullName: `${article.author.firstName} ${article.author.lastName}`,
-          } : null,
+          }
+        : null,
     })),
   })),
   withProps(props => ({
@@ -59,7 +61,7 @@ export default compose(
         // { name: 'twitter:label2', content: 'Filed under' },
         // { name: 'twitter:data2', content: category },
       ],
-    }
+    },
   })),
-  withProps(props => console.log('{props} containers/Category',props)),
+  withProps(props => console.log('{props} containers/Category', props))
 )(Category)

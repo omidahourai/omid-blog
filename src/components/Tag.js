@@ -16,7 +16,7 @@ export default props => (
       <PageGrid>
         <LayoutHeader theme={props.theme} />
         <LayoutArticles>
-          <ArticlePreviewList articles={props.articles}/>
+          <ArticlePreviewList data={props.data} />
         </LayoutArticles>
         <LayoutFooter>
           <SiteFooter />

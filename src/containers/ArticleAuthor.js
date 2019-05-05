@@ -10,7 +10,7 @@ export const query = graphql`
 `
 
 export default compose(
-  withProps(({data}) => ({
+  withProps(({ data }) => ({
     authorDescription: selectors.getAuthorDescription(data),
     authorName: selectors.getAuthorName(data),
     authorImageMeta: selectors.getAuthorImageMeta(data),
@@ -22,6 +22,6 @@ export default compose(
       to: '#',
       title: `Articles by ${props.authorName}`,
       rel: 'author',
-    }
-  })),
+    },
+  }))
 )(ArticleAuthor)

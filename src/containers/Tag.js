@@ -12,7 +12,7 @@ export const query = graphql`
 `
 
 export default compose(
-  withProps(({data}) => ({
+  withProps(({ data }) => ({
     tag: data.tag,
     articles: data.tag.articles,
   })),
@@ -31,7 +31,10 @@ export default compose(
       },
       { property: 'og:site_name', content: `Blog - Omid Ahourai` },
       { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: `Omid Ahourai Blog - ${props.tag.name}` },
+      {
+        property: 'og:title',
+        content: `Omid Ahourai Blog - ${props.tag.name}`,
+      },
       {
         property: 'og:description',
         content:
@@ -50,5 +53,6 @@ export default compose(
       // { name: 'twitter:data2', content: category },
     ],
   })),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/Tag]',props)),
+  process.env.DEBUG &&
+    withProps(props => console.log('{props} [containers/Tag]', props))
 )(Tag)

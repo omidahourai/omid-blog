@@ -21,7 +21,7 @@ const Body = styled.div`
   text-align: center;
 `
 const Header = styled.h4`
-  font-family: ${({theme}) => theme.font.serif};
+  font-family: ${({ theme }) => theme.font.serif};
   font-size: 20px;
   font-weight: 400;
   letter-spacing: 0.5px;
@@ -29,13 +29,13 @@ const Header = styled.h4`
 `
 const Link = styled(Gatsby.Link)`
   text-decoration: none;
-  color: ${({theme}) => theme.color.primary};
+  color: ${({ theme }) => theme.color.primary};
   &:hover {
-    color: ${({theme}) => theme.color.primaryHighlight};
+    color: ${({ theme }) => theme.color.primaryHighlight};
   }
 `
 const DescriptionText = styled.p`
-  font-family: ${({theme}) => theme.font.sansSerif};
+  font-family: ${({ theme }) => theme.font.sansSerif};
   font-size: 0.85rem;
   line-height: 1.35rem;
   margin: 0;
@@ -47,7 +47,7 @@ const ShareIcon = styled.a`
     fill: #bfc1c3;
   }
   &:hover svg > * {
-    fill: ${({theme}) => theme.color.primary};
+    fill: ${({ theme }) => theme.color.primary};
   }
 `
 const ShareWrapper = styled.div`
@@ -61,13 +61,9 @@ export default props => (
     </Avatar>
     <Body>
       <Header>
-        <Link {...props.authorLink}>
-          {props.authorName}
-        </Link>
+        <Link {...props.authorLink}>{props.authorName}</Link>
       </Header>
-      <DescriptionText>
-        {props.authorDescription}
-      </DescriptionText>
+      <DescriptionText>{props.authorDescription}</DescriptionText>
       <ShareWrapper>
         <ShareIcon
           href="http://facebook.com/Omid-Ahourai-296038887569459/"

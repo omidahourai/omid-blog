@@ -37,7 +37,8 @@ const Content = styled.div`
   & h2 {
     margin-bottom: 1rem;
   }
-  h2, p {
+  h2,
+  p {
     color: #333;
   }
 `
@@ -56,7 +57,7 @@ export default props => (
   <Wrapper>
     <Hero>
       <Link to={props.articleUrl}>
-        <img alt={''} {...props.heroImageMeta} />
+        <img alt={props.articleThumbnail.alt} {...props.articleThumbnail} />
       </Link>
     </Hero>
     <ArticlePreviewHeader {...props} />

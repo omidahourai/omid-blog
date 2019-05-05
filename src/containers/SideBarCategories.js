@@ -11,5 +11,8 @@ export const query = graphql`
   }
 `
 export default compose(
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/SideBarCategories]',props)),
+  process.env.DEBUG &&
+    withProps(props =>
+      console.log('{props} [containers/SideBarCategories]', props)
+    )
 )(SideBarCategories)

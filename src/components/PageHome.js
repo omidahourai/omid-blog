@@ -22,16 +22,16 @@ const SidebarWrapper = styled.div`
 export default props => (
   <Page>
     {!props.data ? (
-        <div>{'No Data :('}</div>
+      <div>{'No Data :('}</div>
     ) : (
       <LayoutHome {...props}>
         <Wrapper>
           <Helmet meta={props.pageMeta} title={props.pageTitle} />
           <div>
-            <ArticlePreviewList data={props.data}/>
+            <ArticlePreviewList data={props.data} />
           </div>
           <SidebarWrapper>
-            <SideBar {...props}/>
+            <SideBar {...props} />
           </SidebarWrapper>
         </Wrapper>
       </LayoutHome>

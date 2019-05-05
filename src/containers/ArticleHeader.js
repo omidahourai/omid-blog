@@ -8,19 +8,29 @@ export const query = graphql`
     title
     slug
     publishedOn
-    category { name }
-    author { firstName lastName }
+    category {
+      name
+    }
+    author {
+      firstName
+      lastName
+    }
   }
 `
 
 export default compose(
   withProps(props => ({
-    instagram: props.pageContext.instagram ? props.pageContext.instagram.data : [], 
+    instagram: props.pageContext.instagram
+      ? props.pageContext.instagram.data
+      : [],
     categoryUrl: selectors.getCategoryUrl(props.data),
     categoryName: selectors.getCategoryName(props.data),
     publishDate: selectors.getArticlePublishDate(props.data),
     authorUrl: selectors.getAuthorUrl(props.data),
     authorName: selectors.getAuthorName(props.data),
   })),
-  process.env.DEBUG && withProps(props => {console.log('{props} [containers/ArticleHeader]',props)}),
+  process.env.DEBUG &&
+    withProps(props => {
+      console.log('{props} [containers/ArticleHeader]', props)
+    })
 )(ArticleHeader)

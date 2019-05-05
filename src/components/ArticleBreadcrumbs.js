@@ -6,7 +6,7 @@ const Link = styled(Gatsby.Link)`
   text-decoration: none;
   color: #666;
   &:hover {
-    color: ${({theme}) => theme.color.primaryHighlight};
+    color: ${({ theme }) => theme.color.primaryHighlight};
   }
 `
 const Item = styled.li`

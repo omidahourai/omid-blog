@@ -1,15 +1,7 @@
 import ArticlePreviewList from 'components/ArticlePreviewList'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
-// export const query = graphql`
-//   fragment ArticlePreviewListFragment on ContentfulArticle {
-//     articles: article {
-//       ...SocialLinksFragment
-//       ...ArticlePreviewFragment
-//       ...ArticlePreviewHeaderFragment
-//     }
-//   }
-// `
+import * as selectors from 'selectors'
 
 export const queryCategoryArticle = graphql`
   fragment CategoryArticlePreviewListFragment on ContentfulCategory {
@@ -34,7 +26,7 @@ export const queryTagArticle = graphql`
 
 export const queryArticleConnection = graphql`
   fragment ArticlePreviewListFragment on Query {
-    articles: allContentfulArticle (
+    articles: allContentfulArticle(
       sort: { order: DESC, fields: [publishedOn] }
       filter: { node_locale: { eq: "en-US" } }
     ) {
@@ -50,16 +42,11 @@ export const queryArticleConnection = graphql`
   }
 `
 export default compose(
-  withProps(({data}) => ({
-    articles: data.articles.edges.map(({node}) => node).filter(article => (
-      article.author &&
-      article.category &&
-      article.hero &&
-      article.publishedOn &&
-      article.slug &&
-      article.tags &&
-      article.title
-    )),
+  withProps(({ data }) => ({
+    articles: selectors.getCompletedArticles(data),
   })),
-  process.env.DEBUG && withProps(props => {console.log('{props} [containers/ArticlePreviewList]',props)}),
+  process.env.DEBUG &&
+    withProps(props => {
+      console.log('{props} [containers/ArticlePreviewList]', props)
+    })
 )(ArticlePreviewList)

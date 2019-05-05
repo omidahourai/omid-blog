@@ -1,9 +1,10 @@
 import ArticleBreadcrumbs from 'components/ArticleBreadcrumbs'
-import { lowerFirst } from 'lodash'
 import { compose, withProps } from 'recompose'
+import * as selectors from 'selectors'
 
 export default compose(
-  withProps(props => ({
-    categoryUrl: `/${lowerFirst(props.categoryName)}/`,
-  })),
+  withProps(({ data }) => ({
+    categoryUrl: selectors.getCategoryUrl(data),
+    categoryName: selectors.getCategoryName(data),
+  }))
 )(ArticleBreadcrumbs)

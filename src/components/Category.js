@@ -7,7 +7,7 @@ import { PageGrid } from 'components/PageLayout'
 import { LayoutArticles } from 'components/PageLayout'
 import { LayoutFooter } from 'components/PageLayout'
 
-export default props => (
+export default props =>
   !props.data ? (
     <div>{'No Data :('}</div>
   ) : (
@@ -15,11 +15,10 @@ export default props => (
       <Helmet {...props.meta} />
       <LayoutHeader />
       <LayoutArticles>
-        <ArticlePreviewList articles={props.articles} />
+        <ArticlePreviewList data={props.data} />
       </LayoutArticles>
       <LayoutFooter>
         <SiteFooter />
       </LayoutFooter>
     </PageGrid>
   )
-)

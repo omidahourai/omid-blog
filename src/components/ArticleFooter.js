@@ -18,7 +18,7 @@ const Link = styled(Gatsby.Link)`
   border-width: 1px;
   text-decoration: none;
   &:hover {
-    color: ${({theme}) => theme.color.primary};
+    color: ${({ theme }) => theme.color.primary};
   }
 `
 const Wrapper = styled.footer`
@@ -37,13 +37,13 @@ const MetaTags = styled.div`
   font-size: 12px;
   text-transform: uppercase;
   margin-bottom: 20px;
-  font-family: ${({theme}) => theme.font.sansSerif};
+  font-family: ${({ theme }) => theme.font.sansSerif};
   line-height: 0.65rem;
 `
 const Text = styled.p`
   width: 100%;
   margin-bottom: 0.5rem;
-  font-family: ${({theme}) => theme.font.sansSerif};
+  font-family: ${({ theme }) => theme.font.sansSerif};
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 400;

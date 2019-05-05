@@ -7,9 +7,9 @@ import { withTheme } from 'styled-components'
 export const fragmentCategories = graphql`
   fragment SideBarCategoriesFragment on ContentfulCategoryConnection {
     edges {
-        node {
-          ...SideBarCategoryFragment
-        }
+      node {
+        ...SideBarCategoryFragment
+      }
     }
   }
 `
@@ -18,8 +18,16 @@ export const fragmentAuthor = graphql`
     firstName
     lastName
     shortTitle
-    photo { file { url } }
-    altPhoto { file { url } }
+    photo {
+      file {
+        url
+      }
+    }
+    altPhoto {
+      file {
+        url
+      }
+    }
     shortDescription
     description {
       text: description
@@ -51,14 +59,22 @@ const getAuthorThumbnail = author => {
 
 export default compose(
   withTheme,
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/Sidebar]',props,withTheme)),
-  withProps(({data}) => ({
-    author: {...data.author, fullName: `${data.author.firstName} ${data.author.lastName}`},
-    categories: data.categories.edges.filter(({node}) => !!node.article).map(({node}) => node),
+  process.env.DEBUG &&
+    withProps(props =>
+      console.log('{props} [containers/Sidebar]', props, withTheme)
+    ),
+  withProps(({ data }) => ({
+    author: {
+      ...data.author,
+      fullName: `${data.author.firstName} ${data.author.lastName}`,
+    },
+    categories: data.categories.edges
+      .filter(({ node }) => !!node.article)
+      .map(({ node }) => node),
   })),
-  withProps(({pageContext}) => ({
+  withProps(({ pageContext }) => ({
     instagram: pageContext.instagram ? pageContext.instagram.data : [],
-  })),  
+  })),
   withProps(props => ({
     igImageData: props.instagram.map(item => {
       let text = result(item, 'caption.text') || ''
@@ -84,5 +100,6 @@ export default compose(
     authorLinkedinHandle: 'omidahourai',
     authorEmail: 'hello@omid.com',
   })),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/Sidebar]',props)),
+  process.env.DEBUG &&
+    withProps(props => console.log('{props} [containers/Sidebar]', props))
 )(SideBar)

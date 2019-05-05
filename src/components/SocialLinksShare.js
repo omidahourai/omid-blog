@@ -61,9 +61,6 @@ export default props => (
         alt: props.pinterestTitle,
       }}
     />
-    <LinkShareButton
-      url={props.url}
-      link={props.linkStyles}
-    />
+    <LinkShareButton url={props.url} link={props.linkStyles} />
   </Wrapper>
 )

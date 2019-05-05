@@ -29,13 +29,9 @@ const FooterWrapper = styled.div`
 const LayoutHome = props => (
   <Wrapper>
     <LayoutHeader theme={props.theme} />
-    <ContentWrapper>
-      {props.children}
-    </ContentWrapper>
+    <ContentWrapper>{props.children}</ContentWrapper>
     <FooterWrapper>
-      {props.instagram && (
-        <InstagramBanner feedData={props.instagram} />
-      )}
+      {props.instagram && <InstagramBanner feedData={props.instagram} />}
       <SiteFooter />
     </FooterWrapper>
   </Wrapper>

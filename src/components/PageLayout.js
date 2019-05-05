@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
 export const Page = props => (
-  <ThemeProvider theme={{mode: 'light', ...theme}}>
+  <ThemeProvider theme={{ mode: 'light', ...theme }}>
     {props.children}
   </ThemeProvider>
 )
@@ -23,7 +23,9 @@ export const Grid = styled.div`
 `
 
 export const PageGrid = props => (
-  <Page><Grid>{props.children}</Grid></Page>
+  <Page>
+    <Grid>{props.children}</Grid>
+  </Page>
 )
 
 export const LayoutArticles = styled.main`

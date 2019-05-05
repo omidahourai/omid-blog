@@ -8,8 +8,13 @@ export const query = graphql`
   fragment ArticlePreviewHeaderFragment on ContentfulArticle {
     title
     publishedOn
-    category { name }
-    author { firstName lastName }
+    category {
+      name
+    }
+    author {
+      firstName
+      lastName
+    }
   }
 `
 
@@ -18,10 +23,15 @@ export default compose(
     authorUrl: '#',
     articleUrl: props.articleUrl,
     authorName: `${props.author.firstName} ${props.author.lastName}`,
-    authorUrl: `/author/${(props.author.firstName + props.author.lastName).toLowerCase()}`,
+    authorUrl: `/author/${(
+      props.author.firstName + props.author.lastName
+    ).toLowerCase()}`,
     categoryUrl: `/${lowerFirst(props.category.name)}/`,
     categoryName: props.category.name,
     publishDate: moment(props.publishedOn).format('MMMM D, YYYY'),
   })),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreviewHeader]',props)),
+  process.env.DEBUG &&
+    withProps(props =>
+      console.log('{props} [containers/ArticlePreviewHeader]', props)
+    )
 )(ArticlePreviewHeader)
