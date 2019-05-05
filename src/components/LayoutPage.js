@@ -1,7 +1,9 @@
 import React from 'react'
 import theme from 'styles/theme'
 import styled from 'styled-components'
+import GlobalStyles from 'styles/global'
 import { ThemeProvider } from 'styled-components'
+import { compose, withState, withHandlers } from 'recompose'
 
 export const Grid = styled.div`
   display: grid;
@@ -27,11 +29,33 @@ export const LayoutFooter = styled.div`
   flex-direction: column;
 `
 
-export const Page = props => (
-  <ThemeProvider theme={{ mode: 'light', ...theme }}>
-    {props.children}
+let mode = localStorage.getItem('mode')
+if (!mode) {
+  mode = 'light'
+  localStorage.setItem('mode', mode)
+}
+
+export const Page = compose(
+  withState('mode', 'setMode', mode),
+  withHandlers({
+    toggleMode: props => e => {
+      const mode = (props.mode === 'light') ? 'dark' : 'light'
+      localStorage.setItem('mode', mode)
+      props.setMode(mode)
+    }
+  }),
+)(props => (
+  <ThemeProvider theme={{
+    mode: props.mode,
+    toggleMode: props.toggleMode,
+    ...theme
+  }}>
+    <React.Fragment>
+      <GlobalStyles />
+      {props.children}
+    </React.Fragment>
   </ThemeProvider>
-)
+))
 
 export const PageGrid = props => (
   <Page>

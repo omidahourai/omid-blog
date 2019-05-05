@@ -62,7 +62,7 @@ progress {
 template {
   display: none;
 }
-a {
+/* a {
   text-decoration: none;
   color: #00A9FF;
   background-color: transparent;
@@ -72,7 +72,7 @@ a:active,
 a:hover {
   outline-width: 0;
   text-decoration: underline;
-}
+} */
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;

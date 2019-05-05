@@ -7,7 +7,7 @@ const Count = styled.span`
   color: #aaa;
 `
 const Name = styled.span`
-  color: #333;
+  color: ${({theme}) => theme.text};
 `
 const Item = styled.li`
   margin: 0;

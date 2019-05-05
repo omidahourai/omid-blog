@@ -32,6 +32,11 @@ const linkDefault = {
   kind: 'default',
 }
 
+const backgroundColor = theme('mode', {
+  dark: '#F8F8F8',
+  light: '#999999',
+})
+
 const buttonTheme = {
   backgroundColor: theme('mode', {
     light: '#F8F8F8',
@@ -72,20 +77,20 @@ export const ShareButton = styled.a`
   border-color: ${buttonTheme.borderColor};
   background-color: ${buttonTheme.backgroundColor};
   transition: all 0.25s ease-out;
-  &:hover {
-    cursor: pointer;
-    background-color: ${buttonTheme.hover.backgroundColor};
-    border-color: ${buttonTheme.hover.borderColor};
-    svg > * {
-      fill: #fff;
-    }
-  }
   svg {
     padding: ${({ padding }) => padding || '0.7rem'};
     width: 100%;
     height: 100%;
     & > * {
       fill: #333;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: ${buttonTheme.hover.backgroundColor};
+    border-color: ${buttonTheme.hover.borderColor};
+    svg > * {
+      fill: #FFF;
     }
   }
   &:focus,

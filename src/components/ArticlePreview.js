@@ -39,7 +39,7 @@ const Content = styled.div`
   }
   h2,
   p {
-    color: #333;
+    color: ${({theme}) => theme.text};
   }
 `
 

@@ -28,17 +28,14 @@ const Header = styled.h4`
   margin: 0.8rem 0;
 `
 const Link = styled(Gatsby.Link)`
-  text-decoration: none;
-  color: ${({ theme }) => theme.color.primary};
-  &:hover {
-    color: ${({ theme }) => theme.color.primaryHighlight};
-  }
+  ${({theme}) => theme.link}
 `
 const DescriptionText = styled.p`
   font-family: ${({ theme }) => theme.font.sansSerif};
   font-size: 0.85rem;
   line-height: 1.35rem;
   margin: 0;
+  color: ${({theme}) => theme.text};
 `
 
 const ShareIcon = styled.a`

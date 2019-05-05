@@ -9,6 +9,18 @@ const Cursive = styled.span`
   padding-left: 30px;
 `
 
+const Toggle = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: 0;
+  color: #FFF;
+  text-align: right;
+  flex-grow: 1;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
 const HeaderGrid = styled.header`
   grid-area: header;
   display: flex;
@@ -57,7 +69,9 @@ export default props => (
       <TopBar>
         <Link to="/">{'Blog | Omid Ahourai'}</Link>
         <Cursive>{'Emotional rants, poetry, experiences'}</Cursive>
+        <Toggle onClick={props.onToggleTheme}>{props.theme.mode}</Toggle>
       </TopBar>
     </Wrapper>
+    {props.children}
   </HeaderGrid>
 )
