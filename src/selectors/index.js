@@ -34,21 +34,21 @@ export const getValidCategories = createSelector(
     .map(({ node }) => node)
 )
 
-export const getCompletedArticles = createSelector(
-  getArticles,
-  articles =>
-    articles.edges
-      .map(({ node }) => node)
-      .filter(
-        article =>
-          article.author &&
-          article.category &&
-          article.hero &&
-          article.publishedOn &&
-          article.slug &&
-          article.tags &&
-          article.title
-      )
+const articleFilter = article => (
+  article.author &&
+  article.category &&
+  article.hero &&
+  article.publishedOn &&
+  article.slug &&
+  article.tags &&
+  article.title
+)
+
+export const getCompletedArticles = createSelector(getArticles,
+  ({edges}) => edges.map(({ node }) => node).filter(articleFilter)
+)
+export const getCategoryArticles = createSelector(getCategory,
+  ({articles}) => articles.filter(articleFilter)
 )
 
 export const getArticleId = createSelector(
@@ -59,9 +59,14 @@ export const getArticlePublishDate = createSelector(
   getArticle,
   article => moment(article.publishedOn).format('MMMM D, YYYY')
 )
+export const getArticleCategoryName = createSelector(getArticle,
+  ({category}) => category ? category.name : ''
+)
+export const getArticleSlug = createSelector(getArticle, ({slug}) => slug)
+
 export const getArticleUrl = createSelector(
-  getArticle,
-  article => `${lowerFirst(article.category.name)}/${article.slug}`
+  [getArticleCategoryName, getArticleSlug],
+  (category, slug) => `${lowerFirst(category)}/${slug}`
 )
 export const getArticleFullUrl = createSelector(
   getArticleUrl,
@@ -93,11 +98,11 @@ export const getArticleTagNames = createSelector(
 )
 export const getArticleHeroBase = createSelector(
   getArticle,
-  article => article.hero.file.url
+  ({hero}) => hero ? hero.file.url : ''
 )
 export const getArticleHeroTitle = createSelector(
   getArticle,
-  article => article.hero.title
+  ({hero}) => hero ? hero.title : ''
 )
 export const getArticleHero = createSelector(
   getArticleHeroBase,
@@ -174,8 +179,8 @@ const parseCaption = caption => (
     : ''
 )
 export const getInstagramImageMeta = createSelector(
-  [(ctx, start=9, end=0) => ({start, end}), getInstagram],
-  (({start, end}), instagram) => instagram
+  [(ctx, start=9, end) => ({start, end}), getInstagram],
+  ({start, end}, instagram) => instagram
     .slice(start, end)
     .map(item => ({
       text: parseCaption(item.caption),

@@ -1,10 +1,13 @@
 import SideBarInstagram from 'components/SideBarInstagram'
 import { compose, withProps } from 'recompose'
 import { withTheme } from 'styled-components'
+// import { withContext } from 'containers/Context'
 import * as selectors from 'selectors'
 
 export default compose(
   withTheme,
+  // withContext,
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/SidebarInstagram]', props)),
   withProps(({ pageContext }) => ({
     instagram: selectors.getInstagramImageMeta(pageContext, 0, 9)
   })),

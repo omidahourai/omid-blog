@@ -1,6 +1,7 @@
 import ArticlePreviewHeader from 'components/ArticlePreviewHeader'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
+import * as selectors from 'selectors'
 
 export const query = graphql`
   fragment ArticlePreviewHeaderFragment on ContentfulArticle {

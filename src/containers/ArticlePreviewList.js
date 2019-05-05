@@ -37,8 +37,11 @@ export const queryArticleConnection = graphql`
   }
 `
 export default compose(
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreviewList]', props)),
   withProps(({ data }) => ({
-    articles: selectors.getCompletedArticles(data),
+    articles: data.articles
+      ? selectors.getCompletedArticles(data)
+      : selectors.getCategoryArticles(data),
   })),
   process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreviewList]', props))
 )(ArticlePreviewList)

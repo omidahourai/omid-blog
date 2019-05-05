@@ -2,6 +2,7 @@ import ArticleNextPrev from 'components/ArticleNextPrev'
 import { graphql } from 'gatsby'
 import { compose, withProps } from 'recompose'
 import { lowerFirst } from 'lodash'
+import * as selectors from 'selectors'
 
 export const queryArticleFields = graphql`
   fragment ArticleNextPrevFieldsFragment on ContentfulArticle {
@@ -16,29 +17,26 @@ export const queryArticleFields = graphql`
 `
 
 export default compose(
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticleNextPrev]', props)),
   withProps(({ data }) => ({
-      prevArticle: {
-        ...data.prevArticle,
-        link: {
-          alt: data.prevArticle.title,
-          title: data.prevArticle.title,
-          to: `/${lowerFirst(data.prevArticle.category.name)}/${
-            data.prevArticle.slug
-          }/`,
-        },
+    prevArticle: {
+      ...data.prevArticle,
+      link: {
+        alt: data.prevArticle.title,
+        title: data.prevArticle.title,
+        to: selectors.getArticleUrl({article: data.prevArticle}),
       },
-      nextArticle: {
-        ...data.nextArticle,
-        link: {
-          alt: data.nextArticle.title,
-          title: data.nextArticle.title,
-          to: `/${lowerFirst(data.nextArticle.category.name)}/${
-            data.nextArticle.slug
-          }/`,
-        },
+      thumbImageMeta: selectors.getArticleThumbImageMeta({article: data.prevArticle}),
+    },
+    nextArticle: {
+      ...data.nextArticle,
+      link: {
+        alt: data.nextArticle.title,
+        title: data.nextArticle.title,
+        to: selectors.getArticleUrl({article: data.nextArticle}),
       },
-      thumbImageMeta: selectors.getArticleThumbImageMeta(data),
-    }),
-    process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticleNextPrev]', props))
-  )
+      thumbImageMeta: selectors.getArticleThumbImageMeta({article: data.nextArticle}),
+    },
+  })),
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticleNextPrev]', props))
 )(ArticleNextPrev)

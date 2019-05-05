@@ -94,7 +94,7 @@ export default props => (
     </Section>
     <Section>
       <Header>{'Instagram'}</Header>
-      <SideBarInstagram data={props.data} />
+      <SideBarInstagram pageContext={props.pageContext} />
     </Section>
     <Section>
       <Header>{'Categories'}</Header>

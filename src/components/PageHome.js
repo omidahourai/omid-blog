@@ -43,7 +43,7 @@ export default props => (
         </SidebarWrapper>
       </ContentWrapper>
       <FooterWrapper>
-        <SiteFooterInstagram />
+        <SiteFooterInstagram {...props} />
         <SiteFooter />
       </FooterWrapper>
     </PageGrid>
