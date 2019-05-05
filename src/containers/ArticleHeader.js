@@ -8,13 +8,8 @@ export const query = graphql`
     title
     slug
     publishedOn
-    category {
-      name
-    }
-    author {
-      firstName
-      lastName
-    }
+    category { name }
+    author { firstName lastName }
   }
 `
 
@@ -27,8 +22,5 @@ export default compose(
     authorUrl: selectors.getAuthorUrl(data),
     authorName: selectors.getAuthorName(data),
   })),
-  process.env.DEBUG &&
-    withProps(props => {
-      console.log('{props} [containers/ArticleHeader]', props)
-    })
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticleHeader]', props))
 )(ArticleHeader)

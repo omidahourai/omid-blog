@@ -1,12 +1,12 @@
+import PageCategory from 'components/PageCategory'
 import { graphql } from 'gatsby'
 import { compose, withProps } from 'recompose'
-import Tag from 'components/Tag'
 
 export const query = graphql`
-  query($tagName: String!) {
-    tag: contentfulTag(name: { eq: $tagName }) {
+  query($categoryName: String!) {
+    category: contentfulCategory(name: { eq: $categoryName }) {
       name
-      ...TagArticlePreviewListFragment
+      ...CategoryArticlePreviewListFragment
     }
   }
 `
@@ -15,27 +15,12 @@ export default compose(
   withProps(props => ({
     pageTitle: `Omid Ahourai's Blog`,
     pageMeta: [
-      {
-        name: 'description',
-        content:
-          'Read about my life! Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.',
-      },
-      {
-        name: 'keywords',
-        content:
-          'omid ahourai, omid, ahourai, digital nomad, ardentkid, storyfork',
-      },
+      { name: 'description', content: 'Read about my life! Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.' },
+      { name: 'keywords', content: 'omid ahourai, omid, ahourai, digital nomad, ardentkid, storyfork' },
       { property: 'og:site_name', content: `Blog - Omid Ahourai` },
       { property: 'og:type', content: 'website' },
-      {
-        property: 'og:title',
-        content: `Omid Ahourai Blog - ${props.data.tag.name}`,
-      },
-      {
-        property: 'og:description',
-        content:
-          'Read about my life! Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.',
-      },
+      { property: 'og:title', content: `Omid Ahourai Blog - ${props.category.name}` },
+      { property: 'og:description', content: 'Read about my life! Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.' },
       { property: 'og:url', content: `http://www.omid.com/` },
       // { property: 'og:image', content: `${hero.file.url}?w=1200&q=70` },
       // { name: 'twitter:card', content: 'summary_large_image' },
@@ -49,6 +34,5 @@ export default compose(
       // { name: 'twitter:data2', content: category },
     ],
   })),
-  process.env.DEBUG &&
-    withProps(props => console.log('{props} [containers/Tag]', props))
-)(Tag)
+  withProps(props => console.log('{props} containers/PageCategory', props))
+)(PageCategory)

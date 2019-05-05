@@ -1,7 +1,6 @@
 import ArticlePreview from 'components/ArticlePreview'
-import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
-import { lowerFirst } from 'lodash'
+import { compose, withProps } from 'recompose'
 import * as selectors from 'selectors'
 
 export const query = graphql`
@@ -11,28 +10,11 @@ export const query = graphql`
     slug
     publishedOn
     updatedOn
-    tags {
-      name
-    }
-    category {
-      name
-    }
-    author {
-      firstName
-      lastName
-    }
-    summary {
-      childMarkdownRemark {
-        html
-      }
-    }
-    hero {
-      title
-      description
-      file {
-        url
-      }
-    }
+    tags { name }
+    category { name }
+    author { firstName lastName }
+    summary { childMarkdownRemark { html } }
+    hero { title description file { url } }
   }
 `
 

@@ -7,25 +7,15 @@ export const queryArticleFields = graphql`
     id
     title
     slug
-    category {
-      name
-    }
-    hero {
-      id
-      title
-      description
-      file {
-        url
-      }
-    }
-    publishedOn
     updatedOn
+    publishedOn
+    category { name }
+    hero { id title description file { url } }
   }
 `
 
 export default compose(
-  withProps(
-    ({ data }) => ({
+  withProps(({ data }) => ({
       prevArticle: {
         ...data.prevArticle,
         link: {

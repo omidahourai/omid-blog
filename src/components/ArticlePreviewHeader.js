@@ -102,8 +102,7 @@ export default props => (
       <Link
         to={props.authorUrl}
         title={`Article by ${props.authorName}`}
-        rel={'author'}
-      >
+        rel={'author'}>
         {props.authorName}
       </Link>
     </Meta>

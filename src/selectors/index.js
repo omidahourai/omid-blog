@@ -132,6 +132,7 @@ export const getArticleMode = createSelector(
 export const getAuthorUrl = createSelector(
   getAuthor,
   author => '#'
+  // author => `/author/${(author.firstName + author.lastName).toLowerCase()}`
 )
 export const getAuthorName = createSelector(
   getAuthor,
@@ -166,21 +167,23 @@ export const getAuthorThumbImageMeta = createSelector(
   [getAuthorBaseAltImageUrl, getAuthorShortTitle],
   (baseUrl, title) => getImageMeta({ r: 125, baseUrl, title })
 )
+
+const parseCaption = caption => (
+  (caption && caption.text && caption.text.length > 50)
+    ? caption.text.slice(0, 50) + '...'
+    : ''
+)
 export const getInstagramImageMeta = createSelector(
-  getInstagram,
-  instagram => instagram.map(item => {
-    let text = result(item, 'caption.text') || ''
-    if (text.length > 50) {
-      text = text.slice(0, 50) + '...'
-    }
-    return {
-      text,
+  [(ctx, start=9, end=0) => ({start, end}), getInstagram],
+  (({start, end}), instagram) => instagram
+    .slice(start, end)
+    .map(item => ({
+      text: parseCaption(item.caption),
       key: item.id,
       url: item.images.standard_resolution.url,
       width: item.images.standard_resolution.width,
       height: item.images.standard_resolution.height,
       likes: item.likes.count,
       link: item.link,
-    }
-  })
+    }))
 )

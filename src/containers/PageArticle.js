@@ -1,4 +1,4 @@
-import Article from 'components/Article'
+import PageArticle from 'components/PageArticle'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
 import * as selectors from 'selectors'
@@ -8,29 +8,12 @@ export const queryPageArticle = graphql`
     id
     title
     slug
-    content {
-      childMarkdownRemark {
-        html
-      }
-    }
-    category {
-      name
-    }
-    tags {
-      name
-    }
-    summary {
-      summary
-    }
-    hero {
-      file {
-        url
-      }
-    }
-    author {
-      firstName
-      lastName
-    }
+    content { childMarkdownRemark { html } }
+    category { name }
+    tags { name }
+    summary { summary }
+    hero { file { url } }
+    author { firstName lastName }
   }
 `
 
@@ -99,6 +82,6 @@ export default compose(
   })),
   process.env.DEBUG &&
     withProps(props => {
-      console.log('{props} [containers/Article]', props)
+      console.log('{props} [containers/PageArticle]', props)
     })
-)(Article)
+)(PageArticle)

@@ -17,7 +17,7 @@
     "yoga": "node ./node_modules/graphql-yoga/dist/index.js",
     "gql-playground": "yarn graphql playground",
     "gql-schema": "yarn graphql get-schema",
-    "format": "prettier --config .prettierrc --write 'src/**/*.js'",
+    "format": "prettier --config .prettierrc --write 'src/components/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

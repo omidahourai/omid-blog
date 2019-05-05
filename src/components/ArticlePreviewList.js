@@ -30,7 +30,7 @@ export default props => (
   <Wrapper>
     {props.articles.map(article => (
       <Item key={article.id}>
-        <ArticlePreview data={{ article }} {...article} />
+        <ArticlePreview data={{ article }} />
       </Item>
     ))}
   </Wrapper>

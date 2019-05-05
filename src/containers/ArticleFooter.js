@@ -5,9 +5,7 @@ import * as selectors from 'selectors'
 export const query = graphql`
   fragment ArticleFooterFragment on ContentfulArticle {
     id
-    tags {
-      name
-    }
+    tags { name }
   }
 `
 

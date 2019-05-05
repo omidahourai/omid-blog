@@ -12,7 +12,7 @@ export default props =>
     <div>{'No Data :('}</div>
   ) : (
     <PageGrid>
-      <Helmet {...props.meta} />
+      <Helmet meta={props.pageMeta} title={props.pageTitle} />
       <LayoutHeader />
       <LayoutArticles>
         <ArticlePreviewList data={props.data} />

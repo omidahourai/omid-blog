@@ -105,7 +105,7 @@ exports.createPages = ({ graphql, actions }) => {
                     console.log(`>> Creating Article Page: ${articlePath}`)
                     createPage({
                         path: `/${lowerFirst(categoryName)}/${slug}/`,
-                        component: slash(path.resolve(`./src/containers/Article.js`)),
+                        component: slash(path.resolve(`./src/containers/PageArticle.js`)),
                         context: { id, slug, prevId, nextId },
                     })
                 })
@@ -115,7 +115,7 @@ exports.createPages = ({ graphql, actions }) => {
                     console.log(`>> Creating Category Page: /${lowerFirst(categoryName)}/`)
                     createPage({
                         path: `/${lowerFirst(categoryName)}/`,
-                        component: slash(path.resolve(`./src/containers/Category.js`)),
+                        component: slash(path.resolve(`./src/containers/PageCategory.js`)),
                         context: { categoryName },
                     })
                 })
@@ -125,7 +125,7 @@ exports.createPages = ({ graphql, actions }) => {
                     console.log(`>> Creating Tag Page: /tag/${tagName}/`)
                     createPage({
                         path: `/tag/${tagName}/`,
-                        component: slash(path.resolve(`./src/containers/Tag.js`)),
+                        component: slash(path.resolve(`./src/containers/PageTag.js`)),
                         context: { tagName },
                     })
                 })
