@@ -23,7 +23,7 @@ const Link = styled(GatsbyLink)`
   justify-content: space-between;
   text-decoration: none;
   &:hover ${Name} {
-    color: primary;
+    color: ${({theme}) => theme.color.primary};
   }
 `
 const List = styled.ul`

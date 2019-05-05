@@ -18,10 +18,10 @@ export const fragmentAuthor = graphql`
 export default compose(
   withProps(({ data }) => ({
     authorName: selectors.getAuthorName(data),
-    authorFacebookHandle: 'Omid-Ahourai-296038887569459',
-    authorTwitterHandle: 'omidahourai',
-    authorInstagramHandle: 'omidahourai',
-    authorLinkedinHandle: 'omidahourai',
-    authorEmail: 'hello@omid.com',
+    facebookHandle: 'Omid-Ahourai-296038887569459',
+    twitterHandle: 'omidahourai',
+    instagramHandle: 'omidahourai',
+    linkedinHandle: 'omidahourai',
+    emailAddress: 'hello@omid.com',
   }))
 )(LinksAuthor)
