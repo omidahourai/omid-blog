@@ -23,6 +23,7 @@ export const query = graphql`
       ...PageArticleFragment
       ...ArticleHeaderFragment
       ...ArticleFooterFragment
+      ...ArticleBreadcrumbsFragment
     }
     nextArticle: contentfulArticle(id: { eq: $nextId }) {
       ...ArticleNextPrevFieldsFragment
@@ -44,8 +45,7 @@ export const query = graphql`
 `
 
 export default compose(
-  withProps(({ data, pageContext }) => ({
-    instagram: selectors.getInstagram(pageContext),
+  withProps(({ data }) => ({
     pageKeywords: selectors.getArticleTagNames(data).join(', '),
     pageDescription: selectors.getArticleSummary(data),
     pageArticleUrl: selectors.getArticleFullUrl(data),
@@ -80,8 +80,5 @@ export default compose(
       { name: 'twitter:data2', content: props.categoryName },
     ],
   })),
-  process.env.DEBUG &&
-    withProps(props => {
-      console.log('{props} [containers/PageArticle]', props)
-    })
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/PageArticle]', props))
 )(PageArticle)

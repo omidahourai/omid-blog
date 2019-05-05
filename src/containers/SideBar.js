@@ -6,11 +6,7 @@ import * as selectors from 'selectors'
 
 export const fragmentCategories = graphql`
   fragment SideBarCategoriesFragment on ContentfulCategoryConnection {
-    edges {
-      node {
-        ...SideBarCategoryFragment
-      }
-    }
+    edges { node { ...SideBarCategoryFragment } }
   }
 `
 export const fragmentAuthor = graphql`
@@ -18,21 +14,11 @@ export const fragmentAuthor = graphql`
     firstName
     lastName
     shortTitle
-    photo {
-      file {
-        url
-      }
-    }
-    altPhoto {
-      file {
-        url
-      }
-    }
     shortDescription
-    description {
-      text: description
-    }
-    ...SocialLinksAuthorFragment
+    photo { file { url } }
+    altPhoto { file { url } }
+    description { text: description }
+    ...LinksAuthorFragment
   }
 `
 
@@ -43,6 +29,5 @@ export default compose(
     authorTitle: selectors.getAuthorShortTitle(data),
     authorDescription: selectors.getAuthorShortDescription(data),
   })),
-  process.env.DEBUG &&
-    withProps(props => console.log('{props} [containers/Sidebar]', props))
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/Sidebar]', props))
 )(SideBar)

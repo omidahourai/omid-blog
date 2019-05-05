@@ -1,8 +1,7 @@
 import React from 'react'
-import { map } from 'lodash'
-import { Link as GatsbyLink } from 'gatsby'
 import styled from 'styled-components'
 import { lowerFirst } from 'lodash'
+import { Link as GatsbyLink } from 'gatsby'
 
 const Count = styled.span`
   color: #aaa;
@@ -30,13 +29,13 @@ const Link = styled(GatsbyLink)`
 const List = styled.ul`
   margin: 0;
   list-style-type: none;
-  font-family: ${props => props.theme.font.sansSerif};
+  font-family: ${({theme}) => theme.font.sansSerif};
   letter-spacing: normal;
 `
 
 export default props => (
-  <List theme={props.theme}>
-    {map(props.categories, ({ name, article }, index) => (
+  <List>
+    {props.categories.map(({ name, article }, index) => (
       <Item key={index}>
         <Link to={`/${lowerFirst(name)}/`}>
           <Name>{name}</Name>

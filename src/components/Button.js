@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
-import { Tooltip } from 'react-tippy'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 import styled from 'styled-components'
 import theme from 'styled-theming'
+import { Tooltip } from 'react-tippy'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import {
-  FaFacebook,
-  FaTwitter,
-  FaPinterestP,
-  FaInstagram,
-  FaLinkedin,
-  FaEnvelopeO,
-  WebLinkIcon,
-} from 'icons'
+import { FaFacebook } from 'icons/facebook'
+import { FaTwitter } from 'icons/twitter'
+import { FaPinterestP } from 'icons/pinterest-p'
+import { FaInstagram } from 'icons/instagram'
+import { FaLinkedin } from 'icons/linkedin'
+import { FaEnvelopeO } from 'icons/envelope-o'
+import { WebLinkIcon } from 'icons/weblink'
 
 const tooltipDefault = {
   title: 'Follow on Twitter',

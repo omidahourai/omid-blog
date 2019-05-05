@@ -34,6 +34,5 @@ export default compose(
       // { name: 'twitter:data2', content: category },
     ],
   })),
-  process.env.DEBUG &&
-    withProps(props => console.log('{props} [containers/PageTag]', props))
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/PageTag]', props))
 )(PageTag)

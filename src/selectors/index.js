@@ -6,8 +6,8 @@ const getAuthor = data => data.author
 const getArticle = data => data.article
 const getArticles = data => data.articles
 const getCategory = data => data.category || getArticle(data).category
-export const getCategory = data => data.categories
-export const getInstagram = ctx => ctx.instagram ? ctx.instagram.data : []
+const getCategories = data => data.categories
+const getInstagram = ctx => ctx.instagram ? ctx.instagram.data : []
 
 const getImageMeta = ({ r, dim, baseUrl, title }) => ({
   width: r ? r*2 : dim,

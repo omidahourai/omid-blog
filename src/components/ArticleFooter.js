@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Gatsby from 'gatsby'
-import SocialLinksShare from 'containers/SocialLinksShare'
+import LinksArticleShare from 'containers/LinksArticleShare'
 import styled from 'styled-components'
 
 const Link = styled(Gatsby.Link)`
@@ -89,7 +89,7 @@ export default props => (
     </MetaTags>
     <Text>{'Share this article'}</Text>
     <ShareWrapper>
-      <SocialLinksShare {...props} />
+      <LinksArticleShare {...props} />
     </ShareWrapper>
   </Wrapper>
 )

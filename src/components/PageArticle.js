@@ -7,10 +7,10 @@ import ArticleFooter from 'containers/ArticleFooter'
 import ArticleHeader from 'containers/ArticleHeader'
 import ArticleNextPrev from 'containers/ArticleNextPrev'
 import LayoutHeader from 'containers/LayoutHeader'
-import SideBar from 'containers/SideBar'
 import SiteFooter from 'components/SiteFooter'
-import { PageGrid } from 'components/PageLayout'
-import { LayoutFooter } from 'components/PageLayout'
+import SideBar from 'containers/SideBar'
+import { PageGrid } from 'components/LayoutPage'
+import { LayoutFooter } from 'components/LayoutPage'
 
 const ArticleHeroImage = styled.img`
   position: absolute;
@@ -84,31 +84,33 @@ const ArticleContent = styled.div`
 `
 
 export default props => (
-  <PageGrid>
+  <React.Fragment>
     <Helmet title={props.pageTitle} meta={props.pageMeta} />
-    <LayoutHeader>
-      <ArticleBreadcrumbs data={props.data} />
-    </LayoutHeader>
-    <LayoutArticle>
-      <ArticleHero>
-        <ArticleHeroImage alt={props.articleHero.alt} {...props.articleHero} />
-      </ArticleHero>
-      <ArticleHeader {...props} />
-      <ArticleContent
-        category={props.categoryName}
-        dangerouslySetInnerHTML={{
-          __html: props.articleContentHtml,
-        }}
-      />
-      <ArticleFooter data={props.data} />
-      <ArticleAuthor data={props.data} />
-      <ArticleNextPrev data={props.data} />
-      {/*
-        <SideBar {...props} />
-      */}
-    </LayoutArticle>
-    <LayoutFooter>
-      <SiteFooter />
-    </LayoutFooter>
-  </PageGrid>
+    <PageGrid>
+      <LayoutHeader>
+        <ArticleBreadcrumbs data={props.data} />
+      </LayoutHeader>
+      <LayoutArticle>
+        <ArticleHero>
+          <ArticleHeroImage alt={props.articleHero.alt} {...props.articleHero} />
+        </ArticleHero>
+        <ArticleHeader data={props.data} />
+        <ArticleContent
+          category={props.categoryName}
+          dangerouslySetInnerHTML={{
+            __html: props.articleContentHtml,
+          }}
+        />
+        <ArticleFooter data={props.data} />
+        <ArticleAuthor data={props.data} />
+        <ArticleNextPrev data={props.data} />
+        {/*
+          <SideBar {...props} />
+        */}
+      </LayoutArticle>
+      <LayoutFooter>
+        <SiteFooter />
+      </LayoutFooter>
+    </PageGrid>
+  </React.Fragment>
 )

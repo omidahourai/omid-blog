@@ -1,4 +1,4 @@
-import SocialLinksShare from 'components/SocialLinksShare'
+import LinksArticleShare from 'components/LinksArticleShare'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
 import * as selectors from 'selectors'
@@ -7,16 +7,8 @@ export const query = graphql`
   fragment SocialLinksFragment on ContentfulArticle {
     id
     title
-    tags {
-      name
-    }
-    hero {
-      title
-      description
-      file {
-        url
-      }
-    }
+    tags { name }
+    hero { title description file { url } }
   }
 `
 
@@ -53,6 +45,6 @@ export default compose(
   })),
   process.env.DEBUG &&
     withProps(props => {
-      console.log('{props} [containers/SocialLinksShare]', props)
+      console.log('{props} [containers/LinksArticleShare]', props)
     })
-)(SocialLinksShare)
+)(LinksArticleShare)

@@ -6,17 +6,13 @@ import * as selectors from 'selectors'
 export const query = graphql`
   fragment SideBarCategoryFragment on ContentfulCategory {
     name
-    article {
-      id
-    }
+    article { id }
   }
 `
+
 export default compose(
   withProps(({ data }) => ({
     categories: selectors.getValidCategories(data),
   })),
-  process.env.DEBUG &&
-    withProps(props =>
-      console.log('{props} [containers/SideBarCategories]', props)
-    )
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/SideBarCategories]', props))
 )(SideBarCategories)

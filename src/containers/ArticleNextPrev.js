@@ -1,3 +1,4 @@
+import ArticleNextPrev from 'components/ArticleNextPrev'
 import { graphql } from 'gatsby'
 import { compose, withProps } from 'recompose'
 import { lowerFirst } from 'lodash'
@@ -38,9 +39,6 @@ export default compose(
       },
       thumbImageMeta: selectors.getArticleThumbImageMeta(data),
     }),
-    process.env.DEBUG &&
-      withProps(props => {
-        console.log('{props} [containers/ArticleNextPrev]', props)
-      })
+    process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticleNextPrev]', props))
   )
-)
+)(ArticleNextPrev)

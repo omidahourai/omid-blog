@@ -25,18 +25,13 @@ export const queryTagArticle = graphql`
 `
 
 export const queryArticleConnection = graphql`
-  fragment ArticlePreviewListFragment on Query {
-    articles: allContentfulArticle(
-      sort: { order: DESC, fields: [publishedOn] }
-      filter: { node_locale: { eq: "en-US" } }
-    ) {
-      edges {
-        node {
-          id
-          ...SocialLinksFragment
-          ...ArticlePreviewFragment
-          ...ArticlePreviewHeaderFragment
-        }
+  fragment ArticlePreviewListFragment on ContentfulArticleConnection {
+    edges {
+      node {
+        id
+        ...SocialLinksFragment
+        ...ArticlePreviewFragment
+        ...ArticlePreviewHeaderFragment
       }
     }
   }
@@ -45,8 +40,5 @@ export default compose(
   withProps(({ data }) => ({
     articles: selectors.getCompletedArticles(data),
   })),
-  process.env.DEBUG &&
-    withProps(props => {
-      console.log('{props} [containers/ArticlePreviewList]', props)
-    })
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreviewList]', props))
 )(ArticlePreviewList)

@@ -25,7 +25,7 @@ const InstagramTile = styled(Tile)`
 export default props => (
   <List>
     {props.instagram.map(image => (
-      <Tile {...image} />
+      <InstagramTile {...image} />
     ))}
   </List>
 )

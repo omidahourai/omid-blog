@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import SocialLinksAuthor from 'containers/SocialLinksAuthor'
+import LinksAuthor from 'containers/LinksAuthor'
 import SideBarInstagram from 'containers/SideBarInstagram'
 import SideBarCategories from 'containers/SideBarCategories'
 
@@ -90,7 +90,7 @@ export default props => (
     </Profile>
     <Section>
       <Header>{'Follow Me'}</Header>
-      <SocialLinksAuthor data={props.data} />
+      <LinksAuthor data={props.data} />
     </Section>
     <Section>
       <Header>{'Instagram'}</Header>

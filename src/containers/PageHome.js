@@ -8,59 +8,17 @@ export const query = graphql`
     categories: allContentfulCategory {
       ...SideBarCategoriesFragment
     }
-    ...ArticlePreviewListFragment
     author: contentfulAuthor(
       firstName: { eq: "Omid" }
       lastName: { eq: "Ahourai" }
     ) {
       ...SideBarAuthorFragment
     }
-    allContentfulArticle(
+    articles: allContentfulArticle(
       sort: { order: DESC, fields: [publishedOn] }
       filter: { node_locale: { eq: "en-US" } }
     ) {
-      edges {
-        node {
-          # id
-          # title
-          summary {
-            # childMarkdownRemark {
-            #   html
-            # }
-            id
-            summary
-          }
-          # hero {
-          id
-          #   title
-          #   description
-          #   file {
-          #     url
-          #   }
-          # }
-          # category {
-          #   name
-          # }
-          content {
-            id
-            content
-          }
-          author {
-            id
-            # firstName
-            # lastName
-            description {
-              description
-            }
-          }
-          # tags {
-          #   name
-          # }
-          # slug
-          # publishedOn
-          # updatedOn
-        }
-      }
+      ...ArticlePreviewListFragment
     }
   }
 `
@@ -69,24 +27,12 @@ export default compose(
   withProps(props => ({
     pageTitle: `Omid Ahourai's Blog`,
     pageMeta: [
-      {
-        name: 'description',
-        content:
-          'Read about my life! Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.',
-      },
-      {
-        name: 'keywords',
-        content:
-          'omid ahourai, omid, ahourai, digital nomad, ardentkid, storyfork',
-      },
+      { name: 'description', content: 'Read about my life! Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.' },
+      { name: 'keywords', content: 'omid ahourai, omid, ahourai, digital nomad, ardentkid, storyfork' },
       { property: 'og:site_name', content: `Blog - Omid Ahourai` },
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: `Omid Ahourai's Blog` },
-      {
-        property: 'og:description',
-        content:
-          'Read about my life! Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.',
-      },
+      { property: 'og:description', content: 'Read about my life! Omid Ahourai is an Entrepreneur, Web and Mobile Apps and Games Developer, and Digital Nomad.' },
       { property: 'og:url', content: `http://www.omid.com/` },
       // { property: 'og:image', content: `${hero.file.url}?w=1200&q=70` },
       // { name: 'twitter:card', content: 'summary_large_image' },
@@ -100,6 +46,5 @@ export default compose(
       // { name: 'twitter:data2', content: category },
     ],
   })),
-  process.env.DEBUG &&
-    withProps(props => console.log('{props} [containers/PageHome]', props))
+  process.env.DEBUG && withProps(props => console.log('{props} [containers/PageHome]', props))
 )(PageHome)

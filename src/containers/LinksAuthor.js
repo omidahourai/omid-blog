@@ -1,10 +1,10 @@
-import SocialLinksAuthor from 'components/SocialLinksAuthor'
+import LinksAuthor from 'components/LinksAuthor'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
 import * as selectors from 'selectors'
 
 export const fragmentAuthor = graphql`
-  fragment SocialLinksAuthorFragment on ContentfulAuthor {
+  fragment LinksAuthorFragment on ContentfulAuthor {
     firstName
     lastName
     facebookHandle
@@ -24,4 +24,4 @@ export default compose(
     authorLinkedinHandle: 'omidahourai',
     authorEmail: 'hello@omid.com',
   }))
-)(SocialLinksAuthor)
+)(LinksAuthor)

@@ -4,9 +4,9 @@ import styled from 'styled-components'
 import ArticlePreviewList from 'containers/ArticlePreviewList'
 import SideBar from 'containers/SideBar'
 import SiteFooter from 'components/SiteFooter'
-import InstagramBanner from 'containers/InstagramBanner'
+import SiteFooterInstagram from 'containers/SiteFooterInstagram'
 import LayoutHeader from 'containers/LayoutHeader'
-import { PageGrid } from 'components/PageLayout'
+import { PageGrid } from 'components/LayoutPage'
 import 'react-tippy/dist/tippy.css'
 
 const SidebarWrapper = styled.div`
@@ -30,20 +30,22 @@ const FooterWrapper = styled.div`
 `
 
 export default props => (
-  <Helmet meta={props.pageMeta} title={props.pageTitle} />
-  <PageGrid>
-    <LayoutHeader />
-    <ContentWrapper>
-      <div>
-        <ArticlePreviewList data={props.data} />
-      </div>
-      <SidebarWrapper>
-        <SideBar {...props} />
-      </SidebarWrapper>
-    </ContentWrapper>
-    <FooterWrapper>
-      <InstagramBanner/>
-      <SiteFooter />
-    </FooterWrapper>
-  </PageGrid>
+  <React.Fragment>
+    <Helmet meta={props.pageMeta} title={props.pageTitle} />
+    <PageGrid>
+      <LayoutHeader />
+      <ContentWrapper>
+        <div>
+          <ArticlePreviewList data={props.data} />
+        </div>
+        <SidebarWrapper>
+          <SideBar {...props} />
+        </SidebarWrapper>
+      </ContentWrapper>
+      <FooterWrapper>
+        <SiteFooterInstagram />
+        <SiteFooter />
+      </FooterWrapper>
+    </PageGrid>
+  </React.Fragment>
 )

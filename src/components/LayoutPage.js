@@ -3,12 +3,6 @@ import theme from 'styles/theme'
 import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
-export const Page = props => (
-  <ThemeProvider theme={{ mode: 'light', ...theme }}>
-    {props.children}
-  </ThemeProvider>
-)
-
 export const Grid = styled.div`
   display: grid;
   grid-template-areas: 'header header header' 'padLeft main padRight' 'footer footer footer';
@@ -22,12 +16,6 @@ export const Grid = styled.div`
   }
 `
 
-export const PageGrid = props => (
-  <Page>
-    <Grid>{props.children}</Grid>
-  </Page>
-)
-
 export const LayoutArticles = styled.main`
   display: flex;
   grid-area: main;
@@ -38,3 +26,17 @@ export const LayoutFooter = styled.div`
   display: flex;
   flex-direction: column;
 `
+
+export const Page = props => (
+  <ThemeProvider theme={{ mode: 'light', ...theme }}>
+    {props.children}
+  </ThemeProvider>
+)
+
+export const PageGrid = props => (
+  <Page>
+    <Grid>
+      {props.children}
+    </Grid>
+  </Page>
+)

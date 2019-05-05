@@ -14,8 +14,7 @@ export const query = graphql`
 `
 
 export default compose(
-  withProps(({ data, pageContext }) => ({
-    instagram: selectors.getInstagram(pageContext),
+  withProps(({ data }) => ({
     categoryUrl: selectors.getCategoryUrl(data),
     categoryName: selectors.getCategoryName(data),
     publishDate: selectors.getArticlePublishDate(data),
