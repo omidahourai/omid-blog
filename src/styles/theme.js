@@ -55,19 +55,37 @@ export const theme = {
   gutter: '2em',
   transition: '300ms ease-in-out',
   text: Theme('mode', {
-    light: '#333',
-    dark: '#E3E3E3',
+    light: css`
+      color: #333;
+    `,
+    dark: css`
+     color: #E3E3E3;
+    `,
   }),
   link: Theme('mode', {
     light: `
       text-decoration: none;
+      background-color: transparent;
       color: #00A9FF;
-      &:hover { color: #46A9EE; }
+      -webkit-text-decoration-skip: objects;
+      &:hover,
+      &:active {
+        color: #46A9EE;
+        outline-width: 0;
+        text-decoration: underline;
+      }
       `,
     dark: `
       text-decoration: none;
+      background-color: transparent;
       color: #00A9FF;
-      &:hover { color: #46A9EE; }
+      -webkit-text-decoration-skip: objects;
+      &:hover,
+      &:active {
+        color: #46A9EE;
+        outline-width: 0;
+        text-decoration: underline;
+      }
     `,
   }),
 }

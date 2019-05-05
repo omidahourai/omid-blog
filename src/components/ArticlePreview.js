@@ -2,15 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import LinksArticleShare from 'containers/LinksArticleShare'
 import ArticlePreviewHeader from 'containers/ArticlePreviewHeader'
-import { Link } from 'gatsby'
+import * as Gatsby from 'gatsby'
 
+const Link = styled(Gatsby.Link)`
+  ${({theme}) => theme.link}
+`
 const Wrapper = styled.article`
   display: flex;
   flex-direction: column;
   height: 100%;
-  & a {
-    text-decoration: none;
-  }
 `
 const Hero = styled.div`
   margin-bottom: 1rem;
@@ -37,10 +37,6 @@ const Content = styled.div`
   & h2 {
     margin-bottom: 1rem;
   }
-  h2,
-  p {
-    color: ${({theme}) => theme.text};
-  }
 `
 
 const Footer = styled.div`
@@ -55,11 +51,11 @@ const Footer = styled.div`
 
 export default props => (
   <Wrapper>
-    <Hero>
-      <Link to={props.articleUrl}>
+    <Link to={props.articleUrl}>
+      <Hero>
         <img alt={props.articleThumbnail.alt} {...props.articleThumbnail} />
-      </Link>
-    </Hero>
+      </Hero>
+    </Link>
     <ArticlePreviewHeader {...props} />
     <Content
       dangerouslySetInnerHTML={{

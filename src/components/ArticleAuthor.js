@@ -35,7 +35,6 @@ const DescriptionText = styled.p`
   font-size: 0.85rem;
   line-height: 1.35rem;
   margin: 0;
-  color: ${({theme}) => theme.text};
 `
 
 const ShareIcon = styled.a`

@@ -54,7 +54,6 @@ const Wrapper = styled.div`
   display: flex;
   & p,
   & h4 {
-    color: ${({theme}) => theme.text};
     margin: 0;
   }
   & a {

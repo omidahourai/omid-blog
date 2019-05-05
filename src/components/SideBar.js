@@ -10,6 +10,8 @@ const Image = styled.img`
   height: auto;
   max-width: 100%;
   vertical-align: middle;
+  border-radius: 50%;
+  overflow: hidden;
 `
 const Header = styled.h3`
   text-transform: uppercase;

@@ -2,7 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import * as Gatsby from 'gatsby'
 
-const Link = styled(Gatsby.Link)``
+const Link = styled(Gatsby.Link)`
+  ${({theme}) => theme.link}
+`
 const Wrapper = styled.header`
   text-align: center;
   margin-bottom: 0.5rem;
@@ -43,13 +45,13 @@ const Title = styled.h2`
   font-weight: 400;
 
   ${Link} {
-    color: #111;
+    ${({theme}) => theme.text}
     &:visited {
-      color: #111;
+      ${({theme}) => theme.text}
     }
     &:hover {
-      color: ${({ theme }) => theme.color.primary};
-      text-decoration: none;
+      ${({theme}) => theme.link}
+      text-decoration: none !important;
     }
   }
 `
