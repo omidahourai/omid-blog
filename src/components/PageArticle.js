@@ -12,6 +12,7 @@ import SiteFooter from 'components/SiteFooter'
 import SideBar from 'containers/SideBar'
 import { PageGrid } from 'components/LayoutPage'
 import { LayoutFooter } from 'components/LayoutPage'
+import { DiscussionEmbed } from 'disqus-react'
 
 const ArticleHeroImage = styled.img`
   position: absolute;
@@ -128,6 +129,12 @@ export default props => (
         {/*
           <SideBar {...props} />
         */}
+        <DiscussionEmbed
+          shortname={'omidahourai'}
+          config={{
+            identifier: props.articleId,
+            title: props.articleTitle,
+          }}/>
       </LayoutArticle>
       <LayoutFooter>
         <SiteFooter />

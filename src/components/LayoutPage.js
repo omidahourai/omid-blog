@@ -3,7 +3,7 @@ import theme from 'styles/theme'
 import styled from 'styled-components'
 import GlobalStyles from 'styles/global'
 import { ThemeProvider } from 'styled-components'
-import { compose, withState, withHandlers } from 'recompose'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
 
 export const Grid = styled.div`
   display: grid;
@@ -29,14 +29,19 @@ export const LayoutFooter = styled.div`
   flex-direction: column;
 `
 
-let mode = localStorage.getItem('mode')
-if (!mode) {
-  mode = 'light'
-  localStorage.setItem('mode', mode)
-}
 
 export const Page = compose(
-  withState('mode', 'setMode', mode),
+  withState('mode', 'setMode', 'light'),
+  lifecycle({
+    componentDidMount() {
+      let mode = window.localStorage.getItem('mode')
+      if (!mode) {
+        mode = 'light'
+        window.localStorage.setItem('mode', mode)
+      }
+      this.props.setMode(mode)
+    }
+  }),
   withHandlers({
     toggleMode: props => e => {
       const mode = (props.mode === 'light') ? 'dark' : 'light'

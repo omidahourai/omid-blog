@@ -19,7 +19,7 @@ export const queryArticleFields = graphql`
 export default compose(
   process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticleNextPrev]', props)),
   withProps(({ data }) => ({
-    prevArticle: {
+    prevArticle: data.prevArticle && {
       ...data.prevArticle,
       link: {
         alt: data.prevArticle.title,
@@ -28,7 +28,7 @@ export default compose(
       },
       thumbImageMeta: selectors.getArticleThumbImageMeta({article: data.prevArticle}),
     },
-    nextArticle: {
+    nextArticle: data.nextArticle && {
       ...data.nextArticle,
       link: {
         alt: data.nextArticle.title,

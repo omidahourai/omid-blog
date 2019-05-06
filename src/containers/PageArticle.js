@@ -50,6 +50,7 @@ export default compose(
     pageDescription: selectors.getArticleSummary(data),
     pageArticleUrl: selectors.getArticleFullUrl(data),
     pageHeroUrl: selectors.getArticleHero(data),
+    articleId: selectors.getArticleId(data),
     articleTitle: selectors.getArticleTitle(data),
     articleHero: selectors.getArticleHeroImageMeta(data),
     articleContentHtml: selectors.getArticleContentHtml(data),
