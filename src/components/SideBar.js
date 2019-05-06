@@ -1,5 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
+import Theme from 'styled-theming'
+import styled, { css } from 'styled-components'
 import LinksAuthor from 'containers/LinksAuthor'
 import SideBarInstagram from 'containers/SideBarInstagram'
 import SideBarCategories from 'containers/SideBarCategories'
@@ -72,9 +73,22 @@ const Profile = styled.section`
     text-align: center;
   }
 `
+const wrapperStyle = Theme('mode', {
+  light: css`
+    background-color: transparent;
+    padding: 0 10px;
+    width: 340px;
+    `,
+    dark: css`
+    background-color: #111;
+    padding: 30px;
+    width: 360px;
+  `
+})
 const Wrapper = styled.aside`
-  padding-left: 15px;
-  width: 312px;
+  ${wrapperStyle}
+  border: 1px solid #FFF;
+  transition: width 0.5s ease-out, padding 0.5s ease-out, background-color 0.5s;
 `
 // TODO: CREATE AUTHOR PAGE
 // const authorLink = {

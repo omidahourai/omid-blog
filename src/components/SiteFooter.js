@@ -1,5 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import Theme from 'styled-theming'
 
 const Text = styled.p`
   margin: 1rem 0;
@@ -10,9 +11,17 @@ const Text = styled.p`
   letter-spacing: 0.5px;
   margin-bottom: 17px;
 `
+const footerStyles = Theme('mode', {
+  light: css`
+    background-color: #333;
+  `,
+  dark: css`
+    background-color: #111;
+  `
+})
 const Wrapper = styled.footer`
-  background-color: #333;
   text-align: center;
+  ${footerStyles}
 `
 
 export default () => (

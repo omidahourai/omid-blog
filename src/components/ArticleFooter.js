@@ -1,12 +1,23 @@
 import React from 'react'
 import * as Gatsby from 'gatsby'
 import LinksArticleShare from 'containers/LinksArticleShare'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import Theme from 'styled-theming'
 
+const linkStyle = Theme('mode', {
+  light: css`
+    background-color: #F8F8F8;
+    border-color: #E8E8E8;
+    color: #000;
+  `,
+  dark: css`
+    background-color: #333;
+    border-color: #444;
+    color: #FFF;
+  `
+})
 const Link = styled(Gatsby.Link)`
-  background-color: #f8f8f8;
-  border-color: #e8e8e8;
-  color: #000;
+  ${linkStyle}
   font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;

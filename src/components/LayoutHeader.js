@@ -1,5 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
+import Theme from 'styled-theming'
+import styled, { css } from 'styled-components'
 import { Link } from 'gatsby'
 
 const Cursive = styled.span`
@@ -20,21 +21,34 @@ const Toggle = styled.button`
     cursor: pointer;
   }
 `
-
 const HeaderGrid = styled.header`
+  transition: padding-bottom 0.5s ease-out;
   grid-area: header;
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-bottom: 3rem;
+  padding-bottom: 12px;
+  @media only screen and (min-width: 640px) {
+    padding-bottom: 3rem;
+  }
   ${({ theme }) => `
     color: ${theme.color};
     background-color: ${theme.bg};
   `}
 `
+const headerStyles = Theme('mode', {
+  light: css`
+    background-color: #333;
+  `,
+  dark: css`
+    background-color: #111;
+  `
+})
+
 const Wrapper = styled.div`
+  ${headerStyles}
   height: 48px;
-  background-color: #272727;
+  /* background-color: #272727; */
   padding: 0 10px;
 
   @media only screen and (min-width: 980px) {

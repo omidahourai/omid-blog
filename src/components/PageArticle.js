@@ -1,6 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import Theme from 'styled-theming'
 import ArticleAuthor from 'containers/ArticleAuthor'
 import ArticleBreadcrumbs from 'containers/ArticleBreadcrumbs'
 import ArticleFooter from 'containers/ArticleFooter'
@@ -26,8 +27,28 @@ const ArticleHero = styled.div`
   position: relative;
   padding-top: 60%;
 `
-
+const layoutArticleStyle = Theme('mode', {
+  light: css`
+    background-color: #FFF;
+    border: 1px solid #FFF;
+  `,
+  dark: css`
+    background-color: #111;
+    box-shadow: rgba(0,0,0,0.5) 0px 4px 20px;
+    border: 1px solid #FFF;
+    &>*:not(:first-child){
+      padding-left: 10px;
+      padding-right: 10px;
+      @media only screen and (min-width: 640px) {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+    }
+  `
+})
 const LayoutArticle = styled.article`
+  ${layoutArticleStyle}
+  transition: background-color 0.5s ease-out;
   grid-area: main;
   overflow: hidden;
   margin: 0 auto;

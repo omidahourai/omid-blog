@@ -1,6 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import styled from 'styled-components'
+import Theme from 'styled-theming'
+import styled, { css } from 'styled-components'
 import ArticlePreviewList from 'containers/ArticlePreviewList'
 import SideBar from 'containers/SideBar'
 import SiteFooter from 'components/SiteFooter'
@@ -10,8 +11,10 @@ import { PageGrid } from 'components/LayoutPage'
 import 'react-tippy/dist/tippy.css'
 
 const SidebarWrapper = styled.div`
+  padding: 1rem;
+  transition: padding 0.5s ease-out;
   position: static;
-  width: 345px;
+  width: 100%;
   height: 1239px;
   display: block;
   float: left;

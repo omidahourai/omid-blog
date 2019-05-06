@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import theme from 'styled-theming'
-import { Tooltip } from 'react-tippy'
+import { Tooltip as Tippy } from 'react-tippy'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { withTheme } from 'styled-components'
 
 import { FaFacebook } from 'icons/facebook'
 import { FaTwitter } from 'icons/twitter'
@@ -11,6 +12,8 @@ import { FaInstagram } from 'icons/instagram'
 import { FaLinkedin } from 'icons/linkedin'
 import { FaEnvelopeO } from 'icons/envelope-o'
 import { WebLinkIcon } from 'icons/weblink'
+
+const Tooltip = Tippy//withTheme(Tippy)
 
 const tooltipDefault = {
   title: 'Follow on Twitter',
@@ -105,7 +108,7 @@ ShareButton.defaultProps = {
 
 export const FacebookShareButton = props => (
   <Tooltip {...tooltipDefault} {...props.tooltip}>
-    {console.log('propsddddd', ShareButton.props)}
+    {console.log('propsddddd', props)}
     <ShareButton {...linkDefault} {...props.link} kind={'facebook'}>
       <FaFacebook />
     </ShareButton>
