@@ -57,6 +57,7 @@ const buttonTheme = {
       instagram: { light: '#D62BFF', dark: '#D62BFF' },
       pinterest: { light: '#E60223', dark: '#E60223' },
       linkedin: { light: '#0E76A8', dark: '#0E76A8' },
+      link: { light: '#FF9022', dark: '#FF9022' },
     }),
     borderColor: theme.variants('mode', 'kind', {
       default: { light: '#E8E8E8', dark: '#E8E8E8' },
@@ -65,6 +66,7 @@ const buttonTheme = {
       instagram: { light: '#D62BFF', dark: '#FFFFFF' },
       pinterest: { light: '#E60223', dark: '#FFFFFF' },
       linkedin: { light: '#0E76A8', dark: '#FFFFFF' },
+      link: { light: '#FF9022', dark: '#FFFFFF' },
     }),
   },
 }
@@ -165,7 +167,7 @@ export class EmailShareButton extends Component {
           as={`button`}
           {...linkDefault}
           {...this.props.link}
-          bg={`#FF9022`}
+          kind={'link'}
         >
           <FaEnvelopeO />
         </ShareButton>
@@ -196,7 +198,7 @@ export class LinkShareButton extends Component {
           as={`button`}
           {...linkDefault}
           {...this.props.link}
-          bg={`#FF9022`}
+          kind={'link'}
         >
           <WebLinkIcon />
         </ShareButton>
