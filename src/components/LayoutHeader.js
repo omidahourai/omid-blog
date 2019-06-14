@@ -83,7 +83,9 @@ export default props => (
       <TopBar>
         <Link to="/">{'Blog | Omid Ahourai'}</Link>
         <Cursive>{'Emotional rants, poetry, experiences'}</Cursive>
+        {/*
         <Toggle onClick={props.onToggleTheme}>{props.theme.mode}</Toggle>
+        */}
       </TopBar>
     </Wrapper>
     {props.children}
