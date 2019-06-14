@@ -7,5 +7,5 @@ export default compose(
   withHandlers({
     onToggleTheme: props => props.theme.toggleMode
   }),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/LayoutHeader]', props))
+  // process.env.DEBUG && withProps(props => console.log('{props} [containers/LayoutHeader]', props))
 )(LayoutHeader)

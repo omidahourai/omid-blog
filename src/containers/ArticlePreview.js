@@ -24,5 +24,5 @@ export default compose(
     articleUrl: selectors.getArticleUrl(data),
     summaryHtml: selectors.getArticleSummaryHtml(data),
   })),
-  withProps(props => console.log('{props} [containers/ArticlePreview]', props))
+  // process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreview]', props))
 )(ArticlePreview)

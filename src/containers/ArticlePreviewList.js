@@ -47,5 +47,5 @@ export default compose(
           ? selectors.getTagArticles(data)
           : []
   })),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreviewList]', props))
+  // process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreviewList]', props))
 )(ArticlePreviewList)

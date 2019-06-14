@@ -34,5 +34,5 @@ export default compose(
       // { name: 'twitter:data2', content: category },
     ],
   })),
-  withProps(props => console.log('{props} containers/PageCategory', props))
+  // process.env.DEBUG && withProps(props => console.log('{props} containers/PageCategory', props))
 )(PageCategory)

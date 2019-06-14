@@ -14,5 +14,5 @@ export default compose(
   withProps(({ data }) => ({
     categories: selectors.getValidCategories(data),
   })),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/SideBarCategories]', props))
+  // process.env.DEBUG && withProps(props => console.log('{props} [containers/SideBarCategories]', props))
 )(SideBarCategories)

@@ -15,5 +15,5 @@ export default compose(
     categoryName: selectors.getCategoryName(data),
     title: selectors.getArticleTitle(data),
   })),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticleBreadcrumbs]', props))
+  // process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticleBreadcrumbs]', props))
 )(ArticleBreadcrumbs)

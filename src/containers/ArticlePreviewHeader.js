@@ -22,5 +22,5 @@ export default compose(
     categoryName: selectors.getCategoryName(data),
     publishDate: selectors.getArticlePublishDate(data),
   })),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreviewHeader]', props))
+  // process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreviewHeader]', props))
 )(ArticlePreviewHeader)

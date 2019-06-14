@@ -110,7 +110,6 @@ ShareButton.defaultProps = {
 
 export const FacebookShareButton = props => (
   <Tooltip {...tooltipDefault} {...props.tooltip}>
-    {console.log('propsddddd', props)}
     <ShareButton {...linkDefault} {...props.link} kind={'facebook'}>
       <FaFacebook />
     </ShareButton>

@@ -14,6 +14,9 @@ const Likes = styled.span`
   & > svg {
     margin-right: 0.3rem;
   }
+  & > span {
+    color: #FFF;
+  }
 `
 const Overlay = styled.div`
   width: 100%;
@@ -28,6 +31,9 @@ const Tile = styled.li`
   margin: 0;
   position: relative;
   list-style-type: none;
+  ${({floor}) => floor && `
+    min-width: 180px;
+  `}
   &:hover {
     ${Overlay} {
       opacity: 0.3;
@@ -54,7 +60,7 @@ const OverlayLink = styled.a`
 `
 
 export default props => (
-  <Tile key={props.key}>
+  <Tile key={props.key} floor={props.floor}>
     <OverlayLink href={props.link} target={'_blank'} rel={'noopener noreferrer'}>
       <FaInstagram color={'#FFF'} size={'2rem'} />
       <Likes>

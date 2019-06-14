@@ -30,7 +30,6 @@ const heroImgStyle = Theme('mode', {
     }
   `,
   dark: css`
-    margin-bottom: 10px !important;
     & img {
       box-shadow: black 2px 2px 10px 1px;
     }
@@ -42,6 +41,7 @@ const Hero = styled.div`
   transition: margin 0.5s ease-out;
   position: relative;
   padding-top: 60%;
+  margin-bottom: 10px !important;
   & img {
     transition: box-shadow 0.5s ease-out;
     position: absolute;

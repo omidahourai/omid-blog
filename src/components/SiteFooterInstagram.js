@@ -22,7 +22,7 @@ const InstagramTile = styled(Tile)`
 export default props => (
   <Wrapper>
     {props.instagram.map(image => (
-      <InstagramTile {...image} />
+      <InstagramTile {...image} floor={true} />
     ))}
   </Wrapper>
 )

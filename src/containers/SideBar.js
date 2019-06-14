@@ -29,5 +29,5 @@ export default compose(
     authorTitle: selectors.getAuthorShortTitle(data),
     authorDescription: selectors.getAuthorShortDescription(data),
   })),
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/Sidebar]', props))
+  // process.env.DEBUG && withProps(props => console.log('{props} [containers/Sidebar]', props))
 )(SideBar)

@@ -13,7 +13,7 @@
     "build": "gatsby build",
     "start": "gatsby serve",
     "env:prod": "env-cmd -f .env.production",
-    "prod": "yarn env:prod yarn build && yarn start",
+    "prod": "yarn env:prod yarn build && yarn env:prod yarn start",
     "env:dev": "env-cmd -f .env.development",
     "dev": "yarn env:dev gatsby develop",
     "yoga": "node ./node_modules/graphql-yoga/dist/index.js",
