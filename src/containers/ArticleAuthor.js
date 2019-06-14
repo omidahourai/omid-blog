@@ -1,5 +1,6 @@
 import ArticleAuthor from 'components/ArticleAuthor'
 import { compose, withProps } from 'recompose'
+import { graphql } from 'gatsby'
 import * as selectors from 'selectors'
 
 export const query = graphql`

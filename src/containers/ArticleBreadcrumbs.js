@@ -1,5 +1,6 @@
 import ArticleBreadcrumbs from 'components/ArticleBreadcrumbs'
 import { compose, withProps, withHandlers } from 'recompose'
+import { graphql } from 'gatsby'
 import * as selectors from 'selectors'
 
 export const query = graphql`

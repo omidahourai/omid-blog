@@ -1,5 +1,6 @@
 import ArticleFooter from 'components/ArticleFooter'
 import { compose, withProps } from 'recompose'
+import { graphql } from 'gatsby'
 import * as selectors from 'selectors'
 
 export const query = graphql`
