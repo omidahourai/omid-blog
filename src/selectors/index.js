@@ -5,6 +5,7 @@ import moment from 'moment'
 const getAuthor = data => data.author
 const getArticle = data => data.article
 const getArticles = data => data.articles
+const getTag = data => data.tag
 const getCategory = data => data.category || getArticle(data).category
 const getCategories = data => data.categories
 const getInstagram = ctx => ctx.instagram ? ctx.instagram.data : []
@@ -48,6 +49,9 @@ export const getCompletedArticles = createSelector(getArticles,
   ({edges}) => edges.map(({ node }) => node).filter(articleFilter)
 )
 export const getCategoryArticles = createSelector(getCategory,
+  ({articles}) => articles.filter(articleFilter)
+)
+export const getTagArticles = createSelector(getTag,
   ({articles}) => articles.filter(articleFilter)
 )
 

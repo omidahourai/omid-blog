@@ -2,6 +2,7 @@ import ArticlePreviewList from 'components/ArticlePreviewList'
 import { compose, withProps } from 'recompose'
 import { graphql } from 'gatsby'
 import * as selectors from 'selectors'
+import { result } from 'lodash'
 
 export const queryCategoryArticle = graphql`
   fragment CategoryArticlePreviewListFragment on ContentfulCategory {
@@ -37,11 +38,14 @@ export const queryArticleConnection = graphql`
   }
 `
 export default compose(
-  process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreviewList]', props)),
   withProps(({ data }) => ({
     articles: data.articles
       ? selectors.getCompletedArticles(data)
-      : selectors.getCategoryArticles(data),
+      : data.category
+        ? selectors.getCategoryArticles(data)
+        : data.tag
+          ? selectors.getTagArticles(data)
+          : []
   })),
   process.env.DEBUG && withProps(props => console.log('{props} [containers/ArticlePreviewList]', props))
 )(ArticlePreviewList)
